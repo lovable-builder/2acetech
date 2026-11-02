@@ -86,10 +86,26 @@ $social  = array(
 	<div class="footer__bar">
 		<div class="container footer__bar-inner">
 			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'All rights reserved.', '2acetech' ); ?></p>
-			<?php if ( function_exists( 'the_privacy_policy_link' ) ) : ?>
-				<p><?php the_privacy_policy_link(); ?></p>
-			<?php endif; ?>
+			<p class="footer__legal">
+				<?php
+				$terms_id = function_exists( 'wc_terms_and_conditions_page_id' ) ? (int) wc_terms_and_conditions_page_id() : 0;
+				if ( $terms_id ) {
+					printf( '<a href="%s">%s</a>', esc_url( get_permalink( $terms_id ) ), esc_html( get_the_title( $terms_id ) ) );
+				}
+				if ( function_exists( 'the_privacy_policy_link' ) ) {
+					the_privacy_policy_link();
+				}
+				?>
+			</p>
 		</div>
+		<?php
+		$seller    = trim( (string) get_theme_mod( 'ace_seller', '' ) );
+		$seller_id = trim( (string) get_theme_mod( 'ace_seller_id', '' ) );
+		if ( $seller ) :
+			$line = array_filter( array( $seller, $address, $seller_id ) );
+			?>
+			<div class="container"><p class="footer__seller"><?php echo esc_html( implode( ' · ', $line ) ); ?></p></div>
+		<?php endif; ?>
 	</div>
 </footer>
 

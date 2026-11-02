@@ -6,6 +6,10 @@
 
 update_option( 'blogname', '2acetech' );
 update_option( 'blogdescription', 'Premium electronics' );
+set_theme_mod( 'ace_seller', 'Sample Sp. z o.o.' );
+set_theme_mod( 'ace_seller_id', 'NIP 000-000-00-00' );
+set_theme_mod( 'ace_address', 'ul. Przykladowa 1, 00-001 Warszawa' );
+set_theme_mod( 'ace_phone', '+48 000 000 000' );
 update_option( 'timezone_string', 'Europe/Warsaw' );
 update_option( 'permalink_structure', '/%postname%/' );
 
@@ -43,6 +47,7 @@ $blog    = ace_dev_page( 'Blog' );
 $about   = ace_dev_page( 'About us', '<p>2acetech sells premium electronics, delivered fast across Poland.</p>' );
 $contact = ace_dev_page( 'Contact', '<p>Write to us at info@2acetech.pl.</p>' );
 
+update_post_meta( $contact, '_wp_page_template', 'template-contact.php' );
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $home );
 update_option( 'page_for_posts', $blog );

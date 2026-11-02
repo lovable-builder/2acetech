@@ -26,6 +26,8 @@ function ace_customize_register( $wp_customize ) {
 		'ace_phone'     => array( __( 'Phone', '2acetech' ), '', 'text' ),
 		'ace_email'     => array( __( 'Email', '2acetech' ), 'info@2acetech.pl', 'text' ),
 		'ace_address'   => array( __( 'Address', '2acetech' ), '', 'text' ),
+		'ace_seller'    => array( __( 'Seller: company name', '2acetech' ), '', 'text' ),
+		'ace_seller_id' => array( __( 'Seller: NIP / tax ID and registry number', '2acetech' ), '', 'text' ),
 		'ace_facebook'  => array( __( 'Facebook URL', '2acetech' ), '', 'url' ),
 		'ace_instagram' => array( __( 'Instagram URL', '2acetech' ), '', 'url' ),
 		'ace_x'         => array( __( 'X (Twitter) URL', '2acetech' ), '', 'url' ),

@@ -93,3 +93,10 @@ Appearance > Customize > **Landing page**:
 Code lives in `inc/home.php` (defaults and readers) and
 `inc/customizer-home.php` (the panel). Developers can still override output
 with the `ace_hero_scenes` and `ace_promos` filters.
+
+## Before launch
+
+See [docs/launch-checklist.md](docs/launch-checklist.md): business details,
+legal pages, VAT, payments, email, backups, test purchases and going live.
+The theme includes a Contact page template (Page attributes > Template >
+Contact), seller details in the footer, and the EU-compliant order button.

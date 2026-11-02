@@ -159,3 +159,25 @@ function ace_flow_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ace_flow_assets', 30 );
+
+/**
+ * Order button label that states the obligation to pay (EU law).
+ *
+ * @return string
+ */
+function ace_place_order_label() {
+	return __( 'Order with obligation to pay', '2acetech' );
+}
+add_filter( 'woocommerce_order_button_text', 'ace_place_order_label' );
+
+/**
+ * Same label for the block checkout, via WooCommerce's checkout filters.
+ */
+function ace_checkout_script() {
+	if ( ! function_exists( 'is_checkout' ) || ! is_checkout() ) {
+		return;
+	}
+	wp_enqueue_script( 'ace-checkout', ACE_URI . '/assets/js/checkout.js', array( 'wc-blocks-checkout' ), ace_ver( 'assets/js/checkout.js' ), true );
+	wp_add_inline_script( 'ace-checkout', 'window.aceCheckout = ' . wp_json_encode( array( 'placeOrder' => ace_place_order_label() ) ) . ';', 'before' );
+}
+add_action( 'wp_enqueue_scripts', 'ace_checkout_script', 40 );
