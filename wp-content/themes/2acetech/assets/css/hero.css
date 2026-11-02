@@ -1,0 +1,334 @@
+/* ==========================================================================
+   Scroll-driven hero.
+
+   .hero__track is tall; .hero__stage sticks inside it. hero.js writes two
+   custom properties on every scene while you scroll:
+     --w  weight 0..1   (how visible the scene is)
+     --d  distance      (signed, scene position relative to the viewport)
+   Everything below is pure CSS driven by those two numbers.
+   Without JS the first scene renders as a normal static hero.
+   ========================================================================== */
+
+.hero {
+	position: relative;
+	background: var(--ink);
+	color: #fff;
+}
+
+.hero__track { position: relative; }
+.js .hero__track {
+	height: calc(var(--scenes) * 85svh + (100svh - var(--stick)));
+}
+
+.hero__stage {
+	position: relative;
+	height: calc(100svh - var(--stick));
+	min-height: 540px;
+	overflow: hidden;
+	isolation: isolate;
+}
+.js .hero__stage {
+	position: sticky;
+	top: var(--stick);
+}
+
+/* Background ------------------------------------------------------------- */
+
+.hero__bg { position: absolute; inset: 0; z-index: -1; }
+.hero__bgl { position: absolute; inset: 0; opacity: 0; will-change: opacity; }
+.hero__bgl.is-first { opacity: 1; }
+
+.tone-ember {
+	background:
+		radial-gradient(55% 75% at 74% 48%, rgba(245, 5, 5, 0.34), transparent 70%),
+		linear-gradient(135deg, #0b0b0d 30%, #1c0709);
+}
+.tone-steel {
+	background:
+		radial-gradient(55% 75% at 74% 48%, rgba(110, 138, 200, 0.3), transparent 70%),
+		linear-gradient(135deg, #0a0c11 30%, #131a28);
+}
+.tone-night {
+	background:
+		radial-gradient(55% 75% at 74% 48%, rgba(210, 20, 80, 0.3), transparent 70%),
+		linear-gradient(135deg, #0d0709 30%, #1e0a16);
+}
+
+.hero__grid {
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+	background-size: 64px 64px;
+	-webkit-mask-image: radial-gradient(70% 80% at 70% 50%, #000, transparent 75%);
+	mask-image: radial-gradient(70% 80% at 70% 50%, #000, transparent 75%);
+	transform: translate3d(0, calc(var(--p, 0) * -120px), 0);
+}
+
+.hero__orb {
+	position: absolute;
+	right: -10vmax;
+	top: 50%;
+	width: 46vmax;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(245, 5, 5, 0.3), transparent);
+	filter: blur(12px);
+	transform: translate3d(calc(var(--p, 0) * -18vmax), calc(-50% + var(--p, 0) * 12vmax), 0);
+	will-change: transform;
+}
+
+/* Layout ----------------------------------------------------------------- */
+
+.hero__inner {
+	position: relative;
+	height: 100%;
+	display: grid;
+	grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+	align-items: center;
+	gap: clamp(16px, 4vw, 56px);
+	padding-bottom: 76px; /* Room for the progress UI. */
+}
+
+.hero__copy,
+.hero__visual { position: relative; display: grid; }
+
+.scene { --w: 0; --d: 0; grid-area: 1 / 1; }
+.scene.is-active { --w: 1; }
+
+/* Copy scene */
+.scene--copy {
+	opacity: var(--w);
+	transform: translate3d(0, calc(var(--d) * -64px), 0);
+	pointer-events: none;
+	will-change: transform, opacity;
+}
+.scene--copy.is-active { pointer-events: auto; }
+
+.eyebrow {
+	display: inline-flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0 0 22px;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: #e6e6ec;
+}
+.eyebrow__n {
+	display: inline-grid;
+	place-items: center;
+	height: 26px;
+	padding: 0 10px;
+	border-radius: 999px;
+	background: var(--accent);
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	color: #fff;
+}
+
+.hero__title {
+	margin: 0 0 0.4em;
+	font-size: clamp(2.5rem, 6vw, 5.4rem);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.045em;
+}
+/* Word-by-word reveal. Each word slides up from behind a mask. */
+.hero__title .w { display: inline-block; overflow: hidden; vertical-align: top; padding: 0.04em 0.02em 0.1em; margin: -0.04em -0.02em -0.1em; }
+.hero__title .w > span {
+	display: inline-block;
+	transform: translate3d(0, 112%, 0) rotate(4deg);
+	transform-origin: left bottom;
+	transition: transform 0.95s var(--ease) calc(var(--i) * 70ms + 80ms);
+}
+.is-active .hero__title .w > span { transform: none; }
+.hero__title .w:last-child { color: var(--accent); }
+
+.hero__text {
+	max-width: 30em;
+	margin: 0 0 32px;
+	font-size: clamp(1rem, 1.5vw, 1.2rem);
+	color: #c4c4cd;
+	opacity: 0;
+	transform: translate3d(0, 18px, 0);
+	transition: opacity 0.8s var(--ease) 0.45s, transform 0.8s var(--ease) 0.45s;
+}
+.scene--copy .btn,
+.scene--copy .eyebrow {
+	opacity: 0;
+	transform: translate3d(0, 18px, 0);
+	transition: opacity 0.8s var(--ease) 0.15s, transform 0.8s var(--ease) 0.15s, background 0.25s, box-shadow 0.25s;
+}
+.scene--copy .btn { transition-delay: 0.6s, 0.6s, 0s, 0s; }
+.is-active .hero__text,
+.is-active .btn,
+.is-active .eyebrow { opacity: 1; transform: none; }
+.scene--copy .btn:hover { transform: translateY(-2px); }
+
+/* Art scene */
+.hero__visual { align-self: center; justify-items: center; height: 100%; max-height: 680px; }
+.scene--art {
+	position: relative;
+	align-self: center;
+	width: min(100%, 560px);
+	max-height: 100%;
+	aspect-ratio: 1;
+	opacity: var(--w);
+	will-change: transform, opacity;
+}
+.scene--art .glow {
+	position: absolute;
+	inset: 4%;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(245, 5, 5, 0.55), rgba(245, 5, 5, 0) 72%);
+	opacity: calc(var(--w) * 0.9);
+	transform: scale(calc(0.55 + var(--w) * 0.5));
+}
+.art-wrap {
+	position: absolute;
+	inset: 6%;
+	translate: calc(var(--mx, 0) * 16px) calc(var(--my, 0) * 12px);
+	transition: translate 0.5s var(--ease);
+	transform:
+		translate3d(calc(var(--d) * -14%), calc(var(--d) * 8%), 0)
+		rotate(calc(var(--d) * -18deg))
+		scale(calc(0.74 + var(--w) * 0.26));
+	will-change: transform;
+}
+.art-wrap .art {
+	width: 100%;
+	height: 100%;
+	filter: drop-shadow(0 38px 44px rgba(0, 0, 0, 0.55));
+	animation: hover 6s ease-in-out infinite;
+}
+@keyframes hover { 50% { transform: translateY(-14px); } }
+
+/* Floating spec chips: scroll parallax via `translate`, entrance via `transform`. */
+.chip {
+	position: absolute;
+	z-index: 2;
+	padding: 10px 16px;
+	font-size: 0.82rem;
+	font-weight: 700;
+	line-height: 1;
+	white-space: nowrap;
+	color: #fff;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	border-radius: 999px;
+	-webkit-backdrop-filter: blur(14px);
+	backdrop-filter: blur(14px);
+	opacity: 0;
+	transform: translate3d(0, 20px, 0) scale(0.9);
+	transition: opacity 0.7s var(--ease), transform 0.9s var(--ease);
+}
+.chip::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(245, 5, 5, 0.25); }
+.chip--1 { top: 10%; left: -2%; translate: 0 calc(var(--d) * -70px); transition-delay: 0.5s; }
+.chip--2 { top: 34%; right: -4%; translate: 0 calc(var(--d) * -110px); transition-delay: 0.65s; }
+.chip--3 { bottom: 12%; left: 4%; translate: 0 calc(var(--d) * -50px); transition-delay: 0.8s; }
+.is-active .chip { opacity: 1; transform: none; }
+
+/* Progress UI ------------------------------------------------------------ */
+
+.hero__ui.container {
+	position: absolute;
+	left: 0; right: 0;
+	bottom: 26px;
+	margin-inline: auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	gap: 24px;
+	pointer-events: none;
+}
+.hero__dots { display: flex; gap: clamp(14px, 3vw, 30px); pointer-events: auto; }
+.dot {
+	display: grid;
+	gap: 8px;
+	padding: 6px 0;
+	border: 0;
+	background: none;
+	text-align: left;
+	color: #8c8c97;
+	transition: color 0.3s;
+}
+.dot:hover, .dot.is-active { color: #fff; }
+.dot__n { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; }
+.dot__label { font-size: 0.82rem; font-weight: 700; }
+.dot__bar { grid-row: 3; display: block; width: clamp(56px, 9vw, 112px); height: 3px; overflow: hidden; background: rgba(255, 255, 255, 0.18); border-radius: 3px; }
+.dot__fill { display: block; width: 100%; height: 100%; background: var(--accent); transform: scaleX(var(--fill, 0)); transform-origin: left; }
+.dot { grid-template-areas: "n" "l" "b"; }
+.dot__n { grid-area: n; }
+.dot__label { grid-area: l; }
+.dot__bar { grid-area: b; }
+
+.hero__cue {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	font-size: 0.72rem;
+	font-weight: 800;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	color: #a9a9b3;
+	transition: opacity 0.4s;
+}
+.hero.is-scrolled .hero__cue { opacity: 0; }
+.mouse { position: relative; display: block; width: 22px; height: 34px; border: 2px solid currentColor; border-radius: 12px; }
+.mouse::after {
+	content: "";
+	position: absolute;
+	left: 50%; top: 6px;
+	width: 3px; height: 7px;
+	margin-left: -1.5px;
+	border-radius: 2px;
+	background: var(--accent);
+	animation: wheel 1.6s var(--ease) infinite;
+}
+@keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+
+/* Responsive ------------------------------------------------------------- */
+
+@media (max-width: 860px) {
+	.hero__inner {
+		grid-template-columns: 1fr;
+		grid-template-rows: minmax(0, 1fr) auto;
+		align-content: center;
+		gap: 4px;
+		padding-top: 12px;
+		padding-bottom: 84px;
+	}
+	.hero__visual { order: -1; max-height: none; }
+	.scene--art { width: min(100%, 44svh); }
+	.chip { display: none; }
+	.hero__title { font-size: clamp(2.1rem, 9.4vw, 3.2rem); }
+	.eyebrow { margin-bottom: 12px; }
+	.hero__text { margin-bottom: 20px; font-size: 0.98rem; }
+	.hero__cue { display: none; }
+	.dot__label { display: none; }
+	.dot__bar { width: clamp(44px, 18vw, 96px); }
+	.hero__ui.container { justify-content: center; }
+}
+
+@media (max-height: 640px) and (min-width: 861px) {
+	.hero__title { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+	.hero__text { margin-bottom: 20px; }
+}
+
+/* Reduced motion: a plain, static hero with the first scene only. */
+@media (prefers-reduced-motion: reduce) {
+	.js .hero__track { height: auto; }
+	.js .hero__stage { position: relative; }
+	.hero__dots, .hero__cue { display: none; }
+	.scene:not(:first-child) { display: none; }
+	.hero__title .w > span,
+	.hero__text,
+	.scene--copy .btn,
+	.scene--copy .eyebrow,
+	.chip { transition: none; transform: none; opacity: 1; }
+	.art-wrap .art, .mouse::after { animation: none; }
+}

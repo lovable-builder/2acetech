@@ -1,0 +1,12 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/",
+  "preferredVersions": { "php": "8.3", "wp": "latest" },
+  "features": { "networking": true },
+  "login": true,
+  "plugins": ["woocommerce"],
+  "steps": [
+    { "step": "activateTheme", "themeFolderName": "2acetech" },
+    { "step": "runPHP", "code": "<?php require '/wordpress/wp-load.php'; require '/playground/setup.php';" }
+  ]
+}
