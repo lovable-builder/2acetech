@@ -64,6 +64,20 @@ function ace_customize_register( $wp_customize ) {
 		)
 	);
 
+	$wp_customize->add_setting( 'ace_og_image', array( 'sanitize_callback' => 'absint' ) );
+	$wp_customize->add_control(
+		new WP_Customize_Media_Control(
+			$wp_customize,
+			'ace_og_image',
+			array(
+				'label'       => __( 'Link-sharing image', '2acetech' ),
+				'description' => __( 'Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x 630 px. Leave empty to use the built-in image. Product pages use the product photo.', '2acetech' ),
+				'section'     => 'ace_store',
+				'mime_type'   => 'image',
+			)
+		)
+	);
+
 	$wp_customize->add_setting( 'ace_deal_end', array( 'default' => '', 'sanitize_callback' => 'sanitize_text_field' ) );
 	$wp_customize->add_control(
 		'ace_deal_end',

@@ -39,3 +39,13 @@ site. They are not part of the theme.
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.
   Manrope is self-hosted (no Google Fonts requests).
+
+## Icons and link sharing
+
+`assets/img` holds the favicon (32/48), app icons (180/192), a 512 px site icon
+and `og-default.png` (1200 x 630 share image). The head tags are in
+`inc/seo.php`: favicon, canonical, description, Open Graph and X cards, and
+Organization data on the home page. A site icon or share image set in the
+Customizer overrides the bundled ones. If an SEO plugin (Yoast, Rank Math,
+AIOSEO, SEOPress) is active, the theme stops printing share tags so they never
+double up.
