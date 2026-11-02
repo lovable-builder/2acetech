@@ -18,6 +18,7 @@ require_once ACE_DIR . '/inc/customizer.php';
 require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/woocommerce.php';
+require_once ACE_DIR . '/inc/product.php';
 
 /**
  * Theme setup: supports and menus.

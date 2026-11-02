@@ -155,9 +155,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .wordmark:hover { color: inherit; }
 
 .custom-logo-link { display: inline-block; line-height: 0; }
-.custom-logo { height: 44px; width: auto; max-width: 100%; }
+.site-header .custom-logo { height: clamp(24px, 6.8vw, 44px); width: auto; max-width: none; }
 .footer-logo { display: inline-block; line-height: 0; }
-.footer-logo img { height: 46px; width: auto; }
+.site-footer .footer-logo img { height: clamp(32px, 9vw, 46px); width: auto; max-width: none; }
 
 /* Top bar ---------------------------------------------------------------- */
 
@@ -370,6 +370,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.primary-nav .sub-menu { position: static; opacity: 1; visibility: visible; transform: none; border: 0; box-shadow: none; padding: 0 0 0 16px; }
 }
 @media (max-width: 640px) {
+	.header__row { gap: 8px 10px; }
 	.topbar__links { display: none; }
 	.topbar__inner { justify-content: center; }
 	.wordmark { font-size: 1.55rem; }

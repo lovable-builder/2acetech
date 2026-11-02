@@ -40,9 +40,56 @@ foreach ( $products as $i => $row ) {
 		$p->set_sale_price( (string) $row[2] );
 	}
 	$p->set_featured( $row[4] );
-	$p->set_manage_stock( false );
+	$p->set_short_description( 'Sample product for previewing the theme. Replace with your own description.' );
+	$p->set_description( '<p>A longer description goes here. Use headings, lists and images to describe the product in detail.</p><ul><li>Feature one</li><li>Feature two</li><li>Feature three</li></ul>' );
+	$p->set_manage_stock( true );
+	$p->set_stock_quantity( $i < 3 ? 12 : 3 );
 	$p->set_stock_status( 'instock' );
+	// First two sale products get a sale end date, so their page shows the countdown.
+	if ( $row[3] && $i < 2 ) {
+		$p->set_date_on_sale_to( gmdate( 'Y-m-d', strtotime( '+9 days' ) ) );
+	}
 	$id = $p->save();
 	wp_set_object_terms( $id, $row[1], 'product_cat' );
 	update_post_meta( $id, 'total_sales', $row[5] );
+}
+
+// A variable product with colour and size, to preview swatches.
+if ( ! wc_get_product_id_by_sku( 'SAMPLE-VAR' ) ) {
+	$v = new WC_Product_Variable();
+	$v->set_name( 'Sample Phone Case' );
+	$v->set_sku( 'SAMPLE-VAR' );
+	$v->set_status( 'publish' );
+
+	$color = new WC_Product_Attribute();
+	$color->set_name( 'Color' );
+	$color->set_options( array( 'Black', 'White', 'Blue' ) );
+	$color->set_visible( true );
+	$color->set_variation( true );
+
+	$size = new WC_Product_Attribute();
+	$size->set_name( 'Size' );
+	$size->set_options( array( 'S', 'M', 'L' ) );
+	$size->set_visible( true );
+	$size->set_variation( true );
+
+	$v->set_attributes( array( $color, $size ) );
+	$vid = $v->save();
+	wp_set_object_terms( $vid, 'phones', 'product_cat' );
+
+	foreach ( array( 'Black', 'White', 'Blue' ) as $ci => $c ) {
+		foreach ( array( 'S', 'M', 'L' ) as $si => $sz ) {
+			if ( 'Blue' === $c && 'L' === $sz ) {
+				continue; // One missing combination, to see it disable.
+			}
+			$var = new WC_Product_Variation();
+			$var->set_parent_id( $vid );
+			$var->set_attributes( array( 'color' => $c, 'size' => $sz ) );
+			$var->set_regular_price( (string) ( 79 + $si * 10 ) );
+			$var->set_stock_status( 'instock' );
+			$var->save();
+		}
+	}
+	WC_Product_Variable::sync( $vid );
+	update_post_meta( $vid, 'total_sales', 40 );
 }

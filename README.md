@@ -49,3 +49,19 @@ Organization data on the home page. A site icon or share image set in the
 Customizer overrides the bundled ones. If an SEO plugin (Yoast, Rank Math,
 AIOSEO, SEOPress) is active, the theme stops printing share tags so they never
 double up.
+
+## Product page
+
+`inc/product.php`, `assets/css/product.css`, `assets/js/product.js`.
+
+- **Countdown**: shows when a product is on sale *and* the sale has an end date
+  (Edit product > General > Sale price > Schedule).
+- **Stock bar** ("Available / Already sold"): shows on sale products with
+  Manage stock turned on (Inventory tab). "Only N left" appears at 5 or fewer.
+  All numbers are real WooCommerce data; nothing is invented.
+- **Swatches**: variation dropdowns become buttons. An attribute named
+  Color/Colour/Kolor whose values are CSS colour names (Black, White, Blue)
+  shows round colour dots; any other value shows a text button.
+- **Brand**: uses WooCommerce Brands (Products > Brands), logo or name.
+- Quantity stepper (also on the cart page), share links, copy-link, and a
+  sticky "Add to cart" bar on phones.

@@ -15,7 +15,12 @@ get_header();
 ?>
 <main id="content" class="site-main woo-main">
 	<div class="container">
-		<?php woocommerce_content(); ?>
+		<?php
+		if ( function_exists( 'woocommerce_breadcrumb' ) ) {
+			woocommerce_breadcrumb();
+		}
+		woocommerce_content();
+		?>
 	</div>
 </main>
 <?php

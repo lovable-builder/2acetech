@@ -110,6 +110,9 @@ function ace_icon( $name, $size = 20 ) {
 		'facebook'  => '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8.5c0-.3.2-.5.5-.5z"/>',
 		'instagram' => '<rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6"/>',
 		'x'         => '<path d="M4 4l16 16M20 4 4 20"/>',
+		'whatsapp'  => '<path d="M20 11.5A8 8 0 0 1 8.1 18.5L4 20l1.5-4A8 8 0 1 1 20 11.5z"/><path d="M9.2 8.6c.2 2.5 2.7 5 5.3 5.4l1-1.2-1.8-.9-.7.6a4.2 4.2 0 0 1-2-2l.6-.7-.9-1.8z"/>',
+		'linkedin'  => '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 11v5M8 8v.01M12 16v-5M12 13c0-1.5 1-2 2-2s2 .7 2 2v3"/>',
+		'link'      => '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
 		'youtube'   => '<rect x="3" y="6" width="18" height="12" rx="4"/><path d="m10.5 9.5 4 2.5-4 2.5z"/>',
 	);
 	if ( ! isset( $paths[ $name ] ) ) {
