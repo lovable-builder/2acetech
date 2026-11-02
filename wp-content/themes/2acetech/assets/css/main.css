@@ -155,9 +155,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .wordmark:hover { color: inherit; }
 
 .custom-logo-link { display: inline-block; line-height: 0; }
-.custom-logo { max-height: 46px; width: auto; }
+.custom-logo { height: 44px; width: auto; max-width: 100%; }
 .footer-logo { display: inline-block; line-height: 0; }
-.footer-logo img { max-height: 46px; width: auto; }
+.footer-logo img { height: 46px; width: auto; }
 
 /* Top bar ---------------------------------------------------------------- */
 

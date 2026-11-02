@@ -169,7 +169,32 @@ function ace_logo() {
 		the_custom_logo();
 		return;
 	}
-	echo ace_wordmark(); // phpcs:ignore WordPress.Security.EscapeOutput
+	echo ace_bundled_logo( 'logo.png' ); // phpcs:ignore WordPress.Security.EscapeOutput
+}
+
+/**
+ * The logo that ships with the theme (assets/img), linked to the home page.
+ * Falls back to the text wordmark if the file is missing.
+ *
+ * @param string $file    File in assets/img.
+ * @param string $classes Link classes.
+ * @return string
+ */
+function ace_bundled_logo( $file, $classes = 'custom-logo-link' ) {
+	$path = ACE_DIR . '/assets/img/' . $file;
+	if ( ! file_exists( $path ) ) {
+		return ace_wordmark( 'logo-light.png' === $file ? 'wordmark--light' : '' );
+	}
+	$size = getimagesize( $path );
+	return sprintf(
+		'<a class="%1$s" href="%2$s" rel="home"><img class="custom-logo" src="%3$s" width="%4$d" height="%5$d" alt="%6$s" decoding="async"></a>',
+		esc_attr( $classes ),
+		esc_url( home_url( '/' ) ),
+		esc_url( ACE_URI . '/assets/img/' . $file ),
+		$size ? (int) $size[0] : 760,
+		$size ? (int) $size[1] : 101,
+		esc_attr( get_bloginfo( 'name' ) )
+	);
 }
 
 /**
@@ -185,7 +210,7 @@ function ace_footer_logo() {
 		);
 		return;
 	}
-	echo ace_wordmark( 'wordmark--light' ); // phpcs:ignore WordPress.Security.EscapeOutput
+	echo ace_bundled_logo( 'logo-light.png', 'footer-logo' ); // phpcs:ignore WordPress.Security.EscapeOutput
 }
 
 /**

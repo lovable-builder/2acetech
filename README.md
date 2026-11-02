@@ -29,9 +29,10 @@ site. They are not part of the theme.
   section shows demo products (`inc/demo-data.php`). Admins see a notice. The
   moment a real product exists, the same sections show real data: featured,
   latest, on sale, bestsellers, categories and brands (WooCommerce Brands).
-- **Logo**: Appearance > Customize > Site Identity sets the header logo. A
-  light version for the dark footer goes under Store details > Footer logo.
-  Until then a text wordmark is shown.
+- **Logo**: the theme ships with transparent logos in `wp-content/themes/2acetech/assets/img`
+  (`logo.png` for the header, `logo-light.png` for the dark footer), made from
+  `brand/2ace-tech-logo-original.png`. Appearance > Customize > Site Identity
+  overrides the header logo; Store details > Footer logo overrides the footer one.
 - **Store details** (Customize): top bar text, phone, email, address, social
   links, deal countdown end, newsletter shortcode.
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
