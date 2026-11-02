@@ -154,10 +154,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .wordmark--light .wordmark__a { color: #fff; }
 .wordmark:hover { color: inherit; }
 
-.custom-logo-link { display: inline-block; line-height: 0; }
-.site-header .custom-logo { height: clamp(24px, 6.8vw, 44px); width: auto; max-width: none; }
-.footer-logo { display: inline-block; line-height: 0; }
-.site-footer .footer-logo img { height: clamp(32px, 9vw, 46px); width: auto; max-width: none; }
+.custom-logo-link { display: inline-block; flex: none; line-height: 0; }
+/* object-fit keeps the proportions even if something narrows the box. */
+.site-header .custom-logo { height: clamp(24px, 6.8vw, 44px); width: auto; max-width: none; object-fit: contain; }
+@media (max-width: 960px) { .site-header .custom-logo { height: 30px; } }
+.footer-logo { display: inline-block; flex: none; line-height: 0; }
+.site-footer .footer-logo img { height: clamp(32px, 9vw, 46px); width: auto; max-width: none; object-fit: contain; }
 
 /* Top bar ---------------------------------------------------------------- */
 
