@@ -5,7 +5,8 @@
   "description": "2acetech WordPress / WooCommerce storefront",
   "scripts": {
     "start": "wp-playground-cli server --mount-before-install=./wp-content/themes/2acetech:/wordpress/wp-content/themes/2acetech --mount=./playground:/playground --port=9400 --blueprint=./blueprint.json",
-    "start:products": "wp-playground-cli server --mount-before-install=./wp-content/themes/2acetech:/wordpress/wp-content/themes/2acetech --mount=./playground:/playground --port=9400 --blueprint=./blueprint.products.json"
+    "start:products": "wp-playground-cli server --mount-before-install=./wp-content/themes/2acetech:/wordpress/wp-content/themes/2acetech --mount=./playground:/playground --port=9400 --blueprint=./blueprint.products.json",
+    "start:pl": "wp-playground-cli server --mount-before-install=./wp-content/themes/2acetech:/wordpress/wp-content/themes/2acetech --mount=./playground:/playground --port=9400 --blueprint=./blueprint.pl.json"
   },
   "engines": {
     "node": ">=20.18"

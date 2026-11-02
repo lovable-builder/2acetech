@@ -12,6 +12,7 @@ WordPress in WebAssembly via WordPress Playground.
 npm install
 npm start                # landing page with demo content, http://127.0.0.1:9400
 npm run start:products   # same, plus 8 sample WooCommerce products
+npm run start:pl         # same, with the site language set to Polish
 ```
 
 `playground/` and the `blueprint*.json` files only configure the preview
@@ -100,3 +101,23 @@ See [docs/launch-checklist.md](docs/launch-checklist.md): business details,
 legal pages, VAT, payments, email, backups, test purchases and going live.
 The theme includes a Contact page template (Page attributes > Template >
 Contact), seller details in the footer, and the EU-compliant order button.
+
+## Polish translation
+
+`wp-content/themes/2acetech/languages/` holds `2acetech.pot` (template),
+`pl_PL.po` (Polish, 230 strings) and the compiled `pl_PL.mo`. Set the site
+language under Settings > General > Site Language > Polski and the theme,
+WooCommerce and WordPress all switch to Polish together. The checkout button
+reads "Zamawiam z obowiązkiem zapłaty".
+
+After changing any theme text, regenerate and recompile:
+
+```sh
+cd wp-content/themes/2acetech
+find . -name '*.php' | xargs xgettext --language=PHP --from-code=UTF-8 \
+  --keyword=__:1 --keyword=_e:1 --keyword=esc_html__:1 --keyword=esc_html_e:1 \
+  --keyword=esc_attr__:1 --keyword=esc_attr_e:1 --keyword=_n:1,2 --no-location \
+  -o languages/2acetech.pot
+msgmerge -U languages/pl_PL.po languages/2acetech.pot   # then translate new entries
+msgfmt -o languages/pl_PL.mo languages/pl_PL.po
+```

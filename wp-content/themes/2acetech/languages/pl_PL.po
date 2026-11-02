@@ -1,0 +1,731 @@
+# Polish translation of the 2acetech theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: 2acetech 1.0.0\n"
+"PO-Revision-Date: 2026-11-02 12:00+0000\n"
+"Last-Translator: 2acetech\n"
+"Language-Team: Polish\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "This page has gone missing"
+msgstr "Nie znaleziono strony"
+
+msgid "The link may be broken or the page may have moved. Try a search, or head back to the shop."
+msgstr "Link może być nieprawidłowy lub strona została przeniesiona. Skorzystaj z wyszukiwarki albo wróć do sklepu."
+
+msgid "Back to the shop"
+msgstr "Wróć do sklepu"
+
+#. translators: %s: number of comments.
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] "%s komentarz"
+msgstr[1] "%s komentarze"
+msgstr[2] "%s komentarzy"
+
+msgid "Shop"
+msgstr "Sklep"
+
+msgid "Customer care"
+msgstr "Obsługa klienta"
+
+msgid "All rights reserved."
+msgstr "Wszelkie prawa zastrzeżone."
+
+msgid "Back to top"
+msgstr "Wróć na górę"
+
+msgid "Primary menu"
+msgstr "Menu główne"
+
+msgid "Departments (category dropdown)"
+msgstr "Kategorie (menu rozwijane)"
+
+msgid "Footer: Shop"
+msgstr "Stopka: Sklep"
+
+msgid "Footer: Customer care"
+msgstr "Stopka: Obsługa klienta"
+
+msgid "Sidebar"
+msgstr "Pasek boczny"
+
+msgid "Footer widgets"
+msgstr "Widgety w stopce"
+
+msgid "Fast, tracked delivery across Poland"
+msgstr "Szybka dostawa z numerem śledzenia w całej Polsce"
+
+msgid "Skip to content"
+msgstr "Przejdź do treści"
+
+msgid "Menu"
+msgstr "Menu"
+
+msgid "Wishlist"
+msgstr "Lista życzeń"
+
+msgid "My account"
+msgstr "Moje konto"
+
+msgid "Cart"
+msgstr "Koszyk"
+
+msgid "Shop by category"
+msgstr "Kategorie produktów"
+
+msgid "Product categories"
+msgstr "Kategorie produktów"
+
+msgid "All products"
+msgstr "Wszystkie produkty"
+
+msgid "Primary"
+msgstr "Główne"
+
+msgid "Name"
+msgstr "Imię i nazwisko"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Order number"
+msgstr "Numer zamówienia"
+
+#. translators: 1: site name, 2: sender name.
+msgid "[%1$s] Message from %2$s"
+msgstr "[%1$s] Wiadomość od %2$s"
+
+msgid "Landing page"
+msgstr "Strona startowa"
+
+msgid "Edit the homepage: hero scenes, banners, trust strip, headings and section order. Products, categories, brands and the deal of the week come from WooCommerce."
+msgstr "Edytuj stronę główną: sceny w sekcji hero, banery, pasek zalet, nagłówki i kolejność sekcji. Produkty, kategorie, marki i oferta tygodnia pochodzą z WooCommerce."
+
+#. translators: %d: scene number.
+msgid "Hero scene %d"
+msgstr "Scena hero %d"
+
+msgid "Show this scene"
+msgstr "Pokaż tę scenę"
+
+msgid "Small label"
+msgstr "Mała etykieta"
+
+msgid "Headline"
+msgstr "Nagłówek"
+
+msgid "The last word is shown in red."
+msgstr "Ostatnie słowo jest wyświetlane na czerwono."
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Button text"
+msgstr "Tekst przycisku"
+
+msgid "Leave empty for no button."
+msgstr "Zostaw puste, aby ukryć przycisk."
+
+msgid "Button link"
+msgstr "Link przycisku"
+
+msgid "Product photo"
+msgstr "Zdjęcie produktu"
+
+msgid "Best: a transparent PNG, at least 1000 px wide. Empty uses the illustration below."
+msgstr "Najlepiej przezroczysty PNG o szerokości min. 1000 px. Puste pole użyje ilustracji poniżej."
+
+msgid "Illustration (no photo)"
+msgstr "Ilustracja (gdy brak zdjęcia)"
+
+msgid "Background glow"
+msgstr "Poświata tła"
+
+#. translators: %d: chip number.
+msgid "Floating tag %d"
+msgstr "Znacznik %d"
+
+msgid "Short facts around the product. Empty hides it. Only state facts that are true."
+msgstr "Krótkie fakty wokół produktu. Puste pole ukrywa znacznik. Podawaj tylko prawdziwe informacje."
+
+msgid "Promo banners"
+msgstr "Banery promocyjne"
+
+#. translators: %d: banner number.
+msgid "Banner %d: show"
+msgstr "Baner %d: pokaż"
+
+msgid "Banner %d: small label"
+msgstr "Baner %d: mała etykieta"
+
+msgid "Banner %d: headline"
+msgstr "Baner %d: nagłówek"
+
+msgid "Banner %d: button text"
+msgstr "Baner %d: tekst przycisku"
+
+msgid "Banner %d: link"
+msgstr "Baner %d: link"
+
+msgid "Banner %d: product photo"
+msgstr "Baner %d: zdjęcie produktu"
+
+msgid "Transparent PNG works best. Empty uses the illustration."
+msgstr "Najlepiej przezroczysty PNG. Puste pole użyje ilustracji."
+
+msgid "Banner %d: illustration (no photo)"
+msgstr "Baner %d: ilustracja (gdy brak zdjęcia)"
+
+msgid "Banner %d: style"
+msgstr "Baner %d: styl"
+
+msgid "Light"
+msgstr "Jasny"
+
+msgid "Dark"
+msgstr "Ciemny"
+
+msgid "Trust strip"
+msgstr "Pasek zalet"
+
+msgid "Four short promises under the hero. Empty title hides an item. Only promise what you will deliver."
+msgstr "Cztery krótkie obietnice pod sekcją hero. Pusty tytuł ukrywa pozycję. Obiecuj tylko to, czego dotrzymasz."
+
+#. translators: %d: item number.
+msgid "Item %d title"
+msgstr "Pozycja %d: tytuł"
+
+msgid "Item %d text"
+msgstr "Pozycja %d: tekst"
+
+msgid "Sections"
+msgstr "Sekcje"
+
+msgid "The hero is always first. Tick a section to show it, drag to re-order."
+msgstr "Sekcja hero jest zawsze pierwsza. Zaznacz sekcję, aby ją pokazać, przeciągnij, aby zmienić kolejność."
+
+msgid "Homepage sections"
+msgstr "Sekcje strony głównej"
+
+msgid "Headings and texts"
+msgstr "Nagłówki i teksty"
+
+msgid "Category tiles heading"
+msgstr "Nagłówek kafelków kategorii"
+
+msgid "Featured products heading"
+msgstr "Nagłówek polecanych produktów"
+
+msgid "Best deals heading"
+msgstr "Nagłówek najlepszych okazji"
+
+msgid "Bestsellers heading"
+msgstr "Nagłówek bestsellerów"
+
+msgid "Newsletter heading"
+msgstr "Nagłówek newslettera"
+
+msgid "Newsletter text"
+msgstr "Tekst newslettera"
+
+msgid "Footer tagline"
+msgstr "Hasło w stopce"
+
+msgid "Store details"
+msgstr "Dane sklepu"
+
+msgid "Top bar message"
+msgstr "Komunikat na górnym pasku"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Address"
+msgstr "Adres"
+
+msgid "Seller: company name"
+msgstr "Sprzedawca: nazwa firmy"
+
+msgid "Seller: NIP / tax ID and registry number"
+msgstr "Sprzedawca: NIP i numer rejestru"
+
+msgid "Facebook URL"
+msgstr "Adres URL Facebooka"
+
+msgid "Instagram URL"
+msgstr "Adres URL Instagrama"
+
+msgid "X (Twitter) URL"
+msgstr "Adres URL profilu X (Twitter)"
+
+msgid "YouTube URL"
+msgstr "Adres URL YouTube"
+
+msgid "Footer logo (light version)"
+msgstr "Logo w stopce (wersja jasna)"
+
+msgid "Used on the dark footer. Upload a version with white lettering."
+msgstr "Używane w ciemnej stopce. Wgraj wersję z białymi literami."
+
+msgid "Link-sharing image"
+msgstr "Obraz udostępniania linku"
+
+msgid "Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x 630 px. Leave empty to use the built-in image. Product pages use the product photo."
+msgstr "Wyświetlany, gdy strona jest udostępniana na WhatsApp, Facebooku, LinkedIn lub X. 1200 × 630 px. Puste pole użyje wbudowanego obrazu. Strony produktów używają zdjęcia produktu."
+
+msgid "Deal countdown end"
+msgstr "Koniec odliczania oferty"
+
+msgid "Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end of the current week."
+msgstr "Data i godzina, np. 2026-12-24 23:59. Puste pole odlicza do końca bieżącego tygodnia."
+
+msgid "Newsletter form shortcode"
+msgstr "Shortcode formularza newslettera"
+
+msgid "Optional. Paste a shortcode from Mailchimp for WP, FluentCRM, etc. Empty uses the built-in form, which emails the store admin."
+msgstr "Opcjonalnie. Wklej shortcode z Mailchimp for WP, FluentCRM itp. Puste pole używa wbudowanego formularza, który wysyła e-mail do administratora sklepu."
+
+msgid "Laptops & computers"
+msgstr "Laptopy i komputery"
+
+msgid "Phones & tablets"
+msgstr "Telefony i tablety"
+
+msgid "Audio"
+msgstr "Audio"
+
+msgid "Cameras"
+msgstr "Aparaty i kamery"
+
+msgid "Wearables"
+msgstr "Smartwatche"
+
+msgid "Gaming"
+msgstr "Gaming"
+
+msgid "Red glow"
+msgstr "Czerwona poświata"
+
+msgid "Steel blue"
+msgstr "Stalowy niebieski"
+
+msgid "Deep crimson"
+msgstr "Głęboka czerwień"
+
+msgid "Smartwatch"
+msgstr "Smartwatch"
+
+msgid "Laptop"
+msgstr "Laptop"
+
+msgid "Headphones"
+msgstr "Słuchawki"
+
+msgid "Camera"
+msgstr "Aparat"
+
+msgid "Smartphone"
+msgstr "Smartfon"
+
+msgid "Speaker"
+msgstr "Głośnik"
+
+msgid "Tablet"
+msgstr "Tablet"
+
+msgid "Game console"
+msgstr "Konsola do gier"
+
+msgid "Wear the future on your wrist."
+msgstr "Przyszłość na Twoim nadgarstku."
+
+msgid "Smartwatches that track, pay and keep up with every day."
+msgstr "Smartwatche, które mierzą, płacą i dotrzymują kroku każdemu dniowi."
+
+msgid "Shop wearables"
+msgstr "Kup smartwatche"
+
+msgid "AMOLED display"
+msgstr "Wyświetlacz AMOLED"
+
+msgid "7-day battery"
+msgstr "Bateria na 7 dni"
+
+msgid "GPS + NFC"
+msgstr "GPS + NFC"
+
+msgid "Laptops"
+msgstr "Laptopy"
+
+msgid "Power that travels light."
+msgstr "Moc w lekkiej obudowie."
+
+msgid "Ultralight laptops built for work, study and everything after."
+msgstr "Ultralekkie laptopy do pracy, nauki i wszystkiego po godzinach."
+
+msgid "Shop laptops"
+msgstr "Kup laptopy"
+
+msgid "14\" OLED"
+msgstr "14\" OLED"
+
+msgid "16 GB RAM"
+msgstr "16 GB RAM"
+
+msgid "1 kg"
+msgstr "1 kg"
+
+msgid "Hear every last detail."
+msgstr "Usłysz każdy szczegół."
+
+msgid "Noise-cancelling headphones and speakers with room-filling sound."
+msgstr "Słuchawki z redukcją hałasu i głośniki z dźwiękiem, który wypełnia pokój."
+
+msgid "Shop audio"
+msgstr "Kup sprzęt audio"
+
+msgid "Active noise cancelling"
+msgstr "Aktywna redukcja szumów"
+
+msgid "40 h playback"
+msgstr "40 godzin odtwarzania"
+
+msgid "Bluetooth 5.3"
+msgstr "Bluetooth 5.3"
+
+msgid "Tablets & phones"
+msgstr "Tablety i telefony"
+
+msgid "Shop and save big on the hottest tablets"
+msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
+
+msgid "Shop now"
+msgstr "Kup teraz"
+
+msgid "Level up your setup with new consoles"
+msgstr "Podkręć swoje stanowisko nowymi konsolami"
+
+msgid "Explore gaming"
+msgstr "Odkryj gaming"
+
+msgid "Fast delivery"
+msgstr "Szybka dostawa"
+
+msgid "Tracked shipping across Poland"
+msgstr "Wysyłka z numerem śledzenia w całej Polsce"
+
+msgid "Secure checkout"
+msgstr "Bezpieczne zakupy"
+
+msgid "Encrypted, trusted payments"
+msgstr "Szyfrowane, zaufane płatności"
+
+msgid "Easy returns"
+msgstr "Łatwe zwroty"
+
+msgid "14-day right of withdrawal"
+msgstr "14 dni na odstąpienie od umowy"
+
+msgid "Warranty included"
+msgstr "Gwarancja w cenie"
+
+msgid "Manufacturer warranty on every product"
+msgstr "Gwarancja producenta na każdy produkt"
+
+msgid "Category tiles"
+msgstr "Kafelki kategorii"
+
+msgid "Featured products"
+msgstr "Polecane produkty"
+
+msgid "Deal of the week and product tabs"
+msgstr "Oferta tygodnia i zakładki produktów"
+
+msgid "Brand strip"
+msgstr "Pasek marek"
+
+msgid "Best deals by category"
+msgstr "Najlepsze okazje według kategorii"
+
+msgid "Bestsellers"
+msgstr "Bestsellery"
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "Best deals"
+msgstr "Najlepsze okazje"
+
+msgid "Get the drop before everyone else"
+msgstr "Poznaj nowości przed wszystkimi"
+
+msgid "New arrivals and deals, straight to your inbox."
+msgstr "Nowości i promocje prosto na Twoją skrzynkę."
+
+msgid "Premium electronics, delivered fast across Poland."
+msgstr "Elektronika premium, szybko dostarczana w całej Polsce."
+
+#. translators: %s: site name.
+msgid "[%s] New newsletter sign-up"
+msgstr "[%s] Nowy zapis do newslettera"
+
+#. translators: %s: email address.
+msgid "New newsletter sign-up: %s"
+msgstr "Nowy zapis do newslettera: %s"
+
+msgid "Breadcrumb"
+msgstr "Ścieżka nawigacji"
+
+msgid "Home"
+msgstr "Strona główna"
+
+msgid "Brand:"
+msgstr "Marka:"
+
+#. translators: %d: number of reviews.
+msgid "%d review"
+msgid_plural "%d reviews"
+msgstr[0] "%d opinia"
+msgstr[1] "%d opinie"
+msgstr[2] "%d opinii"
+
+msgid "Be the first to review this product"
+msgstr "Bądź pierwszą osobą, która oceni ten produkt"
+
+msgid "Hurry up! Special offer."
+msgstr "Pospiesz się! Oferta specjalna."
+
+#. translators: %d: units available.
+msgid "Available: %d"
+msgstr "Dostępne: %d"
+
+#. translators: %d: units sold.
+msgid "Already sold: %d"
+msgstr "Już sprzedano: %d"
+
+#. translators: %d: percent sold.
+msgid "%d%% sold"
+msgstr "Sprzedano %d%%"
+
+#. translators: %d: units left.
+msgid "Only %d left in stock"
+msgid_plural "Only %d left in stock"
+msgstr[0] "W magazynie tylko %d szt."
+msgstr[1] "W magazynie tylko %d szt."
+msgstr[2] "W magazynie tylko %d szt."
+
+msgid "days"
+msgstr "dni"
+
+msgid "hrs"
+msgstr "godz."
+
+msgid "min"
+msgstr "min"
+
+msgid "sec"
+msgstr "sek."
+
+msgid "Secure, encrypted checkout"
+msgstr "Bezpieczne, szyfrowane zamówienie"
+
+msgid "On backorder"
+msgstr "Na zamówienie"
+
+msgid "In stock"
+msgstr "Dostępny"
+
+msgid "Out of stock"
+msgstr "Niedostępny"
+
+msgid "Availability"
+msgstr "Dostępność"
+
+msgid "SKU"
+msgstr "SKU"
+
+msgid "Category"
+msgstr "Kategoria"
+
+msgid "Share"
+msgstr "Udostępnij"
+
+msgid "Link copied"
+msgstr "Skopiowano link"
+
+msgid "Copy link"
+msgstr "Kopiuj link"
+
+#. translators: %s: rating out of 5.
+msgid "Rated %s out of 5"
+msgstr "Ocena %s na 5"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "New"
+msgstr "Nowość"
+
+msgid "Sale"
+msgstr "Promocja"
+
+msgid "Sold out"
+msgstr "Wyprzedane"
+
+#. translators: %s: product name.
+msgid "View %s"
+msgstr "Zobacz: %s"
+
+msgid "Showing demo products. Add your first WooCommerce product and this content is replaced automatically."
+msgstr "Wyświetlane są produkty demonstracyjne. Dodaj pierwszy produkt w WooCommerce, a ta treść zostanie zastąpiona automatycznie."
+
+msgid "Showing demo products. Install and activate WooCommerce to sell real products."
+msgstr "Wyświetlane są produkty demonstracyjne. Zainstaluj i aktywuj WooCommerce, aby sprzedawać prawdziwe produkty."
+
+msgid "Admin preview:"
+msgstr "Podgląd administratora:"
+
+msgid "Items in cart:"
+msgstr "Produkty w koszyku:"
+
+msgid "Details & payment"
+msgstr "Dane i płatność"
+
+msgid "Confirmation"
+msgstr "Potwierdzenie"
+
+msgid "Checkout progress"
+msgstr "Postęp zamówienia"
+
+msgid "Order with obligation to pay"
+msgstr "Zamawiam z obowiązkiem zapłaty"
+
+#. translators: %s: search query.
+msgid "Search results for \"%s\""
+msgstr "Wyniki wyszukiwania dla „%s”"
+
+msgid "Nothing found. Try a different search."
+msgstr "Nic nie znaleziono. Spróbuj innego wyszukiwania."
+
+msgid "Continue shopping"
+msgstr "Kontynuuj zakupy"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "All categories"
+msgstr "Wszystkie kategorie"
+
+msgid "Search products…"
+msgstr "Szukaj produktów…"
+
+msgid "Search…"
+msgstr "Szukaj…"
+
+msgid "Thank you, your message has been sent. We will reply as soon as we can."
+msgstr "Dziękujemy, Twoja wiadomość została wysłana. Odpowiemy tak szybko, jak to możliwe."
+
+msgid "Please fill in your name, a valid email and a message."
+msgstr "Podaj imię i nazwisko, poprawny adres e-mail oraz treść wiadomości."
+
+msgid "Too many messages from this connection. Please try again later."
+msgstr "Zbyt wiele wiadomości z tego połączenia. Spróbuj ponownie później."
+
+msgid "We could not send your message. Please email us directly."
+msgstr "Nie udało się wysłać wiadomości. Napisz do nas bezpośrednio na e-mail."
+
+msgid "The form expired. Please reload the page and try again."
+msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
+
+msgid "Send us a message"
+msgstr "Napisz do nas"
+
+msgid "Your name"
+msgstr "Imię i nazwisko"
+
+msgid "Order number (optional)"
+msgstr "Numer zamówienia (opcjonalnie)"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "We use your details only to answer this message."
+msgstr "Używamy Twoich danych wyłącznie do odpowiedzi na tę wiadomość."
+
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
+
+msgid "Send message"
+msgstr "Wyślij wiadomość"
+
+msgid "Contact details"
+msgstr "Dane kontaktowe"
+
+msgid "Brands"
+msgstr "Marki"
+
+#. translators: %d: number of products.
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] "%d produkt"
+msgstr[1] "%d produkty"
+msgstr[2] "%d produktów"
+
+msgid "Deal categories"
+msgstr "Kategorie okazji"
+
+msgid "Featured"
+msgstr "Polecane"
+
+msgid "Latest"
+msgstr "Najnowsze"
+
+msgid "On sale"
+msgstr "W promocji"
+
+msgid "Deal of the week"
+msgstr "Oferta tygodnia"
+
+msgid "Hurry up! Offer ends in:"
+msgstr "Pospiesz się! Oferta kończy się za:"
+
+msgid "Product groups"
+msgstr "Grupy produktów"
+
+msgid "Featured collections"
+msgstr "Polecane kolekcje"
+
+msgid "Scroll"
+msgstr "Przewiń"
+
+msgid "Email address"
+msgstr "Adres e-mail"
+
+msgid "Your email address"
+msgstr "Twój adres e-mail"
+
+msgid "Subscribe"
+msgstr "Zapisz się"
+
+msgid "Thanks, you are on the list."
+msgstr "Dziękujemy, jesteś na liście."
+
+msgid "Please enter a valid email address and try again."
+msgstr "Podaj poprawny adres e-mail i spróbuj ponownie."
+
+msgid "View all"
+msgstr "Zobacz wszystko"
+
+msgid "Previous products"
+msgstr "Poprzednie produkty"
+
+msgid "Next products"
+msgstr "Następne produkty"
+
+msgid "Why shop with us"
+msgstr "Dlaczego warto kupować u nas"

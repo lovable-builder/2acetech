@@ -1,0 +1,781 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the 2acetech package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 2acetech 1.0.0\n"
+"Report-Msgid-Bugs-To: info@2acetech.pl\n"
+"POT-Creation-Date: 2026-11-02 17:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+msgid "This page has gone missing"
+msgstr ""
+
+msgid ""
+"The link may be broken or the page may have moved. Try a search, or head "
+"back to the shop."
+msgstr ""
+
+msgid "Back to the shop"
+msgstr ""
+
+#. translators: %s: number of comments.
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Shop"
+msgstr ""
+
+msgid "Customer care"
+msgstr ""
+
+msgid "All rights reserved."
+msgstr ""
+
+msgid "Back to top"
+msgstr ""
+
+msgid "Primary menu"
+msgstr ""
+
+msgid "Departments (category dropdown)"
+msgstr ""
+
+msgid "Footer: Shop"
+msgstr ""
+
+msgid "Footer: Customer care"
+msgstr ""
+
+msgid "Sidebar"
+msgstr ""
+
+msgid "Footer widgets"
+msgstr ""
+
+msgid "Fast, tracked delivery across Poland"
+msgstr ""
+
+msgid "Skip to content"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Wishlist"
+msgstr ""
+
+msgid "My account"
+msgstr ""
+
+msgid "Cart"
+msgstr ""
+
+msgid "Shop by category"
+msgstr ""
+
+msgid "Product categories"
+msgstr ""
+
+msgid "All products"
+msgstr ""
+
+msgid "Primary"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Order number"
+msgstr ""
+
+#. translators: 1: site name, 2: sender name.
+#, php-format
+msgid "[%1$s] Message from %2$s"
+msgstr ""
+
+msgid "Landing page"
+msgstr ""
+
+msgid ""
+"Edit the homepage: hero scenes, banners, trust strip, headings and section "
+"order. Products, categories, brands and the deal of the week come from "
+"WooCommerce."
+msgstr ""
+
+#. translators: %d: scene number.
+#, php-format
+msgid "Hero scene %d"
+msgstr ""
+
+msgid "Show this scene"
+msgstr ""
+
+msgid "Small label"
+msgstr ""
+
+msgid "Headline"
+msgstr ""
+
+msgid "The last word is shown in red."
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Button text"
+msgstr ""
+
+msgid "Leave empty for no button."
+msgstr ""
+
+msgid "Button link"
+msgstr ""
+
+msgid "Product photo"
+msgstr ""
+
+msgid ""
+"Best: a transparent PNG, at least 1000 px wide. Empty uses the illustration "
+"below."
+msgstr ""
+
+msgid "Illustration (no photo)"
+msgstr ""
+
+msgid "Background glow"
+msgstr ""
+
+#. translators: %d: chip number.
+#, php-format
+msgid "Floating tag %d"
+msgstr ""
+
+msgid ""
+"Short facts around the product. Empty hides it. Only state facts that are "
+"true."
+msgstr ""
+
+msgid "Promo banners"
+msgstr ""
+
+#. translators: %d: banner number.
+#, php-format
+msgid "Banner %d: show"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: small label"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: headline"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: button text"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: link"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: product photo"
+msgstr ""
+
+msgid "Transparent PNG works best. Empty uses the illustration."
+msgstr ""
+
+#, php-format
+msgid "Banner %d: illustration (no photo)"
+msgstr ""
+
+#, php-format
+msgid "Banner %d: style"
+msgstr ""
+
+msgid "Light"
+msgstr ""
+
+msgid "Dark"
+msgstr ""
+
+msgid "Trust strip"
+msgstr ""
+
+msgid ""
+"Four short promises under the hero. Empty title hides an item. Only promise "
+"what you will deliver."
+msgstr ""
+
+#. translators: %d: item number.
+#, php-format
+msgid "Item %d title"
+msgstr ""
+
+#, php-format
+msgid "Item %d text"
+msgstr ""
+
+msgid "Sections"
+msgstr ""
+
+msgid "The hero is always first. Tick a section to show it, drag to re-order."
+msgstr ""
+
+msgid "Homepage sections"
+msgstr ""
+
+msgid "Headings and texts"
+msgstr ""
+
+msgid "Category tiles heading"
+msgstr ""
+
+msgid "Featured products heading"
+msgstr ""
+
+msgid "Best deals heading"
+msgstr ""
+
+msgid "Bestsellers heading"
+msgstr ""
+
+msgid "Newsletter heading"
+msgstr ""
+
+msgid "Newsletter text"
+msgstr ""
+
+msgid "Footer tagline"
+msgstr ""
+
+msgid "Store details"
+msgstr ""
+
+msgid "Top bar message"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Seller: company name"
+msgstr ""
+
+msgid "Seller: NIP / tax ID and registry number"
+msgstr ""
+
+msgid "Facebook URL"
+msgstr ""
+
+msgid "Instagram URL"
+msgstr ""
+
+msgid "X (Twitter) URL"
+msgstr ""
+
+msgid "YouTube URL"
+msgstr ""
+
+msgid "Footer logo (light version)"
+msgstr ""
+
+msgid "Used on the dark footer. Upload a version with white lettering."
+msgstr ""
+
+msgid "Link-sharing image"
+msgstr ""
+
+msgid ""
+"Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x "
+"630 px. Leave empty to use the built-in image. Product pages use the product "
+"photo."
+msgstr ""
+
+msgid "Deal countdown end"
+msgstr ""
+
+msgid ""
+"Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end "
+"of the current week."
+msgstr ""
+
+msgid "Newsletter form shortcode"
+msgstr ""
+
+msgid ""
+"Optional. Paste a shortcode from Mailchimp for WP, FluentCRM, etc. Empty "
+"uses the built-in form, which emails the store admin."
+msgstr ""
+
+msgid "Laptops & computers"
+msgstr ""
+
+msgid "Phones & tablets"
+msgstr ""
+
+msgid "Audio"
+msgstr ""
+
+msgid "Cameras"
+msgstr ""
+
+msgid "Wearables"
+msgstr ""
+
+msgid "Gaming"
+msgstr ""
+
+msgid "Red glow"
+msgstr ""
+
+msgid "Steel blue"
+msgstr ""
+
+msgid "Deep crimson"
+msgstr ""
+
+msgid "Smartwatch"
+msgstr ""
+
+msgid "Laptop"
+msgstr ""
+
+msgid "Headphones"
+msgstr ""
+
+msgid "Camera"
+msgstr ""
+
+msgid "Smartphone"
+msgstr ""
+
+msgid "Speaker"
+msgstr ""
+
+msgid "Tablet"
+msgstr ""
+
+msgid "Game console"
+msgstr ""
+
+msgid "Wear the future on your wrist."
+msgstr ""
+
+msgid "Smartwatches that track, pay and keep up with every day."
+msgstr ""
+
+msgid "Shop wearables"
+msgstr ""
+
+msgid "AMOLED display"
+msgstr ""
+
+msgid "7-day battery"
+msgstr ""
+
+msgid "GPS + NFC"
+msgstr ""
+
+msgid "Laptops"
+msgstr ""
+
+msgid "Power that travels light."
+msgstr ""
+
+msgid "Ultralight laptops built for work, study and everything after."
+msgstr ""
+
+msgid "Shop laptops"
+msgstr ""
+
+msgid "14\" OLED"
+msgstr ""
+
+msgid "16 GB RAM"
+msgstr ""
+
+msgid "1 kg"
+msgstr ""
+
+msgid "Hear every last detail."
+msgstr ""
+
+msgid "Noise-cancelling headphones and speakers with room-filling sound."
+msgstr ""
+
+msgid "Shop audio"
+msgstr ""
+
+msgid "Active noise cancelling"
+msgstr ""
+
+msgid "40 h playback"
+msgstr ""
+
+msgid "Bluetooth 5.3"
+msgstr ""
+
+msgid "Tablets & phones"
+msgstr ""
+
+msgid "Shop and save big on the hottest tablets"
+msgstr ""
+
+msgid "Shop now"
+msgstr ""
+
+msgid "Level up your setup with new consoles"
+msgstr ""
+
+msgid "Explore gaming"
+msgstr ""
+
+msgid "Fast delivery"
+msgstr ""
+
+msgid "Tracked shipping across Poland"
+msgstr ""
+
+msgid "Secure checkout"
+msgstr ""
+
+msgid "Encrypted, trusted payments"
+msgstr ""
+
+msgid "Easy returns"
+msgstr ""
+
+msgid "14-day right of withdrawal"
+msgstr ""
+
+msgid "Warranty included"
+msgstr ""
+
+msgid "Manufacturer warranty on every product"
+msgstr ""
+
+msgid "Category tiles"
+msgstr ""
+
+msgid "Featured products"
+msgstr ""
+
+msgid "Deal of the week and product tabs"
+msgstr ""
+
+msgid "Brand strip"
+msgstr ""
+
+msgid "Best deals by category"
+msgstr ""
+
+msgid "Bestsellers"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Best deals"
+msgstr ""
+
+msgid "Get the drop before everyone else"
+msgstr ""
+
+msgid "New arrivals and deals, straight to your inbox."
+msgstr ""
+
+msgid "Premium electronics, delivered fast across Poland."
+msgstr ""
+
+#. translators: %s: site name.
+#, php-format
+msgid "[%s] New newsletter sign-up"
+msgstr ""
+
+#. translators: %s: email address.
+#, php-format
+msgid "New newsletter sign-up: %s"
+msgstr ""
+
+msgid "Breadcrumb"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Brand:"
+msgstr ""
+
+#. translators: %d: number of reviews.
+#, php-format
+msgid "%d review"
+msgid_plural "%d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Be the first to review this product"
+msgstr ""
+
+msgid "Hurry up! Special offer."
+msgstr ""
+
+#. translators: %d: units available.
+#, php-format
+msgid "Available: %d"
+msgstr ""
+
+#. translators: %d: units sold.
+#, php-format
+msgid "Already sold: %d"
+msgstr ""
+
+#. translators: %d: percent sold.
+#, php-format
+msgid "%d%% sold"
+msgstr ""
+
+#. translators: %d: units left.
+#, php-format
+msgid "Only %d left in stock"
+msgid_plural "Only %d left in stock"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "days"
+msgstr ""
+
+msgid "hrs"
+msgstr ""
+
+msgid "min"
+msgstr ""
+
+msgid "sec"
+msgstr ""
+
+msgid "Secure, encrypted checkout"
+msgstr ""
+
+msgid "On backorder"
+msgstr ""
+
+msgid "In stock"
+msgstr ""
+
+msgid "Out of stock"
+msgstr ""
+
+msgid "Availability"
+msgstr ""
+
+msgid "SKU"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Link copied"
+msgstr ""
+
+msgid "Copy link"
+msgstr ""
+
+#. translators: %s: rating out of 5.
+#, php-format
+msgid "Rated %s out of 5"
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Sale"
+msgstr ""
+
+msgid "Sold out"
+msgstr ""
+
+#. translators: %s: product name.
+#, php-format
+msgid "View %s"
+msgstr ""
+
+msgid ""
+"Showing demo products. Add your first WooCommerce product and this content "
+"is replaced automatically."
+msgstr ""
+
+msgid ""
+"Showing demo products. Install and activate WooCommerce to sell real "
+"products."
+msgstr ""
+
+msgid "Admin preview:"
+msgstr ""
+
+msgid "Items in cart:"
+msgstr ""
+
+msgid "Details & payment"
+msgstr ""
+
+msgid "Confirmation"
+msgstr ""
+
+msgid "Checkout progress"
+msgstr ""
+
+msgid "Order with obligation to pay"
+msgstr ""
+
+#. translators: %s: search query.
+#, php-format
+msgid "Search results for \"%s\""
+msgstr ""
+
+msgid "Nothing found. Try a different search."
+msgstr ""
+
+msgid "Continue shopping"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "All categories"
+msgstr ""
+
+msgid "Search products…"
+msgstr ""
+
+msgid "Search…"
+msgstr ""
+
+msgid "Thank you, your message has been sent. We will reply as soon as we can."
+msgstr ""
+
+msgid "Please fill in your name, a valid email and a message."
+msgstr ""
+
+msgid "Too many messages from this connection. Please try again later."
+msgstr ""
+
+msgid "We could not send your message. Please email us directly."
+msgstr ""
+
+msgid "The form expired. Please reload the page and try again."
+msgstr ""
+
+msgid "Send us a message"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Order number (optional)"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "We use your details only to answer this message."
+msgstr ""
+
+msgid "Privacy policy"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Brands"
+msgstr ""
+
+#. translators: %d: number of products.
+#, php-format
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Deal categories"
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "Latest"
+msgstr ""
+
+msgid "On sale"
+msgstr ""
+
+msgid "Deal of the week"
+msgstr ""
+
+msgid "Hurry up! Offer ends in:"
+msgstr ""
+
+msgid "Product groups"
+msgstr ""
+
+msgid "Featured collections"
+msgstr ""
+
+msgid "Scroll"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "Thanks, you are on the list."
+msgstr ""
+
+msgid "Please enter a valid email address and try again."
+msgstr ""
+
+msgid "View all"
+msgstr ""
+
+msgid "Previous products"
+msgstr ""
+
+msgid "Next products"
+msgstr ""
+
+msgid "Why shop with us"
+msgstr ""
