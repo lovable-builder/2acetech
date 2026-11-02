@@ -16,7 +16,11 @@
 		const setStick = () => {
 			const bar = $('#wpadminbar');
 			const barH = bar && getComputedStyle(bar).position === 'fixed' ? bar.offsetHeight : 0;
-			doc.style.setProperty('--stick', `${header.offsetHeight + barH}px`);
+			// The open phone menu lives inside the header and its max-height is
+			// derived from --stick, so leave it out or the two chase each other.
+			const menu = $('[data-nav]', header);
+			const menuH = menu && menu.classList.contains('is-open') ? menu.offsetHeight : 0;
+			doc.style.setProperty('--stick', `${header.offsetHeight - menuH + barH}px`);
 		};
 		setStick();
 		if ('ResizeObserver' in window) new ResizeObserver(setStick).observe(header);
