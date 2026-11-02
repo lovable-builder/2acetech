@@ -26,7 +26,9 @@ function ace_ver( $rel ) {
 require_once ACE_DIR . '/inc/art.php';
 require_once ACE_DIR . '/inc/demo-data.php';
 require_once ACE_DIR . '/inc/template-tags.php';
+require_once ACE_DIR . '/inc/home.php';
 require_once ACE_DIR . '/inc/customizer.php';
+require_once ACE_DIR . '/inc/customizer-home.php';
 require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/woocommerce.php';

@@ -40,7 +40,7 @@ $uid = wp_unique_id( 'deals-' );
 <section class="section section--mist" data-reveal aria-labelledby="<?php echo esc_attr( $uid ); ?>">
 	<div class="container" data-tabs>
 		<header class="section__head section__head--tabs">
-			<h2 class="section__title" id="<?php echo esc_attr( $uid ); ?>"><?php esc_html_e( 'Best deals', '2acetech' ); ?></h2>
+			<h2 class="section__title" id="<?php echo esc_attr( $uid ); ?>"><?php echo esc_html( ace_text( 'ace_title_deals' ) ); ?></h2>
 			<div class="tabs__list" role="tablist" aria-label="<?php esc_attr_e( 'Deal categories', '2acetech' ); ?>">
 				<?php foreach ( $cats as $n => $cat ) : ?>
 					<button class="tabs__tab" type="button" role="tab" id="<?php echo esc_attr( "$uid-tab-$n" ); ?>" aria-controls="<?php echo esc_attr( "$uid-panel-$n" ); ?>" aria-selected="<?php echo 0 === $n ? 'true' : 'false'; ?>" tabindex="<?php echo 0 === $n ? '0' : '-1'; ?>"><?php echo esc_html( $cat['label'] ); ?></button>

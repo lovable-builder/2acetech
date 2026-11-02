@@ -24,7 +24,7 @@ if ( ! $count ) {
 
 			<div class="hero__bg" aria-hidden="true">
 				<?php foreach ( $scenes as $i => $scene ) : ?>
-					<span class="hero__bgl tone-<?php echo esc_attr( $scene['tone'] ); ?><?php echo 0 === $i ? ' is-first' : ''; ?>" data-bg></span>
+					<span class="hero__bgl tone-<?php echo esc_attr( isset( ace_tone_choices()[ $scene['tone'] ] ) ? $scene['tone'] : 'ember' ); ?><?php echo 0 === $i ? ' is-first' : ''; ?>" data-bg></span>
 				<?php endforeach; ?>
 				<span class="hero__grid"></span>
 				<span class="hero__orb" data-orb></span>
@@ -37,8 +37,12 @@ if ( ! $count ) {
 						<div class="scene scene--copy<?php echo 0 === $i ? ' is-active' : ''; ?>" data-scene="<?php echo (int) $i; ?>" data-copy>
 							<p class="eyebrow"><span class="eyebrow__n"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span><?php echo esc_html( $scene['eyebrow'] ); ?></p>
 							<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="hero__title"><?php echo ace_split_words( $scene['title'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
-							<p class="hero__text"><?php echo esc_html( $scene['text'] ); ?></p>
-							<a class="btn btn--primary" href="<?php echo esc_url( $scene['url'] ); ?>"><?php echo esc_html( $scene['cta'] ); ?><?php echo ace_icon( 'arrow', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+							<?php if ( '' !== trim( (string) $scene['text'] ) ) : ?>
+								<p class="hero__text"><?php echo esc_html( $scene['text'] ); ?></p>
+							<?php endif; ?>
+							<?php if ( '' !== trim( (string) $scene['cta'] ) ) : ?>
+								<a class="btn btn--primary" href="<?php echo esc_url( $scene['url'] ); ?>"><?php echo esc_html( $scene['cta'] ); ?><?php echo ace_icon( 'arrow', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+							<?php endif; ?>
 						</div>
 					<?php endforeach; ?>
 				</div>
@@ -47,7 +51,7 @@ if ( ! $count ) {
 					<?php foreach ( $scenes as $i => $scene ) : ?>
 						<div class="scene scene--art<?php echo 0 === $i ? ' is-active' : ''; ?>" data-scene="<?php echo (int) $i; ?>" data-art>
 							<span class="glow"></span>
-							<div class="art-wrap" data-art-wrap><?php echo ace_art( $scene['art'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
+							<div class="art-wrap" data-art-wrap><?php echo ace_visual( $scene['image'], $scene['art'] ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 							<?php foreach ( (array) $scene['chips'] as $c => $chip ) : ?>
 								<span class="chip chip--<?php echo (int) ( $c + 1 ); ?>" data-chip><?php echo esc_html( $chip ); ?></span>
 							<?php endforeach; ?>

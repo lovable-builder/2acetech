@@ -15,7 +15,7 @@ if ( ! $cats ) {
 <section class="section" data-reveal aria-labelledby="cats-title">
 	<div class="container">
 		<header class="section__head">
-			<h2 class="section__title" id="cats-title"><?php esc_html_e( 'Shop by category', '2acetech' ); ?></h2>
+			<h2 class="section__title" id="cats-title"><?php echo esc_html( ace_text( 'ace_title_categories' ) ); ?></h2>
 			<a class="link-more" href="<?php echo esc_url( ace_shop_url() ); ?>"><?php esc_html_e( 'All products', '2acetech' ); ?><?php echo ace_icon( 'arrow', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
 		</header>
 

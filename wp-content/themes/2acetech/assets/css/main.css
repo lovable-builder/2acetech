@@ -689,6 +689,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .promo__cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-weight: 700; padding: 11px 20px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.9rem; transition: background 0.2s, gap 0.25s var(--ease); }
 .promo--dark .promo__cta { background: #fff; color: var(--ink); }
 .promo:hover .promo__cta { background: var(--accent); color: #fff; gap: 12px; }
+.promo__art img { width: 100%; height: auto; max-height: 230px; object-fit: contain; }
 .promo__art { flex: none; width: clamp(150px, 28%, 250px); transition: transform 0.6s var(--ease); }
 .promo:hover .promo__art { transform: scale(1.08) rotate(-4deg); }
 @media (max-width: 860px) { .promos { grid-template-columns: 1fr; } .promo { min-height: 220px; } }

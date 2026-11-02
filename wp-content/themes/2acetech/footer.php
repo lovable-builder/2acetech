@@ -21,7 +21,7 @@ $social  = array(
 	<div class="container footer__grid">
 		<div class="footer__brand">
 			<?php ace_footer_logo(); ?>
-			<p class="footer__tagline"><?php esc_html_e( 'Premium electronics, delivered fast across Poland.', '2acetech' ); ?></p>
+			<p class="footer__tagline"><?php echo esc_html( ace_text( 'ace_footer_tagline' ) ); ?></p>
 
 			<ul class="footer__contact">
 				<?php if ( $phone ) : ?>

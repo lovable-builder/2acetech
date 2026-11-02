@@ -198,6 +198,7 @@
 		scale(calc(0.74 + var(--w) * 0.26));
 	will-change: transform;
 }
+.art-wrap .art--photo { object-fit: contain; }
 .art-wrap .art {
 	width: 100%;
 	height: 100%;

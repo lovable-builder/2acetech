@@ -16,8 +16,8 @@ $status    = isset( $_GET['subscribed'] ) ? sanitize_key( wp_unslash( $_GET['sub
 		<div class="newsletter__copy">
 			<span class="newsletter__icon"><?php echo ace_icon( 'send', 30 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span>
 			<div>
-				<h2 id="nl-title"><?php esc_html_e( 'Get the drop before everyone else', '2acetech' ); ?></h2>
-				<p><?php esc_html_e( 'New arrivals and deals, straight to your inbox.', '2acetech' ); ?></p>
+				<h2 id="nl-title"><?php echo esc_html( ace_text( 'ace_newsletter_title' ) ); ?></h2>
+				<p><?php echo esc_html( ace_text( 'ace_newsletter_text' ) ); ?></p>
 			</div>
 		</div>
 

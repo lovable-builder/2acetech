@@ -1,0 +1,14 @@
+.ace-sections { margin: 10px 0 0; padding: 0; list-style: none; }
+.ace-sections li {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0 0 6px;
+	padding: 9px 12px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+.ace-sections li.ui-sortable-helper { box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+.ace-handle { cursor: grab; color: #8c8f94; letter-spacing: -3px; font-size: 14px; line-height: 1; user-select: none; }
+.ace-sections label { flex: 1; cursor: pointer; }

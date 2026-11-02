@@ -22,9 +22,9 @@ site. They are not part of the theme.
 - **Landing page**: `front-page.php`, one template part per section in
   `template-parts/`. Reorder or remove sections there.
 - **Scroll hero**: `template-parts/hero.php`, `assets/css/hero.css`,
-  `assets/js/hero.js`. Scenes (copy, art, CTA) come from `ace_hero_scenes()` in
-  `inc/demo-data.php` and can be replaced with the `ace_hero_scenes` filter.
-  It honours `prefers-reduced-motion` and degrades to a static hero without JS.
+  `assets/js/hero.js`. Scenes are edited in Customize > Landing page (see
+  below). It honours `prefers-reduced-motion` and degrades to a static hero
+  without JS.
 - **Demo content**: until WooCommerce has a published product, every product
   section shows demo products (`inc/demo-data.php`). Admins see a notice. The
   moment a real product exists, the same sections show real data: featured,
@@ -76,3 +76,20 @@ preview, `playground/setup.php` enables bank transfer and pay-on-delivery,
 a Poland shipping zone and one finished order so every page has data.
 Asset versions follow each file's modification time, so browsers pick up
 theme updates immediately.
+
+## Editing the landing page (no code)
+
+Appearance > Customize > **Landing page**:
+
+- **Hero scene 1-3**: show/hide, label, headline (last word is red), text,
+  button and link, a product photo (transparent PNG) or a built-in
+  illustration, background glow, and up to three floating tags.
+- **Promo banners**: two banners, each with copy, link, photo or illustration,
+  light or dark.
+- **Trust strip**: four items; an empty title hides one.
+- **Sections**: tick to show, drag to re-order every section below the hero.
+- **Headings and texts**: section headings, newsletter copy, footer tagline.
+
+Code lives in `inc/home.php` (defaults and readers) and
+`inc/customizer-home.php` (the panel). Developers can still override output
+with the `ace_hero_scenes` and `ace_promos` filters.
