@@ -93,3 +93,21 @@ if ( ! wc_get_product_id_by_sku( 'SAMPLE-VAR' ) ) {
 	WC_Product_Variable::sync( $vid );
 	update_post_meta( $vid, 'total_sales', 40 );
 }
+
+// One finished order, so the order-received page can be previewed. Its URL is
+// written to playground/_order-url.txt (gitignored).
+if ( function_exists( 'wc_create_order' ) && ! get_option( 'ace_preview_order' ) ) {
+	$product = wc_get_product( wc_get_product_id_by_sku( 'SAMPLE-2' ) );
+	if ( $product ) {
+		$order = wc_create_order();
+		$order->add_product( $product, 1 );
+		$order->set_address( array( 'first_name' => 'Anna', 'last_name' => 'Kowalska', 'email' => 'anna@example.com', 'phone' => '500 100 200', 'address_1' => 'ul. Marszalkowska 10', 'city' => 'Warszawa', 'postcode' => '00-001', 'country' => 'PL' ), 'billing' );
+		$order->set_address( array( 'first_name' => 'Anna', 'last_name' => 'Kowalska', 'address_1' => 'ul. Marszalkowska 10', 'city' => 'Warszawa', 'postcode' => '00-001', 'country' => 'PL' ), 'shipping' );
+		$order->set_payment_method( 'cod' );
+		$order->set_payment_method_title( 'Pay on delivery' );
+		$order->calculate_totals();
+		$order->update_status( 'processing' );
+		update_option( 'ace_preview_order', $order->get_id() );
+		@file_put_contents( '/playground/_order-url.txt', $order->get_checkout_order_received_url() );
+	}
+}

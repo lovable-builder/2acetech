@@ -11,6 +11,18 @@ define( 'ACE_VERSION', wp_get_theme()->get( 'Version' ) );
 define( 'ACE_DIR', get_template_directory() );
 define( 'ACE_URI', get_template_directory_uri() );
 
+/**
+ * Cache-busting version for an asset: its modification time, so browsers fetch
+ * new CSS/JS as soon as a theme update replaces the file.
+ *
+ * @param string $rel Path relative to the theme, e.g. assets/css/main.css.
+ * @return string
+ */
+function ace_ver( $rel ) {
+	$file = ACE_DIR . '/' . $rel;
+	return file_exists( $file ) ? (string) filemtime( $file ) : ACE_VERSION;
+}
+
 require_once ACE_DIR . '/inc/art.php';
 require_once ACE_DIR . '/inc/demo-data.php';
 require_once ACE_DIR . '/inc/template-tags.php';
@@ -94,13 +106,13 @@ function ace_assets() {
 	$css = ACE_URI . '/assets/css/';
 	$js  = ACE_URI . '/assets/js/';
 
-	wp_enqueue_style( 'ace-main', $css . 'main.css', array(), ACE_VERSION );
-	wp_enqueue_style( 'ace-hero', $css . 'hero.css', array( 'ace-main' ), ACE_VERSION );
-	wp_enqueue_style( 'ace-woo', $css . 'woocommerce.css', array( 'ace-main' ), ACE_VERSION );
+	wp_enqueue_style( 'ace-main', $css . 'main.css', array(), ace_ver( 'assets/css/main.css' ) );
+	wp_enqueue_style( 'ace-hero', $css . 'hero.css', array( 'ace-main' ), ace_ver( 'assets/css/hero.css' ) );
+	wp_enqueue_style( 'ace-woo', $css . 'woocommerce.css', array( 'ace-main' ), ace_ver( 'assets/css/woocommerce.css' ) );
 
-	wp_enqueue_script( 'ace-main', $js . 'main.js', array(), ACE_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+	wp_enqueue_script( 'ace-main', $js . 'main.js', array(), ace_ver( 'assets/js/main.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	if ( is_front_page() ) {
-		wp_enqueue_script( 'ace-hero', $js . 'hero.js', array(), ACE_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_enqueue_script( 'ace-hero', $js . 'hero.js', array(), ace_ver( 'assets/js/hero.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

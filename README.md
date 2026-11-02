@@ -65,3 +65,14 @@ double up.
 - **Brand**: uses WooCommerce Brands (Products > Brands), logo or name.
 - Quantity stepper (also on the cart page), share links, copy-link, and a
   sticky "Add to cart" bar on phones.
+
+## Cart, checkout and account
+
+`assets/css/flow.css` skins WooCommerce's block cart and checkout (and the
+classic shortcode versions), the order confirmation page and My Account.
+`page.php` adds a three-step progress indicator (Cart, Details & payment,
+Confirmation), a "Continue shopping" link and a reassurance row. In the
+preview, `playground/setup.php` enables bank transfer and pay-on-delivery,
+a Poland shipping zone and one finished order so every page has data.
+Asset versions follow each file's modification time, so browsers pick up
+theme updates immediately.

@@ -9,6 +9,8 @@
 defined( 'ABSPATH' ) || exit;
 
 get_header();
+
+$ace_flow = function_exists( 'is_cart' ) && ( is_cart() || is_checkout() );
 ?>
 <main id="content" class="site-main">
 	<div class="container <?php echo ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) ) ? '' : 'container--narrow'; ?>">
@@ -17,8 +19,23 @@ get_header();
 			the_post();
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class( 'entry' ); ?>>
-				<header class="page-head"><h1 class="page-title"><?php the_title(); ?></h1></header>
+				<header class="page-head<?php echo $ace_flow ? ' page-head--flow' : ''; ?>">
+					<h1 class="page-title"><?php the_title(); ?></h1>
+					<?php
+					if ( $ace_flow ) {
+						ace_checkout_steps();
+					}
+					?>
+				</header>
 				<div class="entry-content"><?php the_content(); ?></div>
+				<?php if ( $ace_flow ) : ?>
+					<div class="flow-foot">
+						<?php if ( is_cart() ) : ?>
+							<a class="back-link" href="<?php echo esc_url( ace_shop_url() ); ?>"><?php echo ace_icon( 'arrow', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><?php esc_html_e( 'Continue shopping', '2acetech' ); ?></a>
+						<?php endif; ?>
+						<?php ace_single_perks( 'perks--row' ); ?>
+					</div>
+				<?php endif; ?>
 				<?php wp_link_pages(); ?>
 			</article>
 			<?php

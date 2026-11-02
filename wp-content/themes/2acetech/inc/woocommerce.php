@@ -98,3 +98,64 @@ function ace_keep_cart_fragments() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ace_keep_cart_fragments', 20 );
+
+/**
+ * Which checkout step is this page? 1 cart, 2 details and payment, 3 done, 0 none.
+ *
+ * @return int
+ */
+function ace_checkout_step() {
+	if ( ! function_exists( 'is_cart' ) ) {
+		return 0;
+	}
+	if ( is_checkout() && is_wc_endpoint_url( 'order-received' ) ) {
+		return 3;
+	}
+	if ( is_checkout() ) {
+		return 2;
+	}
+	if ( is_cart() ) {
+		return 1;
+	}
+	return 0;
+}
+
+/**
+ * Step indicator shown on the cart, checkout and confirmation pages.
+ */
+function ace_checkout_steps() {
+	$current = ace_checkout_step();
+	if ( ! $current ) {
+		return;
+	}
+	$steps = array(
+		1 => __( 'Cart', '2acetech' ),
+		2 => __( 'Details & payment', '2acetech' ),
+		3 => __( 'Confirmation', '2acetech' ),
+	);
+	echo '<ol class="steps" aria-label="' . esc_attr__( 'Checkout progress', '2acetech' ) . '">';
+	foreach ( $steps as $n => $label ) {
+		$class = $n < $current ? 'is-done' : ( $n === $current ? 'is-current' : '' );
+		printf(
+			'<li class="%1$s"%2$s><span class="steps__n">%3$s</span><span class="steps__label">%4$s</span></li>',
+			esc_attr( $class ),
+			$n === $current ? ' aria-current="step"' : '',
+			$n < $current ? '&#10003;' : (int) $n,
+			esc_html( $label )
+		);
+	}
+	echo '</ol>';
+}
+
+/**
+ * Styles for cart, checkout, confirmation and account pages.
+ */
+function ace_flow_assets() {
+	if ( ! function_exists( 'is_cart' ) ) {
+		return;
+	}
+	if ( is_cart() || is_checkout() || is_account_page() ) {
+		wp_enqueue_style( 'ace-flow', ACE_URI . '/assets/css/flow.css', array( 'ace-woo' ), ace_ver( 'assets/css/flow.css' ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'ace_flow_assets', 30 );

@@ -187,9 +187,6 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .swatch--color.is-light { border-color: #cfcfd6; }
 
 /* Perks, info, share */
-.perks { display: grid; gap: 10px; margin: 0 0 22px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius); }
-.perks li { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 600; }
-.perks .icon { color: var(--accent); }
 
 .info { display: grid; gap: 8px; margin: 0 0 20px; font-size: 0.92rem; }
 .info > div { display: flex; gap: 10px; }

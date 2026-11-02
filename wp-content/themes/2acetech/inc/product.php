@@ -167,13 +167,13 @@ function ace_single_urgency() {
 /**
  * Delivery, payment and returns reassurance under the buy button.
  */
-function ace_single_perks() {
+function ace_single_perks( $class = '' ) {
 	$perks = array(
 		array( 'truck', __( 'Fast, tracked delivery across Poland', '2acetech' ) ),
 		array( 'shield', __( 'Secure, encrypted checkout', '2acetech' ) ),
 		array( 'return', __( '14-day right of withdrawal', '2acetech' ) ),
 	);
-	echo '<ul class="perks">';
+	echo '<ul class="perks ' . esc_attr( $class ) . '">';
 	foreach ( $perks as $perk ) {
 		printf( '<li>%s<span>%s</span></li>', ace_icon( $perk[0], 20 ), esc_html( $perk[1] ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 	}
@@ -269,10 +269,10 @@ function ace_product_assets() {
 		return;
 	}
 	if ( is_product() ) {
-		wp_enqueue_style( 'ace-product', ACE_URI . '/assets/css/product.css', array( 'ace-woo' ), ACE_VERSION );
+		wp_enqueue_style( 'ace-product', ACE_URI . '/assets/css/product.css', array( 'ace-woo' ), ace_ver( 'assets/css/product.css' ) );
 	}
 	if ( is_product() || is_cart() ) {
-		wp_enqueue_script( 'ace-product', ACE_URI . '/assets/js/product.js', array(), ACE_VERSION, array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_enqueue_script( 'ace-product', ACE_URI . '/assets/js/product.js', array(), ace_ver( 'assets/js/product.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ace_product_assets', 30 );

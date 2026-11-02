@@ -79,6 +79,21 @@ if ( ! wp_get_nav_menu_object( $menu_name ) ) {
 	set_theme_mod( 'nav_menu_locations', $locations );
 }
 
+// Preview-only commerce setup: payment methods and a Poland shipping zone, so
+// cart and checkout have something to show.
+update_option( 'woocommerce_cod_settings', array( 'enabled' => 'yes', 'title' => 'Pay on delivery', 'description' => 'Pay with cash or card when the courier arrives.' ) );
+update_option( 'woocommerce_bacs_settings', array( 'enabled' => 'yes', 'title' => 'Bank transfer', 'description' => 'Pay by bank transfer. We ship once the payment arrives.' ) );
+if ( class_exists( 'WC_Shipping_Zone' ) && empty( WC_Shipping_Zones::get_zones() ) ) {
+	$zone = new WC_Shipping_Zone();
+	$zone->set_zone_name( 'Poland' );
+	$zone->add_location( 'PL', 'country' );
+	$zone->save();
+	$flat = $zone->add_shipping_method( 'flat_rate' );
+	update_option( 'woocommerce_flat_rate_' . $flat . '_settings', array( 'title' => 'Courier delivery', 'tax_status' => 'none', 'cost' => '15' ) );
+	$free = $zone->add_shipping_method( 'free_shipping' );
+	update_option( 'woocommerce_free_shipping_' . $free . '_settings', array( 'title' => 'Free delivery over 500 zł', 'requires' => 'min_amount', 'min_amount' => '500' ) );
+}
+
 // Remove WordPress's starter content.
 foreach ( array( 'Sample Page' ) as $title ) {
 	$starter = get_page_by_title( $title, OBJECT, 'page' ); // phpcs:ignore WordPress.WP.DeprecatedFunctions

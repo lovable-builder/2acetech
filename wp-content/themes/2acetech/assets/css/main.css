@@ -810,7 +810,7 @@ a.brand:hover img { filter: none; opacity: 1; }
 .page-head { margin-bottom: 28px; }
 .page-title { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; }
 .entry-content > * + * { margin-top: 1.1em; }
-.entry-content a:not(.btn):not(.button) { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
+.entry-content :where(a:not(.btn):not(.button):not([class*="wc-block"])) { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
 .entry__thumb { margin-bottom: 28px; border-radius: var(--radius); overflow: hidden; }
 
 .posts { display: grid; gap: 24px; }

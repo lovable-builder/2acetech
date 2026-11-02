@@ -150,3 +150,8 @@ h1.page-title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; }
 	border: 1px solid var(--line); border-radius: 999px; font-weight: 700;
 }
 .woocommerce nav.woocommerce-pagination ul li span.current, .woocommerce nav.woocommerce-pagination ul li a:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* Reassurance list (product page and checkout) */
+.perks { display: grid; gap: 10px; margin: 0 0 22px; padding: 18px 20px; border: 1px solid var(--line); border-radius: var(--radius); }
+.perks li { display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 600; }
+.perks .icon { color: var(--accent); }
