@@ -829,6 +829,19 @@ a.brand:hover img { filter: none; opacity: 1; }
 .page-head { margin-bottom: 28px; }
 .page-title { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 800; }
 .entry-content > * + * { margin-top: 1.1em; }
+/* Long texts (terms, privacy policy): visible list numbers, readable tables. */
+.entry-content :where(ol) { padding-left: 1.7em; list-style: decimal; }
+.entry-content :where(ul) { padding-left: 1.4em; list-style: disc; }
+.entry-content :where(ol ol, ul ul, ol ul, ul ol) { margin-top: 0.5em; }
+.entry-content :where(li) { margin: 0 0 0.55em; line-height: 1.7; }
+.entry-content :where(h2) { margin-top: 2em; font-size: 1.35rem; }
+.entry-content :where(h3) { margin-top: 1.6em; font-size: 1.1rem; }
+.entry-content :where(blockquote) { margin-inline: 0; padding: 14px 20px; background: #fff7e0; border-left: 4px solid #f0b429; border-radius: 4px; }
+.entry-content :where(code) { padding: 1px 6px; background: var(--mist); border-radius: 4px; font-size: 0.9em; }
+.entry-content :where(table) { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.entry-content :where(th, td) { padding: 10px 12px; border: 1px solid var(--line); text-align: left; vertical-align: top; }
+.entry-content :where(th) { background: var(--mist); }
+@media (max-width: 760px) { .entry-content :where(table) { display: block; overflow-x: auto; } }
 .entry-content :where(a:not(.btn):not(.button):not([class*="wc-block"])) { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 3px; }
 .entry__thumb { margin-bottom: 28px; border-radius: var(--radius); overflow: hidden; }
 

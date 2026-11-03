@@ -8,6 +8,30 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
+ * Seller details, as verified in the Ministry of Finance white list and the
+ * KRS register (3 November 2026). Shown in the footer and on the Contact page
+ * until overridden in Customize > Store details.
+ *
+ * @return string[]
+ */
+function ace_seller_defaults() {
+	return array(
+		'ace_seller'    => '2ACE sp. z o.o.',
+		'ace_seller_id' => 'KRS 0001267111 · NIP 1133212948 · REGON 545746743',
+		'ace_address'   => 'ul. Ostrobramska 101A lok. 301, 04-041 Warszawa',
+	);
+}
+
+foreach ( ace_seller_defaults() as $ace_key => $ace_default ) {
+	add_filter(
+		"theme_mod_{$ace_key}",
+		static function ( $value ) use ( $ace_default ) {
+			return ( false === $value || '' === trim( (string) $value ) ) ? $ace_default : $value;
+		}
+	);
+}
+
+/**
  * Register Customizer controls.
  *
  * @param WP_Customize_Manager $wp_customize Customizer.
@@ -25,9 +49,9 @@ function ace_customize_register( $wp_customize ) {
 		'ace_topbar'    => array( __( 'Top bar message', '2acetech' ), __( 'Fast, tracked delivery across Poland', '2acetech' ), 'text' ),
 		'ace_phone'     => array( __( 'Phone', '2acetech' ), '', 'text' ),
 		'ace_email'     => array( __( 'Email', '2acetech' ), 'info@2acetech.pl', 'text' ),
-		'ace_address'   => array( __( 'Address', '2acetech' ), '', 'text' ),
-		'ace_seller'    => array( __( 'Seller: company name', '2acetech' ), '', 'text' ),
-		'ace_seller_id' => array( __( 'Seller: NIP / tax ID and registry number', '2acetech' ), '', 'text' ),
+		'ace_address'   => array( __( 'Address', '2acetech' ), ace_seller_defaults()['ace_address'], 'text' ),
+		'ace_seller'    => array( __( 'Seller: company name', '2acetech' ), ace_seller_defaults()['ace_seller'], 'text' ),
+		'ace_seller_id' => array( __( 'Seller: NIP / tax ID and registry number', '2acetech' ), ace_seller_defaults()['ace_seller_id'], 'text' ),
 		'ace_facebook'  => array( __( 'Facebook URL', '2acetech' ), '', 'url' ),
 		'ace_instagram' => array( __( 'Instagram URL', '2acetech' ), '', 'url' ),
 		'ace_x'         => array( __( 'X (Twitter) URL', '2acetech' ), '', 'url' ),
@@ -96,7 +120,7 @@ function ace_customize_register( $wp_customize ) {
 		'ace_newsletter_shortcode',
 		array(
 			'label'       => __( 'Newsletter form shortcode', '2acetech' ),
-			'description' => __( 'Optional. Paste a shortcode from Mailchimp for WP, FluentCRM, etc. Empty uses the built-in form, which emails the store admin.', '2acetech' ),
+			'description' => __( 'Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). The newsletter band is shown only when this is set, because a newsletter needs a consent record and an unsubscribe link.', '2acetech' ),
 			'section'     => 'ace_store',
 			'type'        => 'text',
 		)

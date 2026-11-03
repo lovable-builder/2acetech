@@ -168,3 +168,9 @@ function ace_footer_legal_links() {
 
 	return $links;
 }
+
+/**
+ * Review avatars would send a hash of the reviewer's email to Gravatar
+ * (Automattic). The privacy policy assumes that does not happen.
+ */
+add_filter( 'pre_option_show_avatars', '__return_zero' );

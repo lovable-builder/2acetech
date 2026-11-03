@@ -352,7 +352,11 @@ function ace_render_home_section( $key ) {
 			get_template_part( 'template-parts/product-rail', null, array( 'title' => ace_text( 'ace_title_best' ), 'type' => 'best', 'limit' => 10 ) );
 			break;
 		case 'newsletter':
-			get_template_part( 'template-parts/newsletter' );
+			// The built-in form keeps no consent record and has no unsubscribe, so
+			// the band shows only once a real mailing tool's shortcode is set.
+			if ( '' !== trim( (string) get_theme_mod( 'ace_newsletter_shortcode', '' ) ) ) {
+				get_template_part( 'template-parts/newsletter' );
+			}
 			break;
 	}
 }

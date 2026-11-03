@@ -60,6 +60,12 @@ site. They are not part of the theme.
   acknowledgement with date and time, copies the store, adds an order note when
   number and billing email match, and keeps every declaration under
   **Withdrawals** in the admin menu. Needs working email (SMTP).
+- **Legal pages**: the Polish Regulamin and Polityka prywatności (drafts by the
+  compliance agent in `legal/`, bundled as HTML in the theme). The first time an
+  administrator opens wp-admin they are created as **drafts**, set as the
+  WooCommerce terms page and the privacy page, and a notice reminds you to fill
+  the `[bracketed]` items (see `legal/OPEN-ITEMS.md`) and get a lawyer to review
+  them. The footer links to them once they are published.
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.

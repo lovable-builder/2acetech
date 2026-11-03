@@ -287,8 +287,8 @@ msgstr "Data i godzina, np. 2026-12-24 23:59. Puste pole odlicza do końca bież
 msgid "Newsletter form shortcode"
 msgstr "Shortcode formularza newslettera"
 
-msgid "Optional. Paste a shortcode from Mailchimp for WP, FluentCRM, etc. Empty uses the built-in form, which emails the store admin."
-msgstr "Opcjonalnie. Wklej shortcode z Mailchimp for WP, FluentCRM itp. Puste pole używa wbudowanego formularza, który wysyła e-mail do administratora sklepu."
+msgid "Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). The newsletter band is shown only when this is set, because a newsletter needs a consent record and an unsubscribe link."
+msgstr "Wklej shortcode z narzędzia do newslettera (Mailchimp for WP, FluentCRM…). Sekcja newslettera pojawia się tylko po jego ustawieniu, ponieważ newsletter wymaga zapisu zgody i linku do rezygnacji."
 
 msgid "Laptops & computers"
 msgstr "Laptopy i komputery"
@@ -603,7 +603,7 @@ msgid "Checkout progress"
 msgstr "Postęp zamówienia"
 
 msgid "Order with obligation to pay"
-msgstr "Zamawiam z obowiązkiem zapłaty"
+msgstr "Zamówienie z obowiązkiem zapłaty"
 
 #. translators: %s: search query.
 msgid "Search results for \"%s\""
