@@ -137,11 +137,11 @@ msgstr "Link przycisku"
 msgid "Product photo"
 msgstr "Zdjęcie produktu"
 
-msgid "Best: a transparent PNG, at least 1000 px wide. Empty uses the illustration below."
-msgstr "Najlepiej przezroczysty PNG o szerokości min. 1000 px. Puste pole użyje ilustracji poniżej."
+msgid "Best: a transparent PNG, at least 1000 px wide. Empty uses the built-in picture below."
+msgstr "Najlepiej przezroczysty PNG, min. 1000 px szerokości. Puste = wbudowany obraz poniżej."
 
-msgid "Illustration (no photo)"
-msgstr "Ilustracja (gdy brak zdjęcia)"
+msgid "Built-in picture (no photo uploaded)"
+msgstr "Wbudowany obraz (gdy nie wgrano zdjęcia)"
 
 msgid "Background glow"
 msgstr "Poświata tła"
@@ -175,10 +175,10 @@ msgstr "Baner %d: link"
 msgid "Banner %d: product photo"
 msgstr "Baner %d: zdjęcie produktu"
 
-msgid "Transparent PNG works best. Empty uses the illustration."
-msgstr "Najlepiej przezroczysty PNG. Puste pole użyje ilustracji."
+msgid "Transparent PNG works best. Empty uses the built-in picture."
+msgstr "Najlepiej przezroczysty PNG. Puste = wbudowany obraz."
 
-msgid "Banner %d: illustration (no photo)"
+msgid "Banner %d: built-in picture (no photo uploaded)"
 msgstr "Baner %d: ilustracja (gdy brak zdjęcia)"
 
 msgid "Banner %d: style"

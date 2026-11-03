@@ -156,7 +156,7 @@ msgid ""
 "below."
 msgstr ""
 
-msgid "Illustration (no photo)"
+msgid "Built-in picture (no photo uploaded)"
 msgstr ""
 
 msgid "Background glow"
@@ -200,11 +200,11 @@ msgstr ""
 msgid "Banner %d: product photo"
 msgstr ""
 
-msgid "Transparent PNG works best. Empty uses the illustration."
+msgid "Transparent PNG works best. Empty uses the built-in picture."
 msgstr ""
 
 #, php-format
-msgid "Banner %d: illustration (no photo)"
+msgid "Banner %d: built-in picture (no photo uploaded)"
 msgstr ""
 
 #, php-format

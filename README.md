@@ -101,7 +101,9 @@ Appearance > Customize > **Landing page**:
 
 - **Hero scene 1-3**: show/hide, label, headline (last word is red), text,
   button and link, a product photo (transparent PNG) or a built-in
-  illustration, background glow, and up to three floating tags.
+  built-in picture, background glow, and up to three floating tags. The theme
+  ships product photos for the watch, laptop and headphones scenes
+  (`assets/img/hero-*.webp`); uploading your own photo in a scene replaces them.
 - **Promo banners**: two banners, each with copy, link, photo or illustration,
   light or dark.
 - **Trust strip**: four items; an empty title hides one.

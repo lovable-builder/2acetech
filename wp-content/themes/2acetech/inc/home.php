@@ -124,11 +124,34 @@ function ace_hero_scenes() {
 }
 
 /**
- * Visual for a hero scene or promo: the uploaded photo, else the illustration.
+ * Product photo that ships with the theme for a built-in picture name
+ * (assets/img/hero-{name}.webp), as an <img>. Empty string if there is none.
+ *
+ * @param string $art Picture name: watch, laptop, headphones.
+ * @return string
+ */
+function ace_bundled_photo( $art ) {
+	$file = 'hero-' . sanitize_file_name( $art ) . '.webp';
+	$path = ACE_DIR . '/assets/img/' . $file;
+	if ( ! file_exists( $path ) ) {
+		return '';
+	}
+	$size = getimagesize( $path );
+	return sprintf(
+		'<img class="art art--photo" src="%1$s" width="%2$d" height="%3$d" alt="" decoding="async">',
+		esc_url( ACE_URI . '/assets/img/' . $file ),
+		$size ? (int) $size[0] : 0,
+		$size ? (int) $size[1] : 0
+	);
+}
+
+/**
+ * Visual for a hero scene or promo: the uploaded photo, else the built-in
+ * photo for that picture name, else the line illustration.
  *
  * @param int    $image_id Attachment ID or 0.
- * @param string $art      Illustration name.
- * @param string $size     Image size for photos.
+ * @param string $art      Built-in picture name.
+ * @param string $size     Image size for uploaded photos.
  * @return string
  */
 function ace_visual( $image_id, $art, $size = 'large' ) {
@@ -138,7 +161,8 @@ function ace_visual( $image_id, $art, $size = 'large' ) {
 			return $img;
 		}
 	}
-	return ace_art( $art );
+	$photo = ace_bundled_photo( $art );
+	return '' !== $photo ? $photo : ace_art( $art );
 }
 
 /**

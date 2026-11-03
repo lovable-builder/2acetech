@@ -158,8 +158,8 @@ function ace_customize_home( $wp ) {
 		ace_cz_field( $wp, $sec, "ace_hero{$n}_text", __( 'Text', '2acetech' ), $d['text'], array( 'type' => 'textarea' ) );
 		ace_cz_field( $wp, $sec, "ace_hero{$n}_cta", __( 'Button text', '2acetech' ), $d['cta'], array( 'description' => __( 'Leave empty for no button.', '2acetech' ) ) );
 		ace_cz_field( $wp, $sec, "ace_hero{$n}_url", __( 'Button link', '2acetech' ), $d['url'], array( 'type' => 'url' ) );
-		ace_cz_image( $wp, $sec, "ace_hero{$n}_image", __( 'Product photo', '2acetech' ), __( 'Best: a transparent PNG, at least 1000 px wide. Empty uses the illustration below.', '2acetech' ) );
-		ace_cz_field( $wp, $sec, "ace_hero{$n}_art", __( 'Illustration (no photo)', '2acetech' ), $d['art'], array( 'type' => 'select', 'choices' => ace_art_choices(), 'sanitize' => 'ace_sanitize_art' ) );
+		ace_cz_image( $wp, $sec, "ace_hero{$n}_image", __( 'Product photo', '2acetech' ), __( 'Best: a transparent PNG, at least 1000 px wide. Empty uses the built-in picture below.', '2acetech' ) );
+		ace_cz_field( $wp, $sec, "ace_hero{$n}_art", __( 'Built-in picture (no photo uploaded)', '2acetech' ), $d['art'], array( 'type' => 'select', 'choices' => ace_art_choices(), 'sanitize' => 'ace_sanitize_art' ) );
 		ace_cz_field( $wp, $sec, "ace_hero{$n}_tone", __( 'Background glow', '2acetech' ), $d['tone'], array( 'type' => 'select', 'choices' => ace_tone_choices(), 'sanitize' => 'ace_sanitize_tone' ) );
 		foreach ( array( 1, 2, 3 ) as $c ) {
 			ace_cz_field(
@@ -184,8 +184,8 @@ function ace_customize_home( $wp ) {
 		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_title", sprintf( __( 'Banner %d: headline', '2acetech' ), $n ), $d['title'] );
 		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_cta", sprintf( __( 'Banner %d: button text', '2acetech' ), $n ), $d['cta'] );
 		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_url", sprintf( __( 'Banner %d: link', '2acetech' ), $n ), $d['url'], array( 'type' => 'url' ) );
-		ace_cz_image( $wp, 'ace_promos', "ace_promo{$n}_image", sprintf( __( 'Banner %d: product photo', '2acetech' ), $n ), __( 'Transparent PNG works best. Empty uses the illustration.', '2acetech' ) );
-		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_art", sprintf( __( 'Banner %d: illustration (no photo)', '2acetech' ), $n ), $d['art'], array( 'type' => 'select', 'choices' => ace_art_choices(), 'sanitize' => 'ace_sanitize_art' ) );
+		ace_cz_image( $wp, 'ace_promos', "ace_promo{$n}_image", sprintf( __( 'Banner %d: product photo', '2acetech' ), $n ), __( 'Transparent PNG works best. Empty uses the built-in picture.', '2acetech' ) );
+		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_art", sprintf( __( 'Banner %d: built-in picture (no photo uploaded)', '2acetech' ), $n ), $d['art'], array( 'type' => 'select', 'choices' => ace_art_choices(), 'sanitize' => 'ace_sanitize_art' ) );
 		ace_cz_field( $wp, 'ace_promos', "ace_promo{$n}_tone", sprintf( __( 'Banner %d: style', '2acetech' ), $n ), $d['tone'], array( 'type' => 'select', 'choices' => array( 'light' => __( 'Light', '2acetech' ), 'dark' => __( 'Dark', '2acetech' ) ), 'sanitize' => 'ace_sanitize_promo_tone' ) );
 	}
 

@@ -30,6 +30,11 @@
 	// neighbouring scenes sum to 1 at the midpoint, so the cross-fade is even.
 	const weight = (d) => clamp(1 - (Math.abs(d) - 0.25) / 0.5);
 
+	// The product photos are cut-outs, so two of them half-visible on top of
+	// each other look like a double exposure. Give them a tighter fade: one
+	// leaves completely before the next arrives.
+	const artWeight = (d) => clamp(1 - (Math.abs(d) - 0.2) / 0.3);
+
 	let active = -1;
 	let queued = false;
 
@@ -55,7 +60,7 @@
 			copies[i].style.setProperty('--w', wv);
 			copies[i].style.setProperty('--d', dv);
 			if (arts[i]) {
-				arts[i].style.setProperty('--w', wv);
+				arts[i].style.setProperty('--w', artWeight(d).toFixed(3));
 				arts[i].style.setProperty('--d', dv);
 			}
 			if (bgs[i]) bgs[i].style.opacity = wv;
