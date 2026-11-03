@@ -165,17 +165,53 @@ function ace_single_urgency() {
 }
 
 /**
- * Delivery, payment and returns reassurance under the buy button.
+ * Default reassurance lines under the buy button: icon, title, small text.
+ * The fourth slot is empty until the shop owner has a warranty to state.
+ *
+ * @return array[]
+ */
+function ace_perk_defaults() {
+	return array(
+		array( 'truck', __( 'Fast, tracked delivery across Poland', '2acetech' ), '' ),
+		array( 'shield', __( 'Secure, encrypted checkout', '2acetech' ), '' ),
+		array( 'return', __( '14-day right of withdrawal', '2acetech' ), '' ),
+		array( 'badge', '', '' ),
+	);
+}
+
+/**
+ * Reassurance lines as configured in Customize > Product page. An empty title
+ * hides a line.
+ *
+ * @return array[] Each: icon, title, text.
+ */
+function ace_perks() {
+	$perks = array();
+	foreach ( ace_perk_defaults() as $i => $d ) {
+		$n     = $i + 1;
+		$title = trim( (string) get_theme_mod( "ace_perk{$n}_title", $d[1] ) );
+		if ( '' === $title ) {
+			continue;
+		}
+		$perks[] = array( $d[0], $title, trim( (string) get_theme_mod( "ace_perk{$n}_text", $d[2] ) ) );
+	}
+	return $perks;
+}
+
+/**
+ * Delivery, payment, returns and warranty reassurance under the buy button.
+ *
+ * @param string $class Extra class.
  */
 function ace_single_perks( $class = '' ) {
-	$perks = array(
-		array( 'truck', __( 'Fast, tracked delivery across Poland', '2acetech' ) ),
-		array( 'shield', __( 'Secure, encrypted checkout', '2acetech' ) ),
-		array( 'return', __( '14-day right of withdrawal', '2acetech' ) ),
-	);
 	echo '<ul class="perks ' . esc_attr( $class ) . '">';
-	foreach ( $perks as $perk ) {
-		printf( '<li>%s<span>%s</span></li>', ace_icon( $perk[0], 20 ), esc_html( $perk[1] ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+	foreach ( ace_perks() as $perk ) {
+		printf(
+			'<li>%1$s<span>%2$s%3$s</span></li>',
+			ace_icon( $perk[0], 20 ), // phpcs:ignore WordPress.Security.EscapeOutput
+			esc_html( $perk[1] ),
+			$perk[2] ? '<small>' . esc_html( $perk[2] ) . '</small>' : '' // phpcs:ignore WordPress.Security.EscapeOutput
+		);
 	}
 	echo '</ul>';
 }
@@ -191,7 +227,13 @@ function ace_single_info() {
 		if ( $product->is_on_backorder() ) {
 			$state = array( 'is-back', __( 'On backorder', '2acetech' ) );
 		} elseif ( $product->is_in_stock() ) {
-			$state = array( 'is-in', __( 'In stock', '2acetech' ) );
+			$qty   = $product->get_manage_stock() ? (int) $product->get_stock_quantity() : 0;
+			$note  = trim( (string) get_theme_mod( 'ace_dispatch_note', '' ) );
+			$text  = $qty > 0
+				/* translators: %d: units in stock. */
+				? sprintf( __( 'In stock (%d pcs)', '2acetech' ), $qty )
+				: __( 'In stock', '2acetech' );
+			$state = array( 'is-in', '' !== $note ? $text . ' — ' . $note : $text );
 		} else {
 			$state = array( 'is-out', __( 'Out of stock', '2acetech' ) );
 		}

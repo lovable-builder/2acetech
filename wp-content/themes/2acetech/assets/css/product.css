@@ -219,6 +219,13 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .woocommerce div.product .woocommerce-tabs ul.tabs li::before, .woocommerce div.product .woocommerce-tabs ul.tabs li::after { display: none; }
 .woocommerce div.product .woocommerce-tabs ul.tabs li a { display: block; padding: 12px 0 16px; font-weight: 800; color: var(--muted); }
 .woocommerce div.product .woocommerce-tabs ul.tabs li.active a { color: var(--ink); box-shadow: 0 3px 0 var(--accent); }
+@media (max-width: 760px) {
+	/* Five tabs do not fit on a phone: one row, swipe sideways. */
+	.woocommerce div.product .woocommerce-tabs ul.tabs { flex-wrap: nowrap; gap: 0 24px; overflow-x: auto; scrollbar-width: none; }
+	.woocommerce div.product .woocommerce-tabs ul.tabs::-webkit-scrollbar { display: none; }
+	.woocommerce div.product .woocommerce-tabs ul.tabs li { flex: none; }
+	.woocommerce div.product .woocommerce-tabs ul.tabs li a { white-space: nowrap; }
+}
 .woocommerce div.product .woocommerce-Tabs-panel { max-width: 920px; }
 .woocommerce div.product .woocommerce-Tabs-panel > h2:first-child { font-size: 1.4rem; }
 .woocommerce div.product .woocommerce-Tabs-panel img { height: auto; border-radius: var(--radius-sm); }
@@ -226,6 +233,38 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .woocommerce table.shop_attributes th { width: 30%; padding: 12px 16px; background: var(--mist); font-weight: 700; }
 .woocommerce table.shop_attributes td { padding: 12px 16px; font-style: normal; }
 .woocommerce table.shop_attributes td p { margin: 0; padding: 0; }
+
+/* Key specs under the short description */
+.specs { display: grid; gap: 7px; margin: 0 0 20px; padding: 14px 16px; list-style: none; background: var(--mist); border-radius: var(--radius-sm); font-size: 0.9rem; }
+.specs li { display: flex; justify-content: space-between; gap: 16px; }
+.specs span { color: var(--muted); }
+.specs b { text-align: right; font-weight: 700; }
+
+/* What's in the box */
+.inbox { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: box; }
+.inbox li { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); font-weight: 600; counter-increment: box; }
+.inbox li::before { content: counter(box, decimal-leading-zero); flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 0.78rem; font-weight: 800; }
+
+/* FAQ, and any <details> written into a description */
+.woocommerce-Tabs-panel details { margin: 0 0 10px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.woocommerce-Tabs-panel summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; font-weight: 700; cursor: pointer; list-style: none; }
+.woocommerce-Tabs-panel summary::-webkit-details-marker { display: none; }
+.woocommerce-Tabs-panel summary::after { content: "+"; flex: none; font-size: 1.4rem; line-height: 1; color: var(--accent); }
+.woocommerce-Tabs-panel details[open] > summary::after { content: "\2013"; }
+.woocommerce-Tabs-panel details > :not(summary) { margin: 0; padding: 0 20px 18px; color: var(--muted); }
+
+/* Description text */
+.woocommerce-Tabs-panel--description p { margin: 0 0 1em; line-height: 1.75; }
+.woocommerce-Tabs-panel--description h2,
+.woocommerce-Tabs-panel--description h3,
+.woocommerce-Tabs-panel--description h4 { margin: 1.8em 0 0.6em; font-size: 1.2rem; font-weight: 800; line-height: 1.3; }
+.woocommerce-Tabs-panel--description ul,
+.woocommerce-Tabs-panel--description ol { margin: 0 0 1.2em; padding-left: 1.3em; list-style: disc; }
+.woocommerce-Tabs-panel--description ol { list-style: decimal; }
+.woocommerce-Tabs-panel--description li { margin: 0 0 0.5em; line-height: 1.65; }
+.woocommerce-Tabs-panel--description table { width: 100%; margin: 0 0 1.4em; border-collapse: collapse; }
+.woocommerce-Tabs-panel--description td,
+.woocommerce-Tabs-panel--description th { padding: 10px 14px; border: 1px solid var(--line); text-align: left; }
 
 #reviews .comment-reply-title { font-size: 1.2rem; font-weight: 800; }
 #review_form #respond .comment-form-rating label { font-weight: 700; }

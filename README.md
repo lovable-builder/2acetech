@@ -41,6 +41,18 @@ site. They are not part of the theme.
   fill the homepage countdown card, soonest-ending first (up to 4, swipeable).
   Each countdown runs to that product's sale end date; without one it falls
   back to Store details > deal countdown end. Nothing ticked: first sale product.
+- **Product page content** (per product, in the product editor):
+  - Product data > **Attributes**: add custom attributes (Colour: Black,
+    Material: Aluminium...) with "Visible on the product page" ticked. The first
+    four show as key specs under the short description; all of them fill the
+    **Specification** tab.
+  - Product data > **Extra details**: "What's in the box" (one item per line)
+    and "Questions and answers" (question line, answer line, blank line). Each
+    becomes its own tab; leave empty to hide it.
+  - The long **Description** is styled (headings, lists, tables, `<details>`).
+  - Customize > **Product page**: the delivery/returns/warranty lines under the
+    buy button (up to four, empty title hides one) and a dispatch note shown
+    after "In stock".
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.

@@ -735,3 +735,48 @@ msgstr "Pokaż ten produkt w karcie odliczania na stronie głównej. Wymaga ceny
 
 msgid "Swipe for more offers"
 msgstr "Przesuń, aby zobaczyć więcej ofert"
+
+msgid "Extra details"
+msgstr "Dodatkowe szczegóły"
+
+msgid "What's in the box"
+msgstr "Zawartość zestawu"
+
+msgid "One item per line, for example \"4 x aluminium LED strips\". Shows as the \"What's in the box\" tab. Leave empty to hide the tab."
+msgstr "Jedna pozycja w wierszu, np. \"4 x aluminiowe listwy LED\". Wyświetla się jako zakładka \"Zawartość zestawu\". Zostaw puste, aby ukryć zakładkę."
+
+msgid "Questions and answers"
+msgstr "Pytania i odpowiedzi"
+
+msgid "A question on one line, its answer on the next line(s), then a blank line before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty to hide the tab."
+msgstr "Pytanie w jednym wierszu, odpowiedź w kolejnych wierszach, potem pusty wiersz przed następnym pytaniem. Zwykły tekst. Wyświetla się jako zakładka \"FAQ\". Zostaw puste, aby ukryć zakładkę."
+
+msgid "Specification"
+msgstr "Specyfikacja"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "Frequently asked questions"
+msgstr "Najczęściej zadawane pytania"
+
+msgid "In stock (%d pcs)"
+msgstr "Dostępny (%d szt.)"
+
+msgid "Product page"
+msgstr "Strona produktu"
+
+msgid "The reassurance lines under the buy button, and the stock note. Only state what you really offer. An empty title hides a line."
+msgstr "Informacje pod przyciskiem zakupu oraz notatka o dostępności. Podawaj tylko to, co naprawdę oferujesz. Pusty tytuł ukrywa wiersz."
+
+msgid "Dispatch note"
+msgstr "Informacja o wysyłce"
+
+msgid "Added after \"In stock\", for example \"ships within 24 h\". Empty shows nothing."
+msgstr "Dodawana po \"Dostępny\", np. \"wysyłka w 24 h\". Puste nic nie pokazuje."
+
+msgid "Line %d: title"
+msgstr "Wiersz %d: tytuł"
+
+msgid "Line %d: small text"
+msgstr "Wiersz %d: mały tekst"

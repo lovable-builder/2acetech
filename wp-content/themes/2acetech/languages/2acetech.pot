@@ -785,3 +785,48 @@ msgstr ""
 
 msgid "Swipe for more offers"
 msgstr ""
+
+msgid "Extra details"
+msgstr ""
+
+msgid "What's in the box"
+msgstr ""
+
+msgid "One item per line, for example \"4 x aluminium LED strips\". Shows as the \"What's in the box\" tab. Leave empty to hide the tab."
+msgstr ""
+
+msgid "Questions and answers"
+msgstr ""
+
+msgid "A question on one line, its answer on the next line(s), then a blank line before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty to hide the tab."
+msgstr ""
+
+msgid "Specification"
+msgstr ""
+
+msgid "FAQ"
+msgstr ""
+
+msgid "Frequently asked questions"
+msgstr ""
+
+msgid "In stock (%d pcs)"
+msgstr ""
+
+msgid "Product page"
+msgstr ""
+
+msgid "The reassurance lines under the buy button, and the stock note. Only state what you really offer. An empty title hides a line."
+msgstr ""
+
+msgid "Dispatch note"
+msgstr ""
+
+msgid "Added after \"In stock\", for example \"ships within 24 h\". Empty shows nothing."
+msgstr ""
+
+msgid "Line %d: title"
+msgstr ""
+
+msgid "Line %d: small text"
+msgstr ""

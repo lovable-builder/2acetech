@@ -42,6 +42,18 @@ foreach ( $products as $i => $row ) {
 	$p->set_featured( $row[4] );
 	$p->set_short_description( 'Sample product for previewing the theme. Replace with your own description.' );
 	$p->set_description( '<p>A longer description goes here. Use headings, lists and images to describe the product in detail.</p><ul><li>Feature one</li><li>Feature two</li><li>Feature three</li></ul>' );
+	$attrs = array();
+	foreach ( array( 'Material' => 'Aluminium, plastic', 'Colour' => 'Black', 'Light source' => 'LED', 'Connectivity' => 'Wi-Fi, USB' ) as $name => $value ) {
+		$attr = new WC_Product_Attribute();
+		$attr->set_name( $name );
+		$attr->set_options( array( $value ) );
+		$attr->set_visible( true );
+		$attr->set_variation( false );
+		$attrs[] = $attr;
+	}
+	$p->set_attributes( $attrs );
+	$p->update_meta_data( '_ace_box', "4 x aluminium LED strips\n2 x VESA arms\n1 x Wi-Fi controller\n1 x IR remote with battery\n1 x Manual (PL, EN)" );
+	$p->update_meta_data( '_ace_faq', "What is it compatible with?\nAny flat-backed TV from 40 to 50 inches.\n\nDoes installation need glue?\nNo. It mounts on the VESA holes.\n\nCan I control it by voice?\nYes, through Google Home and Alexa." );
 	$p->set_manage_stock( true );
 	$p->set_stock_quantity( $i < 3 ? 12 : 3 );
 	$p->set_stock_status( 'instock' );

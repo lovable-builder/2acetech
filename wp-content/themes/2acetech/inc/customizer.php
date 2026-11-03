@@ -103,3 +103,36 @@ function ace_customize_register( $wp_customize ) {
 	);
 }
 add_action( 'customize_register', 'ace_customize_register' );
+
+/**
+ * Customizer: what the product page says around the buy button.
+ *
+ * @param WP_Customize_Manager $wp_customize Customizer.
+ */
+function ace_customize_product( $wp_customize ) {
+	$wp_customize->add_section(
+		'ace_product',
+		array(
+			'title'       => __( 'Product page', '2acetech' ),
+			'description' => __( 'The reassurance lines under the buy button, and the stock note. Only state what you really offer. An empty title hides a line.', '2acetech' ),
+			'priority'    => 31,
+		)
+	);
+
+	ace_cz_field(
+		$wp_customize,
+		'ace_product',
+		'ace_dispatch_note',
+		__( 'Dispatch note', '2acetech' ),
+		'',
+		array( 'description' => __( 'Added after "In stock", for example "ships within 24 h". Empty shows nothing.', '2acetech' ) )
+	);
+
+	foreach ( ace_perk_defaults() as $i => $d ) {
+		$n = $i + 1;
+		/* translators: %d: line number. */
+		ace_cz_field( $wp_customize, 'ace_product', "ace_perk{$n}_title", sprintf( __( 'Line %d: title', '2acetech' ), $n ), $d[1] );
+		ace_cz_field( $wp_customize, 'ace_product', "ace_perk{$n}_text", sprintf( __( 'Line %d: small text', '2acetech' ), $n ), $d[2] );
+	}
+}
+add_action( 'customize_register', 'ace_customize_product' );
