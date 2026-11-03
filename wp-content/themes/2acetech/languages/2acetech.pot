@@ -911,3 +911,12 @@ msgstr ""
 
 msgid "Confirm withdrawal here"
 msgstr ""
+
+msgid "Store terms and conditions"
+msgstr ""
+
+msgid "Legal pages are waiting:"
+msgstr ""
+
+msgid "Fill in every [bracketed] detail, have a lawyer review the text, then publish. They appear in the footer once published. Do not take real orders before then."
+msgstr ""
