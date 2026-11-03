@@ -870,3 +870,15 @@ msgstr "Strony prawne czekają:"
 
 msgid "Fill in every [bracketed] detail, have a lawyer review the text, then publish. They appear in the footer once published. Do not take real orders before then."
 msgstr "Uzupełnij każdy szczegół w [nawiasach], zleć przegląd tekstu prawnikowi, a następnie opublikuj. Po publikacji pojawią się w stopce. Nie przyjmuj prawdziwych zamówień przed tym."
+
+msgid "Decrease quantity"
+msgstr "Zmniejsz ilość"
+
+msgid "Increase quantity"
+msgstr "Zwiększ ilość"
+
+msgid "Previous photo"
+msgstr "Poprzednie zdjęcie"
+
+msgid "Next photo"
+msgstr "Następne zdjęcie"

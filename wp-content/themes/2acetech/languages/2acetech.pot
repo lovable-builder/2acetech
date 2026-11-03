@@ -918,3 +918,15 @@ msgstr ""
 
 msgid "Fill in every [bracketed] detail, have a lawyer review the text, then publish. They appear in the footer once published. Do not take real orders before then."
 msgstr ""
+
+msgid "Decrease quantity"
+msgstr ""
+
+msgid "Increase quantity"
+msgstr ""
+
+msgid "Previous photo"
+msgstr ""
+
+msgid "Next photo"
+msgstr ""

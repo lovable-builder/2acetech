@@ -9,6 +9,11 @@
 	const $ = (sel, ctx = document) => ctx.querySelector(sel);
 	const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 	const fire = (el, type) => el.dispatchEvent(new Event(type, { bubbles: true }));
+	// Labels come from PHP so they follow the site language.
+	const text = Object.assign(
+		{ decrease: 'Decrease quantity', increase: 'Increase quantity', prevPhoto: 'Previous photo', nextPhoto: 'Next photo' },
+		window.aceProduct || {}
+	);
 
 	/* Quantity stepper -------------------------------------------------- */
 	function enhanceQuantity(root = document) {
@@ -35,8 +40,8 @@
 				});
 				return b;
 			};
-			wrap.insertBefore(make('Decrease quantity', '−', -1), wrap.firstChild);
-			wrap.appendChild(make('Increase quantity', '+', 1));
+			wrap.insertBefore(make(text.decrease, '−', -1), wrap.firstChild);
+			wrap.appendChild(make(text.increase, '+', 1));
 		});
 	}
 	enhanceQuantity();
@@ -194,8 +199,8 @@
 				});
 				viewport.appendChild(b);
 			};
-			arrow('prev', 'Previous photo', 'm15 6-6 6 6 6');
-			arrow('next', 'Next photo', 'm9 6 6 6-6 6');
+			arrow('prev', text.prevPhoto, 'm15 6-6 6 6 6');
+			arrow('next', text.nextPhoto, 'm9 6 6 6-6 6');
 
 			// Slide the thumbnail strip, never the page.
 			const keepInView = () => {

@@ -323,6 +323,16 @@ function ace_product_assets() {
 	}
 	if ( is_product() || is_cart() ) {
 		wp_enqueue_script( 'ace-product', ACE_URI . '/assets/js/product.js', array(), ace_ver( 'assets/js/product.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_localize_script(
+			'ace-product',
+			'aceProduct',
+			array(
+				'decrease'  => __( 'Decrease quantity', '2acetech' ),
+				'increase'  => __( 'Increase quantity', '2acetech' ),
+				'prevPhoto' => __( 'Previous photo', '2acetech' ),
+				'nextPhoto' => __( 'Next photo', '2acetech' ),
+			)
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'ace_product_assets', 30 );
