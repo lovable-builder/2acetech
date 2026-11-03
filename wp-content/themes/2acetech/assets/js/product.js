@@ -168,4 +168,48 @@
 			}
 		});
 	});
+
+	/* Gallery: arrows on the photo, active thumbnail kept in view -------- */
+	const gallery = $('.woocommerce-product-gallery');
+	if (gallery && window.jQuery) {
+		const $g = window.jQuery(gallery);
+		let ready = false;
+
+		const setup = () => {
+			const viewport = $('.flex-viewport', gallery);
+			const thumbs = $('.flex-control-thumbs', gallery);
+			if (ready || !viewport || !thumbs || thumbs.children.length < 2) return;
+			ready = true;
+
+			const arrow = (dir, label, path) => {
+				const b = document.createElement('button');
+				b.type = 'button';
+				b.className = `gallery-nav gallery-nav--${dir}`;
+				b.setAttribute('aria-label', label);
+				b.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="${path}"/></svg>`;
+				b.addEventListener('click', (e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					$g.flexslider(dir);
+				});
+				viewport.appendChild(b);
+			};
+			arrow('prev', 'Previous photo', 'm15 6-6 6 6 6');
+			arrow('next', 'Next photo', 'm9 6 6 6-6 6');
+
+			// Slide the thumbnail strip, never the page.
+			const keepInView = () => {
+				const li = $('.flex-active', thumbs);
+				const item = li && li.closest('li');
+				if (!item) return;
+				thumbs.scrollTo({ left: item.offsetLeft - (thumbs.clientWidth - item.offsetWidth) / 2, behavior: 'smooth' });
+			};
+			new MutationObserver(keepInView).observe(thumbs, { attributes: true, subtree: true, attributeFilter: ['class'] });
+		};
+
+		// WooCommerce builds the slider after load; wait for it.
+		new MutationObserver(setup).observe(gallery, { childList: true, subtree: true });
+		window.addEventListener('load', setup);
+		setup();
+	}
 })();

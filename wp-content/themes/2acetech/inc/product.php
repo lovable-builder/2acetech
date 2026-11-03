@@ -50,6 +50,14 @@ function ace_product_hooks() {
 	add_action( 'woocommerce_share', 'ace_single_share' );
 	add_action( 'wp_footer', 'ace_buybar' );
 
+	// Sharper gallery thumbnails than WooCommerce's 100 px default.
+	add_filter(
+		'woocommerce_gallery_thumbnail_size',
+		static function () {
+			return 'woocommerce_thumbnail';
+		}
+	);
+
 	// Simple products show availability in our info list instead.
 	add_filter(
 		'woocommerce_get_stock_html',

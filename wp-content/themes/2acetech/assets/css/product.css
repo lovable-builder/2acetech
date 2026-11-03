@@ -34,8 +34,10 @@
 	border: 1px solid var(--line);
 	border-radius: var(--radius);
 	overflow: hidden;
+	cursor: zoom-in;
 }
-.woocommerce div.product .woocommerce-product-gallery__image img {
+/* :not(.zoomImg): the hover-zoom copy of the photo must stay full size. */
+.woocommerce div.product .woocommerce-product-gallery__image img:not(.zoomImg) {
 	width: 100%;
 	height: auto;
 	aspect-ratio: 1;
@@ -43,29 +45,73 @@
 	padding: 6%;
 	border-radius: 0;
 }
-.woocommerce div.product .flex-control-thumbs {
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
+.woocommerce div.product .woocommerce-product-gallery__image .zoomImg { padding: 0; background: #fff; }
+
+/* Thumbnails: one row of five, swipe or scroll for more. WooCommerce sizes
+   them at 25% of their cell, hence the !important. */
+.woocommerce div.product div.images .flex-control-thumbs {
+	position: relative;
+	display: flex;
 	gap: 10px;
 	margin: 12px 0 0;
-	padding: 0;
+	padding: 2px 2px 8px;
 	list-style: none;
+	overflow-x: auto;
+	scroll-snap-type: x proximity;
+	scrollbar-width: thin;
+	scrollbar-color: var(--line) transparent;
 }
-.woocommerce div.product .flex-control-thumbs li { float: none; width: auto; margin: 0; }
-.woocommerce div.product .flex-control-thumbs img {
+.woocommerce div.product div.images .flex-control-thumbs li {
+	flex: 0 0 calc((100% - 40px) / 5) !important;
+	float: none !important;
+	width: auto !important;
+	margin: 0 !important;
+	scroll-snap-align: start;
+}
+.woocommerce div.product div.images .flex-control-thumbs li img {
+	display: block;
 	width: 100%;
+	height: auto;
 	aspect-ratio: 1;
 	object-fit: contain;
-	padding: 8%;
+	padding: 6%;
 	background: #fff;
 	border: 2px solid var(--line);
 	border-radius: 12px;
-	opacity: 0.7;
+	opacity: 0.65;
 	cursor: pointer;
 	transition: opacity 0.2s, border-color 0.2s;
 }
-.woocommerce div.product .flex-control-thumbs img:hover { opacity: 1; }
-.woocommerce div.product .flex-control-thumbs img.flex-active { opacity: 1; border-color: var(--ink); }
+.woocommerce div.product div.images .flex-control-thumbs li img:hover { opacity: 1; }
+.woocommerce div.product div.images .flex-control-thumbs li img.flex-active { opacity: 1; border-color: var(--ink); }
+@media (max-width: 560px) {
+	.woocommerce div.product div.images .flex-control-thumbs li { flex-basis: calc((100% - 30px) / 4.4) !important; }
+}
+
+/* Previous / next on the main photo */
+.woocommerce div.product div.images .flex-viewport { position: relative; border-radius: var(--radius); }
+.gallery-nav {
+	position: absolute;
+	top: 50%;
+	z-index: 4;
+	display: grid;
+	place-items: center;
+	width: 42px; height: 42px;
+	margin-top: -21px;
+	padding: 0;
+	background: rgba(255, 255, 255, 0.92);
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	box-shadow: var(--shadow);
+	color: var(--ink);
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+}
+.gallery-nav:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+.gallery-nav--prev { left: 12px; }
+.gallery-nav--next { right: 12px; }
+.gallery-nav svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover: none) { .gallery-nav { display: none; } } /* touch: swipe instead */
 .woocommerce div.product .woocommerce-product-gallery__trigger {
 	top: 14px; right: 14px;
 	width: 40px; height: 40px;
