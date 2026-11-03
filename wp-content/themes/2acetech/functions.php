@@ -34,6 +34,7 @@ require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/contact.php';
 require_once ACE_DIR . '/inc/woocommerce.php';
 require_once ACE_DIR . '/inc/product.php';
+require_once ACE_DIR . '/inc/deal.php';
 
 /**
  * Theme setup: supports and menus.

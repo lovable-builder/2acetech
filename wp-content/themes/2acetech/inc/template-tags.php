@@ -598,12 +598,20 @@ function ace_demo_notice() {
 }
 
 /**
- * Seconds-accurate deal end timestamp (ISO 8601) from the Customizer, else the
- * end of the current week.
+ * Seconds-accurate deal end timestamp (ISO 8601): the product's own sale end
+ * date when it has one, else the Customizer date, else the end of the week.
  *
+ * @param WC_Product|null $product Optional deal product.
  * @return string
  */
-function ace_deal_end() {
+function ace_deal_end( $product = null ) {
+	if ( $product instanceof WC_Product ) {
+		$sale_end = $product->get_date_on_sale_to();
+		if ( $sale_end && $sale_end->getTimestamp() > time() ) {
+			return gmdate( 'c', $sale_end->getTimestamp() );
+		}
+	}
+
 	$custom = trim( (string) get_theme_mod( 'ace_deal_end', '' ) );
 	$ts     = $custom ? strtotime( $custom, current_time( 'timestamp' ) ) : false; // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp
 	if ( ! $ts || $ts < time() ) {

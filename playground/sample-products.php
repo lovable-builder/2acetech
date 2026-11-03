@@ -48,6 +48,7 @@ foreach ( $products as $i => $row ) {
 	// First two sale products get a sale end date, so their page shows the countdown.
 	if ( $row[3] && $i < 2 ) {
 		$p->set_date_on_sale_to( gmdate( 'Y-m-d', strtotime( '+9 days' ) ) );
+		$p->update_meta_data( '_ace_deal', 'yes' ); // Shown in the homepage deal card.
 	}
 	$id = $p->save();
 	wp_set_object_terms( $id, $row[1], 'product_cat' );

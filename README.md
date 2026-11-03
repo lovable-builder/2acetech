@@ -36,6 +36,11 @@ site. They are not part of the theme.
   overrides the header logo; Store details > Footer logo overrides the footer one.
 - **Store details** (Customize): top bar text, phone, email, address, social
   links, deal countdown end, newsletter shortcode.
+- **Deal of the week**: tick "Deal of the week" on a product (Product data >
+  General, under the sale price). Ticked products that are on sale and in stock
+  fill the homepage countdown card, soonest-ending first (up to 4, swipeable).
+  Each countdown runs to that product's sale end date; without one it falls
+  back to Store details > deal countdown end. Nothing ticked: first sale product.
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.

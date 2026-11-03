@@ -708,6 +708,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	border-radius: 24px;
 	box-shadow: 8px 8px 0 var(--accent);
 }
+/* Several deals sit side by side and scroll sideways; the padding leaves room
+   for each card's offset shadow. */
+.deal__side { min-width: 0; }
+.deal__cards {
+	display: flex;
+	gap: 18px;
+	padding: 0 10px 10px 0;
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scrollbar-width: none;
+}
+.deal__cards::-webkit-scrollbar { display: none; }
+.deal__cards .deal__card { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
+.deal__more { margin: 6px 0 0; font-size: 0.82rem; font-weight: 600; color: var(--muted); }
 .deal__label { margin: 0 0 6px; text-align: left; }
 .deal__media { display: grid; place-items: center; aspect-ratio: 1; }
 .deal__media img, .deal__media svg { width: 84%; height: 84%; object-fit: contain; animation: float 5s ease-in-out infinite; }
@@ -722,7 +736,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .countdown b { display: block; font-size: 1.55rem; font-weight: 800; font-variant-numeric: tabular-nums; }
 .countdown span { display: block; margin-top: 5px; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: #a9a9b3; }
 .deal__tabs .tabs__list { border-bottom: 1px solid var(--line); margin-bottom: 24px; }
-@media (max-width: 1100px) { .deal { grid-template-columns: 1fr; } .deal__card { max-width: 420px; margin-inline: auto; width: 100%; } }
+@media (max-width: 1100px) { .deal { grid-template-columns: 1fr; } .deal__side { max-width: 420px; margin-inline: auto; width: 100%; } }
 
 /* Brands ----------------------------------------------------------------- */
 

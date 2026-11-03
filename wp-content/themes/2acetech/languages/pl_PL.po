@@ -729,3 +729,9 @@ msgstr "Następne produkty"
 
 msgid "Why shop with us"
 msgstr "Dlaczego warto kupować u nas"
+
+msgid "Show this product in the countdown card on the homepage. It needs a sale price; the countdown runs to the sale end date."
+msgstr "Pokaż ten produkt w karcie odliczania na stronie głównej. Wymaga ceny promocyjnej; odliczanie trwa do daty końca promocji."
+
+msgid "Swipe for more offers"
+msgstr "Przesuń, aby zobaczyć więcej ofert"

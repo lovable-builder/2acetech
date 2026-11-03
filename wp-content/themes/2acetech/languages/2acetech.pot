@@ -779,3 +779,9 @@ msgstr ""
 
 msgid "Why shop with us"
 msgstr ""
+
+msgid "Show this product in the countdown card on the homepage. It needs a sale price; the countdown runs to the sale end date."
+msgstr ""
+
+msgid "Swipe for more offers"
+msgstr ""
