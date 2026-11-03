@@ -25,8 +25,15 @@
 	float: none !important; /* Beat WooCommerce's 48% float layout. */
 	width: auto !important;
 	margin: 0;
-	position: sticky;
-	top: calc(var(--stick) + 20px);
+	top: auto !important; /* Never offset the photos on phones. */
+}
+/* Photos stay in view beside the long summary, on wide screens only. WooCommerce
+   sets position: relative on the gallery with higher specificity, hence !important. */
+@media (min-width: 861px) {
+	.woocommerce div.product div.images {
+		position: sticky !important;
+		top: calc(var(--stick) + 20px) !important;
+	}
 }
 .woocommerce div.product div.images .woocommerce-product-gallery__wrapper { margin: 0; }
 .woocommerce div.product .woocommerce-product-gallery__image {
@@ -331,7 +338,7 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .buybar { display: none; }
 @media (max-width: 860px) {
 	.woocommerce div.product { grid-template-columns: 1fr; gap: 28px; }
-	.woocommerce div.product div.images { position: static; }
+	.woocommerce div.product div.images { position: relative !important; }
 	.buybar {
 		position: fixed;
 		left: 0; right: 0; bottom: 0;
