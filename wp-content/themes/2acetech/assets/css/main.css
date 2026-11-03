@@ -835,6 +835,7 @@ a.brand:hover img { filter: none; opacity: 1; }
 .entry-content :where(ol ol, ul ul, ol ul, ul ol) { margin-top: 0.5em; }
 .entry-content :where(li) { margin: 0 0 0.55em; line-height: 1.7; }
 .entry-content :where(h2) { margin-top: 2em; font-size: 1.35rem; }
+.entry-content h2[id] { scroll-margin-top: calc(var(--stick, 120px) + 16px); }
 .entry-content :where(h3) { margin-top: 1.6em; font-size: 1.1rem; }
 .entry-content :where(blockquote) { margin-inline: 0; padding: 14px 20px; background: #fff7e0; border-left: 4px solid #f0b429; border-radius: 4px; }
 .entry-content :where(code) { padding: 1px 6px; background: var(--mist); border-radius: 4px; font-size: 0.9em; }

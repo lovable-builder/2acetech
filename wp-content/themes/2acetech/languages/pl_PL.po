@@ -882,3 +882,15 @@ msgstr "Poprzednie zdjęcie"
 
 msgid "Next photo"
 msgstr "Następne zdjęcie"
+
+msgid "Delivery and payment"
+msgstr "Dostawa i płatności"
+
+msgid "Returns"
+msgstr "Zwroty"
+
+msgid "Complaints"
+msgstr "Reklamacje"
+
+msgid "Cookie policy"
+msgstr "Polityka cookies"

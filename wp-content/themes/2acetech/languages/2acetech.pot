@@ -930,3 +930,15 @@ msgstr ""
 
 msgid "Next photo"
 msgstr ""
+
+msgid "Delivery and payment"
+msgstr ""
+
+msgid "Returns"
+msgstr ""
+
+msgid "Complaints"
+msgstr ""
+
+msgid "Cookie policy"
+msgstr ""
