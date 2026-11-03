@@ -53,6 +53,13 @@ site. They are not part of the theme.
   - Customize > **Product page**: the delivery/returns/warranty lines under the
     buy button (up to four, empty title hides one) and a dispatch note shown
     after "In stock".
+- **Withdraw from contract here** (Directive 2023/2673): the theme creates a page
+  `/odstap-od-umowy/` with a form (name, order number, email, optional goods) and
+  links to it from the footer of every page, My Account > Orders, the order
+  confirmation page and customer emails. Submitting emails the consumer an
+  acknowledgement with date and time, copies the store, adds an order note when
+  number and billing email match, and keeps every declaration under
+  **Withdrawals** in the admin menu. Needs working email (SMTP).
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.

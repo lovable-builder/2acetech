@@ -780,3 +780,84 @@ msgstr "Wiersz %d: tytuł"
 
 msgid "Line %d: small text"
 msgstr "Wiersz %d: mały tekst"
+
+msgid "Withdraw from contract here"
+msgstr "Odstąp od umowy tutaj"
+
+msgid "Withdrawals"
+msgstr "Odstąpienia od umowy"
+
+msgid "Withdrawal"
+msgstr "Odstąpienie od umowy"
+
+msgid "No withdrawals yet."
+msgstr "Brak odstąpień od umowy."
+
+msgid "The whole order"
+msgstr "Całe zamówienie"
+
+msgid "Goods covered"
+msgstr "Towary objęte odstąpieniem"
+
+msgid "Received"
+msgstr "Data otrzymania"
+
+msgid "Matched to the order (number and email agree)."
+msgstr "Dopasowano do zamówienia (numer i adres e-mail się zgadzają)."
+
+msgid "Not matched to an order automatically. Check the details."
+msgstr "Nie dopasowano automatycznie do zamówienia. Sprawdź dane."
+
+msgid "Withdrawal: order %1$s, %2$s"
+msgstr "Odstąpienie od umowy: zamówienie %1$s, %2$s"
+
+msgid "The customer declared withdrawal from the contract using the website function on %s."
+msgstr "Klient złożył oświadczenie o odstąpieniu od umowy za pomocą funkcji na stronie internetowej dnia %s."
+
+msgid "We confirm that we received your declaration of withdrawal from the contract on %s."
+msgstr "Potwierdzamy otrzymanie Twojego oświadczenia o odstąpieniu od umowy w dniu %s."
+
+msgid "We will reply to this address with the next steps for returning the goods and the refund."
+msgstr "Na ten adres e-mail wyślemy kolejne informacje dotyczące zwrotu towarów i zwrotu płatności."
+
+msgid "[%s] Confirmation of your withdrawal from the contract"
+msgstr "[%s] Potwierdzenie odstąpienia od umowy"
+
+msgid "[%1$s] Withdrawal from contract: order %2$s"
+msgstr "[%1$s] Odstąpienie od umowy: zamówienie %2$s"
+
+msgid "Acknowledgement sent to the consumer."
+msgstr "Potwierdzenie zostało wysłane do konsumenta."
+
+msgid "WARNING: the acknowledgement email to the consumer could NOT be sent. Contact them now."
+msgstr "UWAGA: potwierdzenia do konsumenta NIE udało się wysłać e-mailem. Skontaktuj się z nim teraz."
+
+msgid "Your withdrawal was received on %s. We have sent a confirmation to your email address."
+msgstr "Twoje odstąpienie od umowy zostało odebrane dnia %s. Wysłaliśmy potwierdzenie na Twój adres e-mail."
+
+msgid "Your withdrawal was recorded on %1$s, but we could not send the confirmation email. Please keep this page (for example as a screenshot) and write to %2$s."
+msgstr "Twoje odstąpienie od umowy zostało zapisane dnia %1$s, ale nie udało nam się wysłać potwierdzenia e-mailem. Zachowaj tę stronę (np. jako zrzut ekranu) i napisz do nas: %2$s."
+
+msgid "Please fill in your name, the order number and a valid email address."
+msgstr "Podaj imię i nazwisko, numer zamówienia i prawidłowy adres e-mail."
+
+msgid "Too many attempts from this connection. Please try again later or email us."
+msgstr "Zbyt wiele prób z tego połączenia. Spróbuj ponownie później lub napisz do nas."
+
+msgid "You have 14 days from receiving the goods to withdraw from the contract, without giving a reason. Fill in the details below and confirm."
+msgstr "Masz 14 dni od otrzymania towaru na odstąpienie od umowy bez podawania przyczyny. Uzupełnij dane poniżej i potwierdź."
+
+msgid "First and last name"
+msgstr "Imię i nazwisko"
+
+msgid "Email for the confirmation"
+msgstr "Adres e-mail do potwierdzenia"
+
+msgid "Which goods? (leave empty for the whole order)"
+msgstr "Których towarów dotyczy? (puste = całe zamówienie)"
+
+msgid "After you confirm, we send you an acknowledgement by email with the date and time we received your declaration."
+msgstr "Po potwierdzeniu wyślemy Ci e-mailem potwierdzenie z datą i godziną otrzymania Twojego oświadczenia."
+
+msgid "Confirm withdrawal here"
+msgstr "Potwierdź odstąpienie od umowy tutaj"

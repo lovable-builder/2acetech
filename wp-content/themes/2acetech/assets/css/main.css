@@ -887,4 +887,11 @@ a.brand:hover img { filter: none; opacity: 1; }
 .contact__info a:hover { color: var(--accent); }
 .contact__seller { margin: 0; padding-top: 18px; border-top: 1px solid #dcdce2; font-size: 0.88rem; color: var(--muted); }
 .contact__intro { margin-bottom: 28px; max-width: 720px; }
+/* Withdrawal page and links */
+.contact--single { grid-template-columns: minmax(0, 700px); }
+.footer__legal .withdraw-link { font-weight: 800; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.withdraw-note { margin: 24px 0; }
+.withdraw-link--box { display: inline-block; padding: 12px 20px; border: 2px solid var(--ink); border-radius: 999px; font-weight: 700; transition: background 0.2s, color 0.2s; }
+.withdraw-link--box:hover { background: var(--ink); color: #fff; }
+
 @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } .field-row { grid-template-columns: 1fr; } }

@@ -830,3 +830,84 @@ msgstr ""
 
 msgid "Line %d: small text"
 msgstr ""
+
+msgid "Withdraw from contract here"
+msgstr ""
+
+msgid "Withdrawals"
+msgstr ""
+
+msgid "Withdrawal"
+msgstr ""
+
+msgid "No withdrawals yet."
+msgstr ""
+
+msgid "The whole order"
+msgstr ""
+
+msgid "Goods covered"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
+msgid "Matched to the order (number and email agree)."
+msgstr ""
+
+msgid "Not matched to an order automatically. Check the details."
+msgstr ""
+
+msgid "Withdrawal: order %1$s, %2$s"
+msgstr ""
+
+msgid "The customer declared withdrawal from the contract using the website function on %s."
+msgstr ""
+
+msgid "We confirm that we received your declaration of withdrawal from the contract on %s."
+msgstr ""
+
+msgid "We will reply to this address with the next steps for returning the goods and the refund."
+msgstr ""
+
+msgid "[%s] Confirmation of your withdrawal from the contract"
+msgstr ""
+
+msgid "[%1$s] Withdrawal from contract: order %2$s"
+msgstr ""
+
+msgid "Acknowledgement sent to the consumer."
+msgstr ""
+
+msgid "WARNING: the acknowledgement email to the consumer could NOT be sent. Contact them now."
+msgstr ""
+
+msgid "Your withdrawal was received on %s. We have sent a confirmation to your email address."
+msgstr ""
+
+msgid "Your withdrawal was recorded on %1$s, but we could not send the confirmation email. Please keep this page (for example as a screenshot) and write to %2$s."
+msgstr ""
+
+msgid "Please fill in your name, the order number and a valid email address."
+msgstr ""
+
+msgid "Too many attempts from this connection. Please try again later or email us."
+msgstr ""
+
+msgid "You have 14 days from receiving the goods to withdraw from the contract, without giving a reason. Fill in the details below and confirm."
+msgstr ""
+
+msgid "First and last name"
+msgstr ""
+
+msgid "Email for the confirmation"
+msgstr ""
+
+msgid "Which goods? (leave empty for the whole order)"
+msgstr ""
+
+msgid "After you confirm, we send you an acknowledgement by email with the date and time we received your declaration."
+msgstr ""
+
+msgid "Confirm withdrawal here"
+msgstr ""

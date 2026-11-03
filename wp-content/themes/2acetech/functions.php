@@ -32,6 +32,7 @@ require_once ACE_DIR . '/inc/customizer-home.php';
 require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/contact.php';
+require_once ACE_DIR . '/inc/withdrawal.php';
 require_once ACE_DIR . '/inc/woocommerce.php';
 require_once ACE_DIR . '/inc/product.php';
 require_once ACE_DIR . '/inc/product-details.php';
