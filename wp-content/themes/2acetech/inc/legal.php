@@ -218,3 +218,39 @@ add_filter( 'the_content', 'ace_legal_anchors' );
  * (Automattic). The privacy policy assumes that does not happen.
  */
 add_filter( 'pre_option_show_avatars', '__return_zero' );
+
+/* Titles of the pages the theme creates ------------------------------------ */
+
+/**
+ * The pages the theme creates are saved with an English title when WordPress
+ * creates them (admin language). Translate them when shown, as long as the
+ * owner has not renamed them.
+ *
+ * @return array[] slug => array( English title, translated title ).
+ */
+function ace_auto_page_titles() {
+	return array(
+		ACE_WITHDRAWAL_SLUG    => array( 'Withdraw from contract here', __( 'Withdraw from contract here', '2acetech' ) ),
+		'regulamin'            => array( 'Store terms and conditions', __( 'Store terms and conditions', '2acetech' ) ),
+		'polityka-prywatnosci' => array( 'Privacy policy', __( 'Privacy policy', '2acetech' ) ),
+	);
+}
+
+/**
+ * @param string      $title   Title.
+ * @param int|WP_Post $post_id Post.
+ * @return string
+ */
+function ace_translate_auto_title( $title, $post_id ) {
+	$post = get_post( $post_id );
+	if ( ! $post || 'page' !== $post->post_type ) {
+		return $title;
+	}
+	$map = ace_auto_page_titles();
+	if ( isset( $map[ $post->post_name ] ) && $title === $map[ $post->post_name ][0] ) {
+		return $map[ $post->post_name ][1];
+	}
+	return $title;
+}
+add_filter( 'the_title', 'ace_translate_auto_title', 10, 2 );
+add_filter( 'single_post_title', 'ace_translate_auto_title', 10, 2 );
