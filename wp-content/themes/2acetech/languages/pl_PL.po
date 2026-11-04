@@ -894,3 +894,55 @@ msgstr "Reklamacje"
 
 msgid "Cookie policy"
 msgstr "Polityka cookies"
+
+msgid "Necessary"
+msgstr "Niezbędne"
+
+msgid "Keep the cart, checkout and your account working, and remember this choice. They cannot be switched off."
+msgstr "Zapewniają działanie koszyka, składania zamówień i Twojego konta oraz zapamiętują ten wybór. Nie można ich wyłączyć."
+
+msgid "Analytics"
+msgstr "Analityczne"
+
+msgid "Help us understand how the shop is used so we can improve it. Off unless you agree."
+msgstr "Pomagają nam zrozumieć, jak korzysta się ze sklepu, aby go ulepszać. Wyłączone, dopóki się nie zgodzisz."
+
+msgid "Marketing"
+msgstr "Marketingowe"
+
+msgid "Used to show offers that match your interests, also on other websites. Off unless you agree."
+msgstr "Służą do wyświetlania ofert dopasowanych do Twoich zainteresowań, także na innych stronach. Wyłączone, dopóki się nie zgodzisz."
+
+msgid "Welcome to %s"
+msgstr "Witamy w %s"
+
+msgid "We use cookies to make the shop work: the cart, checkout and your account. We may also use analytical and marketing cookies, but only if you agree. You can change your choice at any time with \"Cookie settings\" at the bottom of every page."
+msgstr "Używamy plików cookie, aby sklep działał: koszyk, składanie zamówień i Twoje konto. Możemy też używać plików cookie analitycznych i marketingowych, ale tylko za Twoją zgodą. Swój wybór możesz zmienić w każdej chwili przyciskiem „Ustawienia cookies” u dołu każdej strony."
+
+msgid "Your personal data is controlled by 2ACE sp. z o.o. You will find more about cookies and your rights in our"
+msgstr "Administratorem Twoich danych osobowych jest 2ACE sp. z o.o. Więcej informacji o plikach cookie i Twoich prawach znajdziesz w naszej"
+
+msgid "Reject all"
+msgstr "Odrzuć wszystkie"
+
+msgid "Manage cookies"
+msgstr "Zarządzaj plikami cookie"
+
+msgid "Accept"
+msgstr "Akceptuję"
+
+msgid "Cookie settings"
+msgstr "Ustawienia cookies"
+
+msgid "Choose which cookies you allow. You can change this at any time."
+msgstr "Wybierz, na jakie pliki cookie się zgadzasz. Możesz to zmienić w każdej chwili."
+
+msgid "Save my choices"
+msgstr "Zapisz mój wybór"
+
+msgid "Accept all"
+msgstr "Akceptuj wszystkie"
+
+msgctxt "link inside the cookie banner sentence"
+msgid "Cookie policy"
+msgstr "Polityce cookies"

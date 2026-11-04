@@ -66,6 +66,13 @@ site. They are not part of the theme.
   WooCommerce terms page and the privacy page, and a notice reminds you to fill
   the `[bracketed]` items (see `legal/OPEN-ITEMS.md`) and get a lawyer to review
   them. The footer links to them once they are published.
+- **Cookie consent**: a banner on the first visit (your logo, "Reject all" /
+  "Manage cookies" / "Accept") with a settings panel (necessary, analytics,
+  marketing) and a "Cookie settings" link in the footer. The choice is kept in
+  the cookie `ace_consent` for 180 days. The shop sets no analytics or marketing
+  cookies yet; anything added later must wait for consent
+  (`<script type="text/plain" data-ace-consent="analytics">`,
+  `window.aceConsent.has('analytics')`, `ace_consent_allowed('analytics')`).
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.

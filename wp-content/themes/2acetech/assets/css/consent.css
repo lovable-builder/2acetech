@@ -1,0 +1,124 @@
+/* ==========================================================================
+   Cookie banner and settings panel.
+   ========================================================================== */
+
+.cookie[hidden], .cookie-modal[hidden] { display: none; }
+
+/* Banner: a white panel along the bottom edge. */
+.cookie {
+	position: fixed;
+	left: 0; right: 0; bottom: 0;
+	z-index: 200;
+	max-height: 92vh;
+	max-height: 92svh;
+	overflow-y: auto;
+	background: #fff;
+	border-top: 1px solid var(--line);
+	box-shadow: 0 -12px 40px rgba(11, 11, 13, 0.18);
+	padding-bottom: env(safe-area-inset-bottom);
+}
+.cookie__inner {
+	width: min(100% - 2 * var(--gutter, 20px), 920px);
+	margin-inline: auto;
+	padding-block: clamp(20px, 3vw, 32px);
+}
+.cookie__logo { display: block; width: auto; height: clamp(26px, 5vw, 40px); max-width: none; margin: 0 0 18px; object-fit: contain; }
+.cookie__title { margin: 0 0 12px; font-size: 1.05rem; font-weight: 800; letter-spacing: 0; }
+.cookie p { margin: 0 0 12px; font-size: 0.92rem; line-height: 1.6; color: var(--ink); }
+.cookie a { text-decoration: underline; text-underline-offset: 3px; }
+.cookie a:hover { color: var(--accent); }
+
+/* Three buttons of the same size, so refusing is as easy as accepting. */
+.cookie__actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.cookie__btn {
+	min-height: 48px;
+	padding: 12px 16px;
+	border: 2px solid transparent;
+	border-radius: 12px;
+	font: inherit;
+	font-weight: 800;
+	font-size: 0.95rem;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.cookie__btn--accept { background: var(--accent); color: #fff; }
+.cookie__btn--accept:hover { background: var(--accent-dark); }
+.cookie__btn--reject { background: var(--ink); color: #fff; }
+.cookie__btn--reject:hover { background: #2a2a31; }
+.cookie__btn--manage { background: #f1f1f4; color: var(--ink); }
+.cookie__btn--manage:hover { background: #e4e4e9; }
+.cookie__btn:focus-visible, .cookie-switch:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+@media (max-width: 640px) {
+	.cookie__inner { padding-block: 16px; }
+	.cookie__logo { height: 24px; margin-bottom: 10px; }
+	.cookie__title { margin-bottom: 8px; font-size: 1rem; }
+	.cookie p { margin-bottom: 8px; font-size: 0.82rem; line-height: 1.5; }
+	.cookie__actions { grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+	.cookie__btn { min-height: 44px; padding: 9px 14px; font-size: 0.9rem; }
+}
+
+/* Settings panel */
+.cookie-modal { position: fixed; inset: 0; z-index: 210; display: grid; place-items: center; padding: 16px; }
+.cookie-modal__backdrop { position: absolute; inset: 0; background: rgba(11, 11, 13, 0.62); }
+.cookie-modal__panel {
+	position: relative;
+	width: min(100%, 640px);
+	max-height: 92vh;
+	max-height: 92svh;
+	overflow-y: auto;
+	padding: clamp(22px, 4vw, 34px);
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+}
+.cookie-modal__panel:focus { outline: 0; }
+.cookie-modal__panel h2 { margin: 0 0 8px; font-size: 1.35rem; font-weight: 800; }
+.cookie-modal__panel > p { margin: 0 0 18px; font-size: 0.92rem; color: var(--muted); }
+.cookie-modal__list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.cookie-modal__list li {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 18px;
+	padding: 16px 18px;
+	border: 1px solid var(--line);
+	border-radius: 14px;
+}
+.cookie-modal__text label { display: block; margin-bottom: 4px; font-weight: 800; cursor: pointer; }
+.cookie-modal__text p { margin: 0; font-size: 0.86rem; line-height: 1.5; color: var(--muted); }
+.cookie-modal__more { margin: 16px 0 0; font-size: 0.9rem; }
+.cookie-modal__more a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Toggle switch (a real checkbox underneath) */
+.cookie-switch {
+	appearance: none;
+	-webkit-appearance: none;
+	flex: none;
+	position: relative;
+	width: 52px; height: 30px;
+	margin: 0;
+	background: #c9c9d1;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.cookie-switch::after {
+	content: "";
+	position: absolute;
+	top: 3px; left: 3px;
+	width: 24px; height: 24px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	transition: transform 0.2s;
+}
+.cookie-switch:checked { background: var(--accent); }
+.cookie-switch:checked::after { transform: translateX(22px); }
+.cookie-switch:disabled { opacity: 0.55; cursor: not-allowed; }
+
+html.cookie-lock { overflow: hidden; }
+
+/* The footer link that reopens the settings looks like its neighbours. */
+.footer__legal .cookie-link { padding: 0; background: none; border: 0; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.footer__legal .cookie-link:hover { color: #fff; }

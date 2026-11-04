@@ -942,3 +942,55 @@ msgstr ""
 
 msgid "Cookie policy"
 msgstr ""
+
+msgid "Necessary"
+msgstr ""
+
+msgid "Keep the cart, checkout and your account working, and remember this choice. They cannot be switched off."
+msgstr ""
+
+msgid "Analytics"
+msgstr ""
+
+msgid "Help us understand how the shop is used so we can improve it. Off unless you agree."
+msgstr ""
+
+msgid "Marketing"
+msgstr ""
+
+msgid "Used to show offers that match your interests, also on other websites. Off unless you agree."
+msgstr ""
+
+msgid "Welcome to %s"
+msgstr ""
+
+msgid "We use cookies to make the shop work: the cart, checkout and your account. We may also use analytical and marketing cookies, but only if you agree. You can change your choice at any time with \"Cookie settings\" at the bottom of every page."
+msgstr ""
+
+msgid "Your personal data is controlled by 2ACE sp. z o.o. You will find more about cookies and your rights in our"
+msgstr ""
+
+msgid "Reject all"
+msgstr ""
+
+msgid "Manage cookies"
+msgstr ""
+
+msgid "Accept"
+msgstr ""
+
+msgid "Cookie settings"
+msgstr ""
+
+msgid "Choose which cookies you allow. You can change this at any time."
+msgstr ""
+
+msgid "Save my choices"
+msgstr ""
+
+msgid "Accept all"
+msgstr ""
+
+msgctxt "link inside the cookie banner sentence"
+msgid "Cookie policy"
+msgstr ""

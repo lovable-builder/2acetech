@@ -192,6 +192,17 @@ Checked against the consolidated text. Summary of what the Regulamin (§ 6) says
 
 ---
 
+## 6a. Cookie banner (added 4 November 2026)
+
+The theme now shows a consent banner on the first visit (logo, text, three equal buttons: Reject all, Manage cookies, Accept) and a settings panel with three categories (necessary, analytics, marketing). The choice is stored in the cookie `ace_consent` for 180 days and can be changed with "Ustawienia cookies" in the footer.
+
+- **Reject is as easy as Accept.** The reference site you showed has only "Manage cookies" and "Accept". I added "Reject all" on purpose: the EU and Polish regulators (UODO) treat a banner without an equally easy way to refuse as invalid consent. Keep the third button.
+- **The banner currently controls nothing**, because the shop sets no analytics or marketing cookies. It does matter later: any analytics or ad script must be loaded only after consent. In HTML use `<script type="text/plain" data-ace-consent="analytics" src="...">`; in JavaScript `window.aceConsent.has('analytics')`; in PHP `ace_consent_allowed('analytics')`. Plugins that add their own tracking (Google Site Kit, Meta pixel, chat widgets) do not follow this automatically. Do not install them without checking.
+- **Privacy policy §6** was rewritten to match (banner, `ace_consent` row, how to change the choice).
+- A lawyer should confirm the wording of the banner and of §6, and the 180-day lifetime of the choice.
+
+---
+
 ## 7. Grey-list check (art. 385³ KC) and related checks
 
 I read the 23 points of art. 385³ KC in the current Civil Code (Dz.U. 2026 poz. 795) and checked every clause that could touch them.

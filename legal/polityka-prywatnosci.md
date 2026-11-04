@@ -82,10 +82,11 @@ Cookies to małe pliki tekstowe zapisywane na Twoim urządzeniu przez stronę in
 
 ### 6.2. Z jakich cookies korzysta Sklep
 
-Sklep używa **wyłącznie plików cookie niezbędnych do działania sklepu** (koszyk, składanie zamówienia, logowanie). Nie używamy cookies analitycznych, reklamowych ani społecznościowych, dlatego nie wyświetlamy baneru ze zgodą. Czcionki sklepu są zapisane na naszym serwerze, a nie pobierane od firm trzecich.
+Przy pierwszej wizycie wyświetlamy baner, w którym możesz zaakceptować wszystkie pliki cookie, odrzucić wszystkie niewymagane albo wybrać kategorie w ustawieniach. Odrzucenie jest tak samo łatwe jak akceptacja. Obecnie Sklep używa **wyłącznie plików cookie niezbędnych do działania sklepu** (koszyk, składanie zamówienia, logowanie) oraz pliku, który zapamiętuje Twój wybór. Nie używamy cookies analitycznych, reklamowych ani społecznościowych. Kategorie „analityczne” i „marketingowe” są domyślnie wyłączone i niczego w ich ramach nie ładujemy bez Twojej zgody. Czcionki sklepu są zapisane na naszym serwerze, a nie pobierane od firm trzecich.
 
 | Nazwa | Do czego służy | Czas działania | Kiedy powstaje |
 |---|---|---|---|
+| `ace_consent` | zapamiętuje Twój wybór dotyczący plików cookie (niezbędny, więc nie wymaga zgody) | 180 dni | gdy klikniesz przycisk w banerze lub zapiszesz ustawienia cookies |
 | `woocommerce_cart_hash`, `woocommerce_items_in_cart` | pozwalają sklepowi wykryć zmiany w koszyku | do końca sesji przeglądarki | gdy dodajesz towar do koszyka |
 | `wp_woocommerce_session_*` | zawiera kod, dzięki któremu sklep odnajduje Twój koszyk i dane zamówienia | około 2 dni | gdy dodajesz towar do koszyka lub przechodzisz do kasy |
 | `wordpress_logged_in_*`, `wordpress_sec_*`, `wp-settings-*`, `wp-settings-time-*` | utrzymują zalogowanie do Konta i ustawienia panelu | do końca sesji lub do 1 roku (`wp-settings-*`) | gdy się logujesz |
@@ -102,11 +103,11 @@ W stopce Sklepu mogą znajdować się odnośniki do naszych profili w mediach sp
 
 ### 6.3. Jak zarządzać cookies
 
-Możesz w każdej chwili usunąć pliki cookie lub zablokować ich zapisywanie w ustawieniach przeglądarki. Pamiętaj, że po zablokowaniu cookies niezbędnych koszyk, składanie zamówień i logowanie nie będą działać prawidłowo.
+Swój wybór możesz zmienić lub wycofać zgodę w każdej chwili przyciskiem „Ustawienia cookies” w stopce Sklepu albo <a href="#cookie-settings">tutaj</a>. Wycofanie zgody nie wpływa na zgodność z prawem przetwarzania dokonanego przed jej wycofaniem. Możesz też w każdej chwili usunąć pliki cookie lub zablokować ich zapisywanie w ustawieniach przeglądarki. Pamiętaj, że po zablokowaniu cookies niezbędnych koszyk, składanie zamówień i logowanie nie będą działać prawidłowo.
 
 ### 6.4. Jeżeli w przyszłości dodamy analitykę lub reklamy
 
-Zanim uruchomimy narzędzia analityczne, reklamowe lub osadzimy treści zewnętrzne (np. wideo), zapytamy Cię o zgodę w banerze cookies, a niniejszą politykę zaktualizujemy. Do czasu zgody takie narzędzia nie będą się ładować.
+Jeżeli włączymy narzędzia analityczne lub reklamowe albo osadzimy treści zewnętrzne (np. wideo), będą się one ładować dopiero po Twojej zgodzie wyrażonej w banerze cookies, a niniejszą politykę zaktualizujemy.
 
 ## 7. Bezpieczeństwo danych
 

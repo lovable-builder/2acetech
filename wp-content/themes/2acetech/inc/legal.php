@@ -188,6 +188,9 @@ function ace_footer_legal_links() {
 		$links[] = $withdraw;
 	}
 
+	// Reopens the cookie settings (inc/consent.php).
+	$links[] = sprintf( '<button type="button" class="cookie-link" data-cookie-open>%s</button>', esc_html__( 'Cookie settings', '2acetech' ) );
+
 	return $links;
 }
 
