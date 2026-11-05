@@ -124,3 +124,40 @@ if ( function_exists( 'wc_create_order' ) && ! get_option( 'ace_preview_order' )
 		@file_put_contents( '/playground/_order-url.txt', $order->get_checkout_order_received_url() );
 	}
 }
+
+/*
+ * Sample brands with deliberately awkward logos (wide, tall, tiny, huge white
+ * margins, white JPEG background) to check the standard brand slot.
+ */
+if ( taxonomy_exists( 'product_brand' ) && ! get_option( 'ace_preview_brands' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+
+	$brand_rows = array(
+		array( 'Soniq', 'soniq-wide-margins.jpg' ),
+		array( 'Vertex', 'vertex-tall.png' ),
+		array( 'Nexo', 'nexo-square-white.png' ),
+		array( 'Lumo', 'lumo-tiny.png' ),
+		array( 'Pro Audio Works', 'proaudio-strip.png' ),
+		array( 'Aero', 'aero-light.jpg' ),
+	);
+	$product_ids = wc_get_products( array( 'limit' => 20, 'return' => 'ids', 'status' => 'publish' ) );
+	foreach ( $brand_rows as $i => $row ) {
+		$made = wp_insert_term( $row[0], 'product_brand' );
+		if ( is_wp_error( $made ) ) {
+			continue;
+		}
+		$tmp = wp_tempnam( $row[1] );
+		copy( '/playground/brand-samples/' . $row[1], $tmp );
+		$att = media_handle_sideload( array( 'name' => $row[1], 'tmp_name' => $tmp ), 0 );
+		if ( ! is_wp_error( $att ) ) {
+			update_term_meta( $made['term_id'], 'thumbnail_id', $att );
+		}
+		// Give each brand a couple of products.
+		foreach ( array_slice( $product_ids, $i, 2 ) as $pid ) {
+			wp_set_object_terms( $pid, (int) $made['term_id'], 'product_brand' );
+		}
+	}
+	update_option( 'ace_preview_brands', 1 );
+}

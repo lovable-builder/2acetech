@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the 2acetech package.
+# This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 2acetech 1.0.0\n"
-"Report-Msgid-Bugs-To: info@2acetech.pl\n"
-"POT-Creation-Date: 2026-11-02 17:17+0100\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-05 10:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-msgid "This page has gone missing"
-msgstr ""
-
-msgid ""
-"The link may be broken or the page may have moved. Try a search, or head "
-"back to the shop."
-msgstr ""
-
-msgid "Back to the shop"
-msgstr ""
-
-#. translators: %s: number of comments.
-#, php-format
-msgid "%s comment"
-msgid_plural "%s comments"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Shop"
-msgstr ""
-
-msgid "Customer care"
-msgstr ""
-
-msgid "All rights reserved."
-msgstr ""
-
-msgid "Back to top"
-msgstr ""
 
 msgid "Primary menu"
 msgstr ""
@@ -65,6 +35,125 @@ msgstr ""
 
 msgid "Footer widgets"
 msgstr ""
+
+msgid "This page has gone missing"
+msgstr ""
+
+msgid ""
+"The link may be broken or the page may have moved. Try a search, or head "
+"back to the shop."
+msgstr ""
+
+msgid "Back to the shop"
+msgstr ""
+
+#, php-format
+msgid ""
+"Your withdrawal was received on %s. We have sent a confirmation to your "
+"email address."
+msgstr ""
+
+#, php-format
+msgid ""
+"Your withdrawal was recorded on %1$s, but we could not send the confirmation "
+"email. Please keep this page (for example as a screenshot) and write to %2$s."
+msgstr ""
+
+msgid "Please fill in your name, the order number and a valid email address."
+msgstr ""
+
+msgid ""
+"Too many attempts from this connection. Please try again later or email us."
+msgstr ""
+
+msgid "The form expired. Please reload the page and try again."
+msgstr ""
+
+msgid ""
+"You have 14 days from receiving the goods to withdraw from the contract, "
+"without giving a reason. Fill in the details below and confirm."
+msgstr ""
+
+msgid "First and last name"
+msgstr ""
+
+msgid "Order number"
+msgstr ""
+
+msgid "Email for the confirmation"
+msgstr ""
+
+msgid "Which goods? (leave empty for the whole order)"
+msgstr ""
+
+msgid ""
+"After you confirm, we send you an acknowledgement by email with the date and "
+"time we received your declaration."
+msgstr ""
+
+msgid "Privacy policy"
+msgstr ""
+
+msgid "Confirm withdrawal here"
+msgstr ""
+
+#, php-format
+msgid "Search results for \"%s\""
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "Nothing found. Try a different search."
+msgstr ""
+
+msgid "Thank you, your message has been sent. We will reply as soon as we can."
+msgstr ""
+
+msgid "Please fill in your name, a valid email and a message."
+msgstr ""
+
+msgid "Too many messages from this connection. Please try again later."
+msgstr ""
+
+msgid "We could not send your message. Please email us directly."
+msgstr ""
+
+msgid "Send us a message"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Order number (optional)"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "We use your details only to answer this message."
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+#, php-format
+msgid "%s comment"
+msgid_plural "%s comments"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "Fast, tracked delivery across Poland"
 msgstr ""
@@ -96,234 +185,106 @@ msgstr ""
 msgid "Primary"
 msgstr ""
 
-msgid "Name"
+msgid "Shop"
 msgstr ""
 
-msgid "Email"
+msgid "Customer care"
 msgstr ""
 
-msgid "Order number"
+msgid "All rights reserved."
 msgstr ""
 
-#. translators: 1: site name, 2: sender name.
-#, php-format
-msgid "[%1$s] Message from %2$s"
+msgid "Back to top"
 msgstr ""
 
-msgid "Landing page"
+msgid "Continue shopping"
 msgstr ""
 
-msgid ""
-"Edit the homepage: hero scenes, banners, trust strip, headings and section "
-"order. Products, categories, brands and the deal of the week come from "
-"WooCommerce."
+msgid "Search"
 msgstr ""
 
-#. translators: %d: scene number.
-#, php-format
-msgid "Hero scene %d"
+msgid "All categories"
 msgstr ""
 
-msgid "Show this scene"
+msgid "Search products…"
 msgstr ""
 
-msgid "Small label"
+msgid "Search…"
 msgstr ""
 
-msgid "Headline"
-msgstr ""
-
-msgid "The last word is shown in red."
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "Button text"
-msgstr ""
-
-msgid "Leave empty for no button."
-msgstr ""
-
-msgid "Button link"
-msgstr ""
-
-msgid "Product photo"
+msgid "Brand logos"
 msgstr ""
 
 msgid ""
-"Best: a transparent PNG, at least 1000 px wide. Empty uses the illustration "
-"below."
+"Every brand logo is trimmed and fitted into the same slot, so they all look "
+"alike. Brands are added under Products > Brands. If one logo still looks too "
+"big or small, set its \"Logo size\" when you edit that brand."
 msgstr ""
 
-msgid "Built-in picture (no photo uploaded)"
+msgid "Logo colour"
 msgstr ""
 
-msgid "Background glow"
+msgid "Grey, colour on hover (calm, uniform)"
 msgstr ""
 
-#. translators: %d: chip number.
-#, php-format
-msgid "Floating tag %d"
+msgid "Full colour"
 msgstr ""
 
-msgid ""
-"Short facts around the product. Empty hides it. Only state facts that are "
-"true."
+msgid "Slot height (px)"
 msgstr ""
 
-msgid "Promo banners"
+msgid "How tall each logo slot is. Slots are always the same size."
 msgstr ""
 
-#. translators: %d: banner number.
-#, php-format
-msgid "Banner %d: show"
+msgid "Logo size inside the slot (%)"
 msgstr ""
 
-#, php-format
-msgid "Banner %d: small label"
+msgid "Lower leaves more space around each logo."
 msgstr ""
 
-#, php-format
-msgid "Banner %d: headline"
-msgstr ""
-
-#, php-format
-msgid "Banner %d: button text"
-msgstr ""
-
-#, php-format
-msgid "Banner %d: link"
-msgstr ""
-
-#, php-format
-msgid "Banner %d: product photo"
-msgstr ""
-
-msgid "Transparent PNG works best. Empty uses the built-in picture."
-msgstr ""
-
-#, php-format
-msgid "Banner %d: built-in picture (no photo uploaded)"
-msgstr ""
-
-#, php-format
-msgid "Banner %d: style"
-msgstr ""
-
-msgid "Light"
-msgstr ""
-
-msgid "Dark"
-msgstr ""
-
-msgid "Trust strip"
+msgid "Logo size (%)"
 msgstr ""
 
 msgid ""
-"Four short promises under the hero. Empty title hides an item. Only promise "
-"what you will deliver."
+"100 is standard. Raise it for a logo that looks small (a thin or light one), "
+"lower it for one that looks too big."
 msgstr ""
 
-#. translators: %d: item number.
-#, php-format
-msgid "Item %d title"
+msgid "Extra details"
 msgstr ""
 
-#, php-format
-msgid "Item %d text"
-msgstr ""
-
-msgid "Sections"
-msgstr ""
-
-msgid "The hero is always first. Tick a section to show it, drag to re-order."
-msgstr ""
-
-msgid "Homepage sections"
-msgstr ""
-
-msgid "Headings and texts"
-msgstr ""
-
-msgid "Category tiles heading"
-msgstr ""
-
-msgid "Featured products heading"
-msgstr ""
-
-msgid "Best deals heading"
-msgstr ""
-
-msgid "Bestsellers heading"
-msgstr ""
-
-msgid "Newsletter heading"
-msgstr ""
-
-msgid "Newsletter text"
-msgstr ""
-
-msgid "Footer tagline"
-msgstr ""
-
-msgid "Store details"
-msgstr ""
-
-msgid "Top bar message"
-msgstr ""
-
-msgid "Phone"
-msgstr ""
-
-msgid "Address"
-msgstr ""
-
-msgid "Seller: company name"
-msgstr ""
-
-msgid "Seller: NIP / tax ID and registry number"
-msgstr ""
-
-msgid "Facebook URL"
-msgstr ""
-
-msgid "Instagram URL"
-msgstr ""
-
-msgid "X (Twitter) URL"
-msgstr ""
-
-msgid "YouTube URL"
-msgstr ""
-
-msgid "Footer logo (light version)"
-msgstr ""
-
-msgid "Used on the dark footer. Upload a version with white lettering."
-msgstr ""
-
-msgid "Link-sharing image"
+msgid "What's in the box"
 msgstr ""
 
 msgid ""
-"Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x "
-"630 px. Leave empty to use the built-in image. Product pages use the product "
-"photo."
+"One item per line, for example \"4 x aluminium LED strips\". Shows as the "
+"\"What's in the box\" tab. Leave empty to hide the tab."
 msgstr ""
 
-msgid "Deal countdown end"
+msgid "Questions and answers"
 msgstr ""
 
 msgid ""
-"Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end "
-"of the current week."
+"A question on one line, its answer on the next line(s), then a blank line "
+"before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty "
+"to hide the tab."
 msgstr ""
 
-msgid "Newsletter form shortcode"
+msgid "Specification"
 msgstr ""
 
-msgid "Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). The newsletter band is shown only when this is set, because a newsletter needs a consent record and an unsubscribe link."
+msgid "FAQ"
+msgstr ""
+
+msgid "Frequently asked questions"
+msgstr ""
+
+#, php-format
+msgid "[%s] New newsletter sign-up"
+msgstr ""
+
+#, php-format
+msgid "New newsletter sign-up: %s"
 msgstr ""
 
 msgid "Laptops & computers"
@@ -342,6 +303,188 @@ msgid "Wearables"
 msgstr ""
 
 msgid "Gaming"
+msgstr ""
+
+msgid "Breadcrumb"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Brand:"
+msgstr ""
+
+#, php-format
+msgid "%d review"
+msgid_plural "%d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Be the first to review this product"
+msgstr ""
+
+msgid "Hurry up! Special offer."
+msgstr ""
+
+#, php-format
+msgid "Available: %d"
+msgstr ""
+
+#, php-format
+msgid "Already sold: %d"
+msgstr ""
+
+#, php-format
+msgid "%d%% sold"
+msgstr ""
+
+#, php-format
+msgid "Only %d left in stock"
+msgid_plural "Only %d left in stock"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "days"
+msgstr ""
+
+msgid "hrs"
+msgstr ""
+
+msgid "min"
+msgstr ""
+
+msgid "sec"
+msgstr ""
+
+msgid "Secure, encrypted checkout"
+msgstr ""
+
+msgid "14-day right of withdrawal"
+msgstr ""
+
+msgid "On backorder"
+msgstr ""
+
+#, php-format
+msgid "In stock (%d pcs)"
+msgstr ""
+
+msgid "In stock"
+msgstr ""
+
+msgid "Out of stock"
+msgstr ""
+
+msgid "Availability"
+msgstr ""
+
+msgid "SKU"
+msgstr ""
+
+msgid "Category"
+msgstr ""
+
+msgid "Share"
+msgstr ""
+
+msgid "Link copied"
+msgstr ""
+
+msgid "Copy link"
+msgstr ""
+
+msgid "Decrease quantity"
+msgstr ""
+
+msgid "Increase quantity"
+msgstr ""
+
+msgid "Previous photo"
+msgstr ""
+
+msgid "Next photo"
+msgstr ""
+
+msgid "Withdraw from contract here"
+msgstr ""
+
+msgid "Withdrawals"
+msgstr ""
+
+msgid "Withdrawal"
+msgstr ""
+
+msgid "No withdrawals yet."
+msgstr ""
+
+msgid "The whole order"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Goods covered"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
+#, php-format
+msgid "Withdrawal: order %1$s, %2$s"
+msgstr ""
+
+msgid "Matched to the order (number and email agree)."
+msgstr ""
+
+msgid "Not matched to an order automatically. Check the details."
+msgstr ""
+
+#, php-format
+msgid ""
+"The customer declared withdrawal from the contract using the website "
+"function on %s."
+msgstr ""
+
+#, php-format
+msgid ""
+"We confirm that we received your declaration of withdrawal from the contract "
+"on %s."
+msgstr ""
+
+msgid ""
+"We will reply to this address with the next steps for returning the goods "
+"and the refund."
+msgstr ""
+
+#, php-format
+msgid "[%s] Confirmation of your withdrawal from the contract"
+msgstr ""
+
+#, php-format
+msgid "[%1$s] Withdrawal from contract: order %2$s"
+msgstr ""
+
+msgid "Acknowledgement sent to the consumer."
+msgstr ""
+
+msgid ""
+"WARNING: the acknowledgement email to the consumer could NOT be sent. "
+"Contact them now."
+msgstr ""
+
+msgid "Items in cart:"
+msgstr ""
+
+msgid "Details & payment"
+msgstr ""
+
+msgid "Confirmation"
+msgstr ""
+
+msgid "Checkout progress"
+msgstr ""
+
+msgid "Order with obligation to pay"
 msgstr ""
 
 msgid "Red glow"
@@ -464,19 +607,22 @@ msgstr ""
 msgid "Easy returns"
 msgstr ""
 
-msgid "14-day right of withdrawal"
-msgstr ""
-
 msgid "Warranty included"
 msgstr ""
 
 msgid "Manufacturer warranty on every product"
 msgstr ""
 
+msgid "Trust strip"
+msgstr ""
+
 msgid "Category tiles"
 msgstr ""
 
 msgid "Featured products"
+msgstr ""
+
+msgid "Promo banners"
 msgstr ""
 
 msgid "Deal of the week and product tabs"
@@ -506,468 +652,287 @@ msgstr ""
 msgid "Premium electronics, delivered fast across Poland."
 msgstr ""
 
-#. translators: %s: site name.
-#, php-format
-msgid "[%s] New newsletter sign-up"
-msgstr ""
-
-#. translators: %s: email address.
-#, php-format
-msgid "New newsletter sign-up: %s"
-msgstr ""
-
-msgid "Breadcrumb"
-msgstr ""
-
-msgid "Home"
-msgstr ""
-
-msgid "Brand:"
-msgstr ""
-
-#. translators: %d: number of reviews.
-#, php-format
-msgid "%d review"
-msgid_plural "%d reviews"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Be the first to review this product"
-msgstr ""
-
-msgid "Hurry up! Special offer."
-msgstr ""
-
-#. translators: %d: units available.
-#, php-format
-msgid "Available: %d"
-msgstr ""
-
-#. translators: %d: units sold.
-#, php-format
-msgid "Already sold: %d"
-msgstr ""
-
-#. translators: %d: percent sold.
-#, php-format
-msgid "%d%% sold"
-msgstr ""
-
-#. translators: %d: units left.
-#, php-format
-msgid "Only %d left in stock"
-msgid_plural "Only %d left in stock"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "days"
-msgstr ""
-
-msgid "hrs"
-msgstr ""
-
-msgid "min"
-msgstr ""
-
-msgid "sec"
-msgstr ""
-
-msgid "Secure, encrypted checkout"
-msgstr ""
-
-msgid "On backorder"
-msgstr ""
-
-msgid "In stock"
-msgstr ""
-
-msgid "Out of stock"
-msgstr ""
-
-msgid "Availability"
-msgstr ""
-
-msgid "SKU"
-msgstr ""
-
-msgid "Category"
-msgstr ""
-
-msgid "Share"
-msgstr ""
-
-msgid "Link copied"
-msgstr ""
-
-msgid "Copy link"
-msgstr ""
-
-#. translators: %s: rating out of 5.
-#, php-format
-msgid "Rated %s out of 5"
-msgstr ""
-
-msgid "Blog"
-msgstr ""
-
-msgid "New"
-msgstr ""
-
-msgid "Sale"
-msgstr ""
-
-msgid "Sold out"
-msgstr ""
-
-#. translators: %s: product name.
-#, php-format
-msgid "View %s"
-msgstr ""
-
-msgid ""
-"Showing demo products. Add your first WooCommerce product and this content "
-"is replaced automatically."
-msgstr ""
-
-msgid ""
-"Showing demo products. Install and activate WooCommerce to sell real "
-"products."
-msgstr ""
-
-msgid "Admin preview:"
-msgstr ""
-
-msgid "Items in cart:"
-msgstr ""
-
-msgid "Details & payment"
-msgstr ""
-
-msgid "Confirmation"
-msgstr ""
-
-msgid "Checkout progress"
-msgstr ""
-
-msgid "Order with obligation to pay"
-msgstr ""
-
-#. translators: %s: search query.
-#, php-format
-msgid "Search results for \"%s\""
-msgstr ""
-
-msgid "Nothing found. Try a different search."
-msgstr ""
-
-msgid "Continue shopping"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "All categories"
-msgstr ""
-
-msgid "Search products…"
-msgstr ""
-
-msgid "Search…"
-msgstr ""
-
-msgid "Thank you, your message has been sent. We will reply as soon as we can."
-msgstr ""
-
-msgid "Please fill in your name, a valid email and a message."
-msgstr ""
-
-msgid "Too many messages from this connection. Please try again later."
-msgstr ""
-
-msgid "We could not send your message. Please email us directly."
-msgstr ""
-
-msgid "The form expired. Please reload the page and try again."
-msgstr ""
-
-msgid "Send us a message"
-msgstr ""
-
-msgid "Your name"
-msgstr ""
-
-msgid "Order number (optional)"
-msgstr ""
-
-msgid "Message"
-msgstr ""
-
-msgid "We use your details only to answer this message."
-msgstr ""
-
-msgid "Privacy policy"
-msgstr ""
-
-msgid "Send message"
-msgstr ""
-
-msgid "Contact details"
-msgstr ""
-
-msgid "Brands"
-msgstr ""
-
-#. translators: %d: number of products.
-#, php-format
-msgid "%d product"
-msgid_plural "%d products"
-msgstr[0] ""
-msgstr[1] ""
-
-msgid "Deal categories"
-msgstr ""
-
-msgid "Featured"
-msgstr ""
-
-msgid "Latest"
-msgstr ""
-
-msgid "On sale"
-msgstr ""
-
 msgid "Deal of the week"
 msgstr ""
 
-msgid "Hurry up! Offer ends in:"
+msgid ""
+"Show this product in the countdown card on the homepage. It needs a sale "
+"price; the countdown runs to the sale end date."
 msgstr ""
 
-msgid "Product groups"
+msgid "Store details"
 msgstr ""
 
-msgid "Featured collections"
+msgid "Top bar message"
 msgstr ""
 
-msgid "Scroll"
+msgid "Seller: company name"
 msgstr ""
 
-msgid "Email address"
+msgid "Seller: NIP / tax ID and registry number"
 msgstr ""
 
-msgid "Your email address"
+msgid "Facebook URL"
 msgstr ""
 
-msgid "Subscribe"
+msgid "Instagram URL"
 msgstr ""
 
-msgid "Thanks, you are on the list."
+msgid "X (Twitter) URL"
 msgstr ""
 
-msgid "Please enter a valid email address and try again."
+msgid "YouTube URL"
 msgstr ""
 
-msgid "View all"
+msgid "Footer logo (light version)"
 msgstr ""
 
-msgid "Previous products"
+msgid "Used on the dark footer. Upload a version with white lettering."
 msgstr ""
 
-msgid "Next products"
+msgid "Link-sharing image"
 msgstr ""
 
-msgid "Why shop with us"
+msgid ""
+"Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x "
+"630 px. Leave empty to use the built-in image. Product pages use the product "
+"photo."
 msgstr ""
 
-msgid "Show this product in the countdown card on the homepage. It needs a sale price; the countdown runs to the sale end date."
+msgid "Deal countdown end"
 msgstr ""
 
-msgid "Swipe for more offers"
+msgid ""
+"Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end "
+"of the current week."
 msgstr ""
 
-msgid "Extra details"
+msgid "Newsletter form shortcode"
 msgstr ""
 
-msgid "What's in the box"
-msgstr ""
-
-msgid "One item per line, for example \"4 x aluminium LED strips\". Shows as the \"What's in the box\" tab. Leave empty to hide the tab."
-msgstr ""
-
-msgid "Questions and answers"
-msgstr ""
-
-msgid "A question on one line, its answer on the next line(s), then a blank line before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty to hide the tab."
-msgstr ""
-
-msgid "Specification"
-msgstr ""
-
-msgid "FAQ"
-msgstr ""
-
-msgid "Frequently asked questions"
-msgstr ""
-
-msgid "In stock (%d pcs)"
+msgid ""
+"Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). "
+"The newsletter band is shown only when this is set, because a newsletter "
+"needs a consent record and an unsubscribe link."
 msgstr ""
 
 msgid "Product page"
 msgstr ""
 
-msgid "The reassurance lines under the buy button, and the stock note. Only state what you really offer. An empty title hides a line."
+msgid ""
+"The reassurance lines under the buy button, and the stock note. Only state "
+"what you really offer. An empty title hides a line."
 msgstr ""
 
 msgid "Dispatch note"
 msgstr ""
 
-msgid "Added after \"In stock\", for example \"ships within 24 h\". Empty shows nothing."
+msgid ""
+"Added after \"In stock\", for example \"ships within 24 h\". Empty shows "
+"nothing."
 msgstr ""
 
+#, php-format
 msgid "Line %d: title"
 msgstr ""
 
+#, php-format
 msgid "Line %d: small text"
 msgstr ""
 
-msgid "Withdraw from contract here"
+#, php-format
+msgid "[%1$s] Message from %2$s"
 msgstr ""
 
-msgid "Withdrawals"
+msgid "Landing page"
 msgstr ""
 
-msgid "Withdrawal"
+msgid ""
+"Edit the homepage: hero scenes, banners, trust strip, headings and section "
+"order. Products, categories, brands and the deal of the week come from "
+"WooCommerce."
 msgstr ""
 
-msgid "No withdrawals yet."
+#, php-format
+msgid "Hero scene %d"
 msgstr ""
 
-msgid "The whole order"
+msgid "Show this scene"
 msgstr ""
 
-msgid "Goods covered"
+msgid "Small label"
 msgstr ""
 
-msgid "Received"
+msgid "Headline"
 msgstr ""
 
-msgid "Matched to the order (number and email agree)."
+msgid "The last word is shown in red."
 msgstr ""
 
-msgid "Not matched to an order automatically. Check the details."
+msgid "Text"
 msgstr ""
 
-msgid "Withdrawal: order %1$s, %2$s"
+msgid "Button text"
 msgstr ""
 
-msgid "The customer declared withdrawal from the contract using the website function on %s."
+msgid "Leave empty for no button."
 msgstr ""
 
-msgid "We confirm that we received your declaration of withdrawal from the contract on %s."
+msgid "Button link"
 msgstr ""
 
-msgid "We will reply to this address with the next steps for returning the goods and the refund."
+msgid "Product photo"
 msgstr ""
 
-msgid "[%s] Confirmation of your withdrawal from the contract"
+msgid ""
+"Best: a transparent PNG, at least 1000 px wide. Empty uses the built-in "
+"picture below."
 msgstr ""
 
-msgid "[%1$s] Withdrawal from contract: order %2$s"
+msgid "Built-in picture (no photo uploaded)"
 msgstr ""
 
-msgid "Acknowledgement sent to the consumer."
+msgid "Background glow"
 msgstr ""
 
-msgid "WARNING: the acknowledgement email to the consumer could NOT be sent. Contact them now."
+#, php-format
+msgid "Floating tag %d"
 msgstr ""
 
-msgid "Your withdrawal was received on %s. We have sent a confirmation to your email address."
+msgid ""
+"Short facts around the product. Empty hides it. Only state facts that are "
+"true."
 msgstr ""
 
-msgid "Your withdrawal was recorded on %1$s, but we could not send the confirmation email. Please keep this page (for example as a screenshot) and write to %2$s."
+#, php-format
+msgid "Banner %d: show"
 msgstr ""
 
-msgid "Please fill in your name, the order number and a valid email address."
+#, php-format
+msgid "Banner %d: small label"
 msgstr ""
 
-msgid "Too many attempts from this connection. Please try again later or email us."
+#, php-format
+msgid "Banner %d: headline"
 msgstr ""
 
-msgid "You have 14 days from receiving the goods to withdraw from the contract, without giving a reason. Fill in the details below and confirm."
+#, php-format
+msgid "Banner %d: button text"
 msgstr ""
 
-msgid "First and last name"
+#, php-format
+msgid "Banner %d: link"
 msgstr ""
 
-msgid "Email for the confirmation"
+#, php-format
+msgid "Banner %d: product photo"
 msgstr ""
 
-msgid "Which goods? (leave empty for the whole order)"
+msgid "Transparent PNG works best. Empty uses the built-in picture."
 msgstr ""
 
-msgid "After you confirm, we send you an acknowledgement by email with the date and time we received your declaration."
+#, php-format
+msgid "Banner %d: built-in picture (no photo uploaded)"
 msgstr ""
 
-msgid "Confirm withdrawal here"
+#, php-format
+msgid "Banner %d: style"
 msgstr ""
 
-msgid "Store terms and conditions"
+msgid "Light"
 msgstr ""
 
-msgid "Legal pages are waiting:"
+msgid "Dark"
 msgstr ""
 
-msgid "Fill in every [bracketed] detail, have a lawyer review the text, then publish. They appear in the footer once published. Do not take real orders before then."
+msgid ""
+"Four short promises under the hero. Empty title hides an item. Only promise "
+"what you will deliver."
 msgstr ""
 
-msgid "Decrease quantity"
+#, php-format
+msgid "Item %d title"
 msgstr ""
 
-msgid "Increase quantity"
+#, php-format
+msgid "Item %d text"
 msgstr ""
 
-msgid "Previous photo"
+msgid "Sections"
 msgstr ""
 
-msgid "Next photo"
+msgid "The hero is always first. Tick a section to show it, drag to re-order."
 msgstr ""
 
-msgid "Delivery and payment"
+msgid "Homepage sections"
 msgstr ""
 
-msgid "Returns"
+msgid "Headings and texts"
 msgstr ""
 
-msgid "Complaints"
+msgid "Category tiles heading"
 msgstr ""
 
-msgid "Cookie policy"
+msgid "Featured products heading"
+msgstr ""
+
+msgid "Best deals heading"
+msgstr ""
+
+msgid "Bestsellers heading"
+msgstr ""
+
+msgid "Newsletter heading"
+msgstr ""
+
+msgid "Newsletter text"
+msgstr ""
+
+msgid "Footer tagline"
 msgstr ""
 
 msgid "Necessary"
 msgstr ""
 
-msgid "Keep the cart, checkout and your account working, and remember this choice. They cannot be switched off."
+msgid ""
+"Keep the cart, checkout and your account working, and remember this choice. "
+"They cannot be switched off."
 msgstr ""
 
 msgid "Analytics"
 msgstr ""
 
-msgid "Help us understand how the shop is used so we can improve it. Off unless you agree."
+msgid ""
+"Help us understand how the shop is used so we can improve it. Off unless you "
+"agree."
 msgstr ""
 
 msgid "Marketing"
 msgstr ""
 
-msgid "Used to show offers that match your interests, also on other websites. Off unless you agree."
+msgid ""
+"Used to show offers that match your interests, also on other websites. Off "
+"unless you agree."
 msgstr ""
 
+#, php-format
 msgid "Welcome to %s"
 msgstr ""
 
-msgid "We use cookies to make the shop work: the cart, checkout and your account. We may also use analytical and marketing cookies, but only if you agree. You can change your choice at any time with \"Cookie settings\" at the bottom of every page."
+msgid ""
+"We use cookies to make the shop work: the cart, checkout and your account. "
+"We may also use analytical and marketing cookies, but only if you agree. You "
+"can change your choice at any time with \"Cookie settings\" at the bottom of "
+"every page."
 msgstr ""
 
-msgid "Your personal data is controlled by 2ACE sp. z o.o. You will find more about cookies and your rights in our"
+msgid ""
+"Your personal data is controlled by 2ACE sp. z o.o. You will find more about "
+"cookies and your rights in our"
+msgstr ""
+
+msgctxt "link inside the cookie banner sentence"
+msgid "Cookie policy"
 msgstr ""
 
 msgid "Reject all"
@@ -991,6 +956,119 @@ msgstr ""
 msgid "Accept all"
 msgstr ""
 
-msgctxt "link inside the cookie banner sentence"
 msgid "Cookie policy"
 msgstr ""
+
+msgid "Store terms and conditions"
+msgstr ""
+
+msgid "Legal pages are waiting:"
+msgstr ""
+
+msgid ""
+"Fill in every [bracketed] detail, have a lawyer review the text, then "
+"publish. They appear in the footer once published. Do not take real orders "
+"before then."
+msgstr ""
+
+msgid "Delivery and payment"
+msgstr ""
+
+msgid "Returns"
+msgstr ""
+
+msgid "Complaints"
+msgstr ""
+
+#, php-format
+msgid "Rated %s out of 5"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "Sale"
+msgstr ""
+
+msgid "Sold out"
+msgstr ""
+
+#, php-format
+msgid "View %s"
+msgstr ""
+
+msgid ""
+"Showing demo products. Add your first WooCommerce product and this content "
+"is replaced automatically."
+msgstr ""
+
+msgid ""
+"Showing demo products. Install and activate WooCommerce to sell real "
+"products."
+msgstr ""
+
+msgid "Admin preview:"
+msgstr ""
+
+msgid "Brands"
+msgstr ""
+
+msgid "Featured collections"
+msgstr ""
+
+msgid "Scroll"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Your email address"
+msgstr ""
+
+msgid "Subscribe"
+msgstr ""
+
+msgid "Thanks, you are on the list."
+msgstr ""
+
+msgid "Please enter a valid email address and try again."
+msgstr ""
+
+msgid "Featured"
+msgstr ""
+
+msgid "Latest"
+msgstr ""
+
+msgid "On sale"
+msgstr ""
+
+msgid "Hurry up! Offer ends in:"
+msgstr ""
+
+msgid "Swipe for more offers"
+msgstr ""
+
+msgid "Product groups"
+msgstr ""
+
+msgid "Deal categories"
+msgstr ""
+
+msgid "View all"
+msgstr ""
+
+msgid "Previous products"
+msgstr ""
+
+msgid "Next products"
+msgstr ""
+
+msgid "Why shop with us"
+msgstr ""
+
+#, php-format
+msgid "%d product"
+msgid_plural "%d products"
+msgstr[0] ""
+msgstr[1] ""

@@ -13,7 +13,7 @@ if ( ! $brands ) {
 	return;
 }
 ?>
-<section class="brands" aria-label="<?php esc_attr_e( 'Brands', '2acetech' ); ?>">
+<section class="brands <?php echo esc_attr( ace_brand_strip_class() ); ?>" style="<?php echo esc_attr( ace_brand_style_attr() ); ?>" aria-label="<?php esc_attr_e( 'Brands', '2acetech' ); ?>">
 	<div class="container">
 		<ul class="brands__list">
 			<?php foreach ( $brands as $brand ) : ?>

@@ -365,11 +365,10 @@ function ace_brand_list() {
 		$terms = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => true, 'number' => 12 ) );
 		if ( ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
-				$logo_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
-				$out[]   = array(
+				$out[] = array(
 					'label' => $term->name,
 					'url'   => get_term_link( $term ),
-					'logo'  => $logo_id ? wp_get_attachment_image( $logo_id, 'medium', false, array( 'loading' => 'lazy' ) ) : '',
+					'logo'  => ace_brand_logo( $term ),
 				);
 			}
 		}

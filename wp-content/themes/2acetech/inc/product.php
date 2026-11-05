@@ -82,13 +82,13 @@ function ace_single_brand() {
 	if ( ! $terms || is_wp_error( $terms ) ) {
 		return;
 	}
-	$term    = $terms[0];
-	$logo_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
+	$term = $terms[0];
+	$logo = ace_brand_logo( $term );
 	printf(
 		'<p class="single-brand"><span>%1$s</span> <a href="%2$s">%3$s</a></p>',
 		esc_html__( 'Brand:', '2acetech' ),
 		esc_url( get_term_link( $term ) ),
-		$logo_id ? wp_get_attachment_image( $logo_id, 'medium', false, array( 'alt' => $term->name ) ) : esc_html( $term->name ) // phpcs:ignore WordPress.Security.EscapeOutput
+		$logo ? $logo : esc_html( $term->name ) // phpcs:ignore WordPress.Security.EscapeOutput
 	);
 }
 

@@ -27,14 +27,9 @@
 	margin: 0;
 	top: auto !important; /* Never offset the photos on phones. */
 }
-/* Photos stay in view beside the long summary, on wide screens only. WooCommerce
-   sets position: relative on the gallery with higher specificity, hence !important. */
-@media (min-width: 861px) {
-	.woocommerce div.product div.images {
-		position: sticky !important;
-		top: calc(var(--stick) + 20px) !important;
-	}
-}
+/* The photos scroll with the page (no pinning), so nothing ever runs over them.
+   WooCommerce sets position: relative on the gallery; keep it that way. */
+.woocommerce div.product div.images { position: relative !important; }
 .woocommerce div.product div.images .woocommerce-product-gallery__wrapper { margin: 0; }
 .woocommerce div.product .woocommerce-product-gallery__image {
 	background: #fff;
@@ -137,7 +132,8 @@
 .single-brand { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 0.9rem; color: var(--muted); }
 .single-brand a { display: inline-flex; font-weight: 800; color: var(--ink); }
 .single-brand a:hover { color: var(--accent); }
-.single-brand img { height: 28px; width: auto; }
+.single-brand .brand-logo { --brand-fill: 1; width: 120px; height: 36px; }
+.single-brand .brand-logo img { mix-blend-mode: multiply; object-fit: contain; width: calc(100% * var(--bw)); height: calc(100% * var(--s)); }
 
 .single-rating { display: flex; align-items: center; gap: 12px; margin: 0 0 14px; font-size: 0.9rem; }
 .single-rating .stars { font-size: 1.05rem; }

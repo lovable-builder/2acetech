@@ -73,6 +73,15 @@ site. They are not part of the theme.
   cookies yet; anything added later must wait for consent
   (`<script type="text/plain" data-ace-consent="analytics">`,
   `window.aceConsent.has('analytics')`, `ace_consent_allowed('analytics')`).
+- **Brand logos** (`inc/brands.php`): every logo looks the same whatever file is
+  uploaded. Upload it as the brand's thumbnail (Products > Brands). The theme
+  trims its empty margin once (transparent or near-white; the Media Library
+  original is untouched; PNG, JPEG, WebP; SVG is left as is), then shows it in an
+  identical slot, fitted not stretched, with a white background blended away.
+  Customize > **Brand logos**: grey (colour on hover) or full colour, slot height,
+  logo size inside the slot. A single logo that still looks too big or small has
+  **Logo size (%)** on its brand edit screen. Needs the PHP GD library for the
+  trim (Hostinger has it); without it the original is used.
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
 - **Colours and type**: CSS variables at the top of `assets/css/main.css`.
@@ -100,7 +109,8 @@ double up.
 - **Swatches**: variation dropdowns become buttons. An attribute named
   Color/Colour/Kolor whose values are CSS colour names (Black, White, Blue)
   shows round colour dots; any other value shows a text button.
-- **Brand**: uses WooCommerce Brands (Products > Brands), logo or name.
+- **Brand**: uses WooCommerce Brands (Products > Brands), logo or name. The
+  photos scroll with the page (they are not pinned).
 - Quantity stepper (also on the cart page), share links, copy-link, and a
   sticky "Add to cart" bar on phones.
 

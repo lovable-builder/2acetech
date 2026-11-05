@@ -741,22 +741,47 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* Brands ----------------------------------------------------------------- */
 
 .brands { border-block: 1px solid var(--line); }
-.brands__list { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px 40px; padding-block: 34px; }
+.brands__list { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 24px; padding-block: 28px; }
+/* Every brand gets the same slot. --brand-h is set from Customize > Brand logos. */
+.brands__list li { flex: none; width: min(calc(var(--brand-h, 64px) * 2.6), calc(50% - 12px)); }
 .brand {
-	display: inline-flex;
+	display: flex;
 	align-items: center;
-	font-size: 1.35rem;
+	justify-content: center;
+	width: 100%;
+	height: var(--brand-h, 64px);
+	font-size: 1.2rem;
 	font-weight: 800;
 	font-style: italic;
 	letter-spacing: -0.03em;
+	text-align: center;
 	text-transform: uppercase;
 	color: #b4b4bd;
 	transition: color 0.3s;
 }
-.brand img { max-height: 36px; width: auto; filter: grayscale(1); opacity: 0.55; transition: opacity 0.3s, filter 0.3s; }
 a.brand:hover { color: var(--ink); }
-a.brand:hover img { filter: none; opacity: 1; }
-@media (max-width: 760px) { .brands__list { justify-content: center; } .brand { font-size: 1.1rem; } }
+/* The logo fills a fixed share of the slot, whatever shape the file is. A white
+   background disappears (multiply). --logo-scale is the per-brand "Logo size". */
+.brand-logo {
+	--s: min(1, calc(var(--brand-fill, 0.7) * var(--logo-scale, 1)));
+	--bw: min(1, calc(0.92 * var(--logo-scale, 1))); /* wide logos may use nearly the full slot width */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+.brand-logo img {
+	width: calc(100% * var(--bw));
+	height: calc(100% * var(--s));
+	max-width: none;
+	object-fit: contain;
+	mix-blend-mode: multiply;
+	transition: opacity 0.3s, filter 0.3s;
+}
+.brands--grey .brand-logo img { filter: grayscale(1); opacity: 0.6; }
+.brands--grey a.brand:hover .brand-logo img { filter: none; opacity: 1; }
+@media (max-width: 760px) { .brand { font-size: 1rem; } .brands__list { gap: 10px 24px; } }
 
 /* Newsletter ------------------------------------------------------------- */
 
