@@ -71,7 +71,12 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 	</div>
 
 	<div class="header__nav" id="site-nav" data-nav>
-		<div class="container nav__row">
+		<?php
+		// Up to 6 main categories sit directly in the bar on desktop; more than that stay in the "Shop by category" menu.
+		$ace_tree   = ace_category_tree( 12 );
+		$ace_inline = $ace_tree && count( $ace_tree ) <= 6;
+		?>
+		<div class="container nav__row<?php echo $ace_inline ? ' nav__row--cats' : ''; ?>">
 			<div class="departments" data-departments>
 				<button class="departments__btn" type="button" aria-expanded="false" aria-controls="departments-panel" data-departments-toggle>
 					<?php echo ace_icon( 'menu', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
@@ -109,6 +114,24 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 					?>
 				</nav>
 			</div>
+
+			<?php if ( $ace_inline ) : ?>
+				<ul class="catbar" aria-label="<?php esc_attr_e( 'Product categories', '2acetech' ); ?>">
+					<?php foreach ( $ace_tree as $cat ) : ?>
+						<li>
+							<a href="<?php echo esc_url( $cat['url'] ); ?>"><?php echo esc_html( $cat['label'] ); ?><?php echo $cat['children'] ? ace_icon( 'chevron', 14 ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+							<?php if ( $cat['children'] ) : ?>
+								<ul class="catbar__sub">
+									<li class="menu__all"><a href="<?php echo esc_url( $cat['url'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: category name. */ __( 'All in %s', '2acetech' ), $cat['label'] ) ); ?></a></li>
+									<?php foreach ( $cat['children'] as $kid ) : ?>
+										<li><a href="<?php echo esc_url( $kid['url'] ); ?>"><span><?php echo esc_html( $kid['label'] ); ?></span><small><?php echo (int) $kid['count']; ?></small></a></li>
+									<?php endforeach; ?>
+								</ul>
+							<?php endif; ?>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
 
 			<nav class="primary-nav" aria-label="<?php esc_attr_e( 'Primary', '2acetech' ); ?>">
 				<?php

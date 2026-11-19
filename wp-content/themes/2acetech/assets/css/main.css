@@ -976,3 +976,69 @@ a.brand:hover { color: var(--ink); }
 .cat-chip:hover { border-color: var(--ink); color: var(--ink); background: #fff; }
 .cat-chip.is-current { background: var(--ink); border-color: var(--ink); color: #fff; }
 .cat-chip.is-current small { color: rgba(255, 255, 255, 0.7); }
+
+/* Main categories directly in the header bar on desktop ---------------------- */
+.catbar { display: none; }
+@media (min-width: 961px) {
+	.nav__row--cats .departments { display: none; }
+	.nav__row--cats .catbar {
+		display: flex;
+		align-items: center;
+		gap: 2px;
+		margin: 0;
+		padding: 0 22px 0 0;
+		border-right: 1px solid var(--line);
+		list-style: none;
+	}
+}
+.catbar > li { position: relative; }
+.catbar > li > a {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	height: 54px;
+	padding: 0 14px;
+	font-weight: 700;
+	font-size: 0.95rem;
+	white-space: nowrap;
+	transition: color 0.2s;
+}
+.catbar > li > a .icon { color: var(--muted); transition: transform 0.25s var(--ease); }
+.catbar > li:hover > a,
+.catbar > li:focus-within > a { color: var(--accent); }
+.catbar > li:hover > a .icon,
+.catbar > li:focus-within > a .icon { transform: rotate(180deg); color: var(--accent); }
+.catbar > li > a::after {
+	content: "";
+	position: absolute;
+	left: 14px; right: 14px; bottom: 8px;
+	height: 2px;
+	background: var(--accent);
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.3s var(--ease);
+}
+.catbar > li:hover > a::after,
+.catbar > li:focus-within > a::after { transform: scaleX(1); }
+.catbar__sub {
+	display: none;
+	position: absolute;
+	top: 100%; left: 0;
+	z-index: 71;
+	min-width: 270px;
+	margin: 0;
+	padding: 8px 0;
+	list-style: none;
+	background: #fff;
+	border: 1px solid var(--line);
+	border-top: 0;
+	border-radius: 0 0 var(--radius) var(--radius);
+	box-shadow: var(--shadow-lg);
+}
+.catbar > li:hover > .catbar__sub,
+.catbar > li:focus-within > .catbar__sub { display: block; }
+.catbar__sub a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 22px; font-weight: 600; font-size: 0.93rem; }
+.catbar__sub a:hover { background: var(--accent-soft); color: var(--accent); }
+.catbar__sub small { color: var(--muted); font-weight: 600; }
+.catbar__sub .menu__all a { color: var(--accent); }

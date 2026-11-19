@@ -82,8 +82,9 @@ site. They are not part of the theme.
   logo size inside the slot. A single logo that still looks too big or small has
   **Logo size (%)** on its brand edit screen. Needs the PHP GD library for the
   trim (Hostinger has it); without it the original is used.
-- **Categories** (`inc/categories.php`): the "Shop by category" menu shows subcategories as a flyout on desktop
-  (inline on phones). Parents count the products of their children, so a parent whose products all sit in
+- **Categories** (`inc/categories.php`): with up to 6 main categories they sit directly in the desktop header bar
+  (hover for subcategories); with more, the "Shop by category" menu is used. On phones it is always the menu, with
+  subcategories inline. Parents count the products of their children, so a parent whose products all sit in
   subcategories still shows. Shop and category pages get subcategory chips. Homepage tiles are centred when
   there are few. Categories are managed under Products > Categories (the Product Cleaner plugin can also
   create and assign them automatically).
