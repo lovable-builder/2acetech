@@ -55,6 +55,7 @@ try {
 			'intro' => 'Elastyczna taśma neonowa LED w kolorach RGB. Można ją wyginać w dowolne kształty. Stopień ochrony IP65 pozwala używać jej na zewnątrz.',
 			'features' => array( 'Elastyczna taśma', 'Można ją przyciąć', 'Stopień ochrony IP65' ),
 			'spec_rows' => array( array( 'Kolor światła', 'RGB' ), array( 'Stopień ochrony', 'IP65' ), array( 'Wtyczka', 'EU' ) ),
+			'category' => array( 'Oświetlenie', 'Taśmy LED' ),
 			'tags' => array( 'taśma neonowa LED', 'neon LED RGB', 'taśma LED IP65', 'oświetlenie zewnętrzne' ),
 			'attrs' => array(
 				'Emitting Color' => array( 'name' => 'Długość', 'variation' => true, 'values' => array( '1rollx5m' => '1 rolka × 5 m', '1rollx10m' => '1 rolka × 10 m' ) ),

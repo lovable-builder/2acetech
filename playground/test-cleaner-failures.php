@@ -26,6 +26,7 @@ try {
 			'intro' => 'Lampka biurkowa LED do pracy i nauki. Ma trzy tryby światła. Jasność można regulować.',
 			'features' => array( 'Regulacja jasności', 'Trzy tryby światła', 'Zasilanie USB' ),
 			'spec_rows' => array( array( 'Źródło światła', 'LED' ), array( 'Tryby', '3' ), array( 'Zasilanie', 'USB' ) ),
+			'category' => array( 'Oświetlenie', 'Lampki biurkowe' ),
 			'tags' => array( 'lampka biurkowa', 'lampka LED', 'oświetlenie biurka' ),
 			'attrs' => array(), 'notes' => array(),
 		);

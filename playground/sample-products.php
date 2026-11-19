@@ -161,3 +161,23 @@ if ( taxonomy_exists( 'product_brand' ) && ! get_option( 'ace_preview_brands' ) 
 	}
 	update_option( 'ace_preview_brands', 1 );
 }
+
+
+/* Subcategories so the category menu, chips and parent counts can be previewed. */
+if ( ! get_option( 'ace_preview_subcats' ) ) {
+	$audio = get_term_by( 'slug', 'audio', 'product_cat' );
+	if ( $audio ) {
+		$kids = array( 'headphones' => 'Headphones', 'speakers' => 'Speakers' );
+		foreach ( $kids as $slug => $name ) {
+			$t = wp_insert_term( $name, 'product_cat', array( 'slug' => $slug, 'parent' => $audio->term_id ) );
+			$kids[ $slug ] = is_wp_error( $t ) ? 0 : $t['term_id'];
+		}
+		foreach ( array( 'Sample ANC Headphones' => 'headphones', 'Sample Speaker 360' => 'speakers' ) as $title => $slug ) {
+			$found = get_posts( array( 'post_type' => 'product', 'title' => $title, 'posts_per_page' => 1, 'fields' => 'ids' ) );
+			if ( $found && $kids[ $slug ] ) {
+				wp_set_object_terms( $found[0], array( (int) $kids[ $slug ] ), 'product_cat' ); // Only in the child: the parent must still show.
+			}
+		}
+	}
+	update_option( 'ace_preview_subcats', 1 );
+}

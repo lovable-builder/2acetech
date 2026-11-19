@@ -84,8 +84,24 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 						wp_nav_menu( array( 'theme_location' => 'departments', 'container' => false, 'menu_class' => 'menu', 'depth' => 1 ) );
 					} else {
 						echo '<ul class="menu">';
-						foreach ( ace_category_list( 12 ) as $cat ) {
-							printf( '<li><a href="%s">%s%s</a></li>', esc_url( $cat['url'] ), esc_html( $cat['label'] ), ace_icon( 'right', 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+						$tree = ace_category_tree( 12 );
+						if ( ! $tree ) {
+							foreach ( ace_category_list( 12 ) as $cat ) {
+								printf( '<li><a href="%s">%s%s</a></li>', esc_url( $cat['url'] ), esc_html( $cat['label'] ), ace_icon( 'right', 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							}
+						}
+						foreach ( $tree as $cat ) {
+							printf( '<li class="%s"><a href="%s"><span>%s</span>%s</a>', $cat['children'] ? 'has-sub' : '', esc_url( $cat['url'] ), esc_html( $cat['label'] ), ace_icon( 'right', 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
+							if ( $cat['children'] ) {
+								echo '<ul class="departments__sub">';
+								/* translators: %s: category name. */
+								printf( '<li class="menu__all"><a href="%s">%s</a></li>', esc_url( $cat['url'] ), esc_html( sprintf( __( 'All in %s', '2acetech' ), $cat['label'] ) ) );
+								foreach ( $cat['children'] as $kid ) {
+									printf( '<li><a href="%s"><span>%s</span><small>%d</small></a></li>', esc_url( $kid['url'] ), esc_html( $kid['label'] ), (int) $kid['count'] );
+								}
+								echo '</ul>';
+							}
+							echo '</li>';
 						}
 						printf( '<li class="menu__all"><a href="%s">%s%s</a></li>', esc_url( ace_shop_url() ), esc_html__( 'All products', '2acetech' ), ace_icon( 'arrow', 16 ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 						echo '</ul>';

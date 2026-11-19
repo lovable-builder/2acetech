@@ -316,6 +316,7 @@ function ace_category_list( $limit = 8 ) {
 				'taxonomy'   => 'product_cat',
 				'parent'     => 0,
 				'hide_empty' => true,
+				'pad_counts' => true,
 				'exclude'    => array( (int) get_option( 'default_product_cat' ) ),
 				'number'     => $limit,
 				'orderby'    => 'menu_order',

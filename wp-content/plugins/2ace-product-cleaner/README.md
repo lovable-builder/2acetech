@@ -8,6 +8,10 @@ removed (only Poland variations stay on sale, the others are disabled, not delet
 default category, prices rounded **up** to .99. Products named `RMF-*` / `lig*` and anything already cleaned
 are skipped. Status (draft/published) is never changed.
 
+- **Categories**: for every import the AI picks the category from what the product *is*: an existing one, or a
+  new Polish one (names in plural, max 2 levels, at most 12 main categories; past that, "Inne produkty").
+  Duplicates are avoided (case-insensitive match). "Re-check categories of all products" on the settings page fixes
+  products that already sit in the wrong place. Own products (RMF-*/lig*) are skipped.
 - **Automatic**: every 10 minutes (WP-Cron) cleans up to 2 imports that have not changed for 5 minutes.
 - **Manual**: "Clean them now" on the settings page.
 - **Undo**: Products list > hover > "Undo Polish cleanup" (restores title, text, SKU, attributes incl. shared

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-05 10:51+0100\n"
+"POT-Creation-Date: 2026-11-19 23:07+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,6 +177,10 @@ msgid "Shop by category"
 msgstr ""
 
 msgid "Product categories"
+msgstr ""
+
+#, php-format
+msgid "All in %s"
 msgstr ""
 
 msgid "All products"
@@ -957,6 +961,9 @@ msgid "Accept all"
 msgstr ""
 
 msgid "Cookie policy"
+msgstr ""
+
+msgid "Categories"
 msgstr ""
 
 msgid "Store terms and conditions"

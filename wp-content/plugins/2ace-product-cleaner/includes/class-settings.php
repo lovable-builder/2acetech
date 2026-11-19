@@ -19,6 +19,7 @@ class ACE_PC_Settings {
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
 		add_action( 'wp_ajax_ace_pc_clean', array( __CLASS__, 'ajax_clean' ) );
 		add_action( 'wp_ajax_ace_pc_test', array( __CLASS__, 'ajax_test' ) );
+		add_action( 'wp_ajax_ace_pc_recat', array( __CLASS__, 'ajax_recat' ) );
 		add_action( 'admin_post_ace_pc_undo', array( __CLASS__, 'handle_undo' ) );
 		add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
 		add_filter( 'cron_schedules', array( __CLASS__, 'schedules' ) );
@@ -166,6 +167,11 @@ class ACE_PC_Settings {
 				<p><?php esc_html_e( 'Nothing waiting. New imports are picked up automatically.', '2ace-product-cleaner' ); ?></p>
 			<?php endif; ?>
 
+			<h2><?php esc_html_e( 'Categories', '2ace-product-cleaner' ); ?></h2>
+			<p><?php esc_html_e( 'New imports get their category from the AI automatically: it uses an existing category or creates a new Polish one (at most 12 main categories, 2 levels). Use the button below to re-check the category of every product that is already in the shop (your own RMF-* and lig* products are skipped).', '2ace-product-cleaner' ); ?></p>
+			<p><button class="button" id="acepc-recat" <?php disabled( '' === $o['api_key'] ); ?>><?php esc_html_e( 'Re-check categories of all products', '2ace-product-cleaner' ); ?></button> <span id="acepc-recat-out"></span></p>
+			<ul id="acepc-recat-list" style="list-style:disc;margin-left:20px"></ul>
+
 			<form method="post" action="options.php">
 				<?php settings_fields( 'ace_pc' ); ?>
 				<table class="form-table" role="presentation">
@@ -183,9 +189,9 @@ class ACE_PC_Settings {
 					<tr><th><label for="md"><?php esc_html_e( 'Model', '2ace-product-cleaner' ); ?></label></th>
 						<td><input type="text" id="md" name="<?php echo esc_attr( self::OPTION ); ?>[model]" value="<?php echo esc_attr( $o['model'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'automatic', '2ace-product-cleaner' ); ?>">
 						<p class="description"><?php esc_html_e( 'Leave empty: the plugin picks a suitable model by itself.', '2ace-product-cleaner' ); ?></p></td></tr>
-					<tr><th><label for="ct"><?php esc_html_e( 'Default category', '2ace-product-cleaner' ); ?></label></th>
+					<tr><th><label for="ct"><?php esc_html_e( 'Fallback category', '2ace-product-cleaner' ); ?></label></th>
 						<td><input type="text" id="ct" name="<?php echo esc_attr( self::OPTION ); ?>[category]" value="<?php echo esc_attr( $o['category'] ); ?>" class="regular-text">
-						<p class="description"><?php esc_html_e( 'Used when an import has no category. Must exist.', '2ace-product-cleaner' ); ?></p></td></tr>
+						<p class="description"><?php esc_html_e( 'Only a fallback; the AI normally chooses the category.', '2ace-product-cleaner' ); ?></p></td></tr>
 					<tr><th><label for="sp"><?php esc_html_e( 'SKU prefix', '2ace-product-cleaner' ); ?></label></th>
 						<td><input type="text" id="sp" name="<?php echo esc_attr( self::OPTION ); ?>[sku_prefix]" value="<?php echo esc_attr( $o['sku_prefix'] ); ?>" class="small-text"></td></tr>
 				</table>
@@ -206,6 +212,22 @@ class ACE_PC_Settings {
 				var fd=new FormData(); fd.append('action','ace_pc_test'); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
 				try{ var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
 					out.textContent = r.success ? ' ✔ '+r.data : ' ✖ '+r.data; }catch(e){ out.textContent=' ✖ '+e; }
+			});
+			var rb=document.getElementById('acepc-recat');
+			if(rb) rb.addEventListener('click',async function(){
+				rb.disabled=true; var out=document.getElementById('acepc-recat-out'), list=document.getElementById('acepc-recat-list'); var offset=0, n=0;
+				try{
+					while(true){
+						out.textContent=' working… '+offset;
+						var fd=new FormData(); fd.append('action','ace_pc_recat'); fd.append('offset',offset); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
+						var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
+						if(!r.success){ out.textContent=' ✖ '+r.data; break; }
+						Object.keys(r.data.changed).forEach(function(id){ n++; var li=document.createElement('li'); li.textContent='#'+id+': '+r.data.changed[id]; list.appendChild(li); });
+						offset=r.data.next;
+						if(r.data.done){ out.textContent=' ✔ done, '+n+' product(s) moved'; break; }
+					}
+				}catch(e){ out.textContent=' ✖ '+e; }
+				rb.disabled=false;
 			});
 			var btn=document.getElementById('acepc-run'); if(!btn) return;
 			var ids=<?php echo wp_json_encode( array_map( 'intval', $waiting ) ); ?>;
@@ -254,6 +276,29 @@ class ACE_PC_Settings {
 		} catch ( Exception $e ) {
 			wp_send_json_error( $e->getMessage() );
 		}
+	}
+
+	public static function ajax_recat() {
+		check_ajax_referer( 'ace_pc' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'Not allowed' );
+		}
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 280 ); // phpcs:ignore
+		}
+		$all = get_posts( array( 'post_type' => 'product', 'post_status' => array( 'publish', 'draft', 'pending', 'private' ), 'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'ASC', 'fields' => 'ids', 'no_found_rows' => true ) );
+		$off = absint( $_POST['offset'] ?? 0 );
+		$batch = array_slice( $all, $off, 15 );
+		try {
+			$changed = ACE_PC_Cleaner::recategorize( $batch );
+		} catch ( Exception $e ) {
+			self::log( 'Category re-check failed: ' . $e->getMessage() );
+			wp_send_json_error( $e->getMessage() );
+		}
+		foreach ( $changed as $id => $txt ) {
+			self::log( sprintf( '#%d category: %s', $id, $txt ) );
+		}
+		wp_send_json_success( array( 'changed' => (object) $changed, 'next' => $off + 15, 'done' => $off + 15 >= count( $all ) ) );
 	}
 
 	/* ---- product list: Undo ---- */

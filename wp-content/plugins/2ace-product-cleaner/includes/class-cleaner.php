@@ -157,6 +157,7 @@ ZASADY (bezwzględne):
 - Każdą wartość każdego zachowanego atrybutu przetłumacz na polski (np. "Warm White" -> "Ciepła biel", "EU Plug" -> "EU"). Podaj wszystkie wartości z listy, bez wyjątku.
 - Atrybut zawierający tylko nieprecyzyjny zakres z filtra (np. Wattage "0-5W") albo dane sprzeczne: ustaw {"drop": true} (atrybut zostanie usunięty ze sklepu).
 - Atrybut z jedną wartością u wszystkich wariantów ustaw "variation": false, chyba że jest jedynym atrybutem produktu - wtedy true.
+- KATEGORIA: wybierz kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Lista istniejących kategorii jest w "existing_categories". Użyj istniejącej, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez nazw marek; maksymalnie 2 poziomy ["Kategoria główna", "Podkategoria"]. Wybierz szeroką kategorię główną (np. "Zabawki i gry", "Oświetlenie", "Sport i rekreacja") i, jeśli sensowne, węższą podkategorię. Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza istniejąca.
 
 FORMAT ODPOWIEDZI:
 {
@@ -166,6 +167,7 @@ FORMAT ODPOWIEDZI:
  "features": ["3-8 najważniejszych cech"],
  "spec_rows": [["Nazwa parametru","Wartość"]],
  "tags": ["3-5 polskich tagów"],
+ "category": ["Kategoria główna", "Podkategoria (opcjonalnie)"],
  "attrs": { "<oryginalna nazwa atrybutu>": {"name": "polska nazwa", "variation": true, "values": {"<oryginalna wartość>": "<polska wartość>"}} },
  "notes": ["krótko: sprzeczności, pominięte dane, zmiany nazw wbrew liście"]
 }
@@ -266,6 +268,11 @@ TXT;
 			return $fake;
 		}
 
+		return self::complete( $prompt );
+	}
+
+	/** Send a prompt to the provider and return the decoded JSON answer. */
+	private static function complete( $prompt ) {
 		$o = ACE_PC_Settings::get();
 		if ( '' === $o['api_key'] ) {
 			throw new Exception( __( 'No API key set (WooCommerce > Product Cleaner).', '2ace-product-cleaner' ) );
@@ -365,6 +372,15 @@ TXT;
 				}
 			}
 		}
+		$cat = isset( $c['category'] ) && is_array( $c['category'] ) ? array_values( array_filter( array_map( 'trim', array_map( 'strval', $c['category'] ) ) ) ) : array();
+		if ( ! $cat || count( $cat ) > 2 ) {
+			$e[] = 'category must be 1 or 2 names';
+		}
+		foreach ( $cat as $name ) {
+			if ( mb_strlen( $name ) < 3 || mb_strlen( $name ) > 40 || preg_match( '/^(uncategori[sz]ed|bez kategorii|inne|other)$/iu', $name ) ) {
+				$e[] = "bad category name: $name";
+			}
+		}
 		$plans = isset( $c['attrs'] ) && is_array( $c['attrs'] ) ? $c['attrs'] : array();
 		$names = array();
 		foreach ( $attrs as $label => $a ) {
@@ -429,6 +445,140 @@ TXT;
 			$ul( $c['short_bullets'] ),
 			'<p>' . esc_html( $c['intro'] ) . '</p><h3>Najważniejsze cechy</h3>' . $ul( $c['features'] ) . '<h3>Specyfikacja</h3><table>' . $rows . '</table>',
 		);
+	}
+
+	/* ------------------------------------------------------------------
+	 * Categories
+	 * ---------------------------------------------------------------- */
+
+	const MAX_TOP = 12;
+
+	/** The shop's category tree as text lines ("Parent", "Parent > Child") for the AI. */
+	public static function tree_lines() {
+		$terms = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'exclude' => array( (int) get_option( 'default_product_cat' ) ) ) );
+		if ( is_wp_error( $terms ) ) {
+			return array();
+		}
+		$by_parent = array();
+		foreach ( $terms as $t ) {
+			$by_parent[ $t->parent ][] = $t;
+		}
+		$lines = array();
+		foreach ( isset( $by_parent[0] ) ? $by_parent[0] : array() as $top ) {
+			$lines[] = $top->name;
+			foreach ( isset( $by_parent[ $top->term_id ] ) ? $by_parent[ $top->term_id ] : array() as $kid ) {
+				$lines[] = $top->name . ' > ' . $kid->name;
+			}
+		}
+		return $lines;
+	}
+
+	/** Find a category by name (case-insensitive) under a parent. */
+	private static function find_term( $name, $parent ) {
+		$terms = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'parent' => (int) $parent ) );
+		if ( is_wp_error( $terms ) ) {
+			return null;
+		}
+		$want = mb_strtolower( trim( $name ) );
+		foreach ( $terms as $t ) {
+			if ( mb_strtolower( $t->name ) === $want || $t->slug === sanitize_title( $name ) ) {
+				return $t;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Turn ["Parent", "Child"] into category ids, creating what is missing.
+	 * Never more than MAX_TOP top-level categories: beyond that, "Inne produkty" is used.
+	 *
+	 * @param bool  $over_cap Only for the catch-all: ignore the cap on top-level categories.
+	 * @return int[] The leaf category id (in an array).
+	 */
+	public static function resolve_category( $path, $over_cap = false ) {
+		$path   = array_slice( array_values( array_filter( array_map( 'trim', (array) $path ) ) ), 0, 2 );
+		$parent = 0;
+		$leaf   = 0;
+		foreach ( $path as $i => $name ) {
+			$name = mb_strtoupper( mb_substr( $name, 0, 1 ) ) . mb_substr( $name, 1 ); // First letter up.
+			$term = self::find_term( $name, $parent );
+			if ( ! $term ) {
+				if ( 0 === $parent && ! $over_cap ) {
+					$tops = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'parent' => 0, 'fields' => 'ids', 'exclude' => array( (int) get_option( 'default_product_cat' ) ) ) );
+					if ( is_wp_error( $tops ) || count( $tops ) >= self::MAX_TOP ) {
+						return self::resolve_category( array( 'Inne produkty' ), true ); // Cap reached: the catch-all may exist beyond the cap.
+					}
+				}
+				$made = wp_insert_term( $name, 'product_cat', array( 'parent' => $parent ) );
+				if ( is_wp_error( $made ) ) {
+					if ( 'term_exists' === $made->get_error_code() && $made->get_error_data() ) {
+						$term = get_term( (int) $made->get_error_data(), 'product_cat' );
+					} else {
+						throw new Exception( 'Could not create category ' . $name . ': ' . $made->get_error_message() );
+					}
+				} else {
+					$term = get_term( $made['term_id'], 'product_cat' );
+					ACE_PC_Settings::log( sprintf( 'New category created: %s%s', $parent ? get_term( $parent )->name . ' > ' : '', $name ) );
+				}
+			}
+			$parent = (int) $term->term_id;
+			$leaf   = $parent;
+		}
+		if ( ! $leaf ) {
+			throw new Exception( 'No category.' );
+		}
+		return array( $leaf );
+	}
+
+	/**
+	 * Re-check the category of existing products, 15 per AI call.
+	 *
+	 * @param int[] $ids Product ids.
+	 * @return array id => "Old > New" for the ones that changed.
+	 */
+	public static function recategorize( $ids ) {
+		$items = array();
+		foreach ( $ids as $id ) {
+			$p = wc_get_product( $id );
+			if ( ! $p || self::is_protected( $p ) ) {
+				continue;
+			}
+			$items[] = array(
+				'id'          => (int) $id,
+				'title'       => $p->get_name(),
+				'description' => mb_substr( self::strip_html( $p->get_short_description() ? $p->get_short_description() : $p->get_description(), 600 ), 0, 600 ),
+				'current'     => wp_get_object_terms( $id, 'product_cat', array( 'fields' => 'names' ) ),
+			);
+		}
+		if ( ! $items ) {
+			return array();
+		}
+		$tree   = self::tree_lines();
+		$prompt = "Jesteś redaktorem sklepu internetowego. Dla KAŻDEGO produktu wybierz właściwą kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Zwróć WYŁĄCZNIE JSON w formacie {\"categories\": {\"<id>\": [\"Kategoria główna\", \"Podkategoria (opcjonalnie)\"]}}.\n"
+			. "ZASADY: użyj istniejącej kategorii z listy, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez marek, maksymalnie 2 poziomy. Wybieraj szerokie kategorie główne (np. \"Zabawki i gry\", \"Oświetlenie\", \"Sport i rekreacja\") i, jeśli sensowne, podkategorię. Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza.\n"
+			. "ISTNIEJĄCE KATEGORIE:\n" . implode( "\n", $tree ) . "\n\nPRODUKTY:\n" . wp_json_encode( $items, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+
+		$fake = apply_filters( 'ace_pc_recat_json', null, $items );
+		$json = is_array( $fake ) ? $fake : self::complete( $prompt );
+		$map  = isset( $json['categories'] ) && is_array( $json['categories'] ) ? $json['categories'] : array();
+
+		$changed = array();
+		foreach ( $items as $it ) {
+			$path = isset( $map[ $it['id'] ] ) ? (array) $map[ $it['id'] ] : null;
+			if ( ! $path ) {
+				continue;
+			}
+			$old = $it['current'];
+			$ids_new = self::resolve_category( $path );
+			wp_set_object_terms( $it['id'], $ids_new, 'product_cat' );
+			$new = wp_get_object_terms( $it['id'], 'product_cat', array( 'fields' => 'names' ) );
+			if ( $old !== $new ) {
+				$changed[ $it['id'] ] = implode( ', ', $old ) . ' → ' . implode( ', ', $new );
+				// Keep the way back.
+				update_post_meta( $it['id'], '_aliclean_prev_cats', $old );
+			}
+		}
+		return $changed;
 	}
 
 	/* ------------------------------------------------------------------
@@ -555,7 +705,7 @@ TXT;
 		}
 
 		$source_text = self::strip_html( $product->get_description() ? $product->get_description() : $product->get_short_description() );
-		$src         = array( 'title' => $product->get_name(), 'description' => $source_text, 'attributes' => array() );
+		$src         = array( 'title' => $product->get_name(), 'description' => $source_text, 'attributes' => array(), 'existing_categories' => self::tree_lines() );
 		foreach ( $attrs as $label => $a ) {
 			$src['attributes'][] = array( 'name' => $label, 'options' => $a['options'] );
 		}
@@ -680,14 +830,7 @@ TXT;
 				$product->set_sale_price( self::up99( $s ) );
 			}
 		}
-		$cat = get_term_by( 'name', $opt['category'], 'product_cat' );
-		if ( $cat ) {
-			$cur = $product->get_category_ids();
-			$unc = get_term_by( 'slug', 'uncategorized', 'product_cat' );
-			if ( ! $cur || ( $unc && array( (int) $unc->term_id ) === array_map( 'intval', $cur ) ) ) {
-				$product->set_category_ids( array( (int) $cat->term_id ) );
-			}
-		}
+		$product->set_category_ids( self::resolve_category( $c['category'] ) );
 		$product->save();
 		wp_set_object_terms( $id, array_values( array_unique( $c['tags'] ) ), 'product_tag' );
 
