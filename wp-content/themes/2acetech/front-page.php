@@ -17,8 +17,11 @@ get_header();
 	<?php
 	ace_demo_notice();
 
-	// The scroll hero is off by default for now: Customize > Landing page > Scroll hero.
-	if ( get_theme_mod( 'ace_hero_show', false ) ) {
+	// The top of the page: an occasion banner (Customize > Landing page > Banner 1-3), else the scroll
+	// hero if it has been switched on again, else nothing.
+	if ( ace_active_banner() ) {
+		get_template_part( 'template-parts/banner' );
+	} elseif ( get_theme_mod( 'ace_hero_show', false ) ) {
 		get_template_part( 'template-parts/hero' );
 	}
 

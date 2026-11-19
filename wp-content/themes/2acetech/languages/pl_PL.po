@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:23+0100\n"
+"POT-Creation-Date: 2026-11-20 00:43+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -435,6 +435,241 @@ msgstr "Poprzednie zdjęcie"
 msgid "Next photo"
 msgstr "Następne zdjęcie"
 
+msgid "Standard (dark and red)"
+msgstr "Standardowy (ciemny z czerwienią)"
+
+msgid "Halloween"
+msgstr "Halloween"
+
+msgid "Christmas"
+msgstr "Boże Narodzenie"
+
+msgid "New Year"
+msgstr "Nowy Rok"
+
+msgid "Black Friday"
+msgstr "Black Friday"
+
+msgid "Valentine's Day"
+msgstr "Walentynki"
+
+msgid "Summer sale (light)"
+msgstr "Letnia wyprzedaż (jasny)"
+
+msgid "My own colours"
+msgstr "Własne kolory"
+
+msgid "New in the shop"
+msgstr "Nowość w sklepie"
+
+msgid "Discover our newest products"
+msgstr "Odkryj nasze najnowsze produkty"
+
+msgid "Shop now"
+msgstr "Kup teraz"
+
+msgid "Spooky deals are here"
+msgstr "Straszne okazje są już tutaj"
+
+msgid "Treat yourself before the night is over."
+msgstr "Sprawdź, zanim skończy się noc."
+
+msgid "Shop the deals"
+msgstr "Zobacz okazje"
+
+msgid "Gifts they will love"
+msgstr "Prezenty, które pokochają"
+
+msgid "Find the perfect present for everyone on your list."
+msgstr "Znajdź idealny prezent dla każdej osoby z Twojej listy."
+
+msgid "Find a gift"
+msgstr "Znajdź prezent"
+
+msgid "Offer ends in:"
+msgstr "Oferta kończy się za:"
+
+msgid "This offer has ended."
+msgstr "Ta oferta już się zakończyła."
+
+#, php-format
+msgid "Banner %d (top of the homepage)"
+msgstr "Baner %d (góra strony głównej)"
+
+msgid ""
+"The big banner at the top of the homepage. Prepare up to three (for example "
+"the normal one, Halloween and Christmas). Give a banner \"Show from\" and "
+"\"Show until\" dates and it switches itself on and off; a banner with dates "
+"beats an always-on one."
+msgstr "Duży baner na górze strony głównej. Możesz przygotować do trzech (na przykład zwykły, na Halloween i na Boże Narodzenie). Ustaw banerowi daty „Pokaż od” i „Pokaż do”, a włączy się i wyłączy sam; baner z datami ma pierwszeństwo przed zawsze włączonym."
+
+msgid "Show this banner"
+msgstr "Pokaż ten baner"
+
+msgid "Look"
+msgstr "Wygląd"
+
+msgid "Festive decorations (floating emojis)"
+msgstr "Świąteczne ozdoby (unoszące się emoji)"
+
+msgid ""
+"Pumpkins, snowflakes, sparkles ... depending on the look. Not used with \"My "
+"own colours\"."
+msgstr "Dynie, płatki śniegu, iskry... zależnie od wyglądu. Nie działa z „Własne kolory”."
+
+msgid "My colours: background start"
+msgstr "Własne kolory: początek tła"
+
+msgid "My colours: background end"
+msgstr "Własne kolory: koniec tła"
+
+msgid "My colours: accent (button, last word)"
+msgstr "Własne kolory: akcent (przycisk, ostatnie słowo)"
+
+msgid "My colours: text"
+msgstr "Własne kolory: tekst"
+
+msgid "White text (dark background)"
+msgstr "Biały tekst (ciemne tło)"
+
+msgid "Dark text (light background)"
+msgstr "Ciemny tekst (jasne tło)"
+
+msgid "Small label"
+msgstr "Mała etykieta"
+
+msgid "Headline"
+msgstr "Nagłówek"
+
+msgid "The last word is shown in the accent colour."
+msgstr "Ostatnie słowo jest w kolorze akcentu."
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Button text"
+msgstr "Tekst przycisku"
+
+msgid "Leave empty for no button."
+msgstr "Zostaw puste, aby ukryć przycisk."
+
+msgid "Button link"
+msgstr "Link przycisku"
+
+msgid "Empty = the shop page."
+msgstr "Puste = strona sklepu."
+
+msgid "Second button text (optional)"
+msgstr "Tekst drugiego przycisku (opcjonalnie)"
+
+msgid "Second button link"
+msgstr "Link drugiego przycisku"
+
+msgid "Right side shows"
+msgstr "Prawa strona pokazuje"
+
+msgid "A carousel of products"
+msgstr "Karuzelę produktów"
+
+msgid "A picture"
+msgstr "Obrazek"
+
+msgid "Nothing (centred text)"
+msgstr "Nic (tekst na środku)"
+
+msgid "Picture"
+msgstr "Obrazek"
+
+msgid ""
+"Used when the right side shows \"A picture\". A transparent PNG works best."
+msgstr "Używany, gdy prawa strona pokazuje „Obrazek”. Najlepiej przezroczysty PNG."
+
+msgid "Products to show"
+msgstr "Produkty do pokazania"
+
+msgid "Newest products"
+msgstr "Najnowsze produkty"
+
+msgid "Featured products (starred in WooCommerce)"
+msgstr "Polecane produkty (z gwiazdką w WooCommerce)"
+
+msgid "Products on sale"
+msgstr "Produkty w promocji"
+
+msgid "Bestsellers"
+msgstr "Bestsellery"
+
+msgid "One category (type its slug below)"
+msgstr "Jedna kategoria (wpisz jej slug poniżej)"
+
+msgid "Products I pick (IDs or SKUs below)"
+msgstr "Produkty wybrane przeze mnie (ID lub SKU poniżej)"
+
+msgid "Category slug"
+msgstr "Slug kategorii"
+
+msgid ""
+"For example: swiateczne-dekoracje. You find the slug under Products > "
+"Categories."
+msgstr "Na przykład: swiateczne-dekoracje. Slug znajdziesz w Produkty > Kategorie."
+
+msgid "Product IDs or SKUs"
+msgstr "ID lub SKU produktów"
+
+msgid ""
+"Separated by commas, in the order you want them, for example: 592, 2AC-0003, "
+"675."
+msgstr "Oddzielone przecinkami, w żądanej kolejności, na przykład: 592, 2AC-0003, 675."
+
+msgid "How many products (3 to 10)"
+msgstr "Ile produktów (od 3 do 10)"
+
+msgid "Show a countdown"
+msgstr "Pokaż odliczanie"
+
+msgid "Countdown ends on"
+msgstr "Odliczanie kończy się"
+
+msgid ""
+"Date and time in your site time zone. No countdown is shown while this is "
+"empty."
+msgstr "Data i godzina w strefie czasowej strony. Dopóki pole jest puste, odliczanie się nie pokazuje."
+
+msgid "Text above the countdown"
+msgstr "Tekst nad odliczaniem"
+
+msgid "Text when the countdown is over"
+msgstr "Tekst po zakończeniu odliczania"
+
+msgid ""
+"Shown instead of the countdown. To remove the whole banner at that moment, "
+"also set \"Show until\"."
+msgstr "Pokazywany zamiast odliczania. Aby w tym momencie usunąć cały baner, ustaw też „Pokaż do”."
+
+msgid "Show from (optional)"
+msgstr "Pokaż od (opcjonalnie)"
+
+msgid "Empty = from now on."
+msgstr "Puste = od teraz."
+
+msgid "Show until (optional)"
+msgstr "Pokaż do (opcjonalnie)"
+
+msgid "Empty = no end. After this moment the banner disappears by itself."
+msgstr "Puste = bez końca. Po tym czasie baner zniknie sam."
+
+msgid "Height"
+msgstr "Wysokość"
+
+msgid "Compact"
+msgstr "Niski"
+
+msgid "Normal"
+msgstr "Normalny"
+
+msgid "Tall"
+msgstr "Wysoki"
+
 msgid "Withdraw from contract here"
 msgstr "Odstąp od umowy tutaj"
 
@@ -649,9 +884,6 @@ msgstr "Tablety i telefony"
 msgid "Shop and save big on the hottest tablets"
 msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
 
-msgid "Shop now"
-msgstr "Kup teraz"
-
 msgid "Level up your setup with new consoles"
 msgstr "Podkręć swoje stanowisko nowymi konsolami"
 
@@ -699,9 +931,6 @@ msgstr "Pasek marek"
 
 msgid "Best deals by category"
 msgstr "Najlepsze okazje według kategorii"
-
-msgid "Bestsellers"
-msgstr "Bestsellery"
 
 msgid "Newsletter"
 msgstr "Newsletter"
@@ -854,9 +1083,10 @@ msgid "Category row"
 msgstr "Rząd kategorii"
 
 msgid ""
-"The round pictures under \"Kategorie produktów\". A picture you set on a "
-"category (Products > Categories) is always used."
-msgstr "Okrągłe obrazki pod nagłówkiem „Kategorie produktów”. Zdjęcie ustawione w kategorii (Produkty > Kategorie) jest zawsze używane."
+"The round pictures under \"Kategorie produktów\". With icons, every category "
+"that has a matching icon shows it; a category without a matching icon uses "
+"its own picture (Products > Categories), else a product photo."
+msgstr "Okrągłe obrazki pod nagłówkiem „Kategorie produktów”. Przy ikonach każda kategoria z pasującą ikoną ją pokazuje; kategoria bez pasującej ikony używa własnego zdjęcia (Produkty > Kategorie), a w razie braku zdjęcia produktu."
 
 msgid "Pictures"
 msgstr "Obrazki"
@@ -874,26 +1104,8 @@ msgstr "Scena hero %d"
 msgid "Show this scene"
 msgstr "Pokaż tę scenę"
 
-msgid "Small label"
-msgstr "Mała etykieta"
-
-msgid "Headline"
-msgstr "Nagłówek"
-
 msgid "The last word is shown in red."
 msgstr "Ostatnie słowo jest wyświetlane na czerwono."
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "Button text"
-msgstr "Tekst przycisku"
-
-msgid "Leave empty for no button."
-msgstr "Zostaw puste, aby ukryć przycisk."
-
-msgid "Button link"
-msgstr "Link przycisku"
 
 msgid "Product photo"
 msgstr "Zdjęcie produktu"
@@ -1180,6 +1392,12 @@ msgstr "Dziękujemy, jesteś na liście."
 msgid "Please enter a valid email address and try again."
 msgstr "Podaj poprawny adres e-mail i spróbuj ponownie."
 
+msgid "Previous products"
+msgstr "Poprzednie produkty"
+
+msgid "Next products"
+msgstr "Następne produkty"
+
 msgid "Featured"
 msgstr "Polecane"
 
@@ -1203,12 +1421,6 @@ msgstr "Kategorie okazji"
 
 msgid "View all"
 msgstr "Zobacz wszystko"
-
-msgid "Previous products"
-msgstr "Poprzednie produkty"
-
-msgid "Next products"
-msgstr "Następne produkty"
 
 msgid "Why shop with us"
 msgstr "Dlaczego warto kupować u nas"

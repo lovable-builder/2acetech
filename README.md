@@ -22,6 +22,16 @@ site. They are not part of the theme.
 
 - **Landing page**: `front-page.php`, one template part per section in
   `template-parts/`. Reorder or remove sections there.
+- **Occasion banner** (`inc/banner.php`, `template-parts/banner.php`, `assets/css/banner.css`): the big banner
+  at the top of the homepage; it works as the hero. Customize > Landing page > **Banner 1-3**. Per banner: a
+  look (Standard, Halloween, Christmas, New Year, Black Friday, Valentine's, Summer sale, or your own colours),
+  festive floating emojis, small label, headline (last word in the accent colour), text, one or two buttons,
+  an optional countdown (own text before and after), and on the right a **carousel of products** (newest,
+  featured, on sale, bestsellers, one category, or products you pick by ID/SKU) or a picture, or nothing.
+  Each banner can have **Show from / Show until** dates: it switches itself on and off, and a banner with dates
+  beats an always-on one, so Halloween, Christmas and New Year can be prepared in advance. Banner 1 is on by
+  default (newest products); 2 (Halloween) and 3 (Christmas) are prepared and off. With no active banner the
+  homepage shows the scroll hero if it has been switched on, else starts with the trust strip.
 - **Scroll hero**: switched **off** for now (Customize > Landing page > Scroll hero (on/off) > Show the scroll hero).
   `template-parts/hero.php`, `assets/css/hero.css`,
   `assets/js/hero.js`. Scenes are edited in Customize > Landing page (see

@@ -29,6 +29,7 @@ require_once ACE_DIR . '/inc/template-tags.php';
 require_once ACE_DIR . '/inc/home.php';
 require_once ACE_DIR . '/inc/customizer.php';
 require_once ACE_DIR . '/inc/customizer-home.php';
+require_once ACE_DIR . '/inc/banner.php';
 require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/contact.php';
@@ -121,6 +122,9 @@ function ace_assets() {
 	wp_enqueue_style( 'ace-woo', $css . 'woocommerce.css', array( 'ace-main' ), ace_ver( 'assets/css/woocommerce.css' ) );
 
 	wp_enqueue_script( 'ace-main', $js . 'main.js', array(), ace_ver( 'assets/js/main.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
+	if ( is_front_page() && ace_active_banner() ) {
+		wp_enqueue_style( 'ace-banner', $css . 'banner.css', array( 'ace-main' ), ace_ver( 'assets/css/banner.css' ) );
+	}
 	if ( is_front_page() ) {
 		wp_enqueue_script( 'ace-hero', $js . 'hero.js', array(), ace_ver( 'assets/js/hero.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:23+0100\n"
+"POT-Creation-Date: 2026-11-20 00:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -409,6 +409,241 @@ msgstr ""
 msgid "Next photo"
 msgstr ""
 
+msgid "Standard (dark and red)"
+msgstr ""
+
+msgid "Halloween"
+msgstr ""
+
+msgid "Christmas"
+msgstr ""
+
+msgid "New Year"
+msgstr ""
+
+msgid "Black Friday"
+msgstr ""
+
+msgid "Valentine's Day"
+msgstr ""
+
+msgid "Summer sale (light)"
+msgstr ""
+
+msgid "My own colours"
+msgstr ""
+
+msgid "New in the shop"
+msgstr ""
+
+msgid "Discover our newest products"
+msgstr ""
+
+msgid "Shop now"
+msgstr ""
+
+msgid "Spooky deals are here"
+msgstr ""
+
+msgid "Treat yourself before the night is over."
+msgstr ""
+
+msgid "Shop the deals"
+msgstr ""
+
+msgid "Gifts they will love"
+msgstr ""
+
+msgid "Find the perfect present for everyone on your list."
+msgstr ""
+
+msgid "Find a gift"
+msgstr ""
+
+msgid "Offer ends in:"
+msgstr ""
+
+msgid "This offer has ended."
+msgstr ""
+
+#, php-format
+msgid "Banner %d (top of the homepage)"
+msgstr ""
+
+msgid ""
+"The big banner at the top of the homepage. Prepare up to three (for example "
+"the normal one, Halloween and Christmas). Give a banner \"Show from\" and "
+"\"Show until\" dates and it switches itself on and off; a banner with dates "
+"beats an always-on one."
+msgstr ""
+
+msgid "Show this banner"
+msgstr ""
+
+msgid "Look"
+msgstr ""
+
+msgid "Festive decorations (floating emojis)"
+msgstr ""
+
+msgid ""
+"Pumpkins, snowflakes, sparkles ... depending on the look. Not used with \"My "
+"own colours\"."
+msgstr ""
+
+msgid "My colours: background start"
+msgstr ""
+
+msgid "My colours: background end"
+msgstr ""
+
+msgid "My colours: accent (button, last word)"
+msgstr ""
+
+msgid "My colours: text"
+msgstr ""
+
+msgid "White text (dark background)"
+msgstr ""
+
+msgid "Dark text (light background)"
+msgstr ""
+
+msgid "Small label"
+msgstr ""
+
+msgid "Headline"
+msgstr ""
+
+msgid "The last word is shown in the accent colour."
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Button text"
+msgstr ""
+
+msgid "Leave empty for no button."
+msgstr ""
+
+msgid "Button link"
+msgstr ""
+
+msgid "Empty = the shop page."
+msgstr ""
+
+msgid "Second button text (optional)"
+msgstr ""
+
+msgid "Second button link"
+msgstr ""
+
+msgid "Right side shows"
+msgstr ""
+
+msgid "A carousel of products"
+msgstr ""
+
+msgid "A picture"
+msgstr ""
+
+msgid "Nothing (centred text)"
+msgstr ""
+
+msgid "Picture"
+msgstr ""
+
+msgid ""
+"Used when the right side shows \"A picture\". A transparent PNG works best."
+msgstr ""
+
+msgid "Products to show"
+msgstr ""
+
+msgid "Newest products"
+msgstr ""
+
+msgid "Featured products (starred in WooCommerce)"
+msgstr ""
+
+msgid "Products on sale"
+msgstr ""
+
+msgid "Bestsellers"
+msgstr ""
+
+msgid "One category (type its slug below)"
+msgstr ""
+
+msgid "Products I pick (IDs or SKUs below)"
+msgstr ""
+
+msgid "Category slug"
+msgstr ""
+
+msgid ""
+"For example: swiateczne-dekoracje. You find the slug under Products > "
+"Categories."
+msgstr ""
+
+msgid "Product IDs or SKUs"
+msgstr ""
+
+msgid ""
+"Separated by commas, in the order you want them, for example: 592, 2AC-0003, "
+"675."
+msgstr ""
+
+msgid "How many products (3 to 10)"
+msgstr ""
+
+msgid "Show a countdown"
+msgstr ""
+
+msgid "Countdown ends on"
+msgstr ""
+
+msgid ""
+"Date and time in your site time zone. No countdown is shown while this is "
+"empty."
+msgstr ""
+
+msgid "Text above the countdown"
+msgstr ""
+
+msgid "Text when the countdown is over"
+msgstr ""
+
+msgid ""
+"Shown instead of the countdown. To remove the whole banner at that moment, "
+"also set \"Show until\"."
+msgstr ""
+
+msgid "Show from (optional)"
+msgstr ""
+
+msgid "Empty = from now on."
+msgstr ""
+
+msgid "Show until (optional)"
+msgstr ""
+
+msgid "Empty = no end. After this moment the banner disappears by itself."
+msgstr ""
+
+msgid "Height"
+msgstr ""
+
+msgid "Compact"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Tall"
+msgstr ""
+
 msgid "Withdraw from contract here"
 msgstr ""
 
@@ -614,9 +849,6 @@ msgstr ""
 msgid "Shop and save big on the hottest tablets"
 msgstr ""
 
-msgid "Shop now"
-msgstr ""
-
 msgid "Level up your setup with new consoles"
 msgstr ""
 
@@ -663,9 +895,6 @@ msgid "Brand strip"
 msgstr ""
 
 msgid "Best deals by category"
-msgstr ""
-
-msgid "Bestsellers"
 msgstr ""
 
 msgid "Newsletter"
@@ -800,8 +1029,9 @@ msgid "Category row"
 msgstr ""
 
 msgid ""
-"The round pictures under \"Kategorie produktów\". A picture you set on a "
-"category (Products > Categories) is always used."
+"The round pictures under \"Kategorie produktów\". With icons, every category "
+"that has a matching icon shows it; a category without a matching icon uses "
+"its own picture (Products > Categories), else a product photo."
 msgstr ""
 
 msgid "Pictures"
@@ -820,25 +1050,7 @@ msgstr ""
 msgid "Show this scene"
 msgstr ""
 
-msgid "Small label"
-msgstr ""
-
-msgid "Headline"
-msgstr ""
-
 msgid "The last word is shown in red."
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "Button text"
-msgstr ""
-
-msgid "Leave empty for no button."
-msgstr ""
-
-msgid "Button link"
 msgstr ""
 
 msgid "Product photo"
@@ -1097,6 +1309,12 @@ msgstr ""
 msgid "Please enter a valid email address and try again."
 msgstr ""
 
+msgid "Previous products"
+msgstr ""
+
+msgid "Next products"
+msgstr ""
+
 msgid "Featured"
 msgstr ""
 
@@ -1119,12 +1337,6 @@ msgid "Deal categories"
 msgstr ""
 
 msgid "View all"
-msgstr ""
-
-msgid "Previous products"
-msgstr ""
-
-msgid "Next products"
 msgstr ""
 
 msgid "Why shop with us"

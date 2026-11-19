@@ -130,6 +130,11 @@
 		const pad = (n) => String(n).padStart(2, '0');
 		const tick = () => {
 			let left = Math.max(0, Math.floor((end - Date.now()) / 1000));
+			if (left === 0) {
+				// Over: show the "ended" text (banner) in place of the timer, if there is one.
+				const done = el.parentElement && $('[data-cd-ended]', el.parentElement);
+				if (done) { done.hidden = false; el.hidden = true; }
+			}
 			const d = Math.floor(left / 86400); left %= 86400;
 			const h = Math.floor(left / 3600); left %= 3600;
 			const m = Math.floor(left / 60);
