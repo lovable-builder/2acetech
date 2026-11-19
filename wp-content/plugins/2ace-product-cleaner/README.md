@@ -12,7 +12,9 @@ are skipped. Status (draft/published) is never changed.
 - **Manual**: "Clean them now" on the settings page.
 - **Undo**: Products list > hover > "Undo Polish cleanup" (restores title, text, SKU, attributes incl. shared
   ones, variations, prices, category, tags).
-- The Polish copy is written by Claude through the Anthropic API (key in the settings). Every answer is
+- The Polish copy is written by an AI through its API: **DeepSeek** (default, cheap; key from platform.deepseek.com)
+  or Anthropic Claude. Pick the provider and paste the key in the settings; "Test connection" checks it. The model is
+  chosen automatically from the account's model list unless you type one. Only product texts are sent, no customer data. Every answer is
   checked (length, bullets, forbidden words, every attribute value translated) before anything is written;
   a failing product is skipped and logged.
 

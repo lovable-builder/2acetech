@@ -100,4 +100,17 @@ try {
 	try { ACE_PC_Cleaner::clean( $pid ); } catch ( Exception $e ) { $no_key = $e->getMessage(); }
 	$out['no_key_message'] = $no_key;
 } catch ( Throwable $e ) { $out['settings_ERROR'] = $e->getMessage() . ' @ ' . basename( $e->getFile() ) . ':' . $e->getLine(); }
+// Real DeepSeek endpoint with a deliberately wrong key: proves URL, headers and error handling.
+try {
+	remove_all_filters( 'ace_pc_llm_json' );
+	try { ACE_PC_Cleaner::undo( $pid ); } catch ( Exception $e ) {}
+	update_option( 'ace_pc_settings', array( 'provider' => 'deepseek', 'keys' => array( 'deepseek' => 'sk-test-wrong-key' ), 'model' => '', 'auto' => 1, 'category' => 'Oświetlenie', 'sku_prefix' => '2AC-' ) );
+	$o = ACE_PC_Settings::get();
+	$out['deepseek_provider_loaded'] = array( $o['provider'], $o['api_key'] );
+	foreach ( array( 'list_models' => function () use ( $o ) { return ACE_PC_Cleaner::list_models( $o ); }, 'clean' => function () use ( $pid ) { return ACE_PC_Cleaner::clean( $pid ); } ) as $k => $fn ) {
+		try { $fn(); $out[ 'deepseek_' . $k ] = 'UNEXPECTED success'; } catch ( Exception $e ) { $out[ 'deepseek_' . $k ] = $e->getMessage(); }
+	}
+	update_option( 'ace_pc_settings', array( 'provider' => 'anthropic', 'keys' => array( 'anthropic' => 'sk-ant-wrong' ), 'model' => '', 'auto' => 1, 'category' => 'Oświetlenie', 'sku_prefix' => '2AC-' ) );
+	try { ACE_PC_Cleaner::list_models( ACE_PC_Settings::get() ); } catch ( Exception $e ) { $out['anthropic_list_models'] = $e->getMessage(); }
+} catch ( Throwable $e ) { $out['provider_ERROR'] = $e->getMessage() . ' @ ' . basename( $e->getFile() ) . ':' . $e->getLine(); }
 file_put_contents( '/playground/_cleaner-result.json', wp_json_encode( $out, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ) );

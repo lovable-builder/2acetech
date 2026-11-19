@@ -164,7 +164,87 @@ DANE ŹRÓDŁOWE:
 TXT;
 	}
 
-	/** Ask Claude. Returns the decoded JSON object or throws. */
+	/* ------------------------------------------------------------------
+	 * The AI provider (DeepSeek by default, or Anthropic Claude)
+	 * ---------------------------------------------------------------- */
+
+	/** One HTTP call to the provider. Returns the decoded JSON body or throws with the provider's own message. */
+	private static function http( $o, $method, $path, $body = null ) {
+		if ( 'anthropic' === $o['provider'] ) {
+			$url     = 'https://api.anthropic.com' . $path;
+			$headers = array( 'x-api-key' => $o['api_key'], 'anthropic-version' => '2023-06-01', 'content-type' => 'application/json' );
+		} else {
+			$url     = 'https://api.deepseek.com' . $path;
+			$headers = array( 'Authorization' => 'Bearer ' . $o['api_key'], 'content-type' => 'application/json' );
+		}
+		$args = array( 'method' => $method, 'timeout' => 150, 'headers' => $headers );
+		if ( null !== $body ) {
+			$args['body'] = wp_json_encode( $body );
+		}
+		$res = wp_remote_request( $url, $args );
+		if ( is_wp_error( $res ) ) {
+			throw new Exception( $res->get_error_message() );
+		}
+		$code = wp_remote_retrieve_response_code( $res );
+		$json = json_decode( wp_remote_retrieve_body( $res ), true );
+		if ( $code < 200 || $code >= 300 ) {
+			$msg = isset( $json['error']['message'] ) ? $json['error']['message'] : 'HTTP ' . $code;
+			throw new Exception( ( 'anthropic' === $o['provider'] ? 'Claude API: ' : 'DeepSeek API: ' ) . $msg );
+		}
+		return is_array( $json ) ? $json : array();
+	}
+
+	/** Model ids the key can use. */
+	public static function list_models( $o ) {
+		$j   = self::http( $o, 'GET', 'anthropic' === $o['provider'] ? '/v1/models' : '/models' );
+		$ids = array();
+		foreach ( isset( $j['data'] ) ? $j['data'] : array() as $m ) {
+			if ( ! empty( $m['id'] ) ) {
+				$ids[] = $m['id'];
+			}
+		}
+		return $ids;
+	}
+
+	/** The model to use: the one typed in settings, else (DeepSeek) the cheapest-looking one the account offers. */
+	public static function model( $o ) {
+		if ( '' !== $o['model'] ) {
+			return $o['model'];
+		}
+		if ( 'anthropic' === $o['provider'] ) {
+			return 'claude-sonnet-5-5';
+		}
+		$cached = get_transient( 'ace_pc_model' );
+		if ( $cached ) {
+			return $cached;
+		}
+		$pick = 'deepseek-chat';
+		try {
+			$ids = self::list_models( $o );
+			foreach ( array( '/flash/i', '/chat/i' ) as $re ) {
+				foreach ( $ids as $id ) {
+					if ( preg_match( $re, $id ) ) {
+						$pick = $id;
+						break 2;
+					}
+				}
+			}
+			if ( 'deepseek-chat' === $pick && $ids && ! in_array( $pick, $ids, true ) ) {
+				foreach ( $ids as $id ) {
+					if ( ! preg_match( '/reason|pro/i', $id ) ) {
+						$pick = $id;
+						break;
+					}
+				}
+			}
+		} catch ( Exception $e ) {
+			return $pick; // Do not cache a guess made while the call failed.
+		}
+		set_transient( 'ace_pc_model', $pick, 12 * HOUR_IN_SECONDS );
+		return $pick;
+	}
+
+	/** Ask the AI. Returns the decoded JSON object or throws. */
 	private static function ask( $source, $extra = '' ) {
 		$prompt = self::prompt() . wp_json_encode( $source, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT ) . $extra;
 
@@ -174,45 +254,40 @@ TXT;
 			return $fake;
 		}
 
-		$opt = ACE_PC_Settings::get();
-		if ( '' === $opt['api_key'] ) {
-			throw new Exception( __( 'No Anthropic API key set (WooCommerce > Product Cleaner).', '2ace-product-cleaner' ) );
+		$o = ACE_PC_Settings::get();
+		if ( '' === $o['api_key'] ) {
+			throw new Exception( __( 'No API key set (WooCommerce > Product Cleaner).', '2ace-product-cleaner' ) );
 		}
-		$res = wp_remote_post(
-			'https://api.anthropic.com/v1/messages',
-			array(
-				'timeout' => 150,
-				'headers' => array(
-					'x-api-key'         => $opt['api_key'],
-					'anthropic-version' => '2023-06-01',
-					'content-type'      => 'application/json',
-				),
-				'body'    => wp_json_encode(
-					array(
-						'model'      => $opt['model'],
-						'max_tokens' => 4000,
-						'messages'   => array( array( 'role' => 'user', 'content' => $prompt ) ),
-					)
-				),
-			)
-		);
-		if ( is_wp_error( $res ) ) {
-			throw new Exception( $res->get_error_message() );
+		$model = self::model( $o );
+		if ( 'anthropic' === $o['provider'] ) {
+			$j    = self::http( $o, 'POST', '/v1/messages', array( 'model' => $model, 'max_tokens' => 4000, 'messages' => array( array( 'role' => 'user', 'content' => $prompt ) ) ) );
+			$text = isset( $j['content'][0]['text'] ) ? $j['content'][0]['text'] : '';
+		} else {
+			$j    = self::http(
+				$o,
+				'POST',
+				'/chat/completions',
+				array(
+					'model'           => $model,
+					'messages'        => array(
+						array( 'role' => 'system', 'content' => 'You reply with one valid JSON object only.' ),
+						array( 'role' => 'user', 'content' => $prompt ),
+					),
+					'response_format' => array( 'type' => 'json_object' ),
+					'max_tokens'      => 8000,
+					'temperature'     => 0.3,
+					'stream'          => false,
+				)
+			);
+			$text = isset( $j['choices'][0]['message']['content'] ) ? $j['choices'][0]['message']['content'] : '';
 		}
-		$code = wp_remote_retrieve_response_code( $res );
-		$body = json_decode( wp_remote_retrieve_body( $res ), true );
-		if ( 200 !== $code ) {
-			$msg = isset( $body['error']['message'] ) ? $body['error']['message'] : 'HTTP ' . $code;
-			throw new Exception( 'Claude API: ' . $msg );
-		}
-		$text = isset( $body['content'][0]['text'] ) ? trim( $body['content'][0]['text'] ) : '';
-		$text = preg_replace( '/^```(?:json)?\s*|\s*```$/', '', $text );
+		$text = preg_replace( '/^```(?:json)?\s*|\s*```$/', '', trim( $text ) );
 		if ( ! preg_match( '/\{.*\}/s', $text, $m ) ) {
-			throw new Exception( 'No JSON in the answer.' );
+			throw new Exception( 'The AI returned no JSON.' );
 		}
 		$json = json_decode( $m[0], true );
 		if ( ! is_array( $json ) ) {
-			throw new Exception( 'The answer was not valid JSON.' );
+			throw new Exception( 'The AI answer was not valid JSON.' );
 		}
 		return $json;
 	}

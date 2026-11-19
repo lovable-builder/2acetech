@@ -18,6 +18,7 @@ class ACE_PC_Settings {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'register' ) );
 		add_action( 'wp_ajax_ace_pc_clean', array( __CLASS__, 'ajax_clean' ) );
+		add_action( 'wp_ajax_ace_pc_test', array( __CLASS__, 'ajax_test' ) );
 		add_action( 'admin_post_ace_pc_undo', array( __CLASS__, 'handle_undo' ) );
 		add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
 		add_filter( 'cron_schedules', array( __CLASS__, 'schedules' ) );
@@ -27,16 +28,19 @@ class ACE_PC_Settings {
 
 	/** Settings with defaults. */
 	public static function get() {
-		return wp_parse_args(
+		$o = wp_parse_args(
 			get_option( self::OPTION, array() ),
 			array(
-				'api_key'    => '',
-				'model'      => 'claude-sonnet-5-5',
+				'provider'   => 'deepseek',
+				'keys'       => array(),
+				'model'      => '', // Empty = automatic.
 				'auto'       => 1,
 				'category'   => 'Oświetlenie',
 				'sku_prefix' => '2AC-',
 			)
 		);
+		$o['api_key'] = isset( $o['keys'][ $o['provider'] ] ) ? $o['keys'][ $o['provider'] ] : '';
+		return $o;
 	}
 
 	public static function log( $line ) {
@@ -97,11 +101,18 @@ class ACE_PC_Settings {
 	}
 
 	public static function sanitize( $in ) {
-		$old = self::get();
-		$key = isset( $in['api_key'] ) ? trim( sanitize_text_field( $in['api_key'] ) ) : '';
+		$old      = self::get();
+		$provider = isset( $in['provider'] ) && 'anthropic' === $in['provider'] ? 'anthropic' : 'deepseek';
+		$keys     = is_array( $old['keys'] ) ? $old['keys'] : array();
+		$key      = isset( $in['api_key'] ) ? trim( sanitize_text_field( $in['api_key'] ) ) : '';
+		if ( '' !== $key ) {
+			$keys[ $provider ] = $key; // An empty box keeps the saved key.
+		}
+		delete_transient( 'ace_pc_model' );
 		return array(
-			'api_key'    => '' === $key ? $old['api_key'] : $key, // Empty box keeps the saved key.
-			'model'      => isset( $in['model'] ) && '' !== trim( $in['model'] ) ? sanitize_text_field( $in['model'] ) : $old['model'],
+			'provider'   => $provider,
+			'keys'       => $keys,
+			'model'      => isset( $in['model'] ) ? sanitize_text_field( $in['model'] ) : '',
 			'auto'       => empty( $in['auto'] ) ? 0 : 1,
 			'category'   => isset( $in['category'] ) ? sanitize_text_field( $in['category'] ) : $old['category'],
 			'sku_prefix' => isset( $in['sku_prefix'] ) ? sanitize_text_field( $in['sku_prefix'] ) : $old['sku_prefix'],
@@ -122,7 +133,7 @@ class ACE_PC_Settings {
 			<p><?php esc_html_e( 'Rewrites imported AliExpress products in Polish: title, bullets, description, tags, attribute names, SKU, category and .99 prices. Your own products are never touched.', '2ace-product-cleaner' ); ?></p>
 
 			<?php if ( '' === $o['api_key'] ) : ?>
-				<div class="notice notice-warning inline"><p><strong><?php esc_html_e( 'Step 1: paste your Anthropic API key below and save.', '2ace-product-cleaner' ); ?></strong> <?php esc_html_e( 'Get one at console.anthropic.com (API keys). Cleaning a product costs a few cents.', '2ace-product-cleaner' ); ?></p></div>
+				<div class="notice notice-warning inline"><p><strong><?php esc_html_e( 'Step 1: paste your API key below and save.', '2ace-product-cleaner' ); ?></strong> <?php echo 'anthropic' === $o['provider'] ? esc_html__( 'Get one at console.anthropic.com.', '2ace-product-cleaner' ) : esc_html__( 'Get one at platform.deepseek.com (API keys). Cleaning a product costs a fraction of a cent to a few cents.', '2ace-product-cleaner' ); ?></p></div>
 			<?php endif; ?>
 
 			<h2><?php esc_html_e( 'Waiting for cleanup', '2ace-product-cleaner' ); ?> (<?php echo count( $waiting ); ?>)</h2>
@@ -141,13 +152,20 @@ class ACE_PC_Settings {
 			<form method="post" action="options.php">
 				<?php settings_fields( 'ace_pc' ); ?>
 				<table class="form-table" role="presentation">
-					<tr><th><label for="ak"><?php esc_html_e( 'Anthropic API key', '2ace-product-cleaner' ); ?></label></th>
-						<td><input type="password" id="ak" name="<?php echo esc_attr( self::OPTION ); ?>[api_key]" class="regular-text" autocomplete="off" placeholder="<?php echo $o['api_key'] ? esc_attr( '••••••••' . substr( $o['api_key'], -4 ) ) : 'sk-ant-…'; ?>">
+					<tr><th><label for="pv"><?php esc_html_e( 'AI provider', '2ace-product-cleaner' ); ?></label></th>
+						<td><select id="pv" name="<?php echo esc_attr( self::OPTION ); ?>[provider]">
+							<option value="deepseek" <?php selected( $o['provider'], 'deepseek' ); ?>>DeepSeek (cheap)</option>
+							<option value="anthropic" <?php selected( $o['provider'], 'anthropic' ); ?>>Anthropic Claude</option>
+						</select>
+						<p class="description"><?php esc_html_e( 'Only product texts from the import are sent. No customer data.', '2ace-product-cleaner' ); ?></p></td></tr>
+					<tr><th><label for="ak"><?php esc_html_e( 'API key', '2ace-product-cleaner' ); ?></label></th>
+						<td><input type="password" id="ak" name="<?php echo esc_attr( self::OPTION ); ?>[api_key]" class="regular-text" autocomplete="off" placeholder="<?php echo $o['api_key'] ? esc_attr( '••••••••' . substr( $o['api_key'], -4 ) ) : 'sk-…'; ?>">
 						<p class="description"><?php esc_html_e( 'Stored in your database. Leave empty to keep the saved key.', '2ace-product-cleaner' ); ?></p></td></tr>
 					<tr><th><?php esc_html_e( 'Clean new imports automatically', '2ace-product-cleaner' ); ?></th>
 						<td><label><input type="checkbox" name="<?php echo esc_attr( self::OPTION ); ?>[auto]" value="1" <?php checked( $o['auto'] ); ?>> <?php esc_html_e( 'Every 10 minutes, products that have not changed for 5 minutes are cleaned. Status (draft or published) is never changed.', '2ace-product-cleaner' ); ?></label></td></tr>
 					<tr><th><label for="md"><?php esc_html_e( 'Model', '2ace-product-cleaner' ); ?></label></th>
-						<td><input type="text" id="md" name="<?php echo esc_attr( self::OPTION ); ?>[model]" value="<?php echo esc_attr( $o['model'] ); ?>" class="regular-text"></td></tr>
+						<td><input type="text" id="md" name="<?php echo esc_attr( self::OPTION ); ?>[model]" value="<?php echo esc_attr( $o['model'] ); ?>" class="regular-text" placeholder="<?php esc_attr_e( 'automatic', '2ace-product-cleaner' ); ?>">
+						<p class="description"><?php esc_html_e( 'Leave empty: the plugin picks a suitable model by itself.', '2ace-product-cleaner' ); ?></p></td></tr>
 					<tr><th><label for="ct"><?php esc_html_e( 'Default category', '2ace-product-cleaner' ); ?></label></th>
 						<td><input type="text" id="ct" name="<?php echo esc_attr( self::OPTION ); ?>[category]" value="<?php echo esc_attr( $o['category'] ); ?>" class="regular-text">
 						<p class="description"><?php esc_html_e( 'Used when an import has no category. Must exist.', '2ace-product-cleaner' ); ?></p></td></tr>
@@ -156,6 +174,8 @@ class ACE_PC_Settings {
 				</table>
 				<?php submit_button(); ?>
 			</form>
+			<p><button class="button" id="acepc-test" <?php disabled( '' === $o['api_key'] ); ?>><?php esc_html_e( 'Test connection', '2ace-product-cleaner' ); ?></button> <span id="acepc-test-out"></span>
+			<span class="description"><?php esc_html_e( 'Uses the saved settings.', '2ace-product-cleaner' ); ?></span></p>
 
 			<h2><?php esc_html_e( 'Recent activity', '2ace-product-cleaner' ); ?></h2>
 			<pre style="background:#fff;border:1px solid #ccd0d4;padding:12px;max-height:260px;overflow:auto;white-space:pre-wrap"><?php echo $log ? esc_html( implode( "\n", $log ) ) : esc_html__( 'Nothing yet.', '2ace-product-cleaner' ); ?></pre>
@@ -163,6 +183,13 @@ class ACE_PC_Settings {
 		</div>
 		<script>
 		(function(){
+			var tb=document.getElementById('acepc-test');
+			if(tb) tb.addEventListener('click',async function(){
+				var out=document.getElementById('acepc-test-out'); out.textContent=' testing…';
+				var fd=new FormData(); fd.append('action','ace_pc_test'); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
+				try{ var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
+					out.textContent = r.success ? ' ✔ '+r.data : ' ✖ '+r.data; }catch(e){ out.textContent=' ✖ '+e; }
+			});
 			var btn=document.getElementById('acepc-run'); if(!btn) return;
 			var ids=<?php echo wp_json_encode( array_map( 'intval', $waiting ) ); ?>;
 			btn.addEventListener('click',async function(){
@@ -193,6 +220,20 @@ class ACE_PC_Settings {
 		}
 		try {
 			wp_send_json_success( self::run_one( absint( $_POST['id'] ?? 0 ) ) );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
+		}
+	}
+
+	public static function ajax_test() {
+		check_ajax_referer( 'ace_pc' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'Not allowed' );
+		}
+		$o = self::get();
+		try {
+			$ids = ACE_PC_Cleaner::list_models( $o );
+			wp_send_json_success( sprintf( 'Connected. Model used: %s (%d available)', ACE_PC_Cleaner::model( $o ), count( $ids ) ) );
 		} catch ( Exception $e ) {
 			wp_send_json_error( $e->getMessage() );
 		}

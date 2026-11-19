@@ -147,7 +147,7 @@ with the `ace_hero_scenes` and `ace_promos` filters.
 ## Product Cleaner plugin
 
 `wp-content/plugins/2ace-product-cleaner`: rewrites imported AliExpress products in Polish, automatically,
-inside WordPress (WooCommerce > Product Cleaner). Needs an Anthropic API key. Details and undo in the
+inside WordPress (WooCommerce > Product Cleaner). Needs an AI API key (DeepSeek by default, or Anthropic). Details and undo in the
 plugin's own README.
 
 ## Before launch
