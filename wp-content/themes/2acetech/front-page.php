@@ -17,7 +17,10 @@ get_header();
 	<?php
 	ace_demo_notice();
 
-	get_template_part( 'template-parts/hero' );
+	// The scroll hero is off by default for now: Customize > Landing page > Scroll hero.
+	if ( get_theme_mod( 'ace_hero_show', false ) ) {
+		get_template_part( 'template-parts/hero' );
+	}
 
 	// Sections and their order come from Customize > Landing page > Sections.
 	foreach ( ace_home_order() as $section ) {

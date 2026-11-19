@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 23:07+0100\n"
+"POT-Creation-Date: 2026-11-20 00:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -755,6 +755,18 @@ msgid ""
 "Edit the homepage: hero scenes, banners, trust strip, headings and section "
 "order. Products, categories, brands and the deal of the week come from "
 "WooCommerce."
+msgstr ""
+
+msgid "Scroll hero (on/off)"
+msgstr ""
+
+msgid ""
+"The tall animated banner at the top of the homepage. It is off for now; the "
+"homepage starts with the trust strip and the categories. Switch it on again "
+"when its scenes show your real products."
+msgstr ""
+
+msgid "Show the scroll hero"
 msgstr ""
 
 #, php-format

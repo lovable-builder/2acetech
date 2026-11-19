@@ -22,7 +22,8 @@ site. They are not part of the theme.
 
 - **Landing page**: `front-page.php`, one template part per section in
   `template-parts/`. Reorder or remove sections there.
-- **Scroll hero**: `template-parts/hero.php`, `assets/css/hero.css`,
+- **Scroll hero**: switched **off** for now (Customize > Landing page > Scroll hero (on/off) > Show the scroll hero).
+  `template-parts/hero.php`, `assets/css/hero.css`,
   `assets/js/hero.js`. Scenes are edited in Customize > Landing page (see
   below). It honours `prefers-reduced-motion` and degrades to a static hero
   without JS.

@@ -138,6 +138,18 @@ function ace_customize_home( $wp ) {
 		)
 	);
 
+	/* Hero on/off */
+	$wp->add_section(
+		'ace_hero_switch',
+		array(
+			'title'       => __( 'Scroll hero (on/off)', '2acetech' ),
+			'description' => __( 'The tall animated banner at the top of the homepage. It is off for now; the homepage starts with the trust strip and the categories. Switch it on again when its scenes show your real products.', '2acetech' ),
+			'panel'       => 'ace_home',
+			'priority'    => 1,
+		)
+	);
+	ace_cz_field( $wp, 'ace_hero_switch', 'ace_hero_show', __( 'Show the scroll hero', '2acetech' ), false, array( 'type' => 'checkbox' ) );
+
 	/* Hero scenes */
 	foreach ( ace_hero_defaults() as $i => $d ) {
 		$n   = $i + 1;

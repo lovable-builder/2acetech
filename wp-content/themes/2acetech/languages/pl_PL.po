@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-19 23:07+0100\n"
+"POT-Creation-Date: 2026-11-20 00:15+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -807,6 +807,18 @@ msgstr ""
 "Edytuj stronę główną: sceny w sekcji hero, banery, pasek zalet, nagłówki i "
 "kolejność sekcji. Produkty, kategorie, marki i oferta tygodnia pochodzą z "
 "WooCommerce."
+
+msgid "Scroll hero (on/off)"
+msgstr "Baner przewijany (włącz/wyłącz)"
+
+msgid ""
+"The tall animated banner at the top of the homepage. It is off for now; the "
+"homepage starts with the trust strip and the categories. Switch it on again "
+"when its scenes show your real products."
+msgstr "Wysoki animowany baner na górze strony głównej. Na razie jest wyłączony: strona zaczyna się od paska zaufania i kategorii. Włącz go ponownie, gdy sceny pokazują Twoje prawdziwe produkty."
+
+msgid "Show the scroll hero"
+msgstr "Pokaż baner przewijany"
 
 #, php-format
 msgid "Hero scene %d"
