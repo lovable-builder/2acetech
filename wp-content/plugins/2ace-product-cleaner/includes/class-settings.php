@@ -73,8 +73,12 @@ class ACE_PC_Settings {
 			@set_time_limit( 280 ); // phpcs:ignore
 		}
 		// Only products untouched for 5 minutes, so a running import is not interrupted.
-		foreach ( ACE_PC_Cleaner::waiting( 2, 300 ) as $id ) {
-			self::run_one( $id );
+		foreach ( ACE_PC_Cleaner::waiting( 2, 300, true ) as $id ) {
+			try {
+				self::run_one( $id );
+			} catch ( Exception $e ) {
+				// Already logged and counted; carry on with the next product.
+			}
 		}
 		delete_transient( 'ace_pc_lock' );
 	}
@@ -85,7 +89,11 @@ class ACE_PC_Settings {
 			self::log( sprintf( '#%d cleaned: %s (%s)', $id, $r['title'], $r['sku'] ) );
 			return $r;
 		} catch ( Exception $e ) {
-			self::log( sprintf( '#%d skipped: %s', $id, $e->getMessage() ) );
+			$n = (int) get_post_meta( $id, ACE_PC_Cleaner::FAILS, true ) + 1;
+			update_post_meta( $id, ACE_PC_Cleaner::FAILS, $n );
+			update_post_meta( $id, ACE_PC_Cleaner::FAIL_AT, time() );
+			update_post_meta( $id, ACE_PC_Cleaner::FAIL_MSG, mb_substr( $e->getMessage(), 0, 300 ) );
+			self::log( sprintf( '#%d skipped (try %d): %s', $id, $n, $e->getMessage() ) );
 			throw $e;
 		}
 	}
@@ -140,7 +148,16 @@ class ACE_PC_Settings {
 			<?php if ( $waiting ) : ?>
 				<ul style="list-style:disc;margin-left:20px">
 					<?php foreach ( $waiting as $id ) : ?>
-						<li id="acepc-<?php echo (int) $id; ?>"><?php echo esc_html( get_the_title( $id ) ); ?> <small>(#<?php echo (int) $id; ?>)</small> <span class="acepc-state"></span></li>
+						<li id="acepc-<?php echo (int) $id; ?>"><?php echo esc_html( get_the_title( $id ) ); ?> <small>(#<?php echo (int) $id; ?>)</small> <span class="acepc-state"><?php
+						$f = (int) get_post_meta( $id, ACE_PC_Cleaner::FAILS, true );
+						if ( $f ) {
+							/* translators: 1: number of tries, 2: error. */
+							echo esc_html( sprintf( ' ⚠ failed %1$d× – %2$s', $f, get_post_meta( $id, ACE_PC_Cleaner::FAIL_MSG, true ) ) );
+							if ( $f >= ACE_PC_Cleaner::MAX_AUTO_TRIES ) {
+								echo esc_html( ' ' . __( '(automatic mode gave up; "Clean them now" tries again)', '2ace-product-cleaner' ) );
+							}
+						}
+					?></span></li>
 					<?php endforeach; ?>
 				</ul>
 				<p><button class="button button-primary" id="acepc-run" <?php disabled( '' === $o['api_key'] ); ?>><?php esc_html_e( 'Clean them now', '2ace-product-cleaner' ); ?></button>

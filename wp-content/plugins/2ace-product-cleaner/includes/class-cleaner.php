@@ -12,6 +12,10 @@ class ACE_PC_Cleaner {
 
 	const MARKER = '_aliclean';
 	const BACKUP = '_aliclean_backup';
+	const FAILS  = '_aliclean_fails';
+	const FAIL_AT = '_aliclean_fail_at';
+	const FAIL_MSG = '_aliclean_fail_msg';
+	const MAX_AUTO_TRIES = 3;
 
 	/* ------------------------------------------------------------------
 	 * Which products
@@ -46,10 +50,12 @@ class ACE_PC_Cleaner {
 	 * Imports that still wait for cleaning.
 	 *
 	 * @param int $limit      How many (0 = all).
-	 * @param int $min_age    Skip products changed in the last N seconds (an import may still be running).
+	 * @param int  $min_age Skip products changed in the last N seconds (an import may still be running).
+	 * @param bool $auto    True for the automatic run: skips products that failed 3 times, and waits 30 minutes
+	 *                      after a failure, so one bad product never blocks the others or burns API credit.
 	 * @return int[] Product ids, oldest first.
 	 */
-	public static function waiting( $limit = 0, $min_age = 0 ) {
+	public static function waiting( $limit = 0, $min_age = 0, $auto = false ) {
 		$args = array(
 			'post_type'      => 'product',
 			'post_status'    => array( 'publish', 'draft', 'pending', 'private' ),
@@ -65,6 +71,12 @@ class ACE_PC_Cleaner {
 		}
 		$out = array();
 		foreach ( get_posts( $args ) as $id ) {
+			if ( $auto ) {
+				$fails = (int) get_post_meta( $id, self::FAILS, true );
+				if ( $fails >= self::MAX_AUTO_TRIES || ( $fails && time() - (int) get_post_meta( $id, self::FAIL_AT, true ) < 1800 ) ) {
+					continue;
+				}
+			}
 			$p = wc_get_product( $id );
 			if ( $p && self::is_import( $p ) && ! self::is_protected( $p ) ) {
 				$out[] = $id;
@@ -692,6 +704,9 @@ TXT;
 			$v->save();
 		}
 		update_post_meta( $id, self::MARKER, gmdate( 'Y-m-d' ) );
+		delete_post_meta( $id, self::FAILS );
+		delete_post_meta( $id, self::FAIL_AT );
+		delete_post_meta( $id, self::FAIL_MSG );
 		update_post_meta( $id, '_aliclean_notes', isset( $c['notes'] ) ? array_map( 'sanitize_text_field', (array) $c['notes'] ) : array() );
 		self::refresh( $id );
 

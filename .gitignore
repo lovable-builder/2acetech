@@ -4,3 +4,4 @@ node_modules/
 dist/
 playground/_order-url.txt
 playground/_cleaner-result.json
+playground/_failure-result.json
