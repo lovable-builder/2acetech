@@ -307,6 +307,34 @@ function ace_guess_art( $name ) {
  * @param int $limit Max categories.
  * @return array[] Each: slug, label, url, count, thumb (HTML or ''), art.
  */
+/**
+ * A photo for a category that has none of its own: the newest product photo in it
+ * (subcategories included). Remembered for 6 hours.
+ *
+ * @param int $term_id Category id.
+ * @return int Attachment id, or 0.
+ */
+function ace_category_product_image( $term_id ) {
+	$key = 'ace_cat_img_' . (int) $term_id;
+	$id  = get_transient( $key );
+	if ( false === $id ) {
+		$ids = get_posts(
+			array(
+				'post_type'      => 'product',
+				'post_status'    => 'publish',
+				'posts_per_page' => 1,
+				'fields'         => 'ids',
+				'no_found_rows'  => true,
+				'meta_query'     => array( array( 'key' => '_thumbnail_id', 'compare' => 'EXISTS' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+				'tax_query'      => array( array( 'taxonomy' => 'product_cat', 'field' => 'term_id', 'terms' => (int) $term_id, 'include_children' => true ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+			)
+		);
+		$id  = $ids ? (int) get_post_thumbnail_id( $ids[0] ) : 0;
+		set_transient( $key, $id, 6 * HOUR_IN_SECONDS );
+	}
+	return (int) $id;
+}
+
 function ace_category_list( $limit = 8 ) {
 	$out = array();
 
@@ -325,12 +353,15 @@ function ace_category_list( $limit = 8 ) {
 		if ( ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
 				$thumb_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
+				if ( ! $thumb_id ) {
+					$thumb_id = ace_category_product_image( $term->term_id ); // No category picture: use a product photo.
+				}
 				$out[]    = array(
 					'slug'  => $term->slug,
 					'label' => $term->name,
 					'url'   => get_term_link( $term ),
 					'count' => (int) $term->count,
-					'thumb' => $thumb_id ? wp_get_attachment_image( $thumb_id, 'ace-tile', false, array( 'loading' => 'lazy' ) ) : '',
+					'thumb' => $thumb_id ? wp_get_attachment_image( $thumb_id, 'ace-tile', false, array( 'loading' => 'lazy', 'alt' => '' ) ) : '',
 					'art'   => ace_guess_art( $term->slug . ' ' . $term->name ),
 				);
 			}

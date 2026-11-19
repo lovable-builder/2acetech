@@ -181,3 +181,20 @@ if ( ! get_option( 'ace_preview_subcats' ) ) {
 	}
 	update_option( 'ace_preview_subcats', 1 );
 }
+
+
+/* Product photos so the category photo row can be previewed (the sample logos double as photos). */
+if ( ! get_option( 'ace_preview_photos' ) && file_exists( '/playground/brand-samples/nexo-square-white.png' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$pics = array( 'soniq-wide-margins.jpg', 'vertex-tall.png', 'nexo-square-white.png', 'lumo-tiny.png', 'proaudio-strip.png', 'aero-light.jpg' );
+	$ids  = wc_get_products( array( 'limit' => 6, 'return' => 'ids', 'status' => 'publish' ) );
+	foreach ( $ids as $i => $pid ) {
+		$tmp = wp_tempnam( $pics[ $i ] );
+		copy( '/playground/brand-samples/' . $pics[ $i ], $tmp );
+		$att = media_handle_sideload( array( 'name' => $pics[ $i ], 'tmp_name' => $tmp ), $pid );
+		if ( ! is_wp_error( $att ) ) { set_post_thumbnail( $pid, $att ); }
+	}
+	update_option( 'ace_preview_photos', 1 );
+}

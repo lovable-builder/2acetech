@@ -85,8 +85,8 @@ site. They are not part of the theme.
 - **Categories** (`inc/categories.php`): with up to 6 main categories they sit directly in the desktop header bar
   (hover for subcategories); with more, the "Shop by category" menu is used. On phones it is always the menu, with
   subcategories inline. Parents count the products of their children, so a parent whose products all sit in
-  subcategories still shows. Shop and category pages get subcategory chips. Homepage tiles are centred when
-  there are few. Categories are managed under Products > Categories (the Product Cleaner plugin can also
+  subcategories still shows. Shop and category pages get subcategory chips. The homepage category section is an Amazon-style row of round photo tiles (name and count underneath, centred,
+  swipeable on phones); a category without its own picture automatically uses a photo of one of its products. Categories are managed under Products > Categories (the Product Cleaner plugin can also
   create and assign them automatically).
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
