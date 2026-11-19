@@ -165,7 +165,7 @@ function ace_customize_home( $wp ) {
 		'ace_cat_row',
 		array(
 			'title'       => __( 'Category row', '2acetech' ),
-			'description' => __( 'The round pictures under "Kategorie produktów". A picture you set on a category (Products > Categories) is always used.', '2acetech' ),
+			'description' => __( 'The round pictures under "Kategorie produktów". With icons, every category that has a matching icon shows it; a category without a matching icon uses its own picture (Products > Categories), else a product photo.', '2acetech' ),
 			'panel'       => 'ace_home',
 			'priority'    => 2,
 		)

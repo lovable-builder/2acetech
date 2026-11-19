@@ -380,10 +380,13 @@ function ace_category_list( $limit = 8 ) {
 		if ( ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
 				$thumb_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
-				$art = ace_guess_art( $term->slug . ' ' . $term->name );
-				// Its own picture always wins. Otherwise: a stylish icon (default), or a product photo
-				// when the shop is set to photos or no icon fits.
-				if ( ! $thumb_id && ( 'photos' === get_theme_mod( 'ace_cat_style', 'icons' ) || ! $art ) ) {
+				$art   = ace_guess_art( $term->slug . ' ' . $term->name );
+				$icons = 'photos' !== get_theme_mod( 'ace_cat_style', 'icons' );
+				// Icons mode: a matching icon is used for every category, so the row looks uniform.
+				// Photos mode (or no icon fits): the category's own picture, else a product photo.
+				if ( $icons && $art ) {
+					$thumb_id = 0;
+				} elseif ( ! $thumb_id ) {
 					$thumb_id = ace_category_product_image( $term->term_id );
 				}
 				$out[]    = array(
