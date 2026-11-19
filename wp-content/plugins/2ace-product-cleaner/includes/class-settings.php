@@ -1,0 +1,226 @@
+<?php
+/**
+ * Settings page (WooCommerce > Product Cleaner), the "clean now" button,
+ * product-list row actions, and the automatic schedule.
+ *
+ * @package 2ace-product-cleaner
+ */
+
+defined( 'ABSPATH' ) || exit;
+
+class ACE_PC_Settings {
+
+	const OPTION = 'ace_pc_settings';
+	const LOG    = 'ace_pc_log';
+	const CRON   = 'ace_pc_cron';
+
+	public static function init() {
+		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
+		add_action( 'admin_init', array( __CLASS__, 'register' ) );
+		add_action( 'wp_ajax_ace_pc_clean', array( __CLASS__, 'ajax_clean' ) );
+		add_action( 'admin_post_ace_pc_undo', array( __CLASS__, 'handle_undo' ) );
+		add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
+		add_filter( 'cron_schedules', array( __CLASS__, 'schedules' ) );
+		add_action( self::CRON, array( __CLASS__, 'cron' ) );
+		add_action( 'init', array( __CLASS__, 'ensure_schedule' ) );
+	}
+
+	/** Settings with defaults. */
+	public static function get() {
+		return wp_parse_args(
+			get_option( self::OPTION, array() ),
+			array(
+				'api_key'    => '',
+				'model'      => 'claude-sonnet-5-5',
+				'auto'       => 1,
+				'category'   => 'Oświetlenie',
+				'sku_prefix' => '2AC-',
+			)
+		);
+	}
+
+	public static function log( $line ) {
+		$log = get_option( self::LOG, array() );
+		array_unshift( $log, gmdate( 'Y-m-d H:i' ) . '  ' . $line );
+		update_option( self::LOG, array_slice( $log, 0, 60 ), false );
+	}
+
+	/* ---- schedule ---- */
+
+	public static function schedules( $s ) {
+		$s['ace_pc_10min'] = array( 'interval' => 600, 'display' => __( 'Every 10 minutes', '2ace-product-cleaner' ) );
+		return $s;
+	}
+
+	public static function ensure_schedule() {
+		if ( ! wp_next_scheduled( self::CRON ) ) {
+			wp_schedule_event( time() + 120, 'ace_pc_10min', self::CRON );
+		}
+	}
+
+	/** Runs by itself: cleans up to 2 finished imports per run. */
+	public static function cron() {
+		$o = self::get();
+		if ( ! $o['auto'] || '' === $o['api_key'] || get_transient( 'ace_pc_lock' ) ) {
+			return;
+		}
+		set_transient( 'ace_pc_lock', 1, 9 * MINUTE_IN_SECONDS );
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 280 ); // phpcs:ignore
+		}
+		// Only products untouched for 5 minutes, so a running import is not interrupted.
+		foreach ( ACE_PC_Cleaner::waiting( 2, 300 ) as $id ) {
+			self::run_one( $id );
+		}
+		delete_transient( 'ace_pc_lock' );
+	}
+
+	private static function run_one( $id ) {
+		try {
+			$r = ACE_PC_Cleaner::clean( $id );
+			self::log( sprintf( '#%d cleaned: %s (%s)', $id, $r['title'], $r['sku'] ) );
+			return $r;
+		} catch ( Exception $e ) {
+			self::log( sprintf( '#%d skipped: %s', $id, $e->getMessage() ) );
+			throw $e;
+		}
+	}
+
+	/* ---- menu + settings ---- */
+
+	public static function menu() {
+		add_submenu_page( 'woocommerce', __( 'Product Cleaner', '2ace-product-cleaner' ), __( 'Product Cleaner', '2ace-product-cleaner' ), 'manage_woocommerce', 'ace-pc', array( __CLASS__, 'page' ) );
+	}
+
+	public static function register() {
+		register_setting( 'ace_pc', self::OPTION, array( 'sanitize_callback' => array( __CLASS__, 'sanitize' ) ) );
+	}
+
+	public static function sanitize( $in ) {
+		$old = self::get();
+		$key = isset( $in['api_key'] ) ? trim( sanitize_text_field( $in['api_key'] ) ) : '';
+		return array(
+			'api_key'    => '' === $key ? $old['api_key'] : $key, // Empty box keeps the saved key.
+			'model'      => isset( $in['model'] ) && '' !== trim( $in['model'] ) ? sanitize_text_field( $in['model'] ) : $old['model'],
+			'auto'       => empty( $in['auto'] ) ? 0 : 1,
+			'category'   => isset( $in['category'] ) ? sanitize_text_field( $in['category'] ) : $old['category'],
+			'sku_prefix' => isset( $in['sku_prefix'] ) ? sanitize_text_field( $in['sku_prefix'] ) : $old['sku_prefix'],
+		);
+	}
+
+	public static function page() {
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			return;
+		}
+		$o       = self::get();
+		$waiting = ACE_PC_Cleaner::waiting();
+		$log     = get_option( self::LOG, array() );
+		$nonce   = wp_create_nonce( 'ace_pc' );
+		?>
+		<div class="wrap">
+			<h1><?php esc_html_e( 'Product Cleaner', '2ace-product-cleaner' ); ?></h1>
+			<p><?php esc_html_e( 'Rewrites imported AliExpress products in Polish: title, bullets, description, tags, attribute names, SKU, category and .99 prices. Your own products are never touched.', '2ace-product-cleaner' ); ?></p>
+
+			<?php if ( '' === $o['api_key'] ) : ?>
+				<div class="notice notice-warning inline"><p><strong><?php esc_html_e( 'Step 1: paste your Anthropic API key below and save.', '2ace-product-cleaner' ); ?></strong> <?php esc_html_e( 'Get one at console.anthropic.com (API keys). Cleaning a product costs a few cents.', '2ace-product-cleaner' ); ?></p></div>
+			<?php endif; ?>
+
+			<h2><?php esc_html_e( 'Waiting for cleanup', '2ace-product-cleaner' ); ?> (<?php echo count( $waiting ); ?>)</h2>
+			<?php if ( $waiting ) : ?>
+				<ul style="list-style:disc;margin-left:20px">
+					<?php foreach ( $waiting as $id ) : ?>
+						<li id="acepc-<?php echo (int) $id; ?>"><?php echo esc_html( get_the_title( $id ) ); ?> <small>(#<?php echo (int) $id; ?>)</small> <span class="acepc-state"></span></li>
+					<?php endforeach; ?>
+				</ul>
+				<p><button class="button button-primary" id="acepc-run" <?php disabled( '' === $o['api_key'] ); ?>><?php esc_html_e( 'Clean them now', '2ace-product-cleaner' ); ?></button>
+				<span class="description"><?php esc_html_e( 'About 30 seconds per product. Keep this page open.', '2ace-product-cleaner' ); ?></span></p>
+			<?php else : ?>
+				<p><?php esc_html_e( 'Nothing waiting. New imports are picked up automatically.', '2ace-product-cleaner' ); ?></p>
+			<?php endif; ?>
+
+			<form method="post" action="options.php">
+				<?php settings_fields( 'ace_pc' ); ?>
+				<table class="form-table" role="presentation">
+					<tr><th><label for="ak"><?php esc_html_e( 'Anthropic API key', '2ace-product-cleaner' ); ?></label></th>
+						<td><input type="password" id="ak" name="<?php echo esc_attr( self::OPTION ); ?>[api_key]" class="regular-text" autocomplete="off" placeholder="<?php echo $o['api_key'] ? esc_attr( '••••••••' . substr( $o['api_key'], -4 ) ) : 'sk-ant-…'; ?>">
+						<p class="description"><?php esc_html_e( 'Stored in your database. Leave empty to keep the saved key.', '2ace-product-cleaner' ); ?></p></td></tr>
+					<tr><th><?php esc_html_e( 'Clean new imports automatically', '2ace-product-cleaner' ); ?></th>
+						<td><label><input type="checkbox" name="<?php echo esc_attr( self::OPTION ); ?>[auto]" value="1" <?php checked( $o['auto'] ); ?>> <?php esc_html_e( 'Every 10 minutes, products that have not changed for 5 minutes are cleaned. Status (draft or published) is never changed.', '2ace-product-cleaner' ); ?></label></td></tr>
+					<tr><th><label for="md"><?php esc_html_e( 'Model', '2ace-product-cleaner' ); ?></label></th>
+						<td><input type="text" id="md" name="<?php echo esc_attr( self::OPTION ); ?>[model]" value="<?php echo esc_attr( $o['model'] ); ?>" class="regular-text"></td></tr>
+					<tr><th><label for="ct"><?php esc_html_e( 'Default category', '2ace-product-cleaner' ); ?></label></th>
+						<td><input type="text" id="ct" name="<?php echo esc_attr( self::OPTION ); ?>[category]" value="<?php echo esc_attr( $o['category'] ); ?>" class="regular-text">
+						<p class="description"><?php esc_html_e( 'Used when an import has no category. Must exist.', '2ace-product-cleaner' ); ?></p></td></tr>
+					<tr><th><label for="sp"><?php esc_html_e( 'SKU prefix', '2ace-product-cleaner' ); ?></label></th>
+						<td><input type="text" id="sp" name="<?php echo esc_attr( self::OPTION ); ?>[sku_prefix]" value="<?php echo esc_attr( $o['sku_prefix'] ); ?>" class="small-text"></td></tr>
+				</table>
+				<?php submit_button(); ?>
+			</form>
+
+			<h2><?php esc_html_e( 'Recent activity', '2ace-product-cleaner' ); ?></h2>
+			<pre style="background:#fff;border:1px solid #ccd0d4;padding:12px;max-height:260px;overflow:auto;white-space:pre-wrap"><?php echo $log ? esc_html( implode( "\n", $log ) ) : esc_html__( 'Nothing yet.', '2ace-product-cleaner' ); ?></pre>
+			<p class="description"><?php esc_html_e( 'To undo a product: Products list > hover the product > "Undo Polish cleanup".', '2ace-product-cleaner' ); ?></p>
+		</div>
+		<script>
+		(function(){
+			var btn=document.getElementById('acepc-run'); if(!btn) return;
+			var ids=<?php echo wp_json_encode( array_map( 'intval', $waiting ) ); ?>;
+			btn.addEventListener('click',async function(){
+				btn.disabled=true;
+				for(var i=0;i<ids.length;i++){
+					var li=document.getElementById('acepc-'+ids[i]), st=li.querySelector('.acepc-state');
+					st.textContent=' … working';
+					try{
+						var fd=new FormData(); fd.append('action','ace_pc_clean'); fd.append('id',ids[i]); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
+						var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
+						st.textContent = r.success ? ' ✔ '+r.data.title : ' ✖ '+(r.data||'error');
+					}catch(e){ st.textContent=' ✖ '+e; }
+				}
+				btn.textContent='Done. Reload the page.';
+			});
+		})();
+		</script>
+		<?php
+	}
+
+	public static function ajax_clean() {
+		check_ajax_referer( 'ace_pc' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'Not allowed' );
+		}
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 280 ); // phpcs:ignore
+		}
+		try {
+			wp_send_json_success( self::run_one( absint( $_POST['id'] ?? 0 ) ) );
+		} catch ( Exception $e ) {
+			wp_send_json_error( $e->getMessage() );
+		}
+	}
+
+	/* ---- product list: Undo ---- */
+
+	public static function row_actions( $actions, $post ) {
+		if ( 'product' === $post->post_type && current_user_can( 'manage_woocommerce' ) && ACE_PC_Cleaner::is_cleaned( $post->ID ) && is_array( get_post_meta( $post->ID, ACE_PC_Cleaner::BACKUP, true ) ) ) {
+			$url = wp_nonce_url( admin_url( 'admin-post.php?action=ace_pc_undo&id=' . $post->ID ), 'ace_pc_undo_' . $post->ID );
+			$actions['ace_pc_undo'] = '<a href="' . esc_url( $url ) . '" onclick="return confirm(\'' . esc_js( __( 'Put this product back as it was before the cleanup?', '2ace-product-cleaner' ) ) . '\')">' . esc_html__( 'Undo Polish cleanup', '2ace-product-cleaner' ) . '</a>';
+		}
+		return $actions;
+	}
+
+	public static function handle_undo() {
+		$id = absint( $_GET['id'] ?? 0 );
+		check_admin_referer( 'ace_pc_undo_' . $id );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_die( 'Not allowed' );
+		}
+		try {
+			ACE_PC_Cleaner::undo( $id );
+			self::log( "#$id restored to the original" );
+		} catch ( Exception $e ) {
+			wp_die( esc_html( $e->getMessage() ) );
+		}
+		wp_safe_redirect( admin_url( 'edit.php?post_type=product' ) );
+		exit;
+	}
+}

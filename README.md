@@ -144,6 +144,12 @@ Code lives in `inc/home.php` (defaults and readers) and
 `inc/customizer-home.php` (the panel). Developers can still override output
 with the `ace_hero_scenes` and `ace_promos` filters.
 
+## Product Cleaner plugin
+
+`wp-content/plugins/2ace-product-cleaner`: rewrites imported AliExpress products in Polish, automatically,
+inside WordPress (WooCommerce > Product Cleaner). Needs an Anthropic API key. Details and undo in the
+plugin's own README.
+
 ## Before launch
 
 See [docs/launch-checklist.md](docs/launch-checklist.md): business details,
