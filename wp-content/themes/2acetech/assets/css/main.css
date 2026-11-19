@@ -1060,13 +1060,14 @@ a.brand:hover { color: var(--ink); }
 	width: 132px; height: 132px;
 	margin-bottom: 8px;
 	overflow: hidden;
-	background: var(--mist);
+	background: radial-gradient(circle at 30% 22%, #fff 0, var(--mist) 72%);
 	border: 1px solid var(--line);
 	border-radius: 50%;
 	transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
 }
 .catrow__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
-.catrow__img svg { width: 70%; height: 70%; }
+.catrow__img svg { width: 90%; height: 90%; transition: transform 0.5s var(--ease); }
+.catrow__item:hover .catrow__img svg { transform: scale(1.1) rotate(-3deg); }
 .catrow__initial { font-size: 3rem; font-weight: 800; color: var(--line); }
 .catrow__item:hover .catrow__img { transform: translateY(-4px); border-color: var(--ink); box-shadow: var(--shadow-lg); }
 .catrow__item:hover .catrow__img img { transform: scale(1.08); }

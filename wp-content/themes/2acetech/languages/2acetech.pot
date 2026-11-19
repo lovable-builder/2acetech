@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:15+0100\n"
+"POT-Creation-Date: 2026-11-20 00:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -524,6 +524,33 @@ msgstr ""
 msgid "Game console"
 msgstr ""
 
+msgid "Lamp"
+msgstr ""
+
+msgid "Building blocks"
+msgstr ""
+
+msgid "Scooter"
+msgstr ""
+
+msgid "Cooking pot"
+msgstr ""
+
+msgid "Plant"
+msgstr ""
+
+msgid "Notebook"
+msgstr ""
+
+msgid "Baby bottle"
+msgstr ""
+
+msgid "Paw print"
+msgstr ""
+
+msgid "Microchip"
+msgstr ""
+
 msgid "Wear the future on your wrist."
 msgstr ""
 
@@ -767,6 +794,23 @@ msgid ""
 msgstr ""
 
 msgid "Show the scroll hero"
+msgstr ""
+
+msgid "Category row"
+msgstr ""
+
+msgid ""
+"The round pictures under \"Kategorie produktów\". A picture you set on a "
+"category (Products > Categories) is always used."
+msgstr ""
+
+msgid "Pictures"
+msgstr ""
+
+msgid "Stylish icons (recommended)"
+msgstr ""
+
+msgid "Product photos"
 msgstr ""
 
 #, php-format

@@ -277,22 +277,49 @@ function ace_footer_fallback( $which ) {
  * @return string
  */
 function ace_guess_art( $name ) {
-	$map = array(
-		'watch'      => 'watch',
-		'wear'       => 'watch',
-		'laptop'     => 'laptop',
-		'computer'   => 'laptop',
-		'notebook'   => 'laptop',
-		'phone'      => 'phone',
-		'tablet'     => 'tablet',
-		'audio'      => 'headphones',
-		'headphone'  => 'headphones',
-		'speaker'    => 'speaker',
-		'camera'     => 'camera',
-		'gaming'     => 'console',
-		'console'    => 'console',
+	$map  = array(
+		'watch'     => 'watch',
+		'wear'      => 'watch',
+		'laptop'    => 'laptop',
+		'computer'  => 'laptop',
+		'komputer'  => 'laptop',
+		'notebook'  => 'laptop',
+		'phone'     => 'phone',
+		'tablet'    => 'tablet',
+		'audio'     => 'headphones',
+		'headphone' => 'headphones',
+		'speaker'   => 'speaker',
+		'camera'    => 'camera',
+		'gaming'    => 'console',
+		'console'   => 'console',
+		// Everyday categories (Polish and English, slug or name).
+		'oswietl'   => 'lamp',
+		'lighting'  => 'lamp',
+		'lamp'      => 'lamp',
+		'zabaw'     => 'blocks',
+		'toy'       => 'blocks',
+		'klock'     => 'blocks',
+		'sport'     => 'scooter',
+		'turyst'    => 'scooter',
+		'hulajn'    => 'scooter',
+		'outdoor'   => 'scooter',
+		'kuchn'     => 'pot',
+		'kitchen'   => 'pot',
+		'cooking'   => 'pot',
+		'ogrod'     => 'plant',
+		'garden'    => 'plant',
+		'biur'      => 'notebook',
+		'office'    => 'notebook',
+		'stationer' => 'notebook',
+		'niemowl'   => 'bottle',
+		'dziec'     => 'bottle',
+		'baby'      => 'bottle',
+		'zwierz'    => 'paw',
+		'pet'       => 'paw',
+		'elektron'  => 'chip',
+		'electronic' => 'chip',
 	);
-	$name = strtolower( $name );
+	$name = function_exists( 'mb_strtolower' ) ? mb_strtolower( $name ) : strtolower( $name );
 	foreach ( $map as $needle => $art ) {
 		if ( false !== strpos( $name, $needle ) ) {
 			return $art;
@@ -353,8 +380,11 @@ function ace_category_list( $limit = 8 ) {
 		if ( ! is_wp_error( $terms ) ) {
 			foreach ( $terms as $term ) {
 				$thumb_id = (int) get_term_meta( $term->term_id, 'thumbnail_id', true );
-				if ( ! $thumb_id ) {
-					$thumb_id = ace_category_product_image( $term->term_id ); // No category picture: use a product photo.
+				$art = ace_guess_art( $term->slug . ' ' . $term->name );
+				// Its own picture always wins. Otherwise: a stylish icon (default), or a product photo
+				// when the shop is set to photos or no icon fits.
+				if ( ! $thumb_id && ( 'photos' === get_theme_mod( 'ace_cat_style', 'icons' ) || ! $art ) ) {
+					$thumb_id = ace_category_product_image( $term->term_id );
 				}
 				$out[]    = array(
 					'slug'  => $term->slug,
@@ -362,7 +392,7 @@ function ace_category_list( $limit = 8 ) {
 					'url'   => get_term_link( $term ),
 					'count' => (int) $term->count,
 					'thumb' => $thumb_id ? wp_get_attachment_image( $thumb_id, 'ace-tile', false, array( 'loading' => 'lazy', 'alt' => '' ) ) : '',
-					'art'   => ace_guess_art( $term->slug . ' ' . $term->name ),
+					'art'   => $art,
 				);
 			}
 		}

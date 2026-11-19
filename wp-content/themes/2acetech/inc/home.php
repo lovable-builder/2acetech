@@ -39,6 +39,15 @@ function ace_art_choices() {
 		'speaker'    => __( 'Speaker', '2acetech' ),
 		'tablet'     => __( 'Tablet', '2acetech' ),
 		'console'    => __( 'Game console', '2acetech' ),
+		'lamp'       => __( 'Lamp', '2acetech' ),
+		'blocks'     => __( 'Building blocks', '2acetech' ),
+		'scooter'    => __( 'Scooter', '2acetech' ),
+		'pot'        => __( 'Cooking pot', '2acetech' ),
+		'plant'      => __( 'Plant', '2acetech' ),
+		'notebook'   => __( 'Notebook', '2acetech' ),
+		'bottle'     => __( 'Baby bottle', '2acetech' ),
+		'paw'        => __( 'Paw print', '2acetech' ),
+		'chip'       => __( 'Microchip', '2acetech' ),
 	);
 }
 

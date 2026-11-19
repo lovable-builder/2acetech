@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:15+0100\n"
+"POT-Creation-Date: 2026-11-20 00:23+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -558,6 +558,33 @@ msgstr "Tablet"
 msgid "Game console"
 msgstr "Konsola do gier"
 
+msgid "Lamp"
+msgstr "Lampa"
+
+msgid "Building blocks"
+msgstr "Klocki"
+
+msgid "Scooter"
+msgstr "Hulajnoga"
+
+msgid "Cooking pot"
+msgstr "Garnek"
+
+msgid "Plant"
+msgstr "Roślina"
+
+msgid "Notebook"
+msgstr "Notes"
+
+msgid "Baby bottle"
+msgstr "Butelka dla niemowląt"
+
+msgid "Paw print"
+msgstr "Łapka"
+
+msgid "Microchip"
+msgstr "Mikroprocesor"
+
 msgid "Wear the future on your wrist."
 msgstr "Przyszłość na Twoim nadgarstku."
 
@@ -815,10 +842,30 @@ msgid ""
 "The tall animated banner at the top of the homepage. It is off for now; the "
 "homepage starts with the trust strip and the categories. Switch it on again "
 "when its scenes show your real products."
-msgstr "Wysoki animowany baner na górze strony głównej. Na razie jest wyłączony: strona zaczyna się od paska zaufania i kategorii. Włącz go ponownie, gdy sceny pokazują Twoje prawdziwe produkty."
+msgstr ""
+"Wysoki animowany baner na górze strony głównej. Na razie jest wyłączony: "
+"strona zaczyna się od paska zaufania i kategorii. Włącz go ponownie, gdy "
+"sceny pokazują Twoje prawdziwe produkty."
 
 msgid "Show the scroll hero"
 msgstr "Pokaż baner przewijany"
+
+msgid "Category row"
+msgstr "Rząd kategorii"
+
+msgid ""
+"The round pictures under \"Kategorie produktów\". A picture you set on a "
+"category (Products > Categories) is always used."
+msgstr "Okrągłe obrazki pod nagłówkiem „Kategorie produktów”. Zdjęcie ustawione w kategorii (Produkty > Kategorie) jest zawsze używane."
+
+msgid "Pictures"
+msgstr "Obrazki"
+
+msgid "Stylish icons (recommended)"
+msgstr "Stylowe ikony (zalecane)"
+
+msgid "Product photos"
+msgstr "Zdjęcia produktów"
 
 #, php-format
 msgid "Hero scene %d"

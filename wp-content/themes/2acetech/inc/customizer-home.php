@@ -16,6 +16,16 @@ defined( 'ABSPATH' ) || exit;
  * @param mixed $value Raw.
  * @return bool
  */
+/**
+ * Category row style: icons or photos.
+ *
+ * @param string $value Submitted value.
+ * @return string
+ */
+function ace_sanitize_cat_style( $value ) {
+	return 'photos' === $value ? 'photos' : 'icons';
+}
+
 function ace_sanitize_checkbox( $value ) {
 	return (bool) $value;
 }
@@ -149,6 +159,32 @@ function ace_customize_home( $wp ) {
 		)
 	);
 	ace_cz_field( $wp, 'ace_hero_switch', 'ace_hero_show', __( 'Show the scroll hero', '2acetech' ), false, array( 'type' => 'checkbox' ) );
+
+	/* Category row */
+	$wp->add_section(
+		'ace_cat_row',
+		array(
+			'title'       => __( 'Category row', '2acetech' ),
+			'description' => __( 'The round pictures under "Kategorie produktów". A picture you set on a category (Products > Categories) is always used.', '2acetech' ),
+			'panel'       => 'ace_home',
+			'priority'    => 2,
+		)
+	);
+	ace_cz_field(
+		$wp,
+		'ace_cat_row',
+		'ace_cat_style',
+		__( 'Pictures', '2acetech' ),
+		'icons',
+		array(
+			'type'     => 'radio',
+			'choices'  => array(
+				'icons'  => __( 'Stylish icons (recommended)', '2acetech' ),
+				'photos' => __( 'Product photos', '2acetech' ),
+			),
+			'sanitize' => 'ace_sanitize_cat_style',
+		)
+	);
 
 	/* Hero scenes */
 	foreach ( ace_hero_defaults() as $i => $d ) {

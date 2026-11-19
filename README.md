@@ -87,7 +87,9 @@ site. They are not part of the theme.
   (hover for subcategories); with more, the "Shop by category" menu is used. On phones it is always the menu, with
   subcategories inline. Parents count the products of their children, so a parent whose products all sit in
   subcategories still shows. Shop and category pages get subcategory chips. The homepage category section is an Amazon-style row of round photo tiles (name and count underneath, centred,
-  swipeable on phones); a category without its own picture automatically uses a photo of one of its products. Categories are managed under Products > Categories (the Product Cleaner plugin can also
+  swipeable on phones); each tile shows a stylish illustration that matches the category name (lamp, building blocks, scooter, pot, plant,
+  notebook, baby bottle, paw, chip, plus the original watch/laptop/headphones...). A picture set on the category
+  always wins; Customize > Landing page > Category row switches to product photos instead. Categories are managed under Products > Categories (the Product Cleaner plugin can also
   create and assign them automatically).
 - **Menus**: Appearance > Menus. Locations: Primary, Departments, Footer Shop,
   Footer Customer care. Sensible fallbacks show until assigned.
