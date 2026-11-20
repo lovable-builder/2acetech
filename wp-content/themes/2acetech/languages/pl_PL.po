@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 11:06+0100\n"
+"POT-Creation-Date: 2026-11-20 12:08+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -115,7 +115,7 @@ msgstr "Lista życzeń"
 msgid "My account"
 msgstr "Moje konto"
 
-#: header.php:65 inc/template-tags.php:256 inc/woocommerce.php:188
+#: header.php:65 inc/template-tags.php:256 inc/woocommerce.php:307
 msgid "Cart"
 msgstr "Koszyk"
 
@@ -182,7 +182,7 @@ msgstr "Nowość w sklepie"
 msgid "Discover our newest products"
 msgstr "Odkryj nasze najnowsze produkty"
 
-#: inc/banner.php:85 inc/home.php:189
+#: inc/banner.php:85
 msgid "Shop now"
 msgstr "Kup teraz"
 
@@ -1031,7 +1031,7 @@ msgstr "Aparaty i kamery"
 msgid "Wearables"
 msgstr "Smartwatche"
 
-#: inc/demo-data.php:62 inc/home.php:195
+#: inc/demo-data.php:62
 msgid "Gaming"
 msgstr "Gaming"
 
@@ -1193,20 +1193,28 @@ msgid "Bluetooth 5.3"
 msgstr "Bluetooth 5.3"
 
 #: inc/home.php:187
-msgid "Tablets & phones"
-msgstr "Tablety i telefony"
+msgid "Toys & games"
+msgstr "Zabawki i gry"
 
 #: inc/home.php:188
-msgid "Shop and save big on the hottest tablets"
-msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
+msgid "Blocks, games and creative sets for kids"
+msgstr "Klocki, gry i zestawy kreatywne dla dzieci"
+
+#: inc/home.php:189
+msgid "See toys"
+msgstr "Zobacz zabawki"
+
+#: inc/home.php:195
+msgid "Lighting"
+msgstr "Oświetlenie"
 
 #: inc/home.php:196
-msgid "Level up your setup with new consoles"
-msgstr "Podkręć swoje stanowisko nowymi konsolami"
+msgid "Lamps, LED strips and string lights for every occasion"
+msgstr "Lampki, taśmy LED i girlandy na każdą okazję"
 
 #: inc/home.php:197
-msgid "Explore gaming"
-msgstr "Odkryj gaming"
+msgid "See lighting"
+msgstr "Zobacz oświetlenie"
 
 #: inc/home.php:238
 msgid "Fast delivery"
@@ -1661,23 +1669,31 @@ msgstr ""
 msgid "Items in cart:"
 msgstr "Produkty w koszyku:"
 
-#: inc/woocommerce.php:90
+#: inc/woocommerce.php:108
+msgid "Add to cart: “%s”"
+msgstr "Dodaj do koszyka: „%s”"
+
+#: inc/woocommerce.php:160
+msgid "Add to cart"
+msgstr "Dodaj do koszyka"
+
+#: inc/woocommerce.php:180
 msgid "Select options"
 msgstr "Wybierz opcje"
 
-#: inc/woocommerce.php:189
+#: inc/woocommerce.php:308
 msgid "Details & payment"
 msgstr "Dane i płatność"
 
-#: inc/woocommerce.php:190
+#: inc/woocommerce.php:309
 msgid "Confirmation"
 msgstr "Potwierdzenie"
 
-#: inc/woocommerce.php:192
+#: inc/woocommerce.php:311
 msgid "Checkout progress"
 msgstr "Postęp zamówienia"
 
-#: inc/woocommerce.php:225
+#: inc/woocommerce.php:344
 msgid "Order with obligation to pay"
 msgstr "Zamówienie z obowiązkiem zapłaty"
 
@@ -1911,3 +1927,15 @@ msgstr ""
 #: template-withdrawal.php:77
 msgid "Confirm withdrawal here"
 msgstr "Potwierdź odstąpienie od umowy tutaj"
+
+#~ msgid "Tablets & phones"
+#~ msgstr "Tablety i telefony"
+
+#~ msgid "Shop and save big on the hottest tablets"
+#~ msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
+
+#~ msgid "Level up your setup with new consoles"
+#~ msgstr "Podkręć swoje stanowisko nowymi konsolami"
+
+#~ msgid "Explore gaming"
+#~ msgstr "Odkryj gaming"

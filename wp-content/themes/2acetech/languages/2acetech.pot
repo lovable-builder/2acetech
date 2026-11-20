@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 11:06+0100\n"
+"POT-Creation-Date: 2026-11-20 12:08+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,7 +116,7 @@ msgstr ""
 msgid "My account"
 msgstr ""
 
-#: header.php:65 inc/template-tags.php:256 inc/woocommerce.php:188
+#: header.php:65 inc/template-tags.php:256 inc/woocommerce.php:307
 msgid "Cart"
 msgstr ""
 
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Discover our newest products"
 msgstr ""
 
-#: inc/banner.php:85 inc/home.php:189
+#: inc/banner.php:85
 msgid "Shop now"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Wearables"
 msgstr ""
 
-#: inc/demo-data.php:62 inc/home.php:195
+#: inc/demo-data.php:62
 msgid "Gaming"
 msgstr ""
 
@@ -1128,19 +1128,27 @@ msgid "Bluetooth 5.3"
 msgstr ""
 
 #: inc/home.php:187
-msgid "Tablets & phones"
+msgid "Toys & games"
 msgstr ""
 
 #: inc/home.php:188
-msgid "Shop and save big on the hottest tablets"
+msgid "Blocks, games and creative sets for kids"
+msgstr ""
+
+#: inc/home.php:189
+msgid "See toys"
+msgstr ""
+
+#: inc/home.php:195
+msgid "Lighting"
 msgstr ""
 
 #: inc/home.php:196
-msgid "Level up your setup with new consoles"
+msgid "Lamps, LED strips and string lights for every occasion"
 msgstr ""
 
 #: inc/home.php:197
-msgid "Explore gaming"
+msgid "See lighting"
 msgstr ""
 
 #: inc/home.php:238
@@ -1574,23 +1582,32 @@ msgstr ""
 msgid "Items in cart:"
 msgstr ""
 
-#: inc/woocommerce.php:90
+#: inc/woocommerce.php:108
+#, php-format
+msgid "Add to cart: “%s”"
+msgstr ""
+
+#: inc/woocommerce.php:160
+msgid "Add to cart"
+msgstr ""
+
+#: inc/woocommerce.php:180
 msgid "Select options"
 msgstr ""
 
-#: inc/woocommerce.php:189
+#: inc/woocommerce.php:308
 msgid "Details & payment"
 msgstr ""
 
-#: inc/woocommerce.php:190
+#: inc/woocommerce.php:309
 msgid "Confirmation"
 msgstr ""
 
-#: inc/woocommerce.php:192
+#: inc/woocommerce.php:311
 msgid "Checkout progress"
 msgstr ""
 
-#: inc/woocommerce.php:225
+#: inc/woocommerce.php:344
 msgid "Order with obligation to pay"
 msgstr ""
 

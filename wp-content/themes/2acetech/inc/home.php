@@ -184,19 +184,19 @@ function ace_promo_defaults() {
 
 	return array(
 		array(
-			'kicker' => __( 'Tablets & phones', '2acetech' ),
-			'title'  => __( 'Shop and save big on the hottest tablets', '2acetech' ),
-			'cta'    => __( 'Shop now', '2acetech' ),
-			'url'    => ace_category_url( 'phones', $shop ),
-			'art'    => 'tablet',
+			'kicker' => __( 'Toys & games', '2acetech' ),
+			'title'  => __( 'Blocks, games and creative sets for kids', '2acetech' ),
+			'cta'    => __( 'See toys', '2acetech' ),
+			'url'    => ace_category_url( 'zabawki-i-gry', $shop ),
+			'art'    => 'blocks',
 			'tone'   => 'light',
 		),
 		array(
-			'kicker' => __( 'Gaming', '2acetech' ),
-			'title'  => __( 'Level up your setup with new consoles', '2acetech' ),
-			'cta'    => __( 'Explore gaming', '2acetech' ),
-			'url'    => ace_category_url( 'gaming', $shop ),
-			'art'    => 'console',
+			'kicker' => __( 'Lighting', '2acetech' ),
+			'title'  => __( 'Lamps, LED strips and string lights for every occasion', '2acetech' ),
+			'cta'    => __( 'See lighting', '2acetech' ),
+			'url'    => ace_category_url( 'oswietlenie', $shop ),
+			'art'    => 'lamp',
 			'tone'   => 'dark',
 		),
 	);
