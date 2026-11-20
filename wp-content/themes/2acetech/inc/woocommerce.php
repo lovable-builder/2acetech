@@ -58,6 +58,89 @@ function ace_cart_count_html() {
 }
 
 /**
+ * The one variation of a "variable" product that has nothing to choose.
+ *
+ * Imports often come as a variable product with a single variation and no
+ * option (the AliExpress "ship from" attribute is hidden). Such a product can
+ * be added straight from a product list, so its card shows "Add to cart"
+ * instead of "Select options".
+ *
+ * @param WC_Product|null $product Product.
+ * @return int Variation ID, or 0 when the product has options to choose or is not purchasable.
+ */
+function ace_sole_variation_id( $product ) {
+	if ( ! $product instanceof WC_Product || ! $product->is_type( 'variable' ) ) {
+		return 0;
+	}
+	if ( $product->get_variation_attributes() ) {
+		return 0; // There is something to choose.
+	}
+	$children = $product->get_children();
+	if ( 1 !== count( $children ) ) {
+		return 0;
+	}
+	$variation = wc_get_product( $children[0] );
+	if ( ! $variation || ! $variation->is_purchasable() || ! $variation->is_in_stock() ) {
+		return 0;
+	}
+	return (int) $variation->get_id();
+}
+
+/**
+ * Loop button for such a product: an AJAX "add to cart" that sends the variation.
+ *
+ * @param array      $args    Button args (class, attributes, quantity).
+ * @param WC_Product $product Product.
+ * @return array
+ */
+function ace_loop_sole_variation_args( $args, $product ) {
+	$variation_id = ace_sole_variation_id( $product );
+	if ( $variation_id ) {
+		$classes         = array_filter( preg_split( '/\s+/', (string) ( isset( $args['class'] ) ? $args['class'] : '' ) ) );
+		$classes         = array_diff( $classes, array( 'product_type_variable' ) );
+		$classes         = array_unique( array_merge( $classes, array( 'product_type_simple', 'add_to_cart_button', 'ajax_add_to_cart' ) ) );
+		$args['class']   = implode( ' ', $classes );
+		$args['attributes']['data-variation_id'] = $variation_id;
+		unset( $args['attributes']['aria-describedby'] ); // "multiple variants" does not apply.
+		// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch, WordPress.WP.I18n.MissingTranslatorsComment
+		$args['attributes']['aria-label'] = sprintf( __( 'Add to cart: “%s”', 'woocommerce' ), wp_strip_all_tags( $product->get_name() ) );
+	}
+	return $args;
+}
+add_filter( 'woocommerce_loop_add_to_cart_args', 'ace_loop_sole_variation_args', 20, 2 );
+
+/**
+ * No "multiple variants" hint for a button that simply adds the product.
+ *
+ * @param string          $text    Description for screen readers.
+ * @param WC_Product|null $product Product.
+ * @return string
+ */
+function ace_sole_variation_describedby( $text, $product = null ) {
+	return ace_sole_variation_id( $product ) ? '' : $text;
+}
+add_filter( 'woocommerce_product_add_to_cart_aria_describedby', 'ace_sole_variation_describedby', 20, 2 );
+
+/**
+ * Without JavaScript the same button works as a plain link.
+ *
+ * @param string     $url     Add-to-cart URL.
+ * @param WC_Product $product Product.
+ * @return string
+ */
+function ace_sole_variation_url( $url, $product ) {
+	$variation_id = ace_sole_variation_id( $product );
+	return $variation_id ? add_query_arg(
+		array(
+			'add-to-cart'  => $product->get_id(),
+			'variation_id' => $variation_id,
+		),
+		$product->get_permalink()
+	) : $url;
+}
+add_filter( 'woocommerce_product_add_to_cart_url', 'ace_sole_variation_url', 20, 2 );
+
+/**
  * Keep the product buttons in Polish. Some plugins (cart, dropshipping, bundle
  * builders) overwrite the button label with their own English text such as
  * "Add To Cart". When the label that arrives here is one of those English
@@ -69,6 +152,11 @@ function ace_cart_count_html() {
  * @return string
  */
 function ace_polish_cart_text( $text, $product = null ) {
+	if ( ace_sole_variation_id( $product ) ) {
+		// Nothing to choose: it is added straight from the list.
+		// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		return __( 'Add to cart', 'woocommerce' );
+	}
 	$key = strtolower( trim( wp_strip_all_tags( (string) $text ) ) );
 	$map = array(
 		'add to cart'    => 'Add to cart',
