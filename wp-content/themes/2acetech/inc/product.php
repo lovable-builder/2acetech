@@ -331,6 +331,11 @@ function ace_product_assets() {
 				'increase'  => __( 'Increase quantity', '2acetech' ),
 				'prevPhoto' => __( 'Previous photo', '2acetech' ),
 				'nextPhoto' => __( 'Next photo', '2acetech' ),
+					// WooCommerce's own (already translated) wording.
+					// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+					'chooseOptions' => __( 'Please select some product options before adding this product to your cart.', 'woocommerce' ),
+					// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+					'unavailable'   => __( 'Sorry, this product is unavailable. Please choose a different combination.', 'woocommerce' ),
 			)
 		);
 	}

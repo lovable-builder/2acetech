@@ -11,7 +11,14 @@
 	const fire = (el, type) => el.dispatchEvent(new Event(type, { bubbles: true }));
 	// Labels come from PHP so they follow the site language.
 	const text = Object.assign(
-		{ decrease: 'Decrease quantity', increase: 'Increase quantity', prevPhoto: 'Previous photo', nextPhoto: 'Next photo' },
+		{
+			decrease: 'Decrease quantity',
+			increase: 'Increase quantity',
+			prevPhoto: 'Previous photo',
+			nextPhoto: 'Next photo',
+			chooseOptions: 'Please choose the product options first.',
+			unavailable: 'Sorry, this combination is not available.',
+		},
 		window.aceProduct || {}
 	);
 
@@ -216,5 +223,82 @@
 		new MutationObserver(setup).observe(gallery, { childList: true, subtree: true });
 		window.addEventListener('load', setup);
 		setup();
+	}
+
+	/* Products with nothing to choose ------------------------------------
+	 * Some imports are "variable" products with one variation and no option
+	 * to pick (the AliExpress "ship from" attribute is hidden). WooCommerce's
+	 * script never enables the button when there are no options, so enable it
+	 * with the only variation. */
+	const jq = window.jQuery;
+	if (jq) {
+		$$('form.variations_form').forEach((form) => {
+			if ($('.variations select', form)) return;
+			let list = null;
+			try {
+				list = JSON.parse(form.getAttribute('data-product_variations') || 'null');
+			} catch (e) {
+				list = null;
+			}
+			if (!Array.isArray(list) || list.length !== 1) return;
+			const variation = list[0];
+			const apply = () => {
+				const btn = $('.single_add_to_cart_button', form);
+				if (btn && btn.classList.contains('wc-variation-selection-needed')) {
+					jq(form).trigger('found_variation', [variation]);
+				}
+			};
+			jq(form).on('wc_variation_form', apply);
+			[60, 500].forEach((ms) => setTimeout(apply, ms));
+		});
+	}
+
+	/* Inline message instead of the browser alert -------------------------
+	 * WooCommerce shows a pop-up when the button is pressed before every
+	 * option is chosen. Show a styled note and mark the missing options. */
+	const clearNotice = (form) => {
+		const note = $('.ace-vnotice', form);
+		if (note) note.parentNode.removeChild(note);
+		$$('.is-missing', form).forEach((el) => el.classList.remove('is-missing'));
+	};
+	document.addEventListener(
+		'click',
+		(e) => {
+			const btn = e.target.closest ? e.target.closest('.single_add_to_cart_button') : null;
+			if (!btn || !btn.classList.contains('disabled')) return;
+			const form = btn.closest('form.variations_form');
+			if (!form) return;
+			e.preventDefault();
+			e.stopImmediatePropagation();
+
+			const params = window.wc_add_to_cart_variation_params || {};
+			const unavailable = btn.classList.contains('wc-variation-is-unavailable');
+			const msg = unavailable
+				? params.i18n_unavailable_text || text.unavailable
+				: params.i18n_make_a_selection_text || text.chooseOptions;
+
+			clearNotice(form);
+			const note = document.createElement('div');
+			note.className = 'ace-vnotice';
+			note.setAttribute('role', 'alert');
+			note.textContent = msg || '';
+			const anchor = $('.woocommerce-variation-add-to-cart', form) || btn.parentNode;
+			anchor.parentNode.insertBefore(note, anchor);
+
+			const missing = $$('.variations select', form).filter((s) => !s.value);
+			missing.forEach((s) => {
+				const row = s.closest('tr') || s.parentNode;
+				row.classList.add('is-missing');
+			});
+			const first = missing[0] || note;
+			first.scrollIntoView({ block: 'center', behavior: 'smooth' });
+			if (missing[0]) missing[0].focus({ preventScroll: true });
+		},
+		true
+	);
+	if (jq) {
+		jq(document).on('change found_variation', 'form.variations_form', function () {
+			clearNotice(this);
+		});
 	}
 })();
