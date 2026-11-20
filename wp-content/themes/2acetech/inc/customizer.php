@@ -19,6 +19,7 @@ function ace_seller_defaults() {
 		'ace_seller'    => '2ACE sp. z o.o.',
 		'ace_seller_id' => 'KRS 0001267111 · NIP 1133212948 · REGON 545746743',
 		'ace_address'   => 'ul. Ostrobramska 101A lok. 301, 04-041 Warszawa',
+		'ace_phone'     => '+48 608 180 946',
 	);
 }
 
