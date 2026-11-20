@@ -32,6 +32,51 @@ function ace_legal_defs() {
 			'title' => __( 'Privacy policy', '2acetech' ),
 			'file'  => 'polityka-prywatnosci.html',
 		),
+		'cookies'   => array(
+			'slug'  => 'polityka-cookies',
+			'title' => __( 'Cookie policy', '2acetech' ),
+			'file'  => 'polityka-cookies.html',
+		),
+		'delivery'  => array(
+			'slug'  => 'dostawa-i-platnosc',
+			'title' => __( 'Delivery and payment', '2acetech' ),
+			'file'  => 'dostawa-i-platnosc.html',
+		),
+		'returns'   => array(
+			'slug'  => 'zwroty-i-odstapienie',
+			'title' => __( 'Returns and withdrawal', '2acetech' ),
+			'file'  => 'zwroty-i-odstapienie.html',
+		),
+		'complaints' => array(
+			'slug'  => 'reklamacje',
+			'title' => __( 'Complaints', '2acetech' ),
+			'file'  => 'reklamacje.html',
+		),
+		'seller'    => array(
+			'slug'  => 'dane-sprzedawcy',
+			'title' => __( 'Seller details', '2acetech' ),
+			'file'  => 'dane-sprzedawcy.html',
+		),
+	);
+}
+
+/**
+ * MD5 of every text the theme seeded in earlier versions. A draft that still
+ * holds one of them (or the text this version seeded) has not been edited by
+ * the owner, so it is safe to replace with the current text. Anything else is
+ * the owner's work and is never touched.
+ *
+ * @return string[]
+ */
+function ace_legal_old_hashes() {
+	return array(
+		'12bb5c5987ac12aebf2113567d42e0f3',
+		'f1edfe87352c8e981252da1515e54364',
+		'ed5eeadb99557f33baba01d6f9a7551d',
+		'1d0c1b0d17944b25027bc6ff3c6384a6',
+		'b5357bb4ba4138f4f5f1d5a5ffcd4114',
+		'1f644f81c63900c63b3172e60cb21a09',
+		'78e8200bd8fe69a21b920318f9942f30',
 	);
 }
 
@@ -75,22 +120,34 @@ function ace_maybe_create_legal_pages() {
 		if ( ! is_readable( $file ) ) {
 			continue;
 		}
+		$text = (string) file_get_contents( $file ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 
 		$existing = ace_legal_page_id( $key );
 		if ( $existing ) {
+			$page = get_post( $existing );
+			if ( ! $page ) {
+				continue;
+			}
 			// WordPress ships an untouched draft "Privacy Policy" with tutorial
-			// text. Replace that, and never touch a page the owner has edited.
-			if ( 'privacy' === $key && ace_is_stock_privacy_stub( $existing ) ) {
+			// text. Replace that, and an unedited draft of an older theme text
+			// with the current one. Never touch a page the owner has edited or
+			// published.
+			$stub      = 'privacy' === $key && ace_is_stock_privacy_stub( $existing );
+			$hash      = md5( $page->post_content );
+			$unedited  = 'draft' === $page->post_status
+				&& ( $hash === get_post_meta( $existing, '_ace_legal_seed', true ) || in_array( $hash, ace_legal_old_hashes(), true ) );
+			if ( ( $stub || $unedited ) && $hash !== md5( $text ) ) {
 				wp_update_post(
 					wp_slash(
 						array(
 							'ID'           => $existing,
 							'post_title'   => $def['title'],
 							'post_name'    => $def['slug'],
-							'post_content' => (string) file_get_contents( $file ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+							'post_content' => $text,
 						)
 					)
 				);
+				update_post_meta( $existing, '_ace_legal_seed', md5( $text ) );
 			}
 			continue;
 		}
@@ -102,15 +159,16 @@ function ace_maybe_create_legal_pages() {
 					'post_status'  => 'draft',
 					'post_title'   => $def['title'],
 					'post_name'    => $def['slug'],
-					'post_content' => (string) file_get_contents( $file ), // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+					'post_content' => $text,
 				)
 			)
 		);
 
 		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, '_ace_legal_seed', md5( $text ) );
 			if ( 'terms' === $key ) {
 				update_option( 'woocommerce_terms_page_id', $id );
-			} else {
+			} elseif ( 'privacy' === $key ) {
 				update_option( 'wp_page_for_privacy_policy', $id );
 			}
 		}
@@ -156,30 +214,41 @@ add_action( 'admin_notices', 'ace_legal_notice' );
  */
 function ace_footer_legal_links() {
 	$links = array();
-	$map   = array(
-		'terms'   => array(
-			array( '', '' ),
-			array( '#par-5', __( 'Delivery and payment', '2acetech' ) ),
-			array( '#par-6', __( 'Returns', '2acetech' ) ),
-			array( '#par-8', __( 'Complaints', '2acetech' ) ),
-		),
-		'privacy' => array(
-			array( '', '' ),
-			array( '#sec-6', __( 'Cookie policy', '2acetech' ) ),
-		),
-	);
 
-	foreach ( $map as $key => $rows ) {
+	/**
+	 * Is the page published? Returns its URL or ''.
+	 *
+	 * @param string $key Key from ace_legal_defs().
+	 * @return string
+	 */
+	$url = static function ( $key ) {
 		$id = ace_legal_page_id( $key );
-		if ( ! $id || 'publish' !== get_post_status( $id ) ) {
-			continue;
-		}
-		foreach ( $rows as $row ) {
-			$links[] = sprintf(
-				'<a href="%s">%s</a>',
-				esc_url( get_permalink( $id ) . $row[0] ),
-				esc_html( '' === $row[1] ? get_the_title( $id ) : $row[1] )
-			);
+		return ( $id && 'publish' === get_post_status( $id ) ) ? get_permalink( $id ) : '';
+	};
+
+	$terms = $url( 'terms' );
+	$rows  = array(
+		array( 'terms', '', '' ),
+		array( 'privacy', '', '' ),
+		array( 'cookies', '', '#sec-6' ),
+		array( 'delivery', __( 'Delivery and payment', '2acetech' ), '#par-5' ),
+		array( 'returns', __( 'Returns', '2acetech' ), '#par-6' ),
+		array( 'complaints', __( 'Complaints', '2acetech' ), '#par-8' ),
+		array( 'seller', '', '' ),
+	);
+	foreach ( $rows as $row ) {
+		list( $key, $label, $anchor ) = $row;
+		$id   = ace_legal_page_id( $key );
+		$href = $url( $key );
+		if ( '' !== $href ) {
+			$title = '' !== $label ? $label : get_the_title( $id );
+			$links[] = sprintf( '<a href="%s">%s</a>', esc_url( $href ), esc_html( $title ) );
+		} elseif ( 'cookies' === $key && $url( 'privacy' ) ) {
+			// No cookie page yet: the privacy policy has a cookie section.
+			$links[] = sprintf( '<a href="%s">%s</a>', esc_url( $url( 'privacy' ) . '#sec-6' ), esc_html__( 'Cookie policy', '2acetech' ) );
+		} elseif ( '' !== $terms && in_array( $key, array( 'delivery', 'returns', 'complaints' ), true ) ) {
+			// No own page yet: the section of the Regulamin.
+			$links[] = sprintf( '<a href="%s">%s</a>', esc_url( $terms . $anchor ), esc_html( $label ) );
 		}
 	}
 
@@ -217,6 +286,55 @@ function ace_legal_anchors( $content ) {
 add_filter( 'the_content', 'ace_legal_anchors' );
 
 /**
+ * Checkout (block): a required tick box for the Regulamin.
+ *
+ * The consumer must be able to read the terms before ordering and the shop must
+ * be able to prove they were made available (art. 8 e-services act, art. 384 KC).
+ * The "Terms and conditions" block of the checkout has a "require checkbox"
+ * option; this sets it, and the text with links, as long as the Regulamin is
+ * published (a tick box for a page that does not exist would be worse than none).
+ *
+ * @param array $block Parsed block.
+ * @return array
+ */
+function ace_checkout_terms_block( $block ) {
+	if ( empty( $block['blockName'] ) || 'woocommerce/checkout-terms-block' !== $block['blockName'] ) {
+		return $block;
+	}
+	$terms = ace_legal_page_id( 'terms' );
+	if ( ! $terms || 'publish' !== get_post_status( $terms ) ) {
+		return $block;
+	}
+	$privacy = ace_legal_page_id( 'privacy' );
+	$link    = static function ( $id, $label ) {
+		return sprintf( '<a href="%s" target="_blank" rel="noopener">%s</a>', esc_url( get_permalink( $id ) ), esc_html( $label ) );
+	};
+
+	if ( $privacy && 'publish' === get_post_status( $privacy ) ) {
+		$text = sprintf(
+			/* translators: 1: link "Terms and conditions", 2: link "Privacy policy". */
+			__( 'I accept the %1$s and confirm that I have read it. How we process your data: %2$s.', '2acetech' ),
+			$link( $terms, __( 'Terms and conditions', '2acetech' ) ),
+			$link( $privacy, __( 'Privacy policy', '2acetech' ) )
+		);
+	} else {
+		$text = sprintf(
+			/* translators: %s: link "Terms and conditions". */
+			__( 'I accept the %s and confirm that I have read it.', '2acetech' ),
+			$link( $terms, __( 'Terms and conditions', '2acetech' ) )
+		);
+	}
+
+	if ( ! isset( $block['attrs'] ) || ! is_array( $block['attrs'] ) ) {
+		$block['attrs'] = array();
+	}
+	$block['attrs']['checkbox'] = true;
+	$block['attrs']['text']     = $text;
+	return $block;
+}
+add_filter( 'render_block_data', 'ace_checkout_terms_block' );
+
+/**
  * Review avatars would send a hash of the reviewer's email to Gravatar
  * (Automattic). The privacy policy assumes that does not happen.
  */
@@ -236,6 +354,11 @@ function ace_auto_page_titles() {
 		ACE_WITHDRAWAL_SLUG    => array( 'Withdraw from contract here', __( 'Withdraw from contract here', '2acetech' ) ),
 		'regulamin'            => array( 'Store terms and conditions', __( 'Store terms and conditions', '2acetech' ) ),
 		'polityka-prywatnosci' => array( 'Privacy policy', __( 'Privacy policy', '2acetech' ) ),
+		'polityka-cookies'     => array( 'Cookie policy', __( 'Cookie policy', '2acetech' ) ),
+		'dostawa-i-platnosc'   => array( 'Delivery and payment', __( 'Delivery and payment', '2acetech' ) ),
+		'zwroty-i-odstapienie' => array( 'Returns and withdrawal', __( 'Returns and withdrawal', '2acetech' ) ),
+		'reklamacje'           => array( 'Complaints', __( 'Complaints', '2acetech' ) ),
+		'dane-sprzedawcy'      => array( 'Seller details', __( 'Seller details', '2acetech' ) ),
 	);
 }
 

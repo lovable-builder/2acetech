@@ -7,8 +7,11 @@
  * "version.analytics.marketing" (for example "1.0.0"). That cookie is strictly
  * necessary (it only remembers the choice) and lasts 180 days.
  *
- * The shop sets no analytics or marketing cookies today. The categories exist
- * so anything added later is gated:
+ * Analytics and marketing tools (Google tags from plugins, others added later)
+ * must wait for this choice:
+ *
+ * - Google tags: Consent Mode. ace_consent_google_default() prints "denied" as
+ *   the very first script in <head>; consent.js sends "update" with the choice.
  *
  * - In HTML:   <script type="text/plain" data-ace-consent="analytics" src="...">
  *              runs only after the visitor accepts analytics.
@@ -83,6 +86,43 @@ function ace_consent_enabled() {
 }
 
 /**
+ * Google Consent Mode, step 1: everything denied until the visitor chooses.
+ *
+ * Printed first in <head> (priority 0), before any plugin prints its gtag
+ * code, so Google tags never start with storage allowed. consent.js sends the
+ * visitor's choice as an "update" (also on every page load for returning
+ * visitors). The default is always "denied" and never read from the cookie on
+ * the server, so a page cache cannot serve one visitor's choice to another.
+ */
+function ace_consent_google_default() {
+	if ( ! ace_consent_enabled() ) {
+		return;
+	}
+	echo "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput
+}
+add_action( 'wp_head', 'ace_consent_google_default', 0 );
+
+/**
+ * The cookie policy page if it is published, else the cookie section of the
+ * privacy policy.
+ *
+ * @return string URL or ''.
+ */
+function ace_cookie_policy_url() {
+	if ( function_exists( 'ace_legal_page_id' ) ) {
+		$cookies = ace_legal_page_id( 'cookies' );
+		if ( $cookies && 'publish' === get_post_status( $cookies ) ) {
+			return get_permalink( $cookies );
+		}
+		$privacy = ace_legal_page_id( 'privacy' );
+		if ( $privacy && 'publish' === get_post_status( $privacy ) ) {
+			return get_permalink( $privacy ) . '#sec-6';
+		}
+	}
+	return '';
+}
+
+/**
  * Styles and script.
  */
 function ace_consent_assets() {
@@ -140,8 +180,7 @@ function ace_consent_markup() {
 		return;
 	}
 
-	$privacy_id = function_exists( 'ace_legal_page_id' ) ? ace_legal_page_id( 'privacy' ) : 0;
-	$policy_url = ( $privacy_id && 'publish' === get_post_status( $privacy_id ) ) ? get_permalink( $privacy_id ) . '#sec-6' : '';
+	$policy_url = ace_cookie_policy_url();
 	?>
 	<div class="cookie" id="cookie-banner" role="region" aria-labelledby="cookie-title" hidden>
 		<div class="cookie__inner">

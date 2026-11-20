@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 12:08+0100\n"
+"POT-Creation-Date: 2026-11-20 15:10+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -95,7 +95,7 @@ msgstr "Zobacz koszyk"
 msgid "Checkout"
 msgstr "Do kasy"
 
-#: header.php:12 inc/customizer.php:49 inc/product.php:183
+#: header.php:12 inc/customizer.php:49
 msgid "Fast, tracked delivery across Poland"
 msgstr "Szybka dostawa z numerem śledzenia w całej Polsce"
 
@@ -119,7 +119,7 @@ msgstr "Moje konto"
 msgid "Cart"
 msgstr "Koszyk"
 
-#: header.php:83 inc/home.php:311
+#: header.php:83 inc/home.php:312
 msgid "Shop by category"
 msgstr "Kategorie produktów"
 
@@ -362,7 +362,7 @@ msgstr "Polecane produkty (z gwiazdką w WooCommerce)"
 msgid "Products on sale"
 msgstr "Produkty w promocji"
 
-#: inc/banner.php:371 inc/home.php:278 inc/home.php:314
+#: inc/banner.php:371 inc/home.php:279 inc/home.php:315
 msgid "Bestsellers"
 msgstr "Bestsellery"
 
@@ -525,11 +525,11 @@ msgstr ""
 msgid "Categories"
 msgstr "Kategorie"
 
-#: inc/consent.php:34
+#: inc/consent.php:37
 msgid "Necessary"
 msgstr "Niezbędne"
 
-#: inc/consent.php:35
+#: inc/consent.php:38
 msgid ""
 "Keep the cart, checkout and your account working, and remember this choice. "
 "They cannot be switched off."
@@ -537,11 +537,11 @@ msgstr ""
 "Zapewniają działanie koszyka, składania zamówień i Twojego konta oraz "
 "zapamiętują ten wybór. Nie można ich wyłączyć."
 
-#: inc/consent.php:39
+#: inc/consent.php:42
 msgid "Analytics"
 msgstr "Analityczne"
 
-#: inc/consent.php:40
+#: inc/consent.php:43
 msgid ""
 "Help us understand how the shop is used so we can improve it. Off unless you "
 "agree."
@@ -549,11 +549,11 @@ msgstr ""
 "Pomagają nam zrozumieć, jak korzysta się ze sklepu, aby go ulepszać. "
 "Wyłączone, dopóki się nie zgodzisz."
 
-#: inc/consent.php:44
+#: inc/consent.php:47
 msgid "Marketing"
 msgstr "Marketingowe"
 
-#: inc/consent.php:45
+#: inc/consent.php:48
 msgid ""
 "Used to show offers that match your interests, also on other websites. Off "
 "unless you agree."
@@ -562,12 +562,12 @@ msgstr ""
 "innych stronach. Wyłączone, dopóki się nie zgodzisz."
 
 #. translators: %s: shop name.
-#: inc/consent.php:152
+#: inc/consent.php:191
 #, php-format
 msgid "Welcome to %s"
 msgstr "Witamy w %s"
 
-#: inc/consent.php:155
+#: inc/consent.php:194
 msgid ""
 "We use cookies to make the shop work: the cart, checkout and your account. "
 "We may also use analytical and marketing cookies, but only if you agree. You "
@@ -579,7 +579,7 @@ msgstr ""
 "tylko za Twoją zgodą. Swój wybór możesz zmienić w każdej chwili przyciskiem "
 "„Ustawienia cookies” u dołu każdej strony."
 
-#: inc/consent.php:157
+#: inc/consent.php:196
 msgid ""
 "Your personal data is controlled by 2ACE sp. z o.o. You will find more about "
 "cookies and your rights in our"
@@ -587,42 +587,42 @@ msgstr ""
 "Administratorem Twoich danych osobowych jest 2ACE sp. z o.o. Więcej "
 "informacji o plikach cookie i Twoich prawach znajdziesz w naszej"
 
-#: inc/consent.php:159 inc/consent.php:161
+#: inc/consent.php:198 inc/consent.php:200
 msgctxt "link inside the cookie banner sentence"
 msgid "Cookie policy"
 msgstr "Polityce cookies"
 
-#: inc/consent.php:165 inc/consent.php:189
+#: inc/consent.php:204 inc/consent.php:228
 msgid "Reject all"
 msgstr "Odrzuć wszystkie"
 
-#: inc/consent.php:166
+#: inc/consent.php:205
 msgid "Manage cookies"
 msgstr "Zarządzaj plikami cookie"
 
-#: inc/consent.php:167
+#: inc/consent.php:206
 msgid "Accept"
 msgstr "Akceptuję"
 
-#: inc/consent.php:175 inc/legal.php:192
+#: inc/consent.php:214 inc/legal.php:261
 msgid "Cookie settings"
 msgstr "Ustawienia cookies"
 
-#: inc/consent.php:176
+#: inc/consent.php:215
 msgid "Choose which cookies you allow. You can change this at any time."
 msgstr ""
 "Wybierz, na jakie pliki cookie się zgadzasz. Możesz to zmienić w każdej "
 "chwili."
 
-#: inc/consent.php:190
+#: inc/consent.php:229
 msgid "Save my choices"
 msgstr "Zapisz mój wybór"
 
-#: inc/consent.php:191
+#: inc/consent.php:230
 msgid "Accept all"
 msgstr "Akceptuj wszystkie"
 
-#: inc/consent.php:194 inc/legal.php:168
+#: inc/consent.php:233 inc/legal.php:37 inc/legal.php:248 inc/legal.php:357
 msgid "Cookie policy"
 msgstr "Polityka cookies"
 
@@ -751,7 +751,7 @@ msgstr ""
 "Krótkie fakty wokół produktu. Puste pole ukrywa znacznik. Podawaj tylko "
 "prawdziwe informacje."
 
-#: inc/customizer-home.php:226 inc/home.php:274
+#: inc/customizer-home.php:226 inc/home.php:275
 msgid "Promo banners"
 msgstr "Banery promocyjne"
 
@@ -808,7 +808,7 @@ msgstr "Jasny"
 msgid "Dark"
 msgstr "Ciemny"
 
-#: inc/customizer-home.php:244 inc/home.php:271
+#: inc/customizer-home.php:244 inc/home.php:272
 msgid "Trust strip"
 msgstr "Pasek zalet"
 
@@ -1217,91 +1217,99 @@ msgid "See lighting"
 msgstr "Zobacz oświetlenie"
 
 #: inc/home.php:238
-msgid "Fast delivery"
-msgstr "Szybka dostawa"
+msgid "Free courier delivery"
+msgstr "Bezpłatna dostawa kurierem"
 
 #: inc/home.php:238
-msgid "Tracked shipping across Poland"
-msgstr "Wysyłka z numerem śledzenia w całej Polsce"
+msgid "Across Poland, no delivery fee"
+msgstr "Na terenie całej Polski, bez opłaty za dostawę"
 
 #: inc/home.php:239
 msgid "Secure checkout"
 msgstr "Bezpieczne zakupy"
 
 #: inc/home.php:239
-msgid "Encrypted, trusted payments"
-msgstr "Szyfrowane, zaufane płatności"
-
-#: inc/home.php:240
-msgid "Easy returns"
-msgstr "Łatwe zwroty"
+msgid "Encrypted payments"
+msgstr "Szyfrowane płatności"
 
 #: inc/home.php:240 inc/product.php:185
-msgid "14-day right of withdrawal"
-msgstr "14 dni na odstąpienie od umowy"
+msgid "Dispatch within 3 working days"
+msgstr "Wysyłka do 3 dni roboczych"
 
-#: inc/home.php:241
-msgid "Warranty included"
-msgstr "Gwarancja w cenie"
+#: inc/home.php:240
+msgid "Then 2–5 working days by courier"
+msgstr "Następnie 2–5 dni roboczych dostawy kurierem"
 
-#: inc/home.php:241
-msgid "Manufacturer warranty on every product"
-msgstr "Gwarancja producenta na każdy produkt"
-
-#: inc/home.php:272
+#: inc/home.php:273
 msgid "Category tiles"
 msgstr "Kafelki kategorii"
 
-#: inc/home.php:273 inc/home.php:312 template-parts/banner.php:108
+#: inc/home.php:274 inc/home.php:313 template-parts/banner.php:108
 msgid "Featured products"
 msgstr "Polecane produkty"
 
-#: inc/home.php:275
+#: inc/home.php:276
 msgid "Deal of the week and product tabs"
 msgstr "Oferta tygodnia i zakładki produktów"
 
-#: inc/home.php:276
+#: inc/home.php:277
 msgid "Brand strip"
 msgstr "Pasek marek"
 
-#: inc/home.php:277
+#: inc/home.php:278
 msgid "Best deals by category"
 msgstr "Najlepsze okazje według kategorii"
 
-#: inc/home.php:279
+#: inc/home.php:280
 msgid "Newsletter"
 msgstr "Newsletter"
 
-#: inc/home.php:313
+#: inc/home.php:314
 msgid "Best deals"
 msgstr "Najlepsze okazje"
 
-#: inc/home.php:315
+#: inc/home.php:316
 msgid "Get the drop before everyone else"
 msgstr "Poznaj nowości przed wszystkimi"
 
-#: inc/home.php:316
+#: inc/home.php:317
 msgid "New arrivals and deals, straight to your inbox."
 msgstr "Nowości i promocje prosto na Twoją skrzynkę."
 
-#: inc/home.php:317 inc/seo.php:94
-msgid "Premium electronics, delivered fast across Poland."
-msgstr "Elektronika premium, szybko dostarczana w całej Polsce."
+#: inc/home.php:318
+msgid "Lighting, toys and more, delivered across Poland."
+msgstr "Oświetlenie, zabawki i nie tylko, z dostawą na terenie całej Polski."
 
-#: inc/legal.php:27 inc/legal.php:237
+#: inc/legal.php:27 inc/legal.php:355
 msgid "Store terms and conditions"
 msgstr "Regulamin sklepu"
 
-#: inc/legal.php:32 inc/legal.php:238 template-contact.php:64
+#: inc/legal.php:32 inc/legal.php:318 inc/legal.php:356 template-contact.php:64
 #: template-withdrawal.php:74
 msgid "Privacy policy"
 msgstr "Polityka prywatności"
 
-#: inc/legal.php:142
+#: inc/legal.php:42 inc/legal.php:234 inc/legal.php:358
+msgid "Delivery and payment"
+msgstr "Dostawa i płatności"
+
+#: inc/legal.php:47 inc/legal.php:359
+msgid "Returns and withdrawal"
+msgstr "Zwroty i odstąpienie od umowy"
+
+#: inc/legal.php:52 inc/legal.php:236 inc/legal.php:360
+msgid "Complaints"
+msgstr "Reklamacje"
+
+#: inc/legal.php:57 inc/legal.php:361
+msgid "Seller details"
+msgstr "Dane sprzedawcy"
+
+#: inc/legal.php:200
 msgid "Legal pages are waiting:"
 msgstr "Strony prawne czekają:"
 
-#: inc/legal.php:144
+#: inc/legal.php:202
 msgid ""
 "Fill in every [bracketed] detail, have a lawyer review the text, then "
 "publish. They appear in the footer once published. Do not take real orders "
@@ -1311,19 +1319,29 @@ msgstr ""
 "następnie opublikuj. Po publikacji pojawią się w stopce. Nie przyjmuj "
 "prawdziwych zamówień przed tym."
 
-#: inc/legal.php:162
-msgid "Delivery and payment"
-msgstr "Dostawa i płatności"
-
-#: inc/legal.php:163
+#: inc/legal.php:235
 msgid "Returns"
 msgstr "Zwroty"
 
-#: inc/legal.php:164
-msgid "Complaints"
-msgstr "Reklamacje"
+#. translators: 1: link "Terms and conditions", 2: link "Privacy policy".
+#: inc/legal.php:316
+#, php-format
+msgid ""
+"I accept the %1$s and confirm that I have read it. How we process your data: "
+"%2$s."
+msgstr "Akceptuję %1$s i oświadczam, że zapoznałem(-am) się z jego treścią. Informacje o przetwarzaniu Twoich danych: %2$s."
 
-#: inc/legal.php:236 inc/withdrawal.php:82 inc/withdrawal.php:104
+#: inc/legal.php:317 inc/legal.php:324
+msgid "Terms and conditions"
+msgstr "Regulamin"
+
+#. translators: %s: link "Terms and conditions".
+#: inc/legal.php:323
+#, php-format
+msgid "I accept the %s and confirm that I have read it."
+msgstr "Akceptuję %s i oświadczam, że zapoznałem(-am) się z jego treścią."
+
+#: inc/legal.php:354 inc/withdrawal.php:82 inc/withdrawal.php:104
 #: inc/withdrawal.php:129 inc/withdrawal.php:152 inc/withdrawal.php:154
 msgid "Withdraw from contract here"
 msgstr "Odstąp od umowy tutaj"
@@ -1455,6 +1473,10 @@ msgstr "min"
 msgid "sec"
 msgstr "sek."
 
+#: inc/product.php:183
+msgid "Free courier delivery in Poland"
+msgstr "Bezpłatna dostawa kurierem w Polsce"
+
 #: inc/product.php:184
 msgid "Secure, encrypted checkout"
 msgstr "Bezpieczne, szyfrowane zamówienie"
@@ -1527,6 +1549,10 @@ msgid ""
 "Sorry, this product is unavailable. Please choose a different combination."
 msgstr "Przepraszamy, ten produkt jest niedostępny. Wybierz inną kombinację."
 
+#: inc/seo.php:94
+msgid "Premium electronics, delivered fast across Poland."
+msgstr "Elektronika premium, szybko dostarczana w całej Polsce."
+
 #. translators: %s: rating out of 5.
 #: inc/template-tags.php:144
 #, php-format
@@ -1537,25 +1563,25 @@ msgstr "Ocena %s na 5"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/template-tags.php:598
+#: inc/template-tags.php:605
 msgid "New"
 msgstr "Nowość"
 
-#: inc/template-tags.php:599
+#: inc/template-tags.php:606
 msgid "Sale"
 msgstr "Promocja"
 
-#: inc/template-tags.php:600
+#: inc/template-tags.php:607
 msgid "Sold out"
 msgstr "Wyprzedane"
 
 #. translators: %s: product name.
-#: inc/template-tags.php:628
+#: inc/template-tags.php:635
 #, php-format
 msgid "View %s"
 msgstr "Zobacz: %s"
 
-#: inc/template-tags.php:667
+#: inc/template-tags.php:674
 msgid ""
 "Showing demo products. Add your first WooCommerce product and this content "
 "is replaced automatically."
@@ -1563,7 +1589,7 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Dodaj pierwszy produkt w "
 "WooCommerce, a ta treść zostanie zastąpiona automatycznie."
 
-#: inc/template-tags.php:668
+#: inc/template-tags.php:675
 msgid ""
 "Showing demo products. Install and activate WooCommerce to sell real "
 "products."
@@ -1571,7 +1597,7 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Zainstaluj i aktywuj WooCommerce, "
 "aby sprzedawać prawdziwe produkty."
 
-#: inc/template-tags.php:669
+#: inc/template-tags.php:676
 msgid "Admin preview:"
 msgstr "Podgląd administratora:"
 
@@ -1670,6 +1696,7 @@ msgid "Items in cart:"
 msgstr "Produkty w koszyku:"
 
 #: inc/woocommerce.php:108
+#, php-format
 msgid "Add to cart: “%s”"
 msgstr "Dodaj do koszyka: „%s”"
 
@@ -1927,6 +1954,28 @@ msgstr ""
 #: template-withdrawal.php:77
 msgid "Confirm withdrawal here"
 msgstr "Potwierdź odstąpienie od umowy tutaj"
+
+#, php-format
+#~ msgid "I have read the %s and I accept it."
+#~ msgstr "Zapoznałem(-am) się z dokumentem „%s” i go akceptuję."
+
+#~ msgid "Fast delivery"
+#~ msgstr "Szybka dostawa"
+
+#~ msgid "Tracked shipping across Poland"
+#~ msgstr "Wysyłka z numerem śledzenia w całej Polsce"
+
+#~ msgid "Easy returns"
+#~ msgstr "Łatwe zwroty"
+
+#~ msgid "14-day right of withdrawal"
+#~ msgstr "14 dni na odstąpienie od umowy"
+
+#~ msgid "Warranty included"
+#~ msgstr "Gwarancja w cenie"
+
+#~ msgid "Manufacturer warranty on every product"
+#~ msgstr "Gwarancja producenta na każdy produkt"
 
 #~ msgid "Tablets & phones"
 #~ msgstr "Tablety i telefony"

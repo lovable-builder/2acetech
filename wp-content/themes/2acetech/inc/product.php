@@ -180,9 +180,9 @@ function ace_single_urgency() {
  */
 function ace_perk_defaults() {
 	return array(
-		array( 'truck', __( 'Fast, tracked delivery across Poland', '2acetech' ), '' ),
+		array( 'truck', __( 'Free courier delivery in Poland', '2acetech' ), '' ),
 		array( 'shield', __( 'Secure, encrypted checkout', '2acetech' ), '' ),
-		array( 'return', __( '14-day right of withdrawal', '2acetech' ), '' ),
+		array( 'return', __( 'Dispatch within 3 working days', '2acetech' ), '' ),
 		array( 'badge', '', '' ),
 	);
 }

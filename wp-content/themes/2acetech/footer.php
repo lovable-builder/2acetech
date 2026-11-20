@@ -85,7 +85,7 @@ $social  = array(
 
 	<div class="footer__bar">
 		<div class="container footer__bar-inner">
-			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>. <?php esc_html_e( 'All rights reserved.', '2acetech' ); ?></p>
+			<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( '' !== trim( (string) get_theme_mod( 'ace_seller', '' ) ) ? trim( (string) get_theme_mod( 'ace_seller', '' ) ) : get_bloginfo( 'name' ) ); ?>. <?php esc_html_e( 'All rights reserved.', '2acetech' ); ?></p>
 			<p class="footer__legal">
 				<?php
 				echo implode( '', ace_footer_legal_links() ); // phpcs:ignore WordPress.Security.EscapeOutput

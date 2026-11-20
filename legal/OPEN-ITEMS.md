@@ -1,264 +1,238 @@
-# Open items for the shop owner: Regulamin and Polityka prywatności
+# Open items for the shop owner: legal documents for 2acetech.pl
 
-Prepared 3 November 2026 for 2ACE sp. z o.o. (2acetech.pl). The two documents (`regulamin-sklepu.md`, `polityka-prywatnosci.md`) are in Polish for consumers. This file is in English for you.
+Updated 20 November 2026 for 2ACE sp. z o.o. This file is in English for you. The documents themselves are in Polish and are meant for consumers.
 
-**These are drafts based on public sources and on the store's code. They are not legal advice. A Polish lawyer must review them before the shop goes live.**
+**These are drafts based on public sources and on the store's code and live pages. They are not legal advice. A Polish lawyer (radca prawny or adwokat) must review them before you take real orders.**
 
-Contents: 1. Company data check (important correction) · 2. Corrections to the original brief · 3. The four additional requests · 4. Placeholders you must fill · 5. Decisions you must take · 6. What the store really does (code findings) and actions in WooCommerce / theme · 7. Grey-list check (art. 385³ KC) · 8. What a Polish lawyer should confirm · 9. Sources and versions used
+Companion files in this folder:
 
----
-
-## 1. Company data check (white-list API and KRS API, 3 November 2026)
-
-| Item | In your brief | Verified value | Source |
-|---|---|---|---|
-| Name | 2ACE SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ | same | Biała lista (wl-api.mf.gov.pl) and KRS |
-| NIP | 1133212948 | **1133212948** (VAT status "Czynny", VAT registration date shown by the API: 2026-10-01) | Biała lista, KRS |
-| KRS | 545746743 | **0001267111** | KRS API (`OdpisAktualny/0001267111`, register P) and Biała lista |
-| REGON | not given | **545746743** (9 digits; the KRS extract shows the 14-digit form 54574674300000) | Biała lista, KRS |
-| Address | Ostrobramska 101A, lok.301, 04-041 Warszawa | **ul. Ostrobramska 101A, lok. 301, 04-041 Warszawa** (the white list writes it "101A/301") | KRS, Biała lista |
-| Share capital | not given | 5 000,00 PLN | KRS |
-| Registered in KRS | not given | 17.09.2026; last entry 18.09.2026 (extract state as of that date) | KRS |
-| Registry court | not given | Sąd Rejonowy dla m.st. Warszawy w Warszawie, XIV Wydział Gospodarczy KRS. I inferred this from the case file signature "WA.XIV NS-REJ.KRS/…" in the extract. **Check it on the PDF extract (odpis aktualny) from ekrs.ms.gov.pl before publishing.** | KRS (inferred) |
-
-**You were right: the "KRS" in your brief is not a KRS number.** 545746743 has 9 digits and is the company's **REGON**. A KRS number has 10 digits; yours is 0001267111. The documents use the verified values.
-
-Hazard: if someone pads your 9-digit number with zeros or truncates it to 0000545746, the KRS API returns a **different, unrelated company**. Never paste the wrong number into the Customizer, invoices or the footer.
-
-Also noted:
-
-- The white list shows two bank accounts for the company. The account you show to customers for any bank-transfer payment must be one of them (otherwise B2B customers and some payment providers will flag it). I did not put any account number in the documents; you did not give one.
-- Phone and e-mail are not in any register. `info@2acetech.pl` is only the theme's default; I treated it as unconfirmed.
-- Footer line: set Appearance > Customize > Store details: Seller = `2ACE sp. z o.o.`, Seller ID = `KRS 0001267111 · NIP 1133212948 · REGON 545746743`, address = `ul. Ostrobramska 101A lok. 301, 04-041 Warszawa`.
-
----
-
-## 2. Corrections to the original brief (with sources)
-
-| # | Your brief | Finding | Source |
-|---|---|---|---|
-| 1 | KRS 545746743 | Wrong: that is the REGON. KRS is 0001267111. | KRS API, white list (see section 1) |
-| 2 | "Art. 17 Consumer Rights Act" for the button | The article is right; the exact provision is **art. 17 ust. 3 UPK** (button or similar function must be labelled "zamówienie z obowiązkiem zapłaty" or another equivalent unambiguous wording). **Art. 17 ust. 2** requires the consumer to expressly confirm that the order carries a payment obligation. **Art. 17 ust. 4**: if ust. 2 or 3 is not met, **the contract is not concluded**. Art. 17 ust. 1 requires the key information (main features, total price, duration, minimum duration) to be shown clearly **directly before** the order. **It is not art. 8 UPK.** Art. 8 covers pre-contract information for contracts concluded *other than* at a distance or off-premises. The source is art. 8(2) of Directive 2011/83/EU. | UPK consolidated text Dz.U. 2026 poz. 1244 |
-| 3 | "2-year presumption of non-conformity (art. 43a–43g)" | **Correct in substance.** Since 1 Jan 2023 art. 43c ust. 1 UPK sets **one** period of 2 years from delivery for both things: (a) the seller is liable for non-conformity that existed at delivery and **appears within 2 years**; (b) non-conformity that appears within those 2 years is **presumed** to have existed at delivery (rebuttable; the presumption does not apply if it cannot be reconciled with the nature of the goods or the defect). The period is longer if the seller/manufacturer set a longer shelf life. The seller cannot rely on the period if it fraudulently hid the defect (art. 43c ust. 2). Before 2023 the presumption was 1 year, so older guides are outdated. Chapter 5a is art. 43a–43g (art. 43g covers guarantee statements in advertising and durability guarantees). **For consumers the old "rękojmia" (KC art. 556 ff.) no longer applies** (art. 43a ust. 1), so the Regulamin does not use that word. I found no special limitation period in art. 43a–43g, so the general rules apply (see section 8). | UPK Dz.U. 2026 poz. 1244; KC Dz.U. 2026 poz. 795 |
-| 4 | "Check whether the EU ODR platform is still operating" | **Closed.** Regulation (EU) 2024/3228: complaints through the platform were possible until 20 March 2025; Regulation 524/2013 was repealed with effect from 20 July 2025. **Do not link to the ODR platform and do not state the ODR e-mail/link requirement.** What remains: art. 12 ust. 1 pkt 21 UPK (tell consumers about out-of-court complaint and redress options) and the ADR Act (see decision D8). The Regulamin § 8 ust. 6–7 does this. | EUR-Lex (Polish text) |
-| 5 | Withdrawal button (Directive 2023/2673) | See section 3, item 1. | EUR-Lex, ISAP |
-| 6 | Right of withdrawal "Art. 27" and "Annex 2" | Correct: art. 27 ust. 1 UPK (14 days) and załącznik nr 2 UPK (model form). I also added załącznik nr 1 (the statutory information notice), because art. 13 UPK says a notice that follows the model satisfies art. 12 ust. 1 pkt 9–11. | UPK |
-| 7 | "Cookie rules" | The old Telecommunications Law art. 173 was replaced: the rule is now **art. 399 ustawy z 12 lipca 2024 r. Prawo komunikacji elektronicznej** (prior information + consent; exemption in ust. 3 pkt 2 for storage that is strictly necessary for a service the user requested). E-mail/electronic marketing needs prior consent under **art. 398 PKE**. Art. 10 of the old e-services act (anti-spam) is repealed. | PKE, Dz.U. 2024 poz. 1221 (original text; the later amending acts I checked, including Dz.U. 2026 poz. 1296 on the DSA, do not appear to change art. 398–399; ask your lawyer to confirm on the current consolidated text) |
-| 8 | Returns address, delivery costs | A returns address is not named in art. 12 UPK as such, but the consumer must be told how and where to exercise withdrawal (art. 12 ust. 1 pkt 9) and the model notice tells them where to send the goods. So a returns address is needed in practice. A separate complaints address is required only if it differs from the business address (art. 12 ust. 1 pkt 4). Delivery costs must be in the total price information (art. 12 ust. 1 pkt 5). | UPK |
-| 9 | "Grey list: Art. 385(3) Civil Code" | Correct: art. 385³ KC, 23 points. Table in section 7. | KC |
-| 10 | Brief to me: art. 22 UPK = maximum 30 days to deliver | **Not so.** Art. 22 UPK says the pre-contract information in art. 12 ust. 1 forms part of the contract and can be changed only by express agreement of the parties. I found **no** express "30 days" delivery rule anywhere in the UPK (the 30 days in the text relate to off-premises contracts and insurance, not delivery). Directive 2011/83 art. 18 has that rule, but the Polish act does not copy it. What applies: art. 455 KC (performance immediately after a call if no date), art. 491–492 KC (additional deadline and withdrawal for delay). Art. 22 UPK matters for you in another way: the delivery time you show before the order becomes a **term of the contract**, so "delivery times are estimates" cannot be a free right to change them (and would look like grey-list points 8, 10 and 19). The draft therefore treats the shipping preparation time as binding, only the carrier transit as an estimate, and adds a 30-day outer limit as your own promise (section 3, item 2). | UPK; KC |
-
----
-
-## 3. The four additional requests
-
-### 3.1 Withdrawal function (Directive 2023/2673)
-
-**What the directive says.** Directive (EU) 2023/2673 adds art. 11a to Directive 2011/83/EU (Polish official text checked on EUR-Lex): for contracts concluded through an online interface the trader must offer a withdrawal function; it is labelled "odstąp od umowy tutaj" (or an equivalent unambiguous wording); it must be continuously available for the whole withdrawal period and prominent and easily accessible; it lets the consumer send an online withdrawal statement with name, details identifying the contract and the electronic means for the acknowledgement; a confirmation function labelled "potwierdź odstąpienie od umowy" (or equivalent); and the trader must send an acknowledgement of receipt on a durable medium **without undue delay**, showing the content and the date and time of the statement. A statement made online before the deadline counts as timely. Art. 6(1)(h) is also changed: before the contract the trader must tell the consumer about the **existence and location** of the function. Member States had to adopt the rules by **19 December 2025** and apply them from **19 June 2026**.
-
-**Polish status as of 3 November 2026 (from ISAP):**
-
-- The consolidated Consumer Rights Act (Dz.U. 2026 poz. 1244, legal state 2 September 2026) has **no** equivalent of art. 11a and no mandatory withdrawal function.
-- The act of 4 Sept 2026 (Dz.U. 2026 poz. 1353, published 19 Oct 2026) amends the UPK but only implements Directive 2024/825 (green claims, durability, repair; it enters into force **27 September 2027** as published). It does not contain the withdrawal function.
-- Trade press (not primary sources) reports a Ministry of Finance draft **UC169** (amending the UPK and the pawn-loan act) that would introduce the "funkcja odstąpienia od umowy", with no adoption date; one article expects it to reach the Council of Ministers in Q1 2027. Earlier, the rules were meant to travel with the consumer credit bill UC82; press reports say the government withdrew that mandate. I could not open legislacja.gov.pl, so treat UC169 details as unverified.
-- Consequence: Poland is late. A directive that is not transposed does not by itself create a duty for a private shop, so **as of today the button is not yet a Polish legal duty**. But (a) art. 30 ust. 3–4 UPK **already** regulates what happens when a shop *offers* electronic withdrawal: the consumer may withdraw on the shop's website, and the shop must **promptly** send confirmation of receipt on a durable medium; (b) the Polish law will almost certainly follow the directive wording; (c) it is cheap to comply now. So the Regulamin describes the function exactly as built.
-
-**What the Regulamin promises (§ 6 ust. 4–12), matched to the code in `inc/withdrawal.php` and `template-withdrawal.php`:** page "Odstąp od umowy tutaj" at `/odstap-od-umowy/`; link in the footer of every page, in My Account > Orders next to each order, and on the order confirmation page; fields: first and last name, order number, e-mail for the acknowledgement, optional note which goods (default whole order); confirm button "Potwierdź odstąpienie od umowy tutaj"; confirmation screen with date and time; acknowledgement e-mail with the declaration and the date and time; a copy to the store; no refund promised automatically; no login needed.
-
-Remarks:
-
-- The directive's wording for the second step is "potwierdź odstąpienie od umowy". The theme adds "tutaj". That is fine ("or an equivalent unambiguous wording").
-- The theme also puts the link in customer order e-mails. The Regulamin does not mention that, so it promises nothing extra.
-- Pre-contract information: art. 6(1)(h) (as amended) wants the consumer told where the function is. The Regulamin and the confirmation e-mail attachment do that; consider also a one-line note near the checkout.
-- Operational duty: someone must watch the "Withdrawals" admin list and the store's copy e-mail, and handle the return and refund within 14 days. The page does not do that automatically.
-
-### 3.2 Prepayment only, international shipping
-
-- **No COD:** Regulamin § 5 ust. 1 says the shop accepts only prepayment. **You must switch off "Cash on delivery" (and any "pay on pickup") in WooCommerce > Settings > Payments** so the store matches the text. Also remove any COD fee setting.
-- **Customs and import taxes outside the EU:** allowed, **if disclosed before the order**. Art. 12 ust. 1 pkt 5 UPK: where additional costs cannot be calculated in advance, the trader must say that the consumer must pay them. Art. 23 UPK: if the trader did not meet the duty to inform about additional costs, the consumer does not bear them. So the clause is in § 5 ust. 10–11, and you should also show a short note in the cart/checkout for non-EU destinations (art. 18 UPK also requires delivery restrictions and accepted payment methods to be shown clearly at the start of the ordering process). Whether customs charges paid to authorities are refundable by you after withdrawal is a lawyer question (section 8).
-- **"Delivery times are estimates":** handled as explained in item 10 of section 2: preparation time binding, transit time estimated, 30-day outer limit, KC art. 491–492 rights kept.
-- **Which countries you ship to is a placeholder** (`[LISTA KRAJÓW DOSTAWY W UE]`, `[LISTA KRAJÓW SPOZA UE]`). The WooCommerce shipping zones and the "Selling location(s)" setting must match the list exactly. Shipping outside the EU also needs a tax adviser for VAT (export, 0% VAT with proof of export) and for the customs documents. Selling to consumers in other EU countries brings VAT questions (OSS scheme); ask your accountant before you enable them.
-- Applicable law for foreign consumers: the Regulamin chooses Polish law but, as art. 6(2) Rome I requires, cannot take away mandatory protection of the consumer's home country. This is stated in § 12 ust. 1.
-
-### 3.3 Right of withdrawal and the cost of return (art. 27–38 UPK)
-
-Checked against the consolidated text. Summary of what the Regulamin (§ 6) says and why:
-
-- 14 days (art. 27 ust. 1); starts from taking possession of the goods; for several goods delivered separately, the last one; for batches, the last batch (art. 28 pkt 1).
-- Declaration by any unambiguous statement, optional model form, or on the website (art. 30 ust. 1 and 3); timely if sent before the end of the period (art. 30 ust. 2); acknowledgement promptly on a durable medium (art. 30 ust. 4).
-- Deadline day falling on a Saturday or public holiday moves to the next working day (art. 115 KC). I included this; ask the lawyer if they want it stated.
-- **Consumer bears the direct cost of return unless you agree to bear it** (art. 34 ust. 2). **The clause only works if you told the consumer about this cost before the order.** Art. 34 ust. 2 itself says the consumer does not bear the cost if the trader did not inform about it, and art. 23 UPK repeats it for return costs under art. 12 ust. 1 pkt 10. This is why the Regulamin states it (§ 6 ust. 15), repeats it in the Annex 1 notice, and why you must **send the Regulamin plus both annexes with the order confirmation** (section 6, action A4). For goods that cannot be returned by ordinary post, art. 12 ust. 1 pkt 10 requires an estimate of the return cost; there is a placeholder.
-- Refund within 14 days of receiving the declaration, including the delivery cost, but not the extra cost of a more expensive delivery method than the cheapest standard one you offer (art. 32 ust. 1, art. 33). Same payment method unless the consumer expressly agrees otherwise at no cost (art. 32 ust. 2). You may hold the refund until you get the goods back or proof of dispatch, whichever is earlier, if you did not offer to collect them (art. 32 ust. 3).
-- Consumer returns the goods within 14 days from withdrawal (art. 34 ust. 1); liable only for diminished value from handling beyond what is needed to establish the nature, characteristics and functioning (art. 34 ust. 4). This sentence is lost if you did not inform the consumer of the withdrawal right in line with art. 12 ust. 1 pkt 9, which is another reason to send the annexes.
-- **Exceptions (art. 38 ust. 1)** that matter for an electronics shop: pkt 3 (made to the consumer's specification, e.g. engraving), pkt 5 (sealed packaging that cannot be returned for health or hygiene reasons, opened after delivery), pkt 6 (goods inseparably combined with other goods), pkt 9 (sealed audio/video recordings or software, opened after delivery). The exceptions must be named in advance (art. 12 ust. 1 pkt 12). **An opened electronic device is not excluded**; the consumer may test it, and you can only deduct diminished value. Using pkt 5 for in-ear headphones is common but contestable; decision D6.
-- **Cross-border and non-EU returns:** same rules; the consumer chooses the carrier and pays the direct cost. Customs treatment of goods coming back into the EU is a placeholder (D7).
-- **Who bears loss in transit:** to the consumer, the seller bears the risk until the goods are handed to the consumer (art. 548 § 3 KC; handing the parcel to a carrier counts as handing it to the consumer only if the seller had no influence on the choice of carrier). On returns, the UPK is silent on who bears the risk. Art. 32 ust. 3 lets you withhold the refund only until proof of dispatch, which pushes in the consumer's favour. The Regulamin deliberately does not shift the risk of return to the consumer (a clause doing so could be attacked under art. 385¹ KC) and only says what to do if a return parcel is lost. Lawyer to confirm (section 8).
-
-### 3.4 WooCommerce integration note: the order button
-
-- **Which provision:** art. 17 ust. 3 UPK (see section 2, item 2); the brief's "art. 17" is right at article level.
-- **The theme already does it.** `inc/woocommerce.php` sets the classic checkout button text through `woocommerce_order_button_text`, and `assets/js/checkout.js` sets it for the block checkout through `registerCheckoutFilters(... placeOrderButtonLabel ...)`. The English string is "Order with obligation to pay". The Polish translation in `languages/pl_PL.po` is **"Zamówienie z obowiązkiem zapłaty"**. You do not need to configure anything in WooCommerce.
-- **Three things you must do:**
-  1. Keep the site language set to **Polish** (Settings > General > Site Language) so the Polish translation is loaded; otherwise customers see the English label on a Polish shop. If you ever change the wording, change it consistently in the `.po` file and recompile the `.mo`.
-  2. Do **not** install a plugin that overrides the label (checkout-field editors, payment-gateway plugins with their own "Pay now" or "Place order" button, one-click or express-pay buttons such as Apple Pay, Google Pay, PayPal or Stripe Link buttons, if shown on the checkout). **Every button that completes an order must carry the wording**, because art. 17 ust. 4 means a non-compliant order is not a contract.
-  3. Test with a real test order in Polish, on desktop and phone, with each payment method, and look at the actual button text.
-- Note on the exact words: the theme now uses the literal statutory phrase **"Zamówienie z obowiązkiem zapłaty"** (changed after the first draft of this file, which suggested the equivalent "Zamawiam z obowiązkiem zapłaty"), and the Regulamin quotes the same words. If you ever change the wording, change it in both places.
-- Art. 17 ust. 1 also requires that directly before the order the shop shows the main features of the goods and the total price with taxes and delivery. The default WooCommerce checkout summary does this, but check it on the test order.
-- The terms checkbox: WooCommerce > Settings > Advanced > Page setup > "Terms and conditions" = the Regulamin page. Then the checkout shows the acceptance box that § 4 ust. 2 pkt 5 refers to.
-
----
-
-## 4. Placeholders you must fill (all in square brackets in the documents)
-
-| Placeholder | Where | What you must provide |
-|---|---|---|
-| `[DATA]`, `[DATA WEJŚCIA W ŻYCIE]` | both | publication date and effective date |
-| `[ADRES E-MAIL SKLEPU]` | both | the real shop e-mail (also set in Customize > Store details) |
-| `[NUMER TELEFONU SKLEPU]` | Regulamin § 1, Annex 1 | phone number (art. 12 ust. 1 pkt 3 UPK requires an e-mail and a phone number); the call must not cost more than an ordinary call (art. 11 UPK) |
-| `[ADRES DO REKLAMACJI]` | § 1, § 8 | complaints address (or "same as registered office") |
-| `[ADRES DO ZWROTÓW]` | § 1, § 6, Annex 1 | postal address where customers send returns; it may be a warehouse, not the registered office |
-| `[LISTA METOD PŁATNOŚCI]`, `[NAZWA OPERATORA PŁATNOŚCI]` | § 5 ust. 2; privacy §3, §6 | the payment methods and provider you really enable; provider's privacy-policy URL and cookies |
-| `[LICZBA]` (payment term) | § 5 ust. 3 | days to pay a bank transfer (only if you offer it) |
-| `[LICZBA]` (preparation time) | § 5 ust. 7 | working days to prepare and dispatch an order; binding on you |
-| Delivery table: `[SPOSÓB DOSTAWY]`, `[PRZEWOŹNIK]`, `[CENA]`, `[CZAS W DNIACH ROBOCZYCH]` | § 5 ust. 6 | one row per delivery method, with the same data as in WooCommerce shipping |
-| `[LISTA KRAJÓW DOSTAWY W UE]`, `[LISTA KRAJÓW SPOZA UE]` | § 5 ust. 5 | countries you ship to (see 3.2) |
-| `[DODAJ: darmowa dostawa…]` | § 5 ust. 6 | free-shipping threshold, if any |
-| `[DECYZJA: … dostawa każdej części]` | § 5 ust. 9 | whether split shipments cost extra |
-| `[RODZAJ DOKUMENTU…]`, `[ZASADY WYSTAWIANIA FAKTUR…]` | § 5 ust. 4 | receipt/invoice rules, agreed with your accountant (including prepayment and e-invoicing/KSeF questions) |
-| `[WARIANT A / B]` return cost | § 6 ust. 15, Annex 1 | A = consumer pays (default); B = you pay (all returns or in defined cases) |
-| `[KWOTA lub „nie dotyczy”]` | § 6 ust. 15 | estimated return cost for goods that cannot go by ordinary post |
-| `[DECYZJA: … ponownym imporcie…]` | § 6 ust. 21 | customs/VAT on goods returned from outside the EU |
-| `[WPISZ KONKRETNE TOWARY…]` | § 6 ust. 23 | which goods fall under art. 38 pkt 5 (sealed, hygiene); or delete |
-| `[WARIANT A / B]` guarantee | § 7 ust. 9 | A = you give no own guarantee (manufacturer's guarantee may exist); B = your own guarantee with the content required by KC art. 577¹ |
-| `[PROCEDURA…]` | § 8 ust. 3 | how a defective item is sent back at your cost (courier you order, or refund of the shipping cost) |
-| ADR statement `[WARIANT A / B]` | § 8 ust. 7 | decision D8 |
-| `[POTWIERDŹ: czy telefon jest wymagany]` | § 4 ust. 2, privacy | whether the checkout asks for a phone number (a delivery-courier need) |
-| `[DECYZJA: wiadomość o przyjęciu Zamówienia…]` | § 4 ust. 4 | when the contract is concluded: acceptance e-mail immediately or after payment |
-| `[DECYZJA WŁAŚCICIELA: czy Sklep sprzedaje także przedsiębiorcom?]` | § 1 ust. 3 | B2C only, or B2B too |
-| Newsletter paragraph | § 10; privacy row 10 | keep only if you really start a newsletter (D3) |
-| Privacy: `[PEŁNA NAZWA I KRAJ DOSTAWCY HOSTINGU]`, `[NAZWA DOSTAWCY POCZTY / SMTP]`, `[LISTA PRZEWOŹNIKÓW]`, `[NAZWA … biuro rachunkowe]` | privacy § 3 | the actual processors. Your hosting is Hostinger (per project notes); the exact legal entity and data location are in your hosting contract |
-| `[OKRES PRZECHOWYWANIA KORESPONDENCJI]`, `[OKRES PRZECHOWYWANIA LOGÓW…]` | privacy table rows 7, 9 | your retention periods |
-| `[PRAWNIK POTWIERDZA OKRES]` | privacy row 3 | the limitation period for claims |
-| Privacy contact address, IOD note | privacy § 1 | a data-protection contact e-mail; confirm you do not need a DPO |
-| Third-country transfers | privacy § 4 | name any supplier that processes data outside the EEA |
-| `[POTWIERDŹ po uruchomieniu SSL]` | privacy § 7 | HTTPS active |
-| Social media profile note | privacy § 6.2 | delete if you have no profiles |
-| Reviews / comments / Gravatar blocks | privacy rows 11, §6.2 | keep only if product reviews or comments are on (D5) |
-
----
-
-## 5. Decisions you must take
-
-- **D1. B2C only?** The brief says consumers only. If you will also sell to companies, add a separate B2B regulamin; the withdrawal and non-conformity chapters of the UPK do not apply to companies.
-- **D2. Who pays for returns.** Default in the text: the consumer. Offering free returns is a competitive choice, not a legal duty. Either way keep the wording consistent in § 6 ust. 15 and Annex 1.
-- **D3. Newsletter.** The current built-in form only e-mails each address to the site admin; it stores no list, has no consent text, no consent record and no unsubscribe (see section 6). Do **not** send commercial e-mails until you add: a clear consent statement or checkbox with a link to the privacy policy, a record of consent (date/time), a sending tool with unsubscribe in every message, and, ideally, double opt-in. If you will not run a newsletter yet, remove the subscribe band or delete § 10 of the Regulamin and row 10 of the privacy policy.
-- **D4. Order Attribution (WooCommerce).** Recent WooCommerce versions have "Order Attribution" which sets `sbjs_*` cookies and writes the visitor's source and device to each order. These cookies are **not** strictly necessary, so they would need prior consent under art. 399 PKE. The privacy policy assumes the feature is **off**: WooCommerce > Settings > Advanced > Features > Order Attribution = off. Alternatively keep it on, add a consent banner that blocks it, and rewrite § 6 of the policy.
-- **D5. Product reviews and comments.** If you enable reviews: add them to the privacy policy (rows 11 and the `comment_author_*` cookie), decide whether to show Gravatar avatars (Settings > Discussion > Show avatars: switch off to avoid sending a hash of the reviewer's e-mail to a third party), and describe how you check that reviews come from real buyers (an EU consumer-protection rule for shops that publish reviews; I did not verify the Polish article, so ask your lawyer).
-- **D6. art. 38 pkt 5 exception for in-ear headphones.** Common practice but contestable. Safer: allow returns of opened in-ear products if hygiene is not at stake, or only exclude when the factory seal is broken after delivery and you say so on the product page.
-- **D7. Returns from outside the EU:** who pays customs/VAT on re-import.
-- **D8. Out-of-court dispute resolution.** You are not obliged to take part. If you commit (or a special law obliges you), you must name the competent entity on your website and in your contract templates (art. 31 ADR Act). If a complaint ends without a solution you must send the consumer, on paper or a durable medium, a statement whether you will take part or refuse (art. 32). If you say nothing at all, art. 32 ust. 3 of the ADR Act treats it as agreement. Variant A in the text is the usual middle route: you do not commit in advance but will answer each time. (I read the ADR Act from the ISAP text of 2016; check the current wording.)
-- **D9. Own guarantee.** None promised in the text unless you choose Variant B. If you or a manufacturer give a guarantee, the guarantee statement must be in Polish, clear, and include the items in KC art. 577¹ § 2 (including a statement that the guarantee does not affect the statutory remedies for non-conformity). You must also hand the guarantee document over with the goods (KC art. 577³) and tell the consumer about guarantees before the order (art. 12 ust. 1 pkt 14 UPK).
-- **D10. Maximum delivery time.** The text commits you to deliver within 30 days of the contract if no other date is shown, and to a binding preparation time. If your suppliers cannot meet that, shorten the promise only by listing real, longer lead times on the product page (they become part of the contract under art. 22 UPK).
-- **D11. When the contract is concluded** (acceptance e-mail before or after payment). Align your WooCommerce emails with § 4 ust. 4.
-
----
-
-## 6. What the store really does, and actions to take in WooCommerce / the theme
-
-**Findings from the code (`wp-content/themes/2acetech`):**
-
-- Checkout button: "Order with obligation to pay" (EN) / "Zamówienie z obowiązkiem zapłaty" (PL), classic and block checkout.
-- Contact form (`inc/contact.php`): name, e-mail, optional order number, message; e-mailed to the shop; **nothing is stored in the database**; a transient with a hash of the visitor's IP address lasts 1 hour to rate-limit (5 per hour). Privacy note on the form: "We use your details only to answer this message."
-- Newsletter (`inc/newsletter.php`): e-mails the entered address to the site admin e-mail; no list is stored; no consent text, no consent log, no unsubscribe. Honeypot and nonce only. It can be replaced by a mailing-list shortcode in Customize.
-- Withdrawal function (`inc/withdrawal.php`): stores each declaration as an admin-only "Withdrawals" entry (name, order number, e-mail, note, time); acknowledgement e-mail to the consumer; copy to the store; transient hash of IP for 1 hour (10 per hour).
-- WooCommerce accounts and orders: standard WooCommerce data (name, address, e-mail, phone depending on settings, order history).
-- No third-party scripts, no analytics, no embedded media; **fonts are self-hosted** (`assets/fonts/manrope-*`); theme JavaScript uses no cookies or local storage. Social "share" buttons on products are plain links.
-- Cookies expected: WooCommerce cart/session cookies and WordPress login cookies (list in the privacy policy §6.2). Product comments/reviews, if open, set `comment_author_*` only when the visitor ticks the "save my details" box and may show Gravatar avatars.
-
-**Actions for you (A1–A10):**
-
-| # | Action |
+| File | What it is |
 |---|---|
-| A1 | Switch off Cash on delivery and any pay-on-pickup (WooCommerce > Settings > Payments). |
-| A2 | Settings > General > Site language = Polish. Confirm the order button reads "Zamówienie z obowiązkiem zapłaty" on a test order (desktop and phone, every payment method). |
-| A3 | WooCommerce > Settings > Advanced > Features > Order Attribution = off (D4). Also Settings > Advanced > WooCommerce.com: do not allow usage tracking. |
-| A4 | Send the Regulamin (PDF) with Annex 1 and Annex 2 to every customer **on a durable medium** with the order confirmation (art. 21 ust. 1 UPK: confirmation with the art. 12 information, at the latest at delivery; art. 12 ust. 1 pkt 9 requires the withdrawal information and the model form). Use an e-mail attachment on the "order received/processing" e-mail (WooCommerce > Settings > Emails, or a PDF-attachment plugin). Also make the Regulamin, Annexes and Privacy Policy pages available in the footer (Appearance > Menus). |
-| A5 | Create pages: Regulamin (set as WooCommerce "Terms and conditions"), Polityka prywatności (Settings > Privacy), and put the model withdrawal form (Annex 2) on the Regulamin or a returns page. Remove all bracketed notes first. |
-| A6 | Settings > Discussion: turn off avatars, or turn off comments and product reviews, unless you want them (D5). |
-| A7 | Add a consent checkbox and a link to the privacy policy to the newsletter form, or remove the form until the tool is ready (D3). (Needs a theme change; the contact form already links the policy.) |
-| A8 | Test the cookies on the live shop with the browser developer tools (guest, logged in, after adding to cart, on the payment page) and complete the table in the policy §6.2. Payment plugins (Stripe, Przelewy24, PayU, BLIK) often load their own scripts and cookies on the checkout page. If they do, add them to the policy; some may need a consent banner. The "no third-party scripts" fact is true for the theme, not for the payment plugin. |
-| A9 | Check that "Order Attribution", "usage tracking", Jetpack, and any plugin that calls external services are off or listed in the privacy policy. |
-| A10 | Prices and promotions: any price reduction you announce (including the deal countdown and strikethrough prices) must show the **lowest price from the previous 30 days** next to the reduced price (art. 4 ust. 2–3 ustawy o informowaniu o cenach towarów i usług, Dz.U. 2023 poz. 168). The theme shows the regular price exactly as you enter it, so you have to enter the correct reference price. Show unit prices where required. Prices must be gross, with the delivery cost visible before the order. |
+| `AUDIT-2026-11.md` | Full audit with risk-ranked findings, developer to-do list and facts needed |
+| `regulamin-sklepu.html` | Terms of sale (Regulamin) with the two statutory annexes |
+| `polityka-prywatnosci.html` | Privacy policy |
+| `polityka-cookies.html` | Cookie policy |
+| `zwroty-i-odstapienie.html` | Returns and withdrawal page with the model form |
+| `reklamacje.html` | Complaints and non-conformity ("rękojmia") page with a complaint form |
+| `dostawa-i-platnosc.html` | Delivery, payment, invoices, used electronics and batteries |
+| `dane-sprzedawcy.html` | Company data and contact (use as the Contact page text) |
+| `blok-informacje-o-bezpieczenstwie-produktu.html` | Block for every product page (product-safety information) |
+| `wzor-umowy-dropshipping.html` | Template supplier agreement (B2B), not for the website |
+| `wzor-umowy-powierzenia-danych.html` | Template data-processing agreement (art. 28 GDPR), not for the website |
+| `regulamin-sklepu.md`, `polityka-prywatnosci.md` | **Old drafts of 3-4 Nov 2026. Superseded by the `.html` files. Do not publish them.** Delete when you are ready. |
+
+The theme also holds copies of the two original templates in `wp-content/themes/2acetech/legal/`. The developer must replace them with the new `.html` files (see AUDIT, section "What the developer can change").
+
+Contents: 1. Publication conditions · 2. Questions for you (numbered checklist) · 3. Decisions you must take · 4. Corrections to the original brief, with sources · 5. Grey-list check (art. 385³ KC) · 6. What a Polish lawyer should confirm · 7. Company data check · 8. Sources and versions used
 
 ---
 
-## 6a. Cookie banner (added 4 November 2026)
+## 1. Publication conditions: what must be true before each document goes live
 
-The theme now shows a consent banner on the first visit (logo, text, three equal buttons: Reject all, Manage cookies, Accept) and a settings panel with three categories (necessary, analytics, marketing). The choice is stored in the cookie `ace_consent` for 180 days and can be changed with "Ustawienia cookies" in the footer.
+Several sentences in the documents describe what the shop does. They become true only after the changes below. Do not publish a page earlier.
 
-- **Reject is as easy as Accept.** The reference site you showed has only "Manage cookies" and "Accept". I added "Reject all" on purpose: the EU and Polish regulators (UODO) treat a banner without an equally easy way to refuse as invalid consent. Keep the third button.
-- **The banner currently controls nothing**, because the shop sets no analytics or marketing cookies. It does matter later: any analytics or ad script must be loaded only after consent. In HTML use `<script type="text/plain" data-ace-consent="analytics" src="...">`; in JavaScript `window.aceConsent.has('analytics')`; in PHP `ace_consent_allowed('analytics')`. Plugins that add their own tracking (Google Site Kit, Meta pixel, chat widgets) do not follow this automatically. Do not install them without checking.
-- **Privacy policy §6** was rewritten to match (banner, `ace_consent` row, how to change the choice).
-- A lawyer should confirm the wording of the banner and of §6, and the 180-day lifetime of the choice.
+| Document | Must be true first |
+|---|---|
+| Regulamin | (a) Phone number filled in. (b) Return address filled in. (c) The "Terms" page is set in WooCommerce so checkout shows a working link, preferably with a tick box (AUDIT C-1, H-1). (d) The order confirmation e-mail carries the Regulamin as PDF (AUDIT C-4). (e) Every product page carries the safety block (§ 3 ust. 6). (f) Only the payment methods listed in § 5 ust. 2 are enabled. (g) Express Apple Pay / Google Pay buttons are labelled or switched off (AUDIT H-2). (h) The checkout summary shows the delivery time and the total price including VAT (AUDIT H-1; § 4 ust. 2 pkt 4). (i) The trust strip, perks and home-page placeholders are corrected (AUDIT H-3, H-10). |
+| Polityka prywatności | Section 3 and 4 filled in with your real suppliers, platforms and tools. Every row for a tool you do not use is deleted. Rows 13 to 16 match what is actually installed (AUDIT C-2, H-4, H-5). |
+| Polityka cookies | A developer has confirmed in the browser (DevTools, Network and Application tabs) that **before consent and after "Odrzuć wszystkie"** no request goes to Google and no `_ga*` or `sbjs_*` cookie is set, and that fonts come from your own server. The cookie table matches what is really set. |
+| Zwroty / Reklamacje / Dostawa | Same facts as the Regulamin. Return cost variant, return address and the way defective goods are collected are decided (questions 6 to 9). |
+| Blok bezpieczeństwa | You hold the manufacturer's data, declaration of conformity and Polish instructions for each product. No documents means no sale. |
 
 ---
 
-## 7. Grey-list check (art. 385³ KC) and related checks
+## 2. Questions for you: numbered checklist
+
+Answer each item. Where a document has a `[BRACKET]` it is listed here. "Where" shows the document and place.
+
+### A. Company and contact
+
+1. **Phone number** of the shop. Where: all documents (`[NUMER TELEFONU SKLEPU]`), also Customize > Store details > Phone. The law requires an e-mail address and a phone number (art. 12 ust. 1 pkt 3 UPK). The call must not cost more than an ordinary call (art. 11 UPK).
+2. Is `info@2acetech.pl` a real mailbox that someone reads every working day? Your DNS has an SPF record for Hostinger mail but **two DMARC records** (invalid) and a Brevo verification record. Ask the developer to fix DMARC (see AUDIT L-5). Is Brevo in use (newsletter or order e-mails)? If yes it must be named in the privacy policy (section 3).
+3. Registry court. The documents say "Sąd Rejonowy dla m.st. Warszawy, XIV Wydział Gospodarczy KRS". I inferred it from the KRS case number `WA.XIV NS-REJ.KRS/50872/26/912/`. Check it on the current KRS extract (odpis aktualny) from ekrs.ms.gov.pl.
+4. Do you want a separate data-protection address (e.g. rodo@)? It must exist and be read. If not, the privacy policy keeps `info@2acetech.pl`.
+5. Is 2ACE a micro-enterprise (fewer than 10 employees and turnover or balance sheet total not above EUR 2 million, counting linked companies)? This decides the accessibility exemption (AUDIT M-8).
+
+### B. Returns, complaints, guarantees
+
+6. **Return address** (`[ADRES DO ZWROTÓW]`). Where do customers send goods? Options: your own address, a returns address you rent, or the supplier's warehouse in Poland. If it is the supplier's warehouse, the supplier must agree in writing to accept returns as your authorised person (art. 34 ust. 1 UPK). Never use the sender on the parcel label unless you agreed that.
+7. **Who pays return shipping?** Variant A (default in the text): the consumer pays the direct cost (art. 34 ust. 2 UPK). Variant B: you pay. Either is lawful if stated before the order. For bulky or battery goods (hoverboard) you must also state an estimated maximum return cost (`[KWOTA ZŁ]`; art. 12 ust. 1 pkt 10 UPK). If you leave this out, the consumer does not bear the cost (art. 23, art. 34 ust. 2 UPK).
+8. **Defective goods:** how will you collect them at your cost? Default in the text: you order a courier, or you refund the shipping cost against proof (art. 43d ust. 5 UPK). Confirm you will do this.
+9. **Out-of-court dispute resolution:** variant A (no commitment, but a statement after each unresolved complaint, art. 32 ADR Act) or variant B (you agree to a named body). Keep it identical in `regulamin-sklepu.html` § 8 ust. 7 and `reklamacje.html`.
+10. Any goods that are excluded from withdrawal (art. 38 UPK)? The text says none today. If you add custom-made or sealed hygiene goods, mark them on the product page.
+11. Do any products really come with a **manufacturer's guarantee card in Polish**? The text says: no guarantee from you; a manufacturer's guarantee only where the product page says so and the card is in the box. List such products or say "none". (The trust strip claim "Gwarancja producenta na każdy produkt" was removed from the documents; the developer must remove it from the site, see AUDIT H-3.)
+
+### C. Delivery, payment, invoices
+
+12. Do your suppliers **guarantee in writing** a dispatch time of up to 3 working days and a transit time of 2 to 5 working days, and that every variation on sale ships from a warehouse **in Poland**? What happens when stock runs out in Poland? These times become part of your contract with the customer (art. 22 UPK).
+13. Do suppliers send a **tracking number**? The site currently promises "z numerem śledzenia". If not, the claim must go.
+14. Carriers: do you want to name them? (Not required. The Regulamin says "kurier".)
+15. **Payment methods enabled today**: the live checkout loads Stripe card, and the code also registers Klarna, Stripe Link and WooPayments (WooCommerce Payments). Which are switched on? The documents list only card, Apple Pay and Google Pay. Disable the rest, or add them to the documents and the privacy policy. When BLIK and Przelewy24 go live, update `regulamin-sklepu.html` § 5 ust. 2, `dostawa-i-platnosc.html` section 5 and the privacy policy.
+16. **Stripe:** the exact Stripe entity named in your Stripe agreement (usually Stripe Payments Europe, Ltd., Ireland); confirm the Data Processing Agreement is part of your account terms; is automatic fraud screening (Radar) on?
+17. **Sales documents and VAT (ask your accountant):** (a) What do customers get: receipt, confirmation, invoice? (b) May you rely on the cash-register exemption for mail-order sales paid through a payment institution? The exemption in the Ministry of Finance regulation of 17 Dec 2024 (Dz.U. 2024 poz. 1902, annex item 41) requires payment through a bank, post or SKOK to your bank account with data that identify the buyer. Card payments settled by Stripe are a grey area; the authorities have given mixed views. (c) WooCommerce taxes are **off** today (the live cart shows no VAT line). Prices are shown gross by default but VAT is not computed in orders. Decide with the accountant how VAT and invoices are handled. (d) Invoice on request: art. 106b ust. 3 VAT Act (3 months from the end of the month of sale or payment). (e) KSeF does not apply to invoices for consumers; B2B rules are the accountant's.
+18. **Used electronics, batteries, packaging (BDO):** (a) Do you have your own BDO registration number? Ask your accountant or an environmental adviser. (b) Ask each supplier in writing for its BDO number and who is the "wprowadzający sprzęt". The WEEE Act requires a distributor to offer only equipment placed on the market by a company entered in the register (art. 39 pkt 1 lit. a). (c) How will you offer **free take-back of old equipment when you deliver new household equipment** (art. 37 ust. 2)? The text in `dostawa-i-platnosc.html` has `[SPOSÓB ODBIORU ZUŻYTEGO SPRZĘTU]` and `[ADRES STRONY Z WYKAZEM PUNKTÓW ZBIERANIA]`. Options: courier take-back arranged with suppliers, or a contract with a collection organisation.
+
+### D. Products and prices
+
+19. **For every product:** manufacturer (name, postal address, e-mail), responsible person in the EU if the manufacturer is outside the EU, model and batch identifier, photo of the label, CE marking, declaration of conformity, warnings and Polish instructions. Use the block in `blok-informacje-o-bezpieczenstwie-produktu.html`. Products without this data must not be sold (art. 19 GPSR; art. 76 of the Polish GPSR Act: fine up to PLN 500,000).
+20. **Toys:** minimum age and the warnings printed on the toy or box, in Polish, visible before purchase. **Hoverboard:** declaration of conformity (low voltage, EMC, and radio equipment if it has Bluetooth), battery data, charger data, and the transport rules for lithium batteries for your courier. Is it a toy or sports equipment? That is the manufacturer's classification; ask for it.
+21. Which lamps, LED strips and string lights are "light sources" or contain one and therefore need an **energy label and product information sheet** shown online (art. 4 lit. b, c Delegated Reg. 2019/2015)? Check each model in EPREL or ask the supplier.
+22. **Product texts** were rewritten by the Product Cleaner plugin through an AI service. Someone must read each text and delete claims you cannot prove (compatibility, "works with all", power, battery life). Public statements about a product become part of what you must deliver (art. 43b ust. 2 pkt 2 UPK).
+23. **Crossed-out "regular price"** (24 of 28 products in your catalogue, none on the 4 products now live): was each product ever sold at that price in the shop? If not, remove the regular price. If yes, you must show the lowest price of the previous 30 days next to every announced reduction (art. 4 ust. 2 and 3 Price Information Act). Fine up to PLN 20,000 (art. 6).
+
+### E. Data and tools
+
+24. **Google tools** (Site Kit with GA4, Google for WooCommerce with Google Ads). Do you want to keep them? If yes, they must be switched on only after consent and Google Consent Mode must follow the banner (developer task AUDIT C-2). If not, deactivate them. Today they send data before consent and after "Odrzuć wszystkie" (tested 20 Nov 2026).
+25. **WooCommerce Order Attribution** sets `sbjs_*` cookies before consent. Default decision: switch it off (WooCommerce > Settings > Advanced > Features).
+26. **Abandoned-cart plugin** (Woo Abandoned Cart Recovery; its GDPR switch is off) and the **Hostinger Reach** plugin (script loaded on every page). Are they used? Default decision: deactivate. If you keep them, reminder e-mails need prior consent (art. 398 PKE) and the privacy policy rows 13 and the tool name must be filled in.
+27. **Product reviews** (Photo Reviews plugin; the review form says in English "Review now to get coupon!"). Keep reviews? If yes: who may review (verified buyers only is safest), is a coupon given for a review (then regardless of rating and labelled), are photos allowed. Fill the conditional blocks in Regulamin § 2 ust. 7 to 9 and privacy row 14. If no: turn reviews off in WooCommerce > Settings > Products.
+28. **Newsletter:** will you run one? If yes: which tool, a consent tick box with text, double opt-in, a stored record of consent, an unsubscribe link in every message. The theme's built-in form does none of this. If no: delete § 10 of the Regulamin and privacy row 12, and remove the form.
+29. Exact names for privacy section 3: hosting company (Hostinger legal entity and server location), mail provider (Hostinger mail, Brevo, SMTP plugin), accountant, couriers.
+30. **Suppliers and platforms:** which platform do you order on (the AliDropship plugin places orders through AliExpress)? In which country are the supplier companies based? What exactly does the plugin send to the supplier (name, address, phone, e-mail)? Does the plugin vendor's server receive any customer data? These facts fill privacy section 3 and 4. If data leave the EEA you need a transfer mechanism (art. 44 to 49 GDPR). The supplier's name stays out of the Regulamin and the pages.
+31. Retention periods you really apply: server logs, e-mail correspondence, abandoned carts, review data. Privacy table has `[...]` for them.
+32. Do you have social-media profiles? (Footer shows none today. If you add them, the privacy policy needs a short note.)
+
+### F. Processes
+
+33. Who reads `info@2acetech.pl` and the **Withdrawals** list in wp-admin, and how fast? Complaints must be answered within 14 days (art. 7a UPK); refunds within 14 days of the withdrawal statement (art. 32 ust. 1 UPK).
+34. Who handles product-safety reports and data-subject requests? You need a simple written procedure and a log (GPSR art. 12, 20; GDPR art. 12, 33(5)).
+35. Create the records the law expects: **record of processing activities** (art. 30 GDPR; the small-company exception does not apply because your processing is not occasional), a register of data-processing agreements, a breach register. No DPO is required (art. 37 ust. 1 GDPR).
+
+---
+
+## 3. Decisions you must take
+
+| # | Decision | Default in the text | Note |
+|---|---|---|---|
+| D1 | Sell only to consumers | yes | Selling to companies needs a separate B2B Regulamin. |
+| D2 | Return shipping | consumer pays | Free returns are a business choice. If you choose free returns, change Regulamin § 6 ust. 15, annex 1, the returns page. |
+| D3 | Newsletter | not offered | See question 28. |
+| D4 | Google Analytics / Ads | to be decided | See question 24. Deactivation is the cheapest safe option. |
+| D5 | Product reviews | to be decided | See question 27. |
+| D6 | Out-of-court dispute resolution | variant A | See question 9. |
+| D7 | Own guarantee | none | If you offer one, the statement must have the content required by art. 577¹ § 2 KC and be handed over with the goods (art. 577³ KC). |
+| D8 | Delivery time | prep 3 working days binding, transit 2-5 working days expected, 30 days outer limit | Shorter promises only if suppliers confirm in writing. |
+| D9 | When the contract is concluded | when you send the order confirmation after successful payment | Align WooCommerce e-mails with Regulamin § 4 ust. 4. |
+| D10 | Trust strip and product-page perks | remove "Gwarancja", "Łatwe zwroty", "szybka dostawa" | See AUDIT H-3. |
+| D11 | Express wallet buttons (Apple Pay, Google Pay, Link) | keep only if labelled | AUDIT H-2. |
+| D12 | Take-back of old equipment | to be decided | Question 18. |
+| D13 | Pause orders | recommended until Critical items are fixed | WooCommerce > Settings > Site visibility, or disable the checkout. The checkout works today with a live Stripe key. |
+
+---
+
+## 4. Corrections to the original brief (with sources)
+
+| # | Brief | Finding | Source |
+|---|---|---|---|
+| 1 | Button wording "art. 8 ust. 2" ("Zamawiam i płacę") | The rule is **art. 17 ust. 2 and 3 UPK**: the consumer must expressly confirm the payment obligation and the button must say "zamówienie z obowiązkiem zapłaty" or an equivalent clear wording. **Art. 17 ust. 4: if not met, the contract is not concluded.** Art. 8 UPK is about contracts other than at a distance. The shop's real button text, seen on the live checkout on 20 Nov 2026, is **"Zamówienie z obowiązkiem zapłaty"** (the statutory words). "Zamawiam i płacę" is also widely accepted as equivalent but the statutory phrase is safer. Express wallet buttons are a separate risk (AUDIT H-2). | UPK Dz.U. 2026 poz. 1244; live checkout |
+| 2 | "Delivery date statement (art. 22 / 30-day rule)" | **Art. 22 UPK** says the art. 12 information is part of the contract and changes only by express agreement. The consolidated UPK contains **no 30-day delivery rule**. That rule is in Directive 2011/83/EU art. 18 and Poland did not copy it. What applies: art. 455, 491, 492 KC. The text uses a 30-day outer limit as your own promise. | UPK (searched for "30 dni"); KC Dz.U. 2026 poz. 795 |
+| 3 | "Rękojmia arts. 556 ff. as amended" | For **consumers**, KC arts. 556 ff. no longer apply (art. 43a ust. 1 UPK). The regime is **non-conformity, art. 43a to 43g UPK**: 2 years from delivery (art. 43c ust. 1), presumption that the defect existed at delivery, repair or replacement first, then price reduction or withdrawal (art. 43d, 43e). "Rękojmia" stays only as a plain-language label in the documents. KC arts. 556 ff. still matter between you and your supplier (B2B), see the supplier template. | UPK; KC |
+| 4 | "EU ODR platform closure of 20 July 2025" | Complaints through the platform ended **20 March 2025**; Regulation 524/2013 is repealed with effect from **20 July 2025** (Regulation (EU) 2024/3228). Do not link to the platform or state ODR duties. What remains: art. 12 ust. 1 pkt 21 UPK and the ADR Act (art. 31 to 32). | EUR-Lex (Polish text) |
+| 5 | "EU electronic withdrawal function from 19 June 2026" | Directive (EU) 2023/2673 adds art. 11a to Directive 2011/83/EU (apply from 19 June 2026). **Poland has not transposed it as of 20 Nov 2026:** the consolidated UPK (state 2 Sept 2026) has no such article; the only 2026 amendment of the UPK found (Dz.U. 2026 poz. 1353, in force 27 Sept 2027) concerns green claims and repairs; press reports a draft UC169 in consultation (not a primary source). Art. 30 ust. 3 to 4 UPK already regulates what happens when a shop *offers* electronic withdrawal. The shop's function (link "Odstąp od umowy tutaj", confirm button, acknowledgement with date and time) matches the directive, so keep it. | ISAP/Sejm ELI API; EUR-Lex |
+| 6 | "Replacement of Telecommunications Law cookie rules by Electronic Communications Law" | Correct: **art. 399 PKE** (consent unless strictly necessary, ust. 3 pkt 2), **art. 398** (e-marketing consent), art. 400 (consent standard as in GDPR). Art. 10 of the e-services act is repealed. The DSA implementing act (Dz.U. 2026 poz. 1296, in force 6 Nov 2026) amends art. 419 PKE only. | PKE Dz.U. 2024 poz. 1221; Dz.U. 2026 poz. 1296 |
+| 7 | "Digital Content/Goods Directive 2019/771" | 2019/771 is the **Sale of Goods Directive** (UPK chapter 5a, art. 43a to 43g). The **Digital Content Directive is 2019/770** (UPK chapter 5b). For smart lamps with an app, art. 43b ust. 3 and art. 43k ust. 3 UPK matter (updates). | UPK |
+| 8 | "European Accessibility Act and the Polish implementing act" | The Polish act is the **act of 26 April 2024, Dz.U. 2024 poz. 731**. E-commerce services are covered (art. 3 ust. 2 pkt 6) but **services of micro-enterprises are excluded (art. 4 pkt 1)**. | ISAP |
+| 9 | "GPSR Reg. (EU) 2023/988" (no article given) | Applies since 13 Dec 2024. Online offers must show manufacturer, EU responsible person, product identifier and warnings: **art. 19**. Distributors: art. 12. Trader selling under own name: art. 13(1). Polish act of 7 Nov 2025 (Dz.U. 2025 poz. 1826, in force 3 Jan 2026): art. 4 (Polish language), **art. 76 (fine up to PLN 500,000 for breach of GPSR art. 19)**. | EUR-Lex; ISAP |
+| 10 | "Toy Safety Directive 2009/48/EC" | Still the law. It is repealed from **1 Aug 2030** by Regulation (EU) 2025/2509. Art. 7(2) (distributor checks) and art. 11(2) (warnings visible before purchase, also online) apply. | EUR-Lex |
+| 11 | "LVD/EMC/RoHS/Ecodesign" (no RED) | Add **RED 2014/53/EU** for products with Wi-Fi or Bluetooth (art. 13 distributors) and Delegated Reg. (EU) 2022/30 (cybersecurity, from 1 Aug 2025; a 2026 delegated act repeals it from 11 Dec 2027). Lighting: Reg. 2019/2020 and 2019/2015 (energy label, art. 4 for dealers). | EUR-Lex |
+| 12 | "VAT/invoices/cash-register exemption" | See question 17: Dz.U. 2024 poz. 1902, annex item 41, and art. 106b ust. 3 VAT Act (Dz.U. 2026 poz. 1263). | ISAP |
+| 13 | "Omnibus (art. 4 ustawy o informowaniu o cenach)" | Correct: art. 4 ust. 2, 3, 5; art. 5 (consumer may demand the most favourable price); art. 6 fines (PLN 20,000; PLN 40,000 for repeats). CJEU 26 Sept 2024, C-330/23 (Aldi Süd): a percentage or amount reduction must be calculated from the lowest price of the previous 30 days. | ISAP Dz.U. 2023 poz. 168; CURIA press release |
+| 14 | "Crossed-out price on 24 of 28 items" | The **live** shop shows only **4 published products, none with a crossed-out price** (Store API, 20 Nov 2026). The 24 of 28 refers to the catalogue not yet public. The assessment (AUDIT H-6) applies when you publish. | Live shop |
+| 15 | "Trust strip: Gwarancja w cenie / Gwarancja producenta na każdy produkt" | Confirmed live on the home page. Not supported by any fact you gave. **Removed from the documents; must be removed from the site.** Presenting a statutory right ("14 dni", "łatwe zwroty") as a selling point is also a black-list practice (art. 7 pkt 10 UPNPR). | Live home page; UPNPR Dz.U. 2023 poz. 845 |
+| 16 | Existing templates | Defects found in the previous drafts: Annex 2 contained markdown artefacts `(<em>)`; the privacy policy said "no transfers outside the EEA", "no analytics or ads" and "Order Attribution is off", which the live shop contradicts; the footer anchor links assumed one Regulamin page; § 5 and § 6 still dealt with non-EU shipping. All fixed in the new files. | Code and live site |
+
+---
+
+## 5. Grey-list check (art. 385³ KC) and related checks
 
 I read the 23 points of art. 385³ KC in the current Civil Code (Dz.U. 2026 poz. 795) and checked every clause that could touch them.
 
-| Regulamin clause | Grey-list point(s) checked | Result |
+| Clause in the new Regulamin | Grey-list point(s) checked | Result |
 |---|---|---|
-| § 1 ust. 6, § 4 ust. 2 pkt 5, § 4 ust. 7 (Regulamin available before the order, tick-box, sent with the confirmation) | pkt 4 (no chance to read before the contract) | OK. Regulamin is accessible on the site, a checkbox is required, and a copy is sent. |
-| § 2 ust. 2–4 (account; termination) | pkt 14 (only consumer deprived of the right to terminate), pkt 15 (seller may end an indefinite contract without important reasons or reasonable notice) | OK. Consumer can end the account at any time at no cost; seller only for listed important reasons with 14 days' notice. |
-| § 2 ust. 5, § 10 (account not required; newsletter voluntary) | pkt 7 (tying the contract to another unrelated contract), pkt 6 | OK. No purchase is conditional on an account or newsletter. (Depends on the guest-checkout setting.) |
-| § 3 ust. 1 (offer data is part of the contract; changed only by agreement) | pkt 10, 19, 20 (unilateral change of the contract or price) | OK. Follows art. 22 UPK; no right for the shop to change price or features after the contract. |
-| § 3 ust. 5 (no surcharge for payment method) | art. 383¹ KC (no surcharge above the trader's cost) | OK. |
-| § 4 ust. 4–5 (acceptance; limited reasons to refuse or cancel) | pkt 8 (performance depends only on the trader's will), pkt 12 and 13 (no refund of payment for unperformed service), pkt 2 | OK. Closed list of objective reasons; full refund within 14 days. |
-| § 4 ust. 6 (consumer can withdraw the offer before acceptance) | pkt 14 | OK. Follows art. 31 ust. 2 UPK. |
-| § 5 ust. 3 (cancel unpaid orders) | pkt 8, 16–17 (penalties) | OK. No fee or penalty. |
-| § 5 ust. 7–8 (delivery time: preparation binding, transit estimated, 30-day limit, art. 491–492 KC kept) | pkt 8, 10, 19 (time left to the trader's discretion), pkt 2 (limiting liability for non-performance), pkt 22 | OK as drafted. **Would NOT be OK** as a bare "all delivery times are estimates and may change". |
-| § 5 ust. 9 (risk in transit) | pkt 2; art. 548 § 3 KC (less favourable clauses are void) | OK. Risk stays with the seller until delivery to the consumer. |
-| § 5 ust. 10–11 (customs and import taxes outside the EU) | pkt 20 (price increase after the contract without a right to withdraw), pkt 12–13 | Lower risk. The charges are third-party taxes, disclosed before the order (art. 12 ust. 1 pkt 5, art. 23 UPK), and the right to withdraw is untouched. The sentence that charges paid to authorities are not refunded by the seller is flagged for the lawyer. |
-| § 6 (withdrawal: 14 days, no reason, effects, exceptions) | pkt 14 (deprives consumer of withdrawal), pkt 12–13 (refund), pkt 16–17 (penalties), art. 7 UPK (waiver void) | OK. No restocking fee, no shorter period, no "opened packaging" ban, exceptions only as in art. 38. Cost of return and diminished value exactly as art. 34 ust. 2 and ust. 4. |
-| § 6 ust. 19 (deduction for diminished value) | pkt 3 (excludes or limits consumer's set-off) | OK. The clause concerns the trader's deduction, and the consumer's set-off is untouched. |
-| § 6 ust. 16 (partial withdrawal: proportional delivery refund) | pkt 12–13 | Flagged for the lawyer (section 8). |
-| § 7 (non-conformity: art. 43a–43g, 2 years, presumption, remedies) | pkt 1–2 (excluding or limiting liability), art. 7 UPK | OK. Mirrors the statute, shortens nothing, and says guarantee is additional. No use of "rękojmia". |
-| § 8 (complaints: 14 days, silence = accepted, any channel) | pkt 4, 9 and 11 (trader alone decides conformity or interprets), pkt 21 (excessive formalities) | OK. Answer in 14 days (art. 7a UPK), no formal requirements. |
-| § 8 ust. 8 (courts) | pkt 23 (excluding Polish courts, arbitration, imposing a court) | OK. No jurisdiction or arbitration clause. |
-| § 11 (changes to the Regulamin) | pkt 10 and 19 (unilateral changes without an important reason stated in the contract) | OK. Closed list of reasons, 14 days' notice, earlier orders keep the old version, free exit for account holders. |
-| § 12 ust. 1 (Polish law) | pkt 23; Rome I art. 6(2) | OK. Mandatory home-country consumer rights preserved. |
-| § 12 ust. 2–3 | art. 385¹ § 2 KC, art. 7 UPK | OK. |
-| **Clauses deliberately not included** | pkt 2, 5, 16–17, 20, 23 | No liability cap, no force-majeure exclusion, no assignment of the contract without consent (pkt 5), no contractual penalties, no "price error – we may cancel" clause (pkt 8, 20), no jurisdiction clause, no "photos are for illustration" disclaimer, no restocking fee, no shorter withdrawal period. Do not add these later without a lawyer. |
+| § 1 ust. 6, § 4 ust. 2 pkt 5, § 4 ust. 7 (Regulamin available before the order, tick box, PDF with confirmation) | pkt 4 (no chance to read before the contract); art. 384 § 1 KC; art. 8 ust. 1 to 2 e-services act | OK once the Terms page is linked at checkout and the tick box exists. **Not OK today** (no page, no link). |
+| § 1 ust. 7 (offer only to Poland; any consumer may order with delivery to Poland) | pkt 23; Reg. 2018/302 art. 4(1)(a) | OK. |
+| § 1 ust. 8 (dropshipping: you are the seller, sender may differ) | pkt 21 (liability depends on others' performance), pkt 2 | OK. The text says the consumer does not need to contact the supplier and you are liable. |
+| § 2 ust. 2 to 4 (account termination) | pkt 14, 15 | OK. Consumer ends any time at no cost; seller only for listed reasons with 14 days' notice. |
+| § 2 ust. 5 (account not required) | pkt 7 | OK. |
+| § 2 ust. 7 to 9 (reviews; incentive; licence; notice and takedown) | pkt 10 (change without valid reason), pkt 8; UPNPR art. 6 ust. 4 pkt 7, art. 7 pkt 25 and 26 | OK as drafted (conditional). The licence is non-exclusive, free, only while published. |
+| § 3 ust. 1 (offer data is part of the contract) | pkt 10, 19, 20 | OK. Follows art. 22 UPK. |
+| § 3 ust. 3 (reference price) | UPNPR art. 5 ust. 3 pkt 5; Price Information Act art. 4 | OK as a promise. Requires correct reference prices (AUDIT H-6). |
+| § 3 ust. 5 (no payment surcharge) | art. 383¹ KC | OK. |
+| § 3 ust. 6 (safety information on every product page) | not a grey-list clause; GPSR art. 19 | True only after the block is on the pages. |
+| § 4 ust. 5 (reasons to refuse or cancel an order, including supplier cannot ship) | pkt 8 (performance depends only on the trader's will), pkt 12, 13 (no refund) | OK. Closed list of external reasons; full refund within 14 days. Do not widen it. |
+| § 4 ust. 6 (consumer may withdraw offer before acceptance) | pkt 14 | OK. Art. 31 ust. 2 UPK. |
+| § 5 ust. 3 (payment failure) | pkt 16, 17 | OK. No fee or penalty. |
+| § 5 ust. 8 to 9 (prep time binding, transit expected, 30-day limit, art. 491 to 492 KC kept) | pkt 8, 10, 19, 2 | OK as drafted. **Would not be OK** as a bare "times are estimates and may change". |
+| § 5 ust. 10 (risk in transit) | pkt 2; art. 548 § 3 KC | OK. Risk stays with you until delivery. |
+| § 5 ust. 11 (parcels in several shipments, no extra cost) | pkt 19 | OK. |
+| § 6 (withdrawal) | pkt 14, 12, 13, 16, 17; art. 7 UPK | OK. No fee, no shorter period, no "opened packaging" ban. Return cost and diminished value as in art. 34 ust. 2 and 4. |
+| § 6 ust. 19 (deduction for diminished value) | pkt 3 | OK; set-off of the consumer is untouched. |
+| § 7 (non-conformity, art. 43a to 43g) | pkt 1, 2; art. 7 UPK | OK. Shortens nothing. Says guarantee is additional. |
+| § 7 ust. 9 (no own guarantee, manufacturer guarantee only when stated) | art. 12 ust. 1 pkt 14 UPK; UPNPR art. 5 | OK and true only if the site stops claiming "gwarancja na każdy produkt". |
+| § 8 (complaints: 14 days, silence means accepted, many channels) | pkt 4, 9, 11, 21 | OK. |
+| § 8 ust. 8 (courts) | pkt 23 | OK. No jurisdiction clause. |
+| § 11 (changes of the Regulamin) | pkt 10, 19 | OK. Closed list of reasons, 14 days' notice, old orders keep the old version, free exit for account holders. |
+| § 12 ust. 1 (Polish law) | pkt 23; Rome I art. 6(2) | OK. Mandatory home-country rights are kept. |
+| § 12 ust. 2 (more favourable of Regulamin and information pages wins) | art. 385 § 2 KC | OK; helps the consumer. |
+| **Clauses deliberately not included** | pkt 2, 5, 16, 17, 20, 23 | No liability cap, no force-majeure exclusion, no assignment of the contract, no contractual penalties, no "price error, we may cancel" clause, no jurisdiction clause, no restocking fee, no shorter withdrawal period, no "photos are for illustration" disclaimer. Do not add these without a lawyer. |
 
 ---
 
-## 8. What a Polish lawyer should confirm
+## 6. What a Polish lawyer should confirm
 
-1. The registry court and the full KRS extract data (section 1).
-2. Whether the withdrawal-function clause (§ 6 ust. 6–12) matches the final Polish law once UC169 or its successor is adopted, and whether the "tutaj" suffix and the page design are acceptable.
-3. Customs and import charges outside the EU: whether the sentence that the seller does not refund charges paid to authorities is acceptable (grey-list pkt 12–13, art. 32 UPK "all payments"), and who pays on re-import of returned goods.
-4. Partial withdrawal: refund of delivery cost "in proportion" (§ 6 ust. 16).
-5. Risk in return shipping: the UPK is silent; the draft is neutral. Confirm the safest wording.
-6. The 30-day outer delivery limit and the "binding preparation time / estimated transit" split under art. 22 UPK and art. 385³ pkt 8, 10, 19.
-7. Limitation period for non-conformity claims: I found no special period in art. 43a–43g, so I assumed the general rules of KC art. 118 (6 years; 3 years for claims linked to a business; the end falls on the last day of the calendar year). Retention in the privacy policy (3 years) depends on this.
-8. Retention periods (privacy table) and the legal bases chosen, including contact-form data (art. 6 ust. 1 lit. f vs. b).
-9. The ADR Act text: I read the 2016 text from ISAP. Check the current consolidated version of art. 31–32 and whether sector rules oblige you to join ADR.
-10. Art. 398–399 PKE on the current consolidated text (Dz.U. 2024 poz. 1221 is the original text; later amendments exist). Likewise art. 6–8 of the e-services act (Dz.U. 2024 poz. 1513), which Dz.U. 2026 poz. 1296 amends from 6 November 2026 (DSA implementation; I saw no change to art. 8).
-11. The conditional blocks (reviews, newsletter, guarantee variants, art. 38 exceptions).
-12. **Not checked in primary sources and outside the brief, but relevant to an electronics shop (ask the lawyer or adviser):** product-safety information online (Regulation (EU) 2023/988: manufacturer name, address and product identifier on the offer); waste electrical and electronic equipment (take-back information and registration duties for sellers of electronics, and batteries rules); the European Accessibility Act for e-commerce (including the micro-enterprise exemption); the geo-blocking regulation (EU) 2018/302 if you sell across borders; consumer-review rules; VAT/OSS for EU consumers.
-13. Upcoming change: Dz.U. 2026 poz. 1353 adds duties from **27 September 2027** (as published): a harmonised "legal guarantee" information notice (Implementing Regulation (EU) 2025/1960), information on a manufacturer's durability guarantee label, software-update period for goods with digital elements, repairability score and spare-parts information. Plan to update the Regulamin and the product pages before then.
+1. Registry court and KRS extract data.
+2. Whether express wallet buttons (Apple Pay, Google Pay, Link) satisfy art. 17 ust. 3 UPK and which wording is safest (AUDIT H-2).
+3. The "prep time binding, transit expected, 30 days outer limit" structure under art. 22 UPK and art. 385³ pkt 8, 10, 19.
+4. Limitation period for non-conformity claims (art. 118 KC: 6 years for consumer claims, 3 years for business-related claims; my privacy retention text is conservative).
+5. Whether review sections count as a "hosting service" under the DSA and which DSA articles apply to you (art. 11, 12, 14, 16, 17; art. 19 exempts micro and small companies only from the platform chapter).
+6. Whether cookieless Google pings sent before consent (consent mode with default "denied") need consent under GDPR for the IP address; I treated them as needing consent.
+7. Classification of Stripe security cookies (`__stripe_mid`, `__stripe_sid`, `m`, anti-bot cookies) as strictly necessary under art. 399 ust. 3 pkt 2 PKE.
+8. Whether abandoned-cart reminders are "commercial information" needing prior consent under art. 398 PKE (I assumed yes).
+9. Third-country transfers to suppliers and purchasing platforms (art. 44 to 49 GDPR; art. 49 ust. 1 lit. b only for occasional transfers) and who is controller and processor in your dropshipping chain.
+10. WEEE, batteries and packaging duties in your dropshipping set-up: who is "wprowadzający sprzęt" (WEEE Act art. 4 pkt 20), what you must register in BDO, and the one-for-one take-back at delivery (art. 37 ust. 2). I verified the WEEE Act (Dz.U. 2024 poz. 573) only; the battery act (Dz.U. 2025 poz. 809), the packaging act (Dz.U. 2026 poz. 619), Regulation (EU) 2023/1542 and Regulation (EU) 2025/40 (from 12 Aug 2026) I did not read in detail.
+11. Partial-withdrawal refund wording and risk of loss in return shipping (the UPK is silent; the draft is neutral).
+12. Whether the claims "Elektronika premium" and "Szybka dostawa" are acceptable puffery once delivery takes 5 to 8 working days.
+13. The supplier template: liability limits, contractual penalties, indemnity for administrative fines, jurisdiction.
+14. The conditional blocks (reviews, newsletter, abandoned carts, analytics, ADR variants, return-cost variants).
+15. Upcoming: Dz.U. 2026 poz. 1353 (from 27 Sept 2027: green claims, new black-list items such as art. 7 pkt 10a, legal-guarantee notice, durability and software-update information) and a Polish transposition of art. 11a (withdrawal function). Plan updates.
+16. Penalties for breach of art. 19 GPSR are in art. 76 of the Polish act; check how the market-surveillance bodies (UOKiK, Inspekcja Handlowa; UKE for radio equipment) enforce them against dropshippers.
 
 ---
 
-## 9. Sources and versions used (all accessed 3 November 2026)
+## 7. Company data check (KRS API and white-list API, 20 November 2026)
 
-- Ustawa o prawach konsumenta, **tekst jednolity Dz.U. 2026 poz. 1244** (announcement of 4 Sept 2026; legal state 2 Sept 2026), via the Sejm ELI API (api.sejm.gov.pl). Articles used: 7, 7a, 7aa, 8, 12, 13, 17, 18, 21, 22, 23, 27–38, 43a–43g, załączniki nr 1 and 2. The Regulamin refers to this consolidated text; update the reference when a new one is published.
-- Ustawa z 4 września 2026 r. o zmianie ustawy o przeciwdziałaniu nieuczciwym praktykom rynkowym oraz ustawy o prawach konsumenta, Dz.U. 2026 poz. 1353 (in force 27 Sept 2027 as published).
-- Kodeks cywilny, Dz.U. 2026 poz. 795: art. 22¹, 115, 118, 383¹, 385–385⁵, 454¹, 455, 491–492, 548, 577–581.
-- Ustawa o świadczeniu usług drogą elektroniczną, Dz.U. 2024 poz. 1513 (art. 6–10); Ustawa o pozasądowym rozwiązywaniu sporów konsumenckich, Dz.U. 2016 poz. 1823 (original text; art. 31–32); Ustawa o informowaniu o cenach towarów i usług, Dz.U. 2023 poz. 168 (art. 4); Prawo komunikacji elektronicznej, Dz.U. 2024 poz. 1221 (art. 398, 399); Ustawa o rachunkowości, Dz.U. 2026 poz. 522 (art. 74); Ustawa o VAT, Dz.U. 2026 poz. 1263 (art. 112).
-- EUR-Lex / Publications Office (Polish text): Directive (EU) 2023/2673 (art. 11a, art. 2 dates); Regulation (EU) 2024/3228 (end of the ODR platform); Regulation (EU) 2016/679 (art. 6, 7, 12, 13, 15–18, 20–22, 49, 77); Regulation (EC) 593/2008 (art. 6).
-- Registers: Biała lista podatników VAT (wl-api.mf.gov.pl, NIP 1133212948) and KRS API (api-krs.ms.gov.pl, 0001267111).
-- Polish press and practitioner articles on the withdrawal button status (prawo.pl 9 June 2026; product-law.pl 10 Feb 2026; akademialtca.pl 11 Sept 2026): used only for the status of draft UC169; **not primary sources**.
-- WooCommerce documentation (woocommerce.com/document/woocommerce-cookies and /order-attribution-tracking) for the cookie list. Please confirm on the live shop.
-- Authority websites checked to exist: polubowne.uokik.gov.pl, uokik.gov.pl, prawakonsumenta.uokik.gov.pl, konsument.gov.pl, uodo.gov.pl.
+| Item | Verified value | Source |
+|---|---|---|
+| Name | 2ACE SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ | KRS and white list |
+| KRS | **0001267111** (registered 17.09.2026; extract state 18.09.2026) | KRS API |
+| NIP | **1133212948**, VAT status "Czynny", VAT registration 2026-10-01 | white list |
+| REGON | **545746743** (KRS shows the 14-digit form 54574674300000) | white list, KRS |
+| Address | ul. Ostrobramska 101A, lok. 301, 04-041 Warszawa | KRS (the white list writes "101A/301") |
+| Share capital | 5 000,00 PLN | KRS |
+| Main activity (PKD) | other non-specialised retail sale | KRS |
+| Bank accounts | two accounts on the white list (not printed in the documents) | white list |
+| Registry court | inferred from the case number (see question 3) | KRS |
+
+The KRS extract does not list an e-mail or a website. The e-mail `info@2acetech.pl` comes from your brief and the theme default. The number 545746743 is the **REGON**, never a KRS number.
+
+---
+
+## 8. Sources and versions used (all accessed 20 November 2026)
+
+- Ustawa o prawach konsumenta, tekst jednolity **Dz.U. 2026 poz. 1244** (state 2 Sept 2026): art. 7, 7a, 7aa, 12, 13, 17, 18, 21 to 24, 27 to 38, 43a to 43g, 43k, annexes 1 and 2. Dz.U. 2026 poz. 1353 (amends UPK and UPNPR, in force 27 Sept 2027).
+- Kodeks cywilny, Dz.U. 2026 poz. 795: art. 22¹, 115, 118, 383¹, 384, 385 to 385⁵, 454¹, 455, 491, 492, 548, 556 to 581.
+- Ustawa o świadczeniu usług drogą elektroniczną, Dz.U. 2024 poz. 1513 (art. 5 to 8, 10 repealed); amended from 6 Nov 2026 by Dz.U. 2026 poz. 1296.
+- Prawo komunikacji elektronicznej, Dz.U. 2024 poz. 1221 (art. 398 to 400).
+- Ustawa o przeciwdziałaniu nieuczciwym praktykom rynkowym, Dz.U. 2023 poz. 845 (art. 5, 6, 7).
+- Ustawa o informowaniu o cenach towarów i usług, Dz.U. 2023 poz. 168 (art. 4 to 6).
+- Ustawa o pozasądowym rozwiązywaniu sporów konsumenckich, Dz.U. 2016 poz. 1823 (art. 31 to 32).
+- Ustawa o języku polskim, Dz.U. 2026 poz. 81 (art. 7, 7a).
+- Ustawa o nadzorze nad ogólnym bezpieczeństwem produktów, Dz.U. 2025 poz. 1826 (art. 4, 76).
+- Ustawa o zużytym sprzęcie elektrycznym i elektronicznym, Dz.U. 2024 poz. 573 (art. 4 pkt 20, art. 37, 39).
+- Ustawa o zapewnianiu spełniania wymagań dostępności, Dz.U. 2024 poz. 731 (art. 3, 4).
+- Ustawa o VAT, Dz.U. 2026 poz. 1263 (art. 106a, 106b, 112); ustawa o rachunkowości, Dz.U. 2026 poz. 522 (art. 74); rozporządzenie MF z 17.12.2024, Dz.U. 2024 poz. 1902 (annex item 41).
+- Referenced but not read in detail: ustawa o bateriach i akumulatorach (Dz.U. 2025 poz. 809); ustawa o gospodarce opakowaniami (Dz.U. 2026 poz. 619); ustawa o systemach oceny zgodności i nadzoru rynku (Dz.U. 2025 poz. 568).
+- EUR-Lex / Publications Office: Reg. (EU) 2016/679; Reg. (EU) 2023/988 (art. 2, 4, 9, 12, 13, 16, 19, 20, 52); Directive 2009/48/EC (art. 7, 8, 11, annex V); Reg. (EU) 2025/2509 (application 1 Aug 2030); Directives 2014/35/EU (art. 9), 2014/30/EU (art. 10), 2014/53/EU (art. 13); Delegated Reg. (EU) 2019/2015 (art. 4), Reg. (EU) 2017/1369 (art. 5); Reg. (EU) 2022/2065 (DSA, art. 11, 12, 14, 16, 17, 19); Reg. (EU) 2018/302 (art. 3 to 5); Reg. (EU) 2024/3228 (end of ODR); Reg. (EU) 2025/40 (application 12 Aug 2026); Reg. (EU) 2023/1542 (batteries).
+- Registers: Biała lista (wl-api.mf.gov.pl) and KRS API (api-krs.ms.gov.pl), 20 Nov 2026.
+- CJEU press release on C-330/23 (curia.europa.eu, 2024-09). Stripe DPA page (stripe.com/legal/dpa). Press and practitioner articles on the status of the withdrawal button and WEEE duties in dropshipping were used only as pointers, not as authority.
+- Live checks (no login, no order placed, one anonymous add-to-cart for the checkout test): HTML of the home, shop, category, product, cart, checkout, withdrawal and account pages; Store API cart and product lists; headless Chrome load of the home, product and checkout pages to list requests and cookies before and after clicking "Odrzuć wszystkie"; public DNS records.

@@ -439,7 +439,9 @@ function ace_brand_list() {
 		}
 	}
 
-	if ( ! $out ) {
+	// Placeholder brand names only in demo mode: on a real shop they would
+	// advertise brands that are not sold (misleading, art. 5 UPNPR).
+	if ( ! $out && ace_is_demo() ) {
 		foreach ( ace_demo_brands() as $name ) {
 			$out[] = array( 'label' => $name, 'url' => '', 'logo' => '' );
 		}
@@ -469,8 +471,11 @@ function ace_get_products( $type = 'latest', $limit = 10, $cat = '' ) {
 	}
 
 	$products = ace_query_products( $type, $limit, $cat );
-	if ( ! $products && 'latest' !== $type ) {
-		$products = ace_query_products( 'latest', $limit, $cat ); // Never leave a rail empty.
+	// A rail of "featured" products may fall back to the latest ones. "Sale" and
+	// "best" never do: a deal or bestseller heading over products that are
+	// neither discounted nor sold would be a false claim.
+	if ( ! $products && 'featured' === $type ) {
+		$products = ace_query_products( 'latest', $limit, $cat );
 	}
 	return $products;
 }
@@ -521,6 +526,8 @@ function ace_query_products( $type, $limit, $cat = '' ) {
 					'post_status'         => 'publish',
 					'posts_per_page'      => $limit,
 					'meta_key'            => 'total_sales', // phpcs:ignore WordPress.DB.SlowDBQuery
+					'meta_value_num'      => 0,
+					'meta_compare'        => '>', // Only products that have really been sold.
 					'orderby'             => 'meta_value_num',
 					'order'               => 'DESC',
 					'no_found_rows'       => true,

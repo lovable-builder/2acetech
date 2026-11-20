@@ -235,10 +235,11 @@ function ace_promos() {
  */
 function ace_trust_defaults() {
 	return array(
-		array( 'truck', __( 'Fast delivery', '2acetech' ), __( 'Tracked shipping across Poland', '2acetech' ) ),
-		array( 'shield', __( 'Secure checkout', '2acetech' ), __( 'Encrypted, trusted payments', '2acetech' ) ),
-		array( 'return', __( 'Easy returns', '2acetech' ), __( '14-day right of withdrawal', '2acetech' ) ),
-		array( 'badge', __( 'Warranty included', '2acetech' ), __( 'Manufacturer warranty on every product', '2acetech' ) ),
+		array( 'truck', __( 'Free courier delivery', '2acetech' ), __( 'Across Poland, no delivery fee', '2acetech' ) ),
+		array( 'shield', __( 'Secure checkout', '2acetech' ), __( 'Encrypted payments', '2acetech' ) ),
+		array( 'return', __( 'Dispatch within 3 working days', '2acetech' ), __( 'Then 2–5 working days by courier', '2acetech' ) ),
+		// Empty: the shop makes no guarantee promise that every product backs up.
+		array( 'badge', '', '' ),
 	);
 }
 
@@ -314,7 +315,7 @@ function ace_text_defaults() {
 		'ace_title_best'        => __( 'Bestsellers', '2acetech' ),
 		'ace_newsletter_title'  => __( 'Get the drop before everyone else', '2acetech' ),
 		'ace_newsletter_text'   => __( 'New arrivals and deals, straight to your inbox.', '2acetech' ),
-		'ace_footer_tagline'    => __( 'Premium electronics, delivered fast across Poland.', '2acetech' ),
+		'ace_footer_tagline'    => __( 'Lighting, toys and more, delivered across Poland.', '2acetech' ),
 	);
 }
 

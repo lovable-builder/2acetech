@@ -57,7 +57,15 @@
 	};
 
 	function announce() {
-		document.dispatchEvent(new CustomEvent('ace:consent', { detail: current || { analytics: false, marketing: false } }));
+		const detail = current || { analytics: false, marketing: false };
+		// Google Consent Mode: the default "denied" is printed first in <head>
+		// (inc/consent.php); this sends the visitor's choice.
+		if (typeof window.gtag === 'function') {
+			const a = detail.analytics ? 'granted' : 'denied';
+			const m = detail.marketing ? 'granted' : 'denied';
+			window.gtag('consent', 'update', { analytics_storage: a, ad_storage: m, ad_user_data: m, ad_personalization: m });
+		}
+		document.dispatchEvent(new CustomEvent('ace:consent', { detail }));
 	}
 
 	/* Showing and hiding ------------------------------------------------- */
