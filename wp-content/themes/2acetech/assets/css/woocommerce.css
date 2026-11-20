@@ -170,7 +170,7 @@ h1.page-title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; }
 /* Grid cards line up: the content stacks and the price and button sit at the
    bottom of every card, whatever the title length or old-price line. */
 .woocommerce ul.products li.product { display: flex; flex-direction: column; }
-.woocommerce ul.products li.product .woocommerce-LoopProduct-link { display: flex; flex-direction: column; flex: 1 1 auto; color: inherit; }
+.woocommerce ul.products li.product .woocommerce-LoopProduct-link { display: flex !important; flex-direction: column; flex: 1 1 auto; color: inherit; }
 .woocommerce ul.products li.product .woocommerce-loop-product__title { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .woocommerce ul.products li.product .price { margin-top: auto; padding-top: 6px; }
 .woocommerce ul.products li.product .button { display: block; flex: 0 0 auto; width: calc(100% - 20px); margin: 0 10px; text-align: center; white-space: nowrap; }
