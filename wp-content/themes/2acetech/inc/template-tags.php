@@ -500,11 +500,19 @@ function ace_query_products( $type, $limit, $cat = '' ) {
 			$args['featured'] = true;
 			break;
 		case 'sale':
-			$ids = wc_get_product_ids_on_sale();
+			// WooCommerce's list holds variation IDs as well as products. Map
+			// every ID to its parent product first; cutting the raw list would
+			// keep mostly variations and leave one or two real products.
+			$ids = array_map( 'absint', (array) wc_get_product_ids_on_sale() );
 			if ( ! $ids ) {
 				return array();
 			}
-			$args['include'] = array_slice( $ids, 0, 60 );
+			global $wpdb;
+			$parents = $wpdb->get_col( "SELECT DISTINCT IF(post_parent > 0, post_parent, ID) FROM {$wpdb->posts} WHERE ID IN (" . implode( ',', array_slice( $ids, 0, 1000 ) ) . ')' ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			if ( ! $parents ) {
+				return array();
+			}
+			$args['include'] = array_map( 'absint', $parents );
 			break;
 		case 'best':
 			$query = new WP_Query(
