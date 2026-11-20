@@ -122,6 +122,21 @@ function ace_assets() {
 	wp_enqueue_style( 'ace-woo', $css . 'woocommerce.css', array( 'ace-main' ), ace_ver( 'assets/css/woocommerce.css' ) );
 
 	wp_enqueue_script( 'ace-main', $js . 'main.js', array(), ace_ver( 'assets/js/main.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
+	// In-site notifications; they also catch every browser alert().
+	wp_enqueue_script( 'ace-toast', $js . 'toast.js', array(), ace_ver( 'assets/js/toast.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
+	wp_localize_script(
+		'ace-toast',
+		'aceToast',
+		array(
+			'close'       => __( 'Close notification', '2acetech' ),
+			'added'       => __( 'Added to cart', '2acetech' ),
+			// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+			'viewCart'    => __( 'View cart', 'woocommerce' ),
+			'checkout'    => __( 'Checkout', '2acetech' ),
+			'cartUrl'     => function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '',
+			'checkoutUrl' => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '',
+		)
+	);
 	if ( is_front_page() && ace_active_banner() ) {
 		wp_enqueue_style( 'ace-banner', $css . 'banner.css', array( 'ace-main' ), ace_ver( 'assets/css/banner.css' ) );
 	}

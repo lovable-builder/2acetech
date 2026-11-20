@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 00:43+0100\n"
+"POT-Creation-Date: 2026-11-20 11:06+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -14,27 +14,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-msgid "Primary menu"
-msgstr "Menu główne"
-
-msgid "Departments (category dropdown)"
-msgstr "Kategorie (menu rozwijane)"
-
-msgid "Footer: Shop"
-msgstr "Stopka: Sklep"
-
-msgid "Footer: Customer care"
-msgstr "Stopka: Obsługa klienta"
-
-msgid "Sidebar"
-msgstr "Pasek boczny"
-
-msgid "Footer widgets"
-msgstr "Widgety w stopce"
-
+#: 404.php:15
 msgid "This page has gone missing"
 msgstr "Nie znaleziono strony"
 
+#: 404.php:16
 msgid ""
 "The link may be broken or the page may have moved. Try a search, or head "
 "back to the shop."
@@ -42,124 +26,12 @@ msgstr ""
 "Link może być nieprawidłowy lub strona została przeniesiona. Skorzystaj z "
 "wyszukiwarki albo wróć do sklepu."
 
+#: 404.php:18
 msgid "Back to the shop"
 msgstr "Wróć do sklepu"
 
-#, php-format
-msgid ""
-"Your withdrawal was received on %s. We have sent a confirmation to your "
-"email address."
-msgstr ""
-"Twoje odstąpienie od umowy zostało odebrane dnia %s. Wysłaliśmy "
-"potwierdzenie na Twój adres e-mail."
-
-#, php-format
-msgid ""
-"Your withdrawal was recorded on %1$s, but we could not send the confirmation "
-"email. Please keep this page (for example as a screenshot) and write to %2$s."
-msgstr ""
-"Twoje odstąpienie od umowy zostało zapisane dnia %1$s, ale nie udało nam się "
-"wysłać potwierdzenia e-mailem. Zachowaj tę stronę (np. jako zrzut ekranu) i "
-"napisz do nas: %2$s."
-
-msgid "Please fill in your name, the order number and a valid email address."
-msgstr "Podaj imię i nazwisko, numer zamówienia i prawidłowy adres e-mail."
-
-msgid ""
-"Too many attempts from this connection. Please try again later or email us."
-msgstr ""
-"Zbyt wiele prób z tego połączenia. Spróbuj ponownie później lub napisz do "
-"nas."
-
-msgid "The form expired. Please reload the page and try again."
-msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
-
-msgid ""
-"You have 14 days from receiving the goods to withdraw from the contract, "
-"without giving a reason. Fill in the details below and confirm."
-msgstr ""
-"Masz 14 dni od otrzymania towaru na odstąpienie od umowy bez podawania "
-"przyczyny. Uzupełnij dane poniżej i potwierdź."
-
-msgid "First and last name"
-msgstr "Imię i nazwisko"
-
-msgid "Order number"
-msgstr "Numer zamówienia"
-
-msgid "Email for the confirmation"
-msgstr "Adres e-mail do potwierdzenia"
-
-msgid "Which goods? (leave empty for the whole order)"
-msgstr "Których towarów dotyczy? (puste = całe zamówienie)"
-
-msgid ""
-"After you confirm, we send you an acknowledgement by email with the date and "
-"time we received your declaration."
-msgstr ""
-"Po potwierdzeniu wyślemy Ci e-mailem potwierdzenie z datą i godziną "
-"otrzymania Twojego oświadczenia."
-
-msgid "Privacy policy"
-msgstr "Polityka prywatności"
-
-msgid "Confirm withdrawal here"
-msgstr "Potwierdź odstąpienie od umowy tutaj"
-
-#, php-format
-msgid "Search results for \"%s\""
-msgstr "Wyniki wyszukiwania dla „%s”"
-
-msgid "Blog"
-msgstr "Blog"
-
-msgid "Nothing found. Try a different search."
-msgstr "Nic nie znaleziono. Spróbuj innego wyszukiwania."
-
-msgid "Thank you, your message has been sent. We will reply as soon as we can."
-msgstr ""
-"Dziękujemy, Twoja wiadomość została wysłana. Odpowiemy tak szybko, jak to "
-"możliwe."
-
-msgid "Please fill in your name, a valid email and a message."
-msgstr "Podaj imię i nazwisko, poprawny adres e-mail oraz treść wiadomości."
-
-msgid "Too many messages from this connection. Please try again later."
-msgstr "Zbyt wiele wiadomości z tego połączenia. Spróbuj ponownie później."
-
-msgid "We could not send your message. Please email us directly."
-msgstr "Nie udało się wysłać wiadomości. Napisz do nas bezpośrednio na e-mail."
-
-msgid "Send us a message"
-msgstr "Napisz do nas"
-
-msgid "Your name"
-msgstr "Imię i nazwisko"
-
-msgid "Email"
-msgstr "E-mail"
-
-msgid "Order number (optional)"
-msgstr "Numer zamówienia (opcjonalnie)"
-
-msgid "Message"
-msgstr "Wiadomość"
-
-msgid "We use your details only to answer this message."
-msgstr "Używamy Twoich danych wyłącznie do odpowiedzi na tę wiadomość."
-
-msgid "Send message"
-msgstr "Wyślij wiadomość"
-
-msgid "Contact details"
-msgstr "Dane kontaktowe"
-
-msgid "Phone"
-msgstr "Telefon"
-
-msgid "Address"
-msgstr "Adres"
-
+#. translators: %s: number of comments.
+#: comments.php:19
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -167,70 +39,437 @@ msgstr[0] "%s komentarz"
 msgstr[1] "%s komentarze"
 msgstr[2] "%s komentarzy"
 
+#: footer.php:48 inc/template-tags.php:226
+msgid "Shop"
+msgstr "Sklep"
+
+#: footer.php:65
+msgid "Customer care"
+msgstr "Obsługa klienta"
+
+#: footer.php:88
+msgid "All rights reserved."
+msgstr "Wszelkie prawa zastrzeżone."
+
+#: footer.php:106
+msgid "Back to top"
+msgstr "Wróć na górę"
+
+#: functions.php:77
+msgid "Primary menu"
+msgstr "Menu główne"
+
+#: functions.php:78
+msgid "Departments (category dropdown)"
+msgstr "Kategorie (menu rozwijane)"
+
+#: functions.php:79
+msgid "Footer: Shop"
+msgstr "Stopka: Sklep"
+
+#: functions.php:80
+msgid "Footer: Customer care"
+msgstr "Stopka: Obsługa klienta"
+
+#: functions.php:92
+msgid "Sidebar"
+msgstr "Pasek boczny"
+
+#: functions.php:102
+msgid "Footer widgets"
+msgstr "Widgety w stopce"
+
+#: functions.php:131
+msgid "Close notification"
+msgstr "Zamknij powiadomienie"
+
+#: functions.php:132
+msgid "Added to cart"
+msgstr "Dodano do koszyka"
+
+#: functions.php:134
+msgid "View cart"
+msgstr "Zobacz koszyk"
+
+#: functions.php:135
+msgid "Checkout"
+msgstr "Do kasy"
+
+#: header.php:12 inc/customizer.php:49 inc/product.php:183
 msgid "Fast, tracked delivery across Poland"
 msgstr "Szybka dostawa z numerem śledzenia w całej Polsce"
 
+#: header.php:25
 msgid "Skip to content"
 msgstr "Przejdź do treści"
 
+#: header.php:44
 msgid "Menu"
 msgstr "Menu"
 
+#: header.php:55
 msgid "Wishlist"
 msgstr "Lista życzeń"
 
+#: header.php:60 inc/template-tags.php:254
 msgid "My account"
 msgstr "Moje konto"
 
+#: header.php:65 inc/template-tags.php:256 inc/woocommerce.php:188
 msgid "Cart"
 msgstr "Koszyk"
 
+#: header.php:83 inc/home.php:311
 msgid "Shop by category"
 msgstr "Kategorie produktów"
 
+#: header.php:86 header.php:119
 msgid "Product categories"
 msgstr "Kategorie produktów"
 
+#. translators: %s: category name.
+#. translators: %s: category.
+#: header.php:103 header.php:125 inc/categories.php:66
 #, php-format
 msgid "All in %s"
 msgstr "Wszystko w: %s"
 
+#: header.php:111 inc/categories.php:69 template-parts/categories.php:21
 msgid "All products"
 msgstr "Wszystkie produkty"
 
+#: header.php:136
 msgid "Primary"
 msgstr "Główne"
 
-msgid "Shop"
-msgstr "Sklep"
+#: inc/banner.php:28
+msgid "Standard (dark and red)"
+msgstr "Standardowy (ciemny z czerwienią)"
 
-msgid "Customer care"
-msgstr "Obsługa klienta"
+#: inc/banner.php:29 inc/banner.php:92
+msgid "Halloween"
+msgstr "Halloween"
 
-msgid "All rights reserved."
-msgstr "Wszelkie prawa zastrzeżone."
+#: inc/banner.php:30 inc/banner.php:102
+msgid "Christmas"
+msgstr "Boże Narodzenie"
 
-msgid "Back to top"
-msgstr "Wróć na górę"
+#: inc/banner.php:31
+msgid "New Year"
+msgstr "Nowy Rok"
 
-msgid "Continue shopping"
-msgstr "Kontynuuj zakupy"
+#: inc/banner.php:32
+msgid "Black Friday"
+msgstr "Black Friday"
 
-msgid "Search"
-msgstr "Szukaj"
+#: inc/banner.php:33
+msgid "Valentine's Day"
+msgstr "Walentynki"
 
-msgid "All categories"
-msgstr "Wszystkie kategorie"
+#: inc/banner.php:34
+msgid "Summer sale (light)"
+msgstr "Letnia wyprzedaż (jasny)"
 
-msgid "Search products…"
-msgstr "Szukaj produktów…"
+#: inc/banner.php:35
+msgid "My own colours"
+msgstr "Własne kolory"
 
-msgid "Search…"
-msgstr "Szukaj…"
+#: inc/banner.php:82
+msgid "New in the shop"
+msgstr "Nowość w sklepie"
 
+#: inc/banner.php:83
+msgid "Discover our newest products"
+msgstr "Odkryj nasze najnowsze produkty"
+
+#: inc/banner.php:85 inc/home.php:189
+msgid "Shop now"
+msgstr "Kup teraz"
+
+#: inc/banner.php:93
+msgid "Spooky deals are here"
+msgstr "Straszne okazje są już tutaj"
+
+#: inc/banner.php:94
+msgid "Treat yourself before the night is over."
+msgstr "Sprawdź, zanim skończy się noc."
+
+#: inc/banner.php:95
+msgid "Shop the deals"
+msgstr "Zobacz okazje"
+
+#: inc/banner.php:103
+msgid "Gifts they will love"
+msgstr "Prezenty, które pokochają"
+
+#: inc/banner.php:104
+msgid "Find the perfect present for everyone on your list."
+msgstr "Znajdź idealny prezent dla każdej osoby z Twojej listy."
+
+#: inc/banner.php:105
+msgid "Find a gift"
+msgstr "Znajdź prezent"
+
+#: inc/banner.php:148 inc/banner.php:385
+msgid "Offer ends in:"
+msgstr "Oferta kończy się za:"
+
+#: inc/banner.php:149 inc/banner.php:386
+msgid "This offer has ended."
+msgstr "Ta oferta już się zakończyła."
+
+#. translators: %d: banner number.
+#: inc/banner.php:327
+#, php-format
+msgid "Banner %d (top of the homepage)"
+msgstr "Baner %d (góra strony głównej)"
+
+#: inc/banner.php:329
+msgid ""
+"The big banner at the top of the homepage. Prepare up to three (for example "
+"the normal one, Halloween and Christmas). Give a banner \"Show from\" and "
+"\"Show until\" dates and it switches itself on and off; a banner with dates "
+"beats an always-on one."
+msgstr ""
+"Duży baner na górze strony głównej. Możesz przygotować do trzech (na "
+"przykład zwykły, na Halloween i na Boże Narodzenie). Ustaw banerowi daty "
+"„Pokaż od” i „Pokaż do”, a włączy się i wyłączy sam; baner z datami ma "
+"pierwszeństwo przed zawsze włączonym."
+
+#: inc/banner.php:336
+msgid "Show this banner"
+msgstr "Pokaż ten baner"
+
+#: inc/banner.php:337
+msgid "Look"
+msgstr "Wygląd"
+
+#: inc/banner.php:338
+msgid "Festive decorations (floating emojis)"
+msgstr "Świąteczne ozdoby (unoszące się emoji)"
+
+#: inc/banner.php:338
+msgid ""
+"Pumpkins, snowflakes, sparkles ... depending on the look. Not used with \"My "
+"own colours\"."
+msgstr ""
+"Dynie, płatki śniegu, iskry... zależnie od wyglądu. Nie działa z „Własne "
+"kolory”."
+
+#: inc/banner.php:341
+msgid "My colours: background start"
+msgstr "Własne kolory: początek tła"
+
+#: inc/banner.php:341
+msgid "My colours: background end"
+msgstr "Własne kolory: koniec tła"
+
+#: inc/banner.php:341
+msgid "My colours: accent (button, last word)"
+msgstr "Własne kolory: akcent (przycisk, ostatnie słowo)"
+
+#: inc/banner.php:345
+msgid "My colours: text"
+msgstr "Własne kolory: tekst"
+
+#: inc/banner.php:345
+msgid "White text (dark background)"
+msgstr "Biały tekst (ciemne tło)"
+
+#: inc/banner.php:345
+msgid "Dark text (light background)"
+msgstr "Ciemny tekst (jasne tło)"
+
+#: inc/banner.php:348 inc/customizer-home.php:204
+msgid "Small label"
+msgstr "Mała etykieta"
+
+#: inc/banner.php:349 inc/customizer-home.php:205
+msgid "Headline"
+msgstr "Nagłówek"
+
+#: inc/banner.php:349
+msgid "The last word is shown in the accent colour."
+msgstr "Ostatnie słowo jest w kolorze akcentu."
+
+#: inc/banner.php:350 inc/customizer-home.php:206
+msgid "Text"
+msgstr "Tekst"
+
+#: inc/banner.php:351 inc/customizer-home.php:207
+msgid "Button text"
+msgstr "Tekst przycisku"
+
+#: inc/banner.php:351 inc/customizer-home.php:207
+msgid "Leave empty for no button."
+msgstr "Zostaw puste, aby ukryć przycisk."
+
+#: inc/banner.php:352 inc/customizer-home.php:208
+msgid "Button link"
+msgstr "Link przycisku"
+
+#: inc/banner.php:352
+msgid "Empty = the shop page."
+msgstr "Puste = strona sklepu."
+
+#: inc/banner.php:353
+msgid "Second button text (optional)"
+msgstr "Tekst drugiego przycisku (opcjonalnie)"
+
+#: inc/banner.php:354
+msgid "Second button link"
+msgstr "Link drugiego przycisku"
+
+#: inc/banner.php:357
+msgid "Right side shows"
+msgstr "Prawa strona pokazuje"
+
+#: inc/banner.php:357
+msgid "A carousel of products"
+msgstr "Karuzelę produktów"
+
+#: inc/banner.php:357
+msgid "A picture"
+msgstr "Obrazek"
+
+#: inc/banner.php:357
+msgid "Nothing (centred text)"
+msgstr "Nic (tekst na środku)"
+
+#: inc/banner.php:358
+msgid "Picture"
+msgstr "Obrazek"
+
+#: inc/banner.php:358
+msgid ""
+"Used when the right side shows \"A picture\". A transparent PNG works best."
+msgstr ""
+"Używany, gdy prawa strona pokazuje „Obrazek”. Najlepiej przezroczysty PNG."
+
+#: inc/banner.php:363
+msgid "Products to show"
+msgstr "Produkty do pokazania"
+
+#: inc/banner.php:368
+msgid "Newest products"
+msgstr "Najnowsze produkty"
+
+#: inc/banner.php:369
+msgid "Featured products (starred in WooCommerce)"
+msgstr "Polecane produkty (z gwiazdką w WooCommerce)"
+
+#: inc/banner.php:370
+msgid "Products on sale"
+msgstr "Produkty w promocji"
+
+#: inc/banner.php:371 inc/home.php:278 inc/home.php:314
+msgid "Bestsellers"
+msgstr "Bestsellery"
+
+#: inc/banner.php:372
+msgid "One category (type its slug below)"
+msgstr "Jedna kategoria (wpisz jej slug poniżej)"
+
+#: inc/banner.php:373
+msgid "Products I pick (IDs or SKUs below)"
+msgstr "Produkty wybrane przeze mnie (ID lub SKU poniżej)"
+
+#: inc/banner.php:378
+msgid "Category slug"
+msgstr "Slug kategorii"
+
+#: inc/banner.php:378
+msgid ""
+"For example: swiateczne-dekoracje. You find the slug under Products > "
+"Categories."
+msgstr ""
+"Na przykład: swiateczne-dekoracje. Slug znajdziesz w Produkty > Kategorie."
+
+#: inc/banner.php:379
+msgid "Product IDs or SKUs"
+msgstr "ID lub SKU produktów"
+
+#: inc/banner.php:379
+msgid ""
+"Separated by commas, in the order you want them, for example: 592, 2AC-0003, "
+"675."
+msgstr ""
+"Oddzielone przecinkami, w żądanej kolejności, na przykład: 592, 2AC-0003, "
+"675."
+
+#: inc/banner.php:380
+msgid "How many products (3 to 10)"
+msgstr "Ile produktów (od 3 do 10)"
+
+#: inc/banner.php:383
+msgid "Show a countdown"
+msgstr "Pokaż odliczanie"
+
+#: inc/banner.php:384
+msgid "Countdown ends on"
+msgstr "Odliczanie kończy się"
+
+#: inc/banner.php:384
+msgid ""
+"Date and time in your site time zone. No countdown is shown while this is "
+"empty."
+msgstr ""
+"Data i godzina w strefie czasowej strony. Dopóki pole jest puste, odliczanie "
+"się nie pokazuje."
+
+#: inc/banner.php:385
+msgid "Text above the countdown"
+msgstr "Tekst nad odliczaniem"
+
+#: inc/banner.php:386
+msgid "Text when the countdown is over"
+msgstr "Tekst po zakończeniu odliczania"
+
+#: inc/banner.php:386
+msgid ""
+"Shown instead of the countdown. To remove the whole banner at that moment, "
+"also set \"Show until\"."
+msgstr ""
+"Pokazywany zamiast odliczania. Aby w tym momencie usunąć cały baner, ustaw "
+"też „Pokaż do”."
+
+#: inc/banner.php:389
+msgid "Show from (optional)"
+msgstr "Pokaż od (opcjonalnie)"
+
+#: inc/banner.php:389
+msgid "Empty = from now on."
+msgstr "Puste = od teraz."
+
+#: inc/banner.php:390
+msgid "Show until (optional)"
+msgstr "Pokaż do (opcjonalnie)"
+
+#: inc/banner.php:390
+msgid "Empty = no end. After this moment the banner disappears by itself."
+msgstr "Puste = bez końca. Po tym czasie baner zniknie sam."
+
+#: inc/banner.php:391
+msgid "Height"
+msgstr "Wysokość"
+
+#: inc/banner.php:391
+msgid "Compact"
+msgstr "Niski"
+
+#: inc/banner.php:391
+msgid "Normal"
+msgstr "Normalny"
+
+#: inc/banner.php:391
+msgid "Tall"
+msgstr "Wysoki"
+
+#: inc/brands.php:336
 msgid "Brand logos"
 msgstr "Logotypy marek"
 
+#: inc/brands.php:337
 msgid ""
 "Every brand logo is trimmed and fitted into the same slot, so they all look "
 "alike. Brands are added under Products > Brands. If one logo still looks too "
@@ -241,31 +480,40 @@ msgstr ""
 "któreś logo nadal wygląda na za duże lub za małe, ustaw jego „Rozmiar logo” "
 "podczas edycji marki."
 
+#: inc/brands.php:346
 msgid "Logo colour"
 msgstr "Kolor logotypów"
 
+#: inc/brands.php:350
 msgid "Grey, colour on hover (calm, uniform)"
 msgstr "Szare, kolorowe po najechaniu (spokojnie i równo)"
 
+#: inc/brands.php:351
 msgid "Full colour"
 msgstr "Pełny kolor"
 
+#: inc/brands.php:360
 msgid "Slot height (px)"
 msgstr "Wysokość pola (px)"
 
+#: inc/brands.php:361
 msgid "How tall each logo slot is. Slots are always the same size."
 msgstr ""
 "Jak wysokie jest pole na logo. Wszystkie pola mają zawsze ten sam rozmiar."
 
+#: inc/brands.php:372
 msgid "Logo size inside the slot (%)"
 msgstr "Rozmiar logo w polu (%)"
 
+#: inc/brands.php:373
 msgid "Lower leaves more space around each logo."
 msgstr "Niższa wartość zostawia więcej miejsca wokół każdego logo."
 
+#: inc/brands.php:402 inc/brands.php:418
 msgid "Logo size (%)"
 msgstr "Rozmiar logo (%)"
 
+#: inc/brands.php:404 inc/brands.php:421
 msgid ""
 "100 is standard. Raise it for a logo that looks small (a thin or light one), "
 "lower it for one that looks too big."
@@ -273,961 +521,15 @@ msgstr ""
 "100 to standard. Zwiększ dla logo, które wygląda na małe (cienkie lub "
 "jasne), zmniejsz dla zbyt dużego."
 
-msgid "Extra details"
-msgstr "Dodatkowe szczegóły"
-
-msgid "What's in the box"
-msgstr "Zawartość zestawu"
-
-msgid ""
-"One item per line, for example \"4 x aluminium LED strips\". Shows as the "
-"\"What's in the box\" tab. Leave empty to hide the tab."
-msgstr ""
-"Jedna pozycja w wierszu, np. \"4 x aluminiowe listwy LED\". Wyświetla się "
-"jako zakładka \"Zawartość zestawu\". Zostaw puste, aby ukryć zakładkę."
-
-msgid "Questions and answers"
-msgstr "Pytania i odpowiedzi"
-
-msgid ""
-"A question on one line, its answer on the next line(s), then a blank line "
-"before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty "
-"to hide the tab."
-msgstr ""
-"Pytanie w jednym wierszu, odpowiedź w kolejnych wierszach, potem pusty "
-"wiersz przed następnym pytaniem. Zwykły tekst. Wyświetla się jako zakładka "
-"\"FAQ\". Zostaw puste, aby ukryć zakładkę."
-
-msgid "Specification"
-msgstr "Specyfikacja"
-
-msgid "FAQ"
-msgstr "FAQ"
-
-msgid "Frequently asked questions"
-msgstr "Najczęściej zadawane pytania"
-
-#, php-format
-msgid "[%s] New newsletter sign-up"
-msgstr "[%s] Nowy zapis do newslettera"
-
-#, php-format
-msgid "New newsletter sign-up: %s"
-msgstr "Nowy zapis do newslettera: %s"
-
-msgid "Laptops & computers"
-msgstr "Laptopy i komputery"
-
-msgid "Phones & tablets"
-msgstr "Telefony i tablety"
-
-msgid "Audio"
-msgstr "Audio"
-
-msgid "Cameras"
-msgstr "Aparaty i kamery"
-
-msgid "Wearables"
-msgstr "Smartwatche"
-
-msgid "Gaming"
-msgstr "Gaming"
-
-msgid "Breadcrumb"
-msgstr "Ścieżka nawigacji"
-
-msgid "Home"
-msgstr "Strona główna"
-
-msgid "Brand:"
-msgstr "Marka:"
-
-#, php-format
-msgid "%d review"
-msgid_plural "%d reviews"
-msgstr[0] "%d opinia"
-msgstr[1] "%d opinie"
-msgstr[2] "%d opinii"
-
-msgid "Be the first to review this product"
-msgstr "Bądź pierwszą osobą, która oceni ten produkt"
-
-msgid "Hurry up! Special offer."
-msgstr "Pospiesz się! Oferta specjalna."
-
-#, php-format
-msgid "Available: %d"
-msgstr "Dostępne: %d"
-
-#, php-format
-msgid "Already sold: %d"
-msgstr "Już sprzedano: %d"
-
-#, php-format
-msgid "%d%% sold"
-msgstr "Sprzedano %d%%"
-
-#, php-format
-msgid "Only %d left in stock"
-msgid_plural "Only %d left in stock"
-msgstr[0] "W magazynie tylko %d szt."
-msgstr[1] "W magazynie tylko %d szt."
-msgstr[2] "W magazynie tylko %d szt."
-
-msgid "days"
-msgstr "dni"
-
-msgid "hrs"
-msgstr "godz."
-
-msgid "min"
-msgstr "min"
-
-msgid "sec"
-msgstr "sek."
-
-msgid "Secure, encrypted checkout"
-msgstr "Bezpieczne, szyfrowane zamówienie"
-
-msgid "14-day right of withdrawal"
-msgstr "14 dni na odstąpienie od umowy"
-
-msgid "On backorder"
-msgstr "Na zamówienie"
-
-#, php-format
-msgid "In stock (%d pcs)"
-msgstr "Dostępny (%d szt.)"
-
-msgid "In stock"
-msgstr "Dostępny"
-
-msgid "Out of stock"
-msgstr "Niedostępny"
-
-msgid "Availability"
-msgstr "Dostępność"
-
-msgid "SKU"
-msgstr "SKU"
-
-msgid "Category"
-msgstr "Kategoria"
-
-msgid "Share"
-msgstr "Udostępnij"
-
-msgid "Link copied"
-msgstr "Skopiowano link"
-
-msgid "Copy link"
-msgstr "Kopiuj link"
-
-msgid "Decrease quantity"
-msgstr "Zmniejsz ilość"
-
-msgid "Increase quantity"
-msgstr "Zwiększ ilość"
-
-msgid "Previous photo"
-msgstr "Poprzednie zdjęcie"
-
-msgid "Next photo"
-msgstr "Następne zdjęcie"
-
-msgid "Standard (dark and red)"
-msgstr "Standardowy (ciemny z czerwienią)"
-
-msgid "Halloween"
-msgstr "Halloween"
-
-msgid "Christmas"
-msgstr "Boże Narodzenie"
-
-msgid "New Year"
-msgstr "Nowy Rok"
-
-msgid "Black Friday"
-msgstr "Black Friday"
-
-msgid "Valentine's Day"
-msgstr "Walentynki"
-
-msgid "Summer sale (light)"
-msgstr "Letnia wyprzedaż (jasny)"
-
-msgid "My own colours"
-msgstr "Własne kolory"
-
-msgid "New in the shop"
-msgstr "Nowość w sklepie"
-
-msgid "Discover our newest products"
-msgstr "Odkryj nasze najnowsze produkty"
-
-msgid "Shop now"
-msgstr "Kup teraz"
-
-msgid "Spooky deals are here"
-msgstr "Straszne okazje są już tutaj"
-
-msgid "Treat yourself before the night is over."
-msgstr "Sprawdź, zanim skończy się noc."
-
-msgid "Shop the deals"
-msgstr "Zobacz okazje"
-
-msgid "Gifts they will love"
-msgstr "Prezenty, które pokochają"
-
-msgid "Find the perfect present for everyone on your list."
-msgstr "Znajdź idealny prezent dla każdej osoby z Twojej listy."
-
-msgid "Find a gift"
-msgstr "Znajdź prezent"
-
-msgid "Offer ends in:"
-msgstr "Oferta kończy się za:"
-
-msgid "This offer has ended."
-msgstr "Ta oferta już się zakończyła."
-
-#, php-format
-msgid "Banner %d (top of the homepage)"
-msgstr "Baner %d (góra strony głównej)"
-
-msgid ""
-"The big banner at the top of the homepage. Prepare up to three (for example "
-"the normal one, Halloween and Christmas). Give a banner \"Show from\" and "
-"\"Show until\" dates and it switches itself on and off; a banner with dates "
-"beats an always-on one."
-msgstr "Duży baner na górze strony głównej. Możesz przygotować do trzech (na przykład zwykły, na Halloween i na Boże Narodzenie). Ustaw banerowi daty „Pokaż od” i „Pokaż do”, a włączy się i wyłączy sam; baner z datami ma pierwszeństwo przed zawsze włączonym."
-
-msgid "Show this banner"
-msgstr "Pokaż ten baner"
-
-msgid "Look"
-msgstr "Wygląd"
-
-msgid "Festive decorations (floating emojis)"
-msgstr "Świąteczne ozdoby (unoszące się emoji)"
-
-msgid ""
-"Pumpkins, snowflakes, sparkles ... depending on the look. Not used with \"My "
-"own colours\"."
-msgstr "Dynie, płatki śniegu, iskry... zależnie od wyglądu. Nie działa z „Własne kolory”."
-
-msgid "My colours: background start"
-msgstr "Własne kolory: początek tła"
-
-msgid "My colours: background end"
-msgstr "Własne kolory: koniec tła"
-
-msgid "My colours: accent (button, last word)"
-msgstr "Własne kolory: akcent (przycisk, ostatnie słowo)"
-
-msgid "My colours: text"
-msgstr "Własne kolory: tekst"
-
-msgid "White text (dark background)"
-msgstr "Biały tekst (ciemne tło)"
-
-msgid "Dark text (light background)"
-msgstr "Ciemny tekst (jasne tło)"
-
-msgid "Small label"
-msgstr "Mała etykieta"
-
-msgid "Headline"
-msgstr "Nagłówek"
-
-msgid "The last word is shown in the accent colour."
-msgstr "Ostatnie słowo jest w kolorze akcentu."
-
-msgid "Text"
-msgstr "Tekst"
-
-msgid "Button text"
-msgstr "Tekst przycisku"
-
-msgid "Leave empty for no button."
-msgstr "Zostaw puste, aby ukryć przycisk."
-
-msgid "Button link"
-msgstr "Link przycisku"
-
-msgid "Empty = the shop page."
-msgstr "Puste = strona sklepu."
-
-msgid "Second button text (optional)"
-msgstr "Tekst drugiego przycisku (opcjonalnie)"
-
-msgid "Second button link"
-msgstr "Link drugiego przycisku"
-
-msgid "Right side shows"
-msgstr "Prawa strona pokazuje"
-
-msgid "A carousel of products"
-msgstr "Karuzelę produktów"
-
-msgid "A picture"
-msgstr "Obrazek"
-
-msgid "Nothing (centred text)"
-msgstr "Nic (tekst na środku)"
-
-msgid "Picture"
-msgstr "Obrazek"
-
-msgid ""
-"Used when the right side shows \"A picture\". A transparent PNG works best."
-msgstr "Używany, gdy prawa strona pokazuje „Obrazek”. Najlepiej przezroczysty PNG."
-
-msgid "Products to show"
-msgstr "Produkty do pokazania"
-
-msgid "Newest products"
-msgstr "Najnowsze produkty"
-
-msgid "Featured products (starred in WooCommerce)"
-msgstr "Polecane produkty (z gwiazdką w WooCommerce)"
-
-msgid "Products on sale"
-msgstr "Produkty w promocji"
-
-msgid "Bestsellers"
-msgstr "Bestsellery"
-
-msgid "One category (type its slug below)"
-msgstr "Jedna kategoria (wpisz jej slug poniżej)"
-
-msgid "Products I pick (IDs or SKUs below)"
-msgstr "Produkty wybrane przeze mnie (ID lub SKU poniżej)"
-
-msgid "Category slug"
-msgstr "Slug kategorii"
-
-msgid ""
-"For example: swiateczne-dekoracje. You find the slug under Products > "
-"Categories."
-msgstr "Na przykład: swiateczne-dekoracje. Slug znajdziesz w Produkty > Kategorie."
-
-msgid "Product IDs or SKUs"
-msgstr "ID lub SKU produktów"
-
-msgid ""
-"Separated by commas, in the order you want them, for example: 592, 2AC-0003, "
-"675."
-msgstr "Oddzielone przecinkami, w żądanej kolejności, na przykład: 592, 2AC-0003, 675."
-
-msgid "How many products (3 to 10)"
-msgstr "Ile produktów (od 3 do 10)"
-
-msgid "Show a countdown"
-msgstr "Pokaż odliczanie"
-
-msgid "Countdown ends on"
-msgstr "Odliczanie kończy się"
-
-msgid ""
-"Date and time in your site time zone. No countdown is shown while this is "
-"empty."
-msgstr "Data i godzina w strefie czasowej strony. Dopóki pole jest puste, odliczanie się nie pokazuje."
-
-msgid "Text above the countdown"
-msgstr "Tekst nad odliczaniem"
-
-msgid "Text when the countdown is over"
-msgstr "Tekst po zakończeniu odliczania"
-
-msgid ""
-"Shown instead of the countdown. To remove the whole banner at that moment, "
-"also set \"Show until\"."
-msgstr "Pokazywany zamiast odliczania. Aby w tym momencie usunąć cały baner, ustaw też „Pokaż do”."
-
-msgid "Show from (optional)"
-msgstr "Pokaż od (opcjonalnie)"
-
-msgid "Empty = from now on."
-msgstr "Puste = od teraz."
-
-msgid "Show until (optional)"
-msgstr "Pokaż do (opcjonalnie)"
-
-msgid "Empty = no end. After this moment the banner disappears by itself."
-msgstr "Puste = bez końca. Po tym czasie baner zniknie sam."
-
-msgid "Height"
-msgstr "Wysokość"
-
-msgid "Compact"
-msgstr "Niski"
-
-msgid "Normal"
-msgstr "Normalny"
-
-msgid "Tall"
-msgstr "Wysoki"
-
-msgid "Withdraw from contract here"
-msgstr "Odstąp od umowy tutaj"
-
-msgid "Withdrawals"
-msgstr "Odstąpienia od umowy"
-
-msgid "Withdrawal"
-msgstr "Odstąpienie od umowy"
-
-msgid "No withdrawals yet."
-msgstr "Brak odstąpień od umowy."
-
-msgid "The whole order"
-msgstr "Całe zamówienie"
-
-msgid "Name"
-msgstr "Imię i nazwisko"
-
-msgid "Goods covered"
-msgstr "Towary objęte odstąpieniem"
-
-msgid "Received"
-msgstr "Data otrzymania"
-
-#, php-format
-msgid "Withdrawal: order %1$s, %2$s"
-msgstr "Odstąpienie od umowy: zamówienie %1$s, %2$s"
-
-msgid "Matched to the order (number and email agree)."
-msgstr "Dopasowano do zamówienia (numer i adres e-mail się zgadzają)."
-
-msgid "Not matched to an order automatically. Check the details."
-msgstr "Nie dopasowano automatycznie do zamówienia. Sprawdź dane."
-
-#, php-format
-msgid ""
-"The customer declared withdrawal from the contract using the website "
-"function on %s."
-msgstr ""
-"Klient złożył oświadczenie o odstąpieniu od umowy za pomocą funkcji na "
-"stronie internetowej dnia %s."
-
-#, php-format
-msgid ""
-"We confirm that we received your declaration of withdrawal from the contract "
-"on %s."
-msgstr ""
-"Potwierdzamy otrzymanie Twojego oświadczenia o odstąpieniu od umowy w dniu "
-"%s."
-
-msgid ""
-"We will reply to this address with the next steps for returning the goods "
-"and the refund."
-msgstr ""
-"Na ten adres e-mail wyślemy kolejne informacje dotyczące zwrotu towarów i "
-"zwrotu płatności."
-
-#, php-format
-msgid "[%s] Confirmation of your withdrawal from the contract"
-msgstr "[%s] Potwierdzenie odstąpienia od umowy"
-
-#, php-format
-msgid "[%1$s] Withdrawal from contract: order %2$s"
-msgstr "[%1$s] Odstąpienie od umowy: zamówienie %2$s"
-
-msgid "Acknowledgement sent to the consumer."
-msgstr "Potwierdzenie zostało wysłane do konsumenta."
-
-msgid ""
-"WARNING: the acknowledgement email to the consumer could NOT be sent. "
-"Contact them now."
-msgstr ""
-"UWAGA: potwierdzenia do konsumenta NIE udało się wysłać e-mailem. Skontaktuj "
-"się z nim teraz."
-
-msgid "Items in cart:"
-msgstr "Produkty w koszyku:"
-
-msgid "Details & payment"
-msgstr "Dane i płatność"
-
-msgid "Confirmation"
-msgstr "Potwierdzenie"
-
-msgid "Checkout progress"
-msgstr "Postęp zamówienia"
-
-msgid "Order with obligation to pay"
-msgstr "Zamówienie z obowiązkiem zapłaty"
-
-msgid "Red glow"
-msgstr "Czerwona poświata"
-
-msgid "Steel blue"
-msgstr "Stalowy niebieski"
-
-msgid "Deep crimson"
-msgstr "Głęboka czerwień"
-
-msgid "Smartwatch"
-msgstr "Smartwatch"
-
-msgid "Laptop"
-msgstr "Laptop"
-
-msgid "Headphones"
-msgstr "Słuchawki"
-
-msgid "Camera"
-msgstr "Aparat"
-
-msgid "Smartphone"
-msgstr "Smartfon"
-
-msgid "Speaker"
-msgstr "Głośnik"
-
-msgid "Tablet"
-msgstr "Tablet"
-
-msgid "Game console"
-msgstr "Konsola do gier"
-
-msgid "Lamp"
-msgstr "Lampa"
-
-msgid "Building blocks"
-msgstr "Klocki"
-
-msgid "Scooter"
-msgstr "Hulajnoga"
-
-msgid "Cooking pot"
-msgstr "Garnek"
-
-msgid "Plant"
-msgstr "Roślina"
-
-msgid "Notebook"
-msgstr "Notes"
-
-msgid "Baby bottle"
-msgstr "Butelka dla niemowląt"
-
-msgid "Paw print"
-msgstr "Łapka"
-
-msgid "Microchip"
-msgstr "Mikroprocesor"
-
-msgid "Wear the future on your wrist."
-msgstr "Przyszłość na Twoim nadgarstku."
-
-msgid "Smartwatches that track, pay and keep up with every day."
-msgstr "Smartwatche, które mierzą, płacą i dotrzymują kroku każdemu dniowi."
-
-msgid "Shop wearables"
-msgstr "Kup smartwatche"
-
-msgid "AMOLED display"
-msgstr "Wyświetlacz AMOLED"
-
-msgid "7-day battery"
-msgstr "Bateria na 7 dni"
-
-msgid "GPS + NFC"
-msgstr "GPS + NFC"
-
-msgid "Laptops"
-msgstr "Laptopy"
-
-msgid "Power that travels light."
-msgstr "Moc w lekkiej obudowie."
-
-msgid "Ultralight laptops built for work, study and everything after."
-msgstr "Ultralekkie laptopy do pracy, nauki i wszystkiego po godzinach."
-
-msgid "Shop laptops"
-msgstr "Kup laptopy"
-
-msgid "14\" OLED"
-msgstr "14\" OLED"
-
-msgid "16 GB RAM"
-msgstr "16 GB RAM"
-
-msgid "1 kg"
-msgstr "1 kg"
-
-msgid "Hear every last detail."
-msgstr "Usłysz każdy szczegół."
-
-msgid "Noise-cancelling headphones and speakers with room-filling sound."
-msgstr ""
-"Słuchawki z redukcją hałasu i głośniki z dźwiękiem, który wypełnia pokój."
-
-msgid "Shop audio"
-msgstr "Kup sprzęt audio"
-
-msgid "Active noise cancelling"
-msgstr "Aktywna redukcja szumów"
-
-msgid "40 h playback"
-msgstr "40 godzin odtwarzania"
-
-msgid "Bluetooth 5.3"
-msgstr "Bluetooth 5.3"
-
-msgid "Tablets & phones"
-msgstr "Tablety i telefony"
-
-msgid "Shop and save big on the hottest tablets"
-msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
-
-msgid "Level up your setup with new consoles"
-msgstr "Podkręć swoje stanowisko nowymi konsolami"
-
-msgid "Explore gaming"
-msgstr "Odkryj gaming"
-
-msgid "Fast delivery"
-msgstr "Szybka dostawa"
-
-msgid "Tracked shipping across Poland"
-msgstr "Wysyłka z numerem śledzenia w całej Polsce"
-
-msgid "Secure checkout"
-msgstr "Bezpieczne zakupy"
-
-msgid "Encrypted, trusted payments"
-msgstr "Szyfrowane, zaufane płatności"
-
-msgid "Easy returns"
-msgstr "Łatwe zwroty"
-
-msgid "Warranty included"
-msgstr "Gwarancja w cenie"
-
-msgid "Manufacturer warranty on every product"
-msgstr "Gwarancja producenta na każdy produkt"
-
-msgid "Trust strip"
-msgstr "Pasek zalet"
-
-msgid "Category tiles"
-msgstr "Kafelki kategorii"
-
-msgid "Featured products"
-msgstr "Polecane produkty"
-
-msgid "Promo banners"
-msgstr "Banery promocyjne"
-
-msgid "Deal of the week and product tabs"
-msgstr "Oferta tygodnia i zakładki produktów"
-
-msgid "Brand strip"
-msgstr "Pasek marek"
-
-msgid "Best deals by category"
-msgstr "Najlepsze okazje według kategorii"
-
-msgid "Newsletter"
-msgstr "Newsletter"
-
-msgid "Best deals"
-msgstr "Najlepsze okazje"
-
-msgid "Get the drop before everyone else"
-msgstr "Poznaj nowości przed wszystkimi"
-
-msgid "New arrivals and deals, straight to your inbox."
-msgstr "Nowości i promocje prosto na Twoją skrzynkę."
-
-msgid "Premium electronics, delivered fast across Poland."
-msgstr "Elektronika premium, szybko dostarczana w całej Polsce."
-
-msgid "Deal of the week"
-msgstr "Oferta tygodnia"
-
-msgid ""
-"Show this product in the countdown card on the homepage. It needs a sale "
-"price; the countdown runs to the sale end date."
-msgstr ""
-"Pokaż ten produkt w karcie odliczania na stronie głównej. Wymaga ceny "
-"promocyjnej; odliczanie trwa do daty końca promocji."
-
-msgid "Store details"
-msgstr "Dane sklepu"
-
-msgid "Top bar message"
-msgstr "Komunikat na górnym pasku"
-
-msgid "Seller: company name"
-msgstr "Sprzedawca: nazwa firmy"
-
-msgid "Seller: NIP / tax ID and registry number"
-msgstr "Sprzedawca: NIP i numer rejestru"
-
-msgid "Facebook URL"
-msgstr "Adres URL Facebooka"
-
-msgid "Instagram URL"
-msgstr "Adres URL Instagrama"
-
-msgid "X (Twitter) URL"
-msgstr "Adres URL profilu X (Twitter)"
-
-msgid "YouTube URL"
-msgstr "Adres URL YouTube"
-
-msgid "Footer logo (light version)"
-msgstr "Logo w stopce (wersja jasna)"
-
-msgid "Used on the dark footer. Upload a version with white lettering."
-msgstr "Używane w ciemnej stopce. Wgraj wersję z białymi literami."
-
-msgid "Link-sharing image"
-msgstr "Obraz udostępniania linku"
-
-msgid ""
-"Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x "
-"630 px. Leave empty to use the built-in image. Product pages use the product "
-"photo."
-msgstr ""
-"Wyświetlany, gdy strona jest udostępniana na WhatsApp, Facebooku, LinkedIn "
-"lub X. 1200 × 630 px. Puste pole użyje wbudowanego obrazu. Strony produktów "
-"używają zdjęcia produktu."
-
-msgid "Deal countdown end"
-msgstr "Koniec odliczania oferty"
-
-msgid ""
-"Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end "
-"of the current week."
-msgstr ""
-"Data i godzina, np. 2026-12-24 23:59. Puste pole odlicza do końca bieżącego "
-"tygodnia."
-
-msgid "Newsletter form shortcode"
-msgstr "Shortcode formularza newslettera"
-
-msgid ""
-"Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). "
-"The newsletter band is shown only when this is set, because a newsletter "
-"needs a consent record and an unsubscribe link."
-msgstr ""
-"Wklej shortcode z narzędzia do newslettera (Mailchimp for WP, FluentCRM…). "
-"Sekcja newslettera pojawia się tylko po jego ustawieniu, ponieważ newsletter "
-"wymaga zapisu zgody i linku do rezygnacji."
-
-msgid "Product page"
-msgstr "Strona produktu"
-
-msgid ""
-"The reassurance lines under the buy button, and the stock note. Only state "
-"what you really offer. An empty title hides a line."
-msgstr ""
-"Informacje pod przyciskiem zakupu oraz notatka o dostępności. Podawaj tylko "
-"to, co naprawdę oferujesz. Pusty tytuł ukrywa wiersz."
-
-msgid "Dispatch note"
-msgstr "Informacja o wysyłce"
-
-msgid ""
-"Added after \"In stock\", for example \"ships within 24 h\". Empty shows "
-"nothing."
-msgstr ""
-"Dodawana po \"Dostępny\", np. \"wysyłka w 24 h\". Puste nic nie pokazuje."
-
-#, php-format
-msgid "Line %d: title"
-msgstr "Wiersz %d: tytuł"
-
-#, php-format
-msgid "Line %d: small text"
-msgstr "Wiersz %d: mały tekst"
-
-#, php-format
-msgid "[%1$s] Message from %2$s"
-msgstr "[%1$s] Wiadomość od %2$s"
-
-msgid "Landing page"
-msgstr "Strona startowa"
-
-msgid ""
-"Edit the homepage: hero scenes, banners, trust strip, headings and section "
-"order. Products, categories, brands and the deal of the week come from "
-"WooCommerce."
-msgstr ""
-"Edytuj stronę główną: sceny w sekcji hero, banery, pasek zalet, nagłówki i "
-"kolejność sekcji. Produkty, kategorie, marki i oferta tygodnia pochodzą z "
-"WooCommerce."
-
-msgid "Scroll hero (on/off)"
-msgstr "Baner przewijany (włącz/wyłącz)"
-
-msgid ""
-"The tall animated banner at the top of the homepage. It is off for now; the "
-"homepage starts with the trust strip and the categories. Switch it on again "
-"when its scenes show your real products."
-msgstr ""
-"Wysoki animowany baner na górze strony głównej. Na razie jest wyłączony: "
-"strona zaczyna się od paska zaufania i kategorii. Włącz go ponownie, gdy "
-"sceny pokazują Twoje prawdziwe produkty."
-
-msgid "Show the scroll hero"
-msgstr "Pokaż baner przewijany"
-
-msgid "Category row"
-msgstr "Rząd kategorii"
-
-msgid ""
-"The round pictures under \"Kategorie produktów\". With icons, every category "
-"that has a matching icon shows it; a category without a matching icon uses "
-"its own picture (Products > Categories), else a product photo."
-msgstr "Okrągłe obrazki pod nagłówkiem „Kategorie produktów”. Przy ikonach każda kategoria z pasującą ikoną ją pokazuje; kategoria bez pasującej ikony używa własnego zdjęcia (Produkty > Kategorie), a w razie braku zdjęcia produktu."
-
-msgid "Pictures"
-msgstr "Obrazki"
-
-msgid "Stylish icons (recommended)"
-msgstr "Stylowe ikony (zalecane)"
-
-msgid "Product photos"
-msgstr "Zdjęcia produktów"
-
-#, php-format
-msgid "Hero scene %d"
-msgstr "Scena hero %d"
-
-msgid "Show this scene"
-msgstr "Pokaż tę scenę"
-
-msgid "The last word is shown in red."
-msgstr "Ostatnie słowo jest wyświetlane na czerwono."
-
-msgid "Product photo"
-msgstr "Zdjęcie produktu"
-
-msgid ""
-"Best: a transparent PNG, at least 1000 px wide. Empty uses the built-in "
-"picture below."
-msgstr ""
-"Najlepiej przezroczysty PNG, min. 1000 px szerokości. Puste = wbudowany "
-"obraz poniżej."
-
-msgid "Built-in picture (no photo uploaded)"
-msgstr "Wbudowany obraz (gdy nie wgrano zdjęcia)"
-
-msgid "Background glow"
-msgstr "Poświata tła"
-
-#, php-format
-msgid "Floating tag %d"
-msgstr "Znacznik %d"
-
-msgid ""
-"Short facts around the product. Empty hides it. Only state facts that are "
-"true."
-msgstr ""
-"Krótkie fakty wokół produktu. Puste pole ukrywa znacznik. Podawaj tylko "
-"prawdziwe informacje."
-
-#, php-format
-msgid "Banner %d: show"
-msgstr "Baner %d: pokaż"
-
-#, php-format
-msgid "Banner %d: small label"
-msgstr "Baner %d: mała etykieta"
-
-#, php-format
-msgid "Banner %d: headline"
-msgstr "Baner %d: nagłówek"
-
-#, php-format
-msgid "Banner %d: button text"
-msgstr "Baner %d: tekst przycisku"
-
-#, php-format
-msgid "Banner %d: link"
-msgstr "Baner %d: link"
-
-#, php-format
-msgid "Banner %d: product photo"
-msgstr "Baner %d: zdjęcie produktu"
-
-msgid "Transparent PNG works best. Empty uses the built-in picture."
-msgstr "Najlepiej przezroczysty PNG. Puste = wbudowany obraz."
-
-#, php-format
-msgid "Banner %d: built-in picture (no photo uploaded)"
-msgstr "Baner %d: ilustracja (gdy brak zdjęcia)"
-
-#, php-format
-msgid "Banner %d: style"
-msgstr "Baner %d: styl"
-
-msgid "Light"
-msgstr "Jasny"
-
-msgid "Dark"
-msgstr "Ciemny"
-
-msgid ""
-"Four short promises under the hero. Empty title hides an item. Only promise "
-"what you will deliver."
-msgstr ""
-"Cztery krótkie obietnice pod sekcją hero. Pusty tytuł ukrywa pozycję. "
-"Obiecuj tylko to, czego dotrzymasz."
-
-#, php-format
-msgid "Item %d title"
-msgstr "Pozycja %d: tytuł"
-
-#, php-format
-msgid "Item %d text"
-msgstr "Pozycja %d: tekst"
-
-msgid "Sections"
-msgstr "Sekcje"
-
-msgid "The hero is always first. Tick a section to show it, drag to re-order."
-msgstr ""
-"Sekcja hero jest zawsze pierwsza. Zaznacz sekcję, aby ją pokazać, "
-"przeciągnij, aby zmienić kolejność."
-
-msgid "Homepage sections"
-msgstr "Sekcje strony głównej"
-
-msgid "Headings and texts"
-msgstr "Nagłówki i teksty"
-
-msgid "Category tiles heading"
-msgstr "Nagłówek kafelków kategorii"
-
-msgid "Featured products heading"
-msgstr "Nagłówek polecanych produktów"
-
-msgid "Best deals heading"
-msgstr "Nagłówek najlepszych okazji"
-
-msgid "Bestsellers heading"
-msgstr "Nagłówek bestsellerów"
-
-msgid "Newsletter heading"
-msgstr "Nagłówek newslettera"
-
-msgid "Newsletter text"
-msgstr "Tekst newslettera"
-
-msgid "Footer tagline"
-msgstr "Hasło w stopce"
-
+#: inc/categories.php:74
+msgid "Categories"
+msgstr "Kategorie"
+
+#: inc/consent.php:34
 msgid "Necessary"
 msgstr "Niezbędne"
 
+#: inc/consent.php:35
 msgid ""
 "Keep the cart, checkout and your account working, and remember this choice. "
 "They cannot be switched off."
@@ -1235,9 +537,11 @@ msgstr ""
 "Zapewniają działanie koszyka, składania zamówień i Twojego konta oraz "
 "zapamiętują ten wybór. Nie można ich wyłączyć."
 
+#: inc/consent.php:39
 msgid "Analytics"
 msgstr "Analityczne"
 
+#: inc/consent.php:40
 msgid ""
 "Help us understand how the shop is used so we can improve it. Off unless you "
 "agree."
@@ -1245,9 +549,11 @@ msgstr ""
 "Pomagają nam zrozumieć, jak korzysta się ze sklepu, aby go ulepszać. "
 "Wyłączone, dopóki się nie zgodzisz."
 
+#: inc/consent.php:44
 msgid "Marketing"
 msgstr "Marketingowe"
 
+#: inc/consent.php:45
 msgid ""
 "Used to show offers that match your interests, also on other websites. Off "
 "unless you agree."
@@ -1255,10 +561,13 @@ msgstr ""
 "Służą do wyświetlania ofert dopasowanych do Twoich zainteresowań, także na "
 "innych stronach. Wyłączone, dopóki się nie zgodzisz."
 
+#. translators: %s: shop name.
+#: inc/consent.php:152
 #, php-format
 msgid "Welcome to %s"
 msgstr "Witamy w %s"
 
+#: inc/consent.php:155
 msgid ""
 "We use cookies to make the shop work: the cart, checkout and your account. "
 "We may also use analytical and marketing cookies, but only if you agree. You "
@@ -1270,6 +579,7 @@ msgstr ""
 "tylko za Twoją zgodą. Swój wybór możesz zmienić w każdej chwili przyciskiem "
 "„Ustawienia cookies” u dołu każdej strony."
 
+#: inc/consent.php:157
 msgid ""
 "Your personal data is controlled by 2ACE sp. z o.o. You will find more about "
 "cookies and your rights in our"
@@ -1277,45 +587,713 @@ msgstr ""
 "Administratorem Twoich danych osobowych jest 2ACE sp. z o.o. Więcej "
 "informacji o plikach cookie i Twoich prawach znajdziesz w naszej"
 
+#: inc/consent.php:159 inc/consent.php:161
 msgctxt "link inside the cookie banner sentence"
 msgid "Cookie policy"
 msgstr "Polityce cookies"
 
+#: inc/consent.php:165 inc/consent.php:189
 msgid "Reject all"
 msgstr "Odrzuć wszystkie"
 
+#: inc/consent.php:166
 msgid "Manage cookies"
 msgstr "Zarządzaj plikami cookie"
 
+#: inc/consent.php:167
 msgid "Accept"
 msgstr "Akceptuję"
 
+#: inc/consent.php:175 inc/legal.php:192
 msgid "Cookie settings"
 msgstr "Ustawienia cookies"
 
+#: inc/consent.php:176
 msgid "Choose which cookies you allow. You can change this at any time."
 msgstr ""
 "Wybierz, na jakie pliki cookie się zgadzasz. Możesz to zmienić w każdej "
 "chwili."
 
+#: inc/consent.php:190
 msgid "Save my choices"
 msgstr "Zapisz mój wybór"
 
+#: inc/consent.php:191
 msgid "Accept all"
 msgstr "Akceptuj wszystkie"
 
+#: inc/consent.php:194 inc/legal.php:168
 msgid "Cookie policy"
 msgstr "Polityka cookies"
 
-msgid "Categories"
-msgstr "Kategorie"
+#: inc/contact.php:57 inc/withdrawal.php:234
+msgid "Name"
+msgstr "Imię i nazwisko"
 
+#: inc/contact.php:59 inc/customizer.php:51 inc/withdrawal.php:238
+#: template-contact.php:56 template-contact.php:74
+msgid "Email"
+msgstr "E-mail"
+
+#: inc/contact.php:61 inc/withdrawal.php:236 template-withdrawal.php:63
+msgid "Order number"
+msgstr "Numer zamówienia"
+
+#. translators: 1: site name, 2: sender name.
+#: inc/contact.php:69
+#, php-format
+msgid "[%1$s] Message from %2$s"
+msgstr "[%1$s] Wiadomość od %2$s"
+
+#: inc/customizer-home.php:145
+msgid "Landing page"
+msgstr "Strona startowa"
+
+#: inc/customizer-home.php:146
+msgid ""
+"Edit the homepage: hero scenes, banners, trust strip, headings and section "
+"order. Products, categories, brands and the deal of the week come from "
+"WooCommerce."
+msgstr ""
+"Edytuj stronę główną: sceny w sekcji hero, banery, pasek zalet, nagłówki i "
+"kolejność sekcji. Produkty, kategorie, marki i oferta tygodnia pochodzą z "
+"WooCommerce."
+
+#: inc/customizer-home.php:155
+msgid "Scroll hero (on/off)"
+msgstr "Baner przewijany (włącz/wyłącz)"
+
+#: inc/customizer-home.php:156
+msgid ""
+"The tall animated banner at the top of the homepage. It is off for now; the "
+"homepage starts with the trust strip and the categories. Switch it on again "
+"when its scenes show your real products."
+msgstr ""
+"Wysoki animowany baner na górze strony głównej. Na razie jest wyłączony: "
+"strona zaczyna się od paska zaufania i kategorii. Włącz go ponownie, gdy "
+"sceny pokazują Twoje prawdziwe produkty."
+
+#: inc/customizer-home.php:161
+msgid "Show the scroll hero"
+msgstr "Pokaż baner przewijany"
+
+#: inc/customizer-home.php:167
+msgid "Category row"
+msgstr "Rząd kategorii"
+
+#: inc/customizer-home.php:168
+msgid ""
+"The round pictures under \"Kategorie produktów\". With icons, every category "
+"that has a matching icon shows it; a category without a matching icon uses "
+"its own picture (Products > Categories), else a product photo."
+msgstr ""
+"Okrągłe obrazki pod nagłówkiem „Kategorie produktów”. Przy ikonach każda "
+"kategoria z pasującą ikoną ją pokazuje; kategoria bez pasującej ikony używa "
+"własnego zdjęcia (Produkty > Kategorie), a w razie braku zdjęcia produktu."
+
+#: inc/customizer-home.php:177
+msgid "Pictures"
+msgstr "Obrazki"
+
+#: inc/customizer-home.php:182
+msgid "Stylish icons (recommended)"
+msgstr "Stylowe ikony (zalecane)"
+
+#: inc/customizer-home.php:183
+msgid "Product photos"
+msgstr "Zdjęcia produktów"
+
+#. translators: %d: scene number.
+#: inc/customizer-home.php:198
+#, php-format
+msgid "Hero scene %d"
+msgstr "Scena hero %d"
+
+#: inc/customizer-home.php:203
+msgid "Show this scene"
+msgstr "Pokaż tę scenę"
+
+#: inc/customizer-home.php:205
+msgid "The last word is shown in red."
+msgstr "Ostatnie słowo jest wyświetlane na czerwono."
+
+#: inc/customizer-home.php:209
+msgid "Product photo"
+msgstr "Zdjęcie produktu"
+
+#: inc/customizer-home.php:209
+msgid ""
+"Best: a transparent PNG, at least 1000 px wide. Empty uses the built-in "
+"picture below."
+msgstr ""
+"Najlepiej przezroczysty PNG, min. 1000 px szerokości. Puste = wbudowany "
+"obraz poniżej."
+
+#: inc/customizer-home.php:210
+msgid "Built-in picture (no photo uploaded)"
+msgstr "Wbudowany obraz (gdy nie wgrano zdjęcia)"
+
+#: inc/customizer-home.php:211
+msgid "Background glow"
+msgstr "Poświata tła"
+
+#. translators: %d: chip number.
+#: inc/customizer-home.php:218
+#, php-format
+msgid "Floating tag %d"
+msgstr "Znacznik %d"
+
+#: inc/customizer-home.php:220
+msgid ""
+"Short facts around the product. Empty hides it. Only state facts that are "
+"true."
+msgstr ""
+"Krótkie fakty wokół produktu. Puste pole ukrywa znacznik. Podawaj tylko "
+"prawdziwe informacje."
+
+#: inc/customizer-home.php:226 inc/home.php:274
+msgid "Promo banners"
+msgstr "Banery promocyjne"
+
+#. translators: %d: banner number.
+#: inc/customizer-home.php:230
+#, php-format
+msgid "Banner %d: show"
+msgstr "Baner %d: pokaż"
+
+#: inc/customizer-home.php:231
+#, php-format
+msgid "Banner %d: small label"
+msgstr "Baner %d: mała etykieta"
+
+#: inc/customizer-home.php:232
+#, php-format
+msgid "Banner %d: headline"
+msgstr "Baner %d: nagłówek"
+
+#: inc/customizer-home.php:233
+#, php-format
+msgid "Banner %d: button text"
+msgstr "Baner %d: tekst przycisku"
+
+#: inc/customizer-home.php:234
+#, php-format
+msgid "Banner %d: link"
+msgstr "Baner %d: link"
+
+#: inc/customizer-home.php:235
+#, php-format
+msgid "Banner %d: product photo"
+msgstr "Baner %d: zdjęcie produktu"
+
+#: inc/customizer-home.php:235
+msgid "Transparent PNG works best. Empty uses the built-in picture."
+msgstr "Najlepiej przezroczysty PNG. Puste = wbudowany obraz."
+
+#: inc/customizer-home.php:236
+#, php-format
+msgid "Banner %d: built-in picture (no photo uploaded)"
+msgstr "Baner %d: ilustracja (gdy brak zdjęcia)"
+
+#: inc/customizer-home.php:237
+#, php-format
+msgid "Banner %d: style"
+msgstr "Baner %d: styl"
+
+#: inc/customizer-home.php:237
+msgid "Light"
+msgstr "Jasny"
+
+#: inc/customizer-home.php:237
+msgid "Dark"
+msgstr "Ciemny"
+
+#: inc/customizer-home.php:244 inc/home.php:271
+msgid "Trust strip"
+msgstr "Pasek zalet"
+
+#: inc/customizer-home.php:245
+msgid ""
+"Four short promises under the hero. Empty title hides an item. Only promise "
+"what you will deliver."
+msgstr ""
+"Cztery krótkie obietnice pod sekcją hero. Pusty tytuł ukrywa pozycję. "
+"Obiecuj tylko to, czego dotrzymasz."
+
+#. translators: %d: item number.
+#: inc/customizer-home.php:252
+#, php-format
+msgid "Item %d title"
+msgstr "Pozycja %d: tytuł"
+
+#: inc/customizer-home.php:253
+#, php-format
+msgid "Item %d text"
+msgstr "Pozycja %d: tekst"
+
+#: inc/customizer-home.php:260
+msgid "Sections"
+msgstr "Sekcje"
+
+#: inc/customizer-home.php:261
+msgid "The hero is always first. Tick a section to show it, drag to re-order."
+msgstr ""
+"Sekcja hero jest zawsze pierwsza. Zaznacz sekcję, aby ją pokazać, "
+"przeciągnij, aby zmienić kolejność."
+
+#: inc/customizer-home.php:271
+msgid "Homepage sections"
+msgstr "Sekcje strony głównej"
+
+#: inc/customizer-home.php:278
+msgid "Headings and texts"
+msgstr "Nagłówki i teksty"
+
+#: inc/customizer-home.php:280
+msgid "Category tiles heading"
+msgstr "Nagłówek kafelków kategorii"
+
+#: inc/customizer-home.php:281
+msgid "Featured products heading"
+msgstr "Nagłówek polecanych produktów"
+
+#: inc/customizer-home.php:282
+msgid "Best deals heading"
+msgstr "Nagłówek najlepszych okazji"
+
+#: inc/customizer-home.php:283
+msgid "Bestsellers heading"
+msgstr "Nagłówek bestsellerów"
+
+#: inc/customizer-home.php:284
+msgid "Newsletter heading"
+msgstr "Nagłówek newslettera"
+
+#: inc/customizer-home.php:285
+msgid "Newsletter text"
+msgstr "Tekst newslettera"
+
+#: inc/customizer-home.php:286
+msgid "Footer tagline"
+msgstr "Hasło w stopce"
+
+#: inc/customizer.php:43
+msgid "Store details"
+msgstr "Dane sklepu"
+
+#: inc/customizer.php:49
+msgid "Top bar message"
+msgstr "Komunikat na górnym pasku"
+
+#: inc/customizer.php:50 template-contact.php:77
+msgid "Phone"
+msgstr "Telefon"
+
+#: inc/customizer.php:52 template-contact.php:80
+msgid "Address"
+msgstr "Adres"
+
+#: inc/customizer.php:53
+msgid "Seller: company name"
+msgstr "Sprzedawca: nazwa firmy"
+
+#: inc/customizer.php:54
+msgid "Seller: NIP / tax ID and registry number"
+msgstr "Sprzedawca: NIP i numer rejestru"
+
+#: inc/customizer.php:55
+msgid "Facebook URL"
+msgstr "Adres URL Facebooka"
+
+#: inc/customizer.php:56
+msgid "Instagram URL"
+msgstr "Adres URL Instagrama"
+
+#: inc/customizer.php:57
+msgid "X (Twitter) URL"
+msgstr "Adres URL profilu X (Twitter)"
+
+#: inc/customizer.php:58
+msgid "YouTube URL"
+msgstr "Adres URL YouTube"
+
+#: inc/customizer.php:85
+msgid "Footer logo (light version)"
+msgstr "Logo w stopce (wersja jasna)"
+
+#: inc/customizer.php:86
+msgid "Used on the dark footer. Upload a version with white lettering."
+msgstr "Używane w ciemnej stopce. Wgraj wersję z białymi literami."
+
+#: inc/customizer.php:99
+msgid "Link-sharing image"
+msgstr "Obraz udostępniania linku"
+
+#: inc/customizer.php:100
+msgid ""
+"Shown when the site is shared on WhatsApp, Facebook, LinkedIn or X. 1200 x "
+"630 px. Leave empty to use the built-in image. Product pages use the product "
+"photo."
+msgstr ""
+"Wyświetlany, gdy strona jest udostępniana na WhatsApp, Facebooku, LinkedIn "
+"lub X. 1200 × 630 px. Puste pole użyje wbudowanego obrazu. Strony produktów "
+"używają zdjęcia produktu."
+
+#: inc/customizer.php:111
+msgid "Deal countdown end"
+msgstr "Koniec odliczania oferty"
+
+#: inc/customizer.php:112
+msgid ""
+"Date and time, e.g. 2026-12-24 23:59. Leave empty to count down to the end "
+"of the current week."
+msgstr ""
+"Data i godzina, np. 2026-12-24 23:59. Puste pole odlicza do końca bieżącego "
+"tygodnia."
+
+#: inc/customizer.php:122
+msgid "Newsletter form shortcode"
+msgstr "Shortcode formularza newslettera"
+
+#: inc/customizer.php:123
+msgid ""
+"Paste a shortcode from your mailing tool (Mailchimp for WP, FluentCRM, ...). "
+"The newsletter band is shown only when this is set, because a newsletter "
+"needs a consent record and an unsubscribe link."
+msgstr ""
+"Wklej shortcode z narzędzia do newslettera (Mailchimp for WP, FluentCRM…). "
+"Sekcja newslettera pojawia się tylko po jego ustawieniu, ponieważ newsletter "
+"wymaga zapisu zgody i linku do rezygnacji."
+
+#: inc/customizer.php:140
+msgid "Product page"
+msgstr "Strona produktu"
+
+#: inc/customizer.php:141
+msgid ""
+"The reassurance lines under the buy button, and the stock note. Only state "
+"what you really offer. An empty title hides a line."
+msgstr ""
+"Informacje pod przyciskiem zakupu oraz notatka o dostępności. Podawaj tylko "
+"to, co naprawdę oferujesz. Pusty tytuł ukrywa wiersz."
+
+#: inc/customizer.php:150
+msgid "Dispatch note"
+msgstr "Informacja o wysyłce"
+
+#: inc/customizer.php:152
+msgid ""
+"Added after \"In stock\", for example \"ships within 24 h\". Empty shows "
+"nothing."
+msgstr ""
+"Dodawana po \"Dostępny\", np. \"wysyłka w 24 h\". Puste nic nie pokazuje."
+
+#. translators: %d: line number.
+#: inc/customizer.php:158
+#, php-format
+msgid "Line %d: title"
+msgstr "Wiersz %d: tytuł"
+
+#: inc/customizer.php:159
+#, php-format
+msgid "Line %d: small text"
+msgstr "Wiersz %d: mały tekst"
+
+#: inc/deal.php:21 template-parts/deal.php:53
+msgid "Deal of the week"
+msgstr "Oferta tygodnia"
+
+#: inc/deal.php:22
+msgid ""
+"Show this product in the countdown card on the homepage. It needs a sale "
+"price; the countdown runs to the sale end date."
+msgstr ""
+"Pokaż ten produkt w karcie odliczania na stronie głównej. Wymaga ceny "
+"promocyjnej; odliczanie trwa do daty końca promocji."
+
+#: inc/demo-data.php:57
+msgid "Laptops & computers"
+msgstr "Laptopy i komputery"
+
+#: inc/demo-data.php:58
+msgid "Phones & tablets"
+msgstr "Telefony i tablety"
+
+#: inc/demo-data.php:59 inc/home.php:84
+msgid "Audio"
+msgstr "Audio"
+
+#: inc/demo-data.php:60
+msgid "Cameras"
+msgstr "Aparaty i kamery"
+
+#: inc/demo-data.php:61 inc/home.php:64
+msgid "Wearables"
+msgstr "Smartwatche"
+
+#: inc/demo-data.php:62 inc/home.php:195
+msgid "Gaming"
+msgstr "Gaming"
+
+#: inc/home.php:21
+msgid "Red glow"
+msgstr "Czerwona poświata"
+
+#: inc/home.php:22
+msgid "Steel blue"
+msgstr "Stalowy niebieski"
+
+#: inc/home.php:23
+msgid "Deep crimson"
+msgstr "Głęboka czerwień"
+
+#: inc/home.php:34
+msgid "Smartwatch"
+msgstr "Smartwatch"
+
+#: inc/home.php:35
+msgid "Laptop"
+msgstr "Laptop"
+
+#: inc/home.php:36
+msgid "Headphones"
+msgstr "Słuchawki"
+
+#: inc/home.php:37
+msgid "Camera"
+msgstr "Aparat"
+
+#: inc/home.php:38
+msgid "Smartphone"
+msgstr "Smartfon"
+
+#: inc/home.php:39
+msgid "Speaker"
+msgstr "Głośnik"
+
+#: inc/home.php:40
+msgid "Tablet"
+msgstr "Tablet"
+
+#: inc/home.php:41
+msgid "Game console"
+msgstr "Konsola do gier"
+
+#: inc/home.php:42
+msgid "Lamp"
+msgstr "Lampa"
+
+#: inc/home.php:43
+msgid "Building blocks"
+msgstr "Klocki"
+
+#: inc/home.php:44
+msgid "Scooter"
+msgstr "Hulajnoga"
+
+#: inc/home.php:45
+msgid "Cooking pot"
+msgstr "Garnek"
+
+#: inc/home.php:46
+msgid "Plant"
+msgstr "Roślina"
+
+#: inc/home.php:47
+msgid "Notebook"
+msgstr "Notes"
+
+#: inc/home.php:48
+msgid "Baby bottle"
+msgstr "Butelka dla niemowląt"
+
+#: inc/home.php:49
+msgid "Paw print"
+msgstr "Łapka"
+
+#: inc/home.php:50
+msgid "Microchip"
+msgstr "Mikroprocesor"
+
+#: inc/home.php:65
+msgid "Wear the future on your wrist."
+msgstr "Przyszłość na Twoim nadgarstku."
+
+#: inc/home.php:66
+msgid "Smartwatches that track, pay and keep up with every day."
+msgstr "Smartwatche, które mierzą, płacą i dotrzymują kroku każdemu dniowi."
+
+#: inc/home.php:67
+msgid "Shop wearables"
+msgstr "Kup smartwatche"
+
+#: inc/home.php:70
+msgid "AMOLED display"
+msgstr "Wyświetlacz AMOLED"
+
+#: inc/home.php:70
+msgid "7-day battery"
+msgstr "Bateria na 7 dni"
+
+#: inc/home.php:70
+msgid "GPS + NFC"
+msgstr "GPS + NFC"
+
+#: inc/home.php:74
+msgid "Laptops"
+msgstr "Laptopy"
+
+#: inc/home.php:75
+msgid "Power that travels light."
+msgstr "Moc w lekkiej obudowie."
+
+#: inc/home.php:76
+msgid "Ultralight laptops built for work, study and everything after."
+msgstr "Ultralekkie laptopy do pracy, nauki i wszystkiego po godzinach."
+
+#: inc/home.php:77
+msgid "Shop laptops"
+msgstr "Kup laptopy"
+
+#: inc/home.php:80
+msgid "14\" OLED"
+msgstr "14\" OLED"
+
+#: inc/home.php:80
+msgid "16 GB RAM"
+msgstr "16 GB RAM"
+
+#: inc/home.php:80
+msgid "1 kg"
+msgstr "1 kg"
+
+#: inc/home.php:85
+msgid "Hear every last detail."
+msgstr "Usłysz każdy szczegół."
+
+#: inc/home.php:86
+msgid "Noise-cancelling headphones and speakers with room-filling sound."
+msgstr ""
+"Słuchawki z redukcją hałasu i głośniki z dźwiękiem, który wypełnia pokój."
+
+#: inc/home.php:87
+msgid "Shop audio"
+msgstr "Kup sprzęt audio"
+
+#: inc/home.php:90
+msgid "Active noise cancelling"
+msgstr "Aktywna redukcja szumów"
+
+#: inc/home.php:90
+msgid "40 h playback"
+msgstr "40 godzin odtwarzania"
+
+#: inc/home.php:90
+msgid "Bluetooth 5.3"
+msgstr "Bluetooth 5.3"
+
+#: inc/home.php:187
+msgid "Tablets & phones"
+msgstr "Tablety i telefony"
+
+#: inc/home.php:188
+msgid "Shop and save big on the hottest tablets"
+msgstr "Kup najgorętsze tablety i dużo zaoszczędź"
+
+#: inc/home.php:196
+msgid "Level up your setup with new consoles"
+msgstr "Podkręć swoje stanowisko nowymi konsolami"
+
+#: inc/home.php:197
+msgid "Explore gaming"
+msgstr "Odkryj gaming"
+
+#: inc/home.php:238
+msgid "Fast delivery"
+msgstr "Szybka dostawa"
+
+#: inc/home.php:238
+msgid "Tracked shipping across Poland"
+msgstr "Wysyłka z numerem śledzenia w całej Polsce"
+
+#: inc/home.php:239
+msgid "Secure checkout"
+msgstr "Bezpieczne zakupy"
+
+#: inc/home.php:239
+msgid "Encrypted, trusted payments"
+msgstr "Szyfrowane, zaufane płatności"
+
+#: inc/home.php:240
+msgid "Easy returns"
+msgstr "Łatwe zwroty"
+
+#: inc/home.php:240 inc/product.php:185
+msgid "14-day right of withdrawal"
+msgstr "14 dni na odstąpienie od umowy"
+
+#: inc/home.php:241
+msgid "Warranty included"
+msgstr "Gwarancja w cenie"
+
+#: inc/home.php:241
+msgid "Manufacturer warranty on every product"
+msgstr "Gwarancja producenta na każdy produkt"
+
+#: inc/home.php:272
+msgid "Category tiles"
+msgstr "Kafelki kategorii"
+
+#: inc/home.php:273 inc/home.php:312 template-parts/banner.php:108
+msgid "Featured products"
+msgstr "Polecane produkty"
+
+#: inc/home.php:275
+msgid "Deal of the week and product tabs"
+msgstr "Oferta tygodnia i zakładki produktów"
+
+#: inc/home.php:276
+msgid "Brand strip"
+msgstr "Pasek marek"
+
+#: inc/home.php:277
+msgid "Best deals by category"
+msgstr "Najlepsze okazje według kategorii"
+
+#: inc/home.php:279
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: inc/home.php:313
+msgid "Best deals"
+msgstr "Najlepsze okazje"
+
+#: inc/home.php:315
+msgid "Get the drop before everyone else"
+msgstr "Poznaj nowości przed wszystkimi"
+
+#: inc/home.php:316
+msgid "New arrivals and deals, straight to your inbox."
+msgstr "Nowości i promocje prosto na Twoją skrzynkę."
+
+#: inc/home.php:317 inc/seo.php:94
+msgid "Premium electronics, delivered fast across Poland."
+msgstr "Elektronika premium, szybko dostarczana w całej Polsce."
+
+#: inc/legal.php:27 inc/legal.php:237
 msgid "Store terms and conditions"
 msgstr "Regulamin sklepu"
 
+#: inc/legal.php:32 inc/legal.php:238 template-contact.php:64
+#: template-withdrawal.php:74
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
+
+#: inc/legal.php:142
 msgid "Legal pages are waiting:"
 msgstr "Strony prawne czekają:"
 
+#: inc/legal.php:144
 msgid ""
 "Fill in every [bracketed] detail, have a lawyer review the text, then "
 "publish. They appear in the footer once published. Do not take real orders "
@@ -1325,32 +1303,251 @@ msgstr ""
 "następnie opublikuj. Po publikacji pojawią się w stopce. Nie przyjmuj "
 "prawdziwych zamówień przed tym."
 
+#: inc/legal.php:162
 msgid "Delivery and payment"
 msgstr "Dostawa i płatności"
 
+#: inc/legal.php:163
 msgid "Returns"
 msgstr "Zwroty"
 
+#: inc/legal.php:164
 msgid "Complaints"
 msgstr "Reklamacje"
 
+#: inc/legal.php:236 inc/withdrawal.php:82 inc/withdrawal.php:104
+#: inc/withdrawal.php:129 inc/withdrawal.php:152 inc/withdrawal.php:154
+msgid "Withdraw from contract here"
+msgstr "Odstąp od umowy tutaj"
+
+#. translators: %s: site name.
+#: inc/newsletter.php:40
+#, php-format
+msgid "[%s] New newsletter sign-up"
+msgstr "[%s] Nowy zapis do newslettera"
+
+#. translators: %s: email address.
+#: inc/newsletter.php:42
+#, php-format
+msgid "New newsletter sign-up: %s"
+msgstr "Nowy zapis do newslettera: %s"
+
+#: inc/product-details.php:26
+msgid "Extra details"
+msgstr "Dodatkowe szczegóły"
+
+#: inc/product-details.php:44 inc/product-details.php:134
+#: inc/product-details.php:157
+msgid "What's in the box"
+msgstr "Zawartość zestawu"
+
+#: inc/product-details.php:45
+msgid ""
+"One item per line, for example \"4 x aluminium LED strips\". Shows as the "
+"\"What's in the box\" tab. Leave empty to hide the tab."
+msgstr ""
+"Jedna pozycja w wierszu, np. \"4 x aluminiowe listwy LED\". Wyświetla się "
+"jako zakładka \"Zawartość zestawu\". Zostaw puste, aby ukryć zakładkę."
+
+#: inc/product-details.php:55
+msgid "Questions and answers"
+msgstr "Pytania i odpowiedzi"
+
+#: inc/product-details.php:56
+msgid ""
+"A question on one line, its answer on the next line(s), then a blank line "
+"before the next question. Plain text. Shows as the \"FAQ\" tab. Leave empty "
+"to hide the tab."
+msgstr ""
+"Pytanie w jednym wierszu, odpowiedź w kolejnych wierszach, potem pusty "
+"wiersz przed następnym pytaniem. Zwykły tekst. Wyświetla się jako zakładka "
+"\"FAQ\". Zostaw puste, aby ukryć zakładkę."
+
+#: inc/product-details.php:128
+msgid "Specification"
+msgstr "Specyfikacja"
+
+#: inc/product-details.php:141
+msgid "FAQ"
+msgstr "FAQ"
+
+#: inc/product-details.php:169
+msgid "Frequently asked questions"
+msgstr "Najczęściej zadawane pytania"
+
+#: inc/product.php:26
+msgid "Breadcrumb"
+msgstr "Ścieżka nawigacji"
+
+#: inc/product.php:28 inc/template-tags.php:224
+msgid "Home"
+msgstr "Strona główna"
+
+#: inc/product.php:89
+msgid "Brand:"
+msgstr "Marka:"
+
+#. translators: %d: number of reviews.
+#: inc/product.php:110
+#, php-format
+msgid "%d review"
+msgid_plural "%d reviews"
+msgstr[0] "%d opinia"
+msgstr[1] "%d opinie"
+msgstr[2] "%d opinii"
+
+#: inc/product.php:113
+msgid "Be the first to review this product"
+msgstr "Bądź pierwszą osobą, która oceni ten produkt"
+
+#: inc/product.php:141
+msgid "Hurry up! Special offer."
+msgstr "Pospiesz się! Oferta specjalna."
+
+#. translators: %d: units available.
+#: inc/product.php:151
+#, php-format
+msgid "Available: %d"
+msgstr "Dostępne: %d"
+
+#. translators: %d: units sold.
+#: inc/product.php:152
+#, php-format
+msgid "Already sold: %d"
+msgstr "Już sprzedano: %d"
+
+#. translators: %d: percent sold.
+#: inc/product.php:154
+#, php-format
+msgid "%d%% sold"
+msgstr "Sprzedano %d%%"
+
+#. translators: %d: units left.
+#: inc/product.php:158
+#, php-format
+msgid "Only %d left in stock"
+msgid_plural "Only %d left in stock"
+msgstr[0] "W magazynie tylko %d szt."
+msgstr[1] "W magazynie tylko %d szt."
+msgstr[2] "W magazynie tylko %d szt."
+
+#: inc/product.php:165 template-parts/banner.php:77 template-parts/deal.php:61
+msgid "days"
+msgstr "dni"
+
+#: inc/product.php:166 template-parts/banner.php:78 template-parts/deal.php:62
+msgid "hrs"
+msgstr "godz."
+
+#: inc/product.php:167 template-parts/banner.php:79 template-parts/deal.php:63
+msgid "min"
+msgstr "min"
+
+#: inc/product.php:168 template-parts/banner.php:80 template-parts/deal.php:64
+msgid "sec"
+msgstr "sek."
+
+#: inc/product.php:184
+msgid "Secure, encrypted checkout"
+msgstr "Bezpieczne, szyfrowane zamówienie"
+
+#: inc/product.php:236
+msgid "On backorder"
+msgstr "Na zamówienie"
+
+#. translators: %d: units in stock.
+#: inc/product.php:242
+#, php-format
+msgid "In stock (%d pcs)"
+msgstr "Dostępny (%d szt.)"
+
+#: inc/product.php:243
+msgid "In stock"
+msgstr "Dostępny"
+
+#: inc/product.php:246
+msgid "Out of stock"
+msgstr "Niedostępny"
+
+#: inc/product.php:248
+msgid "Availability"
+msgstr "Dostępność"
+
+#: inc/product.php:252
+msgid "SKU"
+msgstr "SKU"
+
+#: inc/product.php:257
+msgid "Category"
+msgstr "Kategoria"
+
+#: inc/product.php:276
+msgid "Share"
+msgstr "Udostępnij"
+
+#: inc/product.php:288
+msgid "Link copied"
+msgstr "Skopiowano link"
+
+#: inc/product.php:289
+msgid "Copy link"
+msgstr "Kopiuj link"
+
+#: inc/product.php:330
+msgid "Decrease quantity"
+msgstr "Zmniejsz ilość"
+
+#: inc/product.php:331
+msgid "Increase quantity"
+msgstr "Zwiększ ilość"
+
+#: inc/product.php:332
+msgid "Previous photo"
+msgstr "Poprzednie zdjęcie"
+
+#: inc/product.php:333
+msgid "Next photo"
+msgstr "Następne zdjęcie"
+
+#: inc/product.php:336
+msgid ""
+"Please select some product options before adding this product to your cart."
+msgstr "Wybierz opcje produktu przed dodaniem go do koszyka."
+
+#: inc/product.php:338
+msgid ""
+"Sorry, this product is unavailable. Please choose a different combination."
+msgstr "Przepraszamy, ten produkt jest niedostępny. Wybierz inną kombinację."
+
+#. translators: %s: rating out of 5.
+#: inc/template-tags.php:144
 #, php-format
 msgid "Rated %s out of 5"
 msgstr "Ocena %s na 5"
 
+#: inc/template-tags.php:230 index.php:23
+msgid "Blog"
+msgstr "Blog"
+
+#: inc/template-tags.php:598
 msgid "New"
 msgstr "Nowość"
 
+#: inc/template-tags.php:599
 msgid "Sale"
 msgstr "Promocja"
 
+#: inc/template-tags.php:600
 msgid "Sold out"
 msgstr "Wyprzedane"
 
+#. translators: %s: product name.
+#: inc/template-tags.php:628
 #, php-format
 msgid "View %s"
 msgstr "Zobacz: %s"
 
+#: inc/template-tags.php:667
 msgid ""
 "Showing demo products. Add your first WooCommerce product and this content "
 "is replaced automatically."
@@ -1358,6 +1555,7 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Dodaj pierwszy produkt w "
 "WooCommerce, a ta treść zostanie zastąpiona automatycznie."
 
+#: inc/template-tags.php:668
 msgid ""
 "Showing demo products. Install and activate WooCommerce to sell real "
 "products."
@@ -1365,69 +1563,351 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Zainstaluj i aktywuj WooCommerce, "
 "aby sprzedawać prawdziwe produkty."
 
+#: inc/template-tags.php:669
 msgid "Admin preview:"
 msgstr "Podgląd administratora:"
 
-msgid "Brands"
-msgstr "Marki"
+#: inc/withdrawal.php:170
+msgid "Withdrawals"
+msgstr "Odstąpienia od umowy"
 
-msgid "Featured collections"
-msgstr "Polecane kolekcje"
+#: inc/withdrawal.php:171 inc/withdrawal.php:172
+msgid "Withdrawal"
+msgstr "Odstąpienie od umowy"
 
-msgid "Scroll"
-msgstr "Przewiń"
+#: inc/withdrawal.php:173
+msgid "No withdrawals yet."
+msgstr "Brak odstąpień od umowy."
 
-msgid "Email address"
-msgstr "Adres e-mail"
+#: inc/withdrawal.php:230
+msgid "The whole order"
+msgstr "Całe zamówienie"
 
-msgid "Your email address"
-msgstr "Twój adres e-mail"
+#: inc/withdrawal.php:240
+msgid "Goods covered"
+msgstr "Towary objęte odstąpieniem"
 
-msgid "Subscribe"
-msgstr "Zapisz się"
+#: inc/withdrawal.php:242
+msgid "Received"
+msgstr "Data otrzymania"
 
-msgid "Thanks, you are on the list."
-msgstr "Dziękujemy, jesteś na liście."
+#. translators: 1: order number, 2: name.
+#: inc/withdrawal.php:260
+#, php-format
+msgid "Withdrawal: order %1$s, %2$s"
+msgstr "Odstąpienie od umowy: zamówienie %1$s, %2$s"
 
-msgid "Please enter a valid email address and try again."
-msgstr "Podaj poprawny adres e-mail i spróbuj ponownie."
+#: inc/withdrawal.php:261
+msgid "Matched to the order (number and email agree)."
+msgstr "Dopasowano do zamówienia (numer i adres e-mail się zgadzają)."
 
+#: inc/withdrawal.php:261
+msgid "Not matched to an order automatically. Check the details."
+msgstr "Nie dopasowano automatycznie do zamówienia. Sprawdź dane."
+
+#. translators: %s: date and time.
+#: inc/withdrawal.php:271
+#, php-format
+msgid ""
+"The customer declared withdrawal from the contract using the website "
+"function on %s."
+msgstr ""
+"Klient złożył oświadczenie o odstąpieniu od umowy za pomocą funkcji na "
+"stronie internetowej dnia %s."
+
+#. translators: %s: date and time.
+#: inc/withdrawal.php:279
+#, php-format
+msgid ""
+"We confirm that we received your declaration of withdrawal from the contract "
+"on %s."
+msgstr ""
+"Potwierdzamy otrzymanie Twojego oświadczenia o odstąpieniu od umowy w dniu "
+"%s."
+
+#: inc/withdrawal.php:281
+msgid ""
+"We will reply to this address with the next steps for returning the goods "
+"and the refund."
+msgstr ""
+"Na ten adres e-mail wyślemy kolejne informacje dotyczące zwrotu towarów i "
+"zwrotu płatności."
+
+#. translators: %s: shop name.
+#: inc/withdrawal.php:287
+#, php-format
+msgid "[%s] Confirmation of your withdrawal from the contract"
+msgstr "[%s] Potwierdzenie odstąpienia od umowy"
+
+#. translators: %s: order number.
+#: inc/withdrawal.php:299
+#, php-format
+msgid "[%1$s] Withdrawal from contract: order %2$s"
+msgstr "[%1$s] Odstąpienie od umowy: zamówienie %2$s"
+
+#: inc/withdrawal.php:300
+msgid "Acknowledgement sent to the consumer."
+msgstr "Potwierdzenie zostało wysłane do konsumenta."
+
+#: inc/withdrawal.php:300
+msgid ""
+"WARNING: the acknowledgement email to the consumer could NOT be sent. "
+"Contact them now."
+msgstr ""
+"UWAGA: potwierdzenia do konsumenta NIE udało się wysłać e-mailem. Skontaktuj "
+"się z nim teraz."
+
+#: inc/woocommerce.php:56
+msgid "Items in cart:"
+msgstr "Produkty w koszyku:"
+
+#: inc/woocommerce.php:90
+msgid "Select options"
+msgstr "Wybierz opcje"
+
+#: inc/woocommerce.php:189
+msgid "Details & payment"
+msgstr "Dane i płatność"
+
+#: inc/woocommerce.php:190
+msgid "Confirmation"
+msgstr "Potwierdzenie"
+
+#: inc/woocommerce.php:192
+msgid "Checkout progress"
+msgstr "Postęp zamówienia"
+
+#: inc/woocommerce.php:225
+msgid "Order with obligation to pay"
+msgstr "Zamówienie z obowiązkiem zapłaty"
+
+#. translators: %s: search query.
+#: index.php:19
+#, php-format
+msgid "Search results for \"%s\""
+msgstr "Wyniki wyszukiwania dla „%s”"
+
+#: index.php:40
+msgid "Nothing found. Try a different search."
+msgstr "Nic nie znaleziono. Spróbuj innego wyszukiwania."
+
+#: page.php:34
+msgid "Continue shopping"
+msgstr "Kontynuuj zakupy"
+
+#: searchform.php:14 searchform.php:39
+msgid "Search"
+msgstr "Szukaj"
+
+#: searchform.php:23
+msgid "All categories"
+msgstr "Wszystkie kategorie"
+
+#: searchform.php:37
+msgid "Search products…"
+msgstr "Szukaj produktów…"
+
+#: searchform.php:37
+msgid "Search…"
+msgstr "Szukaj…"
+
+#: template-contact.php:23
+msgid "Thank you, your message has been sent. We will reply as soon as we can."
+msgstr ""
+"Dziękujemy, Twoja wiadomość została wysłana. Odpowiemy tak szybko, jak to "
+"możliwe."
+
+#: template-contact.php:24
+msgid "Please fill in your name, a valid email and a message."
+msgstr "Podaj imię i nazwisko, poprawny adres e-mail oraz treść wiadomości."
+
+#: template-contact.php:25
+msgid "Too many messages from this connection. Please try again later."
+msgstr "Zbyt wiele wiadomości z tego połączenia. Spróbuj ponownie później."
+
+#: template-contact.php:26
+msgid "We could not send your message. Please email us directly."
+msgstr "Nie udało się wysłać wiadomości. Napisz do nas bezpośrednio na e-mail."
+
+#: template-contact.php:27 template-withdrawal.php:32
+msgid "The form expired. Please reload the page and try again."
+msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
+
+#: template-contact.php:44
+msgid "Send us a message"
+msgstr "Napisz do nas"
+
+#: template-contact.php:55
+msgid "Your name"
+msgstr "Imię i nazwisko"
+
+#: template-contact.php:58
+msgid "Order number (optional)"
+msgstr "Numer zamówienia (opcjonalnie)"
+
+#: template-contact.php:59
+msgid "Message"
+msgstr "Wiadomość"
+
+#: template-contact.php:62
+msgid "We use your details only to answer this message."
+msgstr "Używamy Twoich danych wyłącznie do odpowiedzi na tę wiadomość."
+
+#: template-contact.php:67
+msgid "Send message"
+msgstr "Wyślij wiadomość"
+
+#: template-contact.php:70 template-contact.php:71
+msgid "Contact details"
+msgstr "Dane kontaktowe"
+
+#: template-parts/banner.php:114 template-parts/deal.php:72
+#: template-parts/product-rail.php:28
 msgid "Previous products"
 msgstr "Poprzednie produkty"
 
+#: template-parts/banner.php:115 template-parts/deal.php:73
+#: template-parts/product-rail.php:29
 msgid "Next products"
 msgstr "Następne produkty"
 
-msgid "Featured"
-msgstr "Polecane"
+#: template-parts/brands.php:16
+msgid "Brands"
+msgstr "Marki"
 
-msgid "Latest"
-msgstr "Najnowsze"
-
-msgid "On sale"
-msgstr "W promocji"
-
-msgid "Hurry up! Offer ends in:"
-msgstr "Pospiesz się! Oferta kończy się za:"
-
-msgid "Swipe for more offers"
-msgstr "Przesuń, aby zobaczyć więcej ofert"
-
-msgid "Product groups"
-msgstr "Grupy produktów"
-
-msgid "Deal categories"
-msgstr "Kategorie okazji"
-
-msgid "View all"
-msgstr "Zobacz wszystko"
-
-msgid "Why shop with us"
-msgstr "Dlaczego warto kupować u nas"
-
+#. translators: %d: number of products.
+#: template-parts/categories.php:44
 #, php-format
 msgid "%d product"
 msgid_plural "%d products"
 msgstr[0] "%d produkt"
 msgstr[1] "%d produkty"
 msgstr[2] "%d produktów"
+
+#: template-parts/category-tabs.php:44
+msgid "Deal categories"
+msgstr "Kategorie okazji"
+
+#: template-parts/deal.php:20
+msgid "Featured"
+msgstr "Polecane"
+
+#: template-parts/deal.php:21
+msgid "Latest"
+msgstr "Najnowsze"
+
+#: template-parts/deal.php:22
+msgid "On sale"
+msgstr "W promocji"
+
+#: template-parts/deal.php:59
+msgid "Hurry up! Offer ends in:"
+msgstr "Pospiesz się! Oferta kończy się za:"
+
+#: template-parts/deal.php:75
+msgid "Swipe for more offers"
+msgstr "Przesuń, aby zobaczyć więcej ofert"
+
+#: template-parts/deal.php:80
+msgid "Product groups"
+msgstr "Grupy produktów"
+
+#: template-parts/hero.php:21
+msgid "Featured collections"
+msgstr "Polecane kolekcje"
+
+#: template-parts/hero.php:75
+msgid "Scroll"
+msgstr "Przewiń"
+
+#: template-parts/newsletter.php:32
+msgid "Email address"
+msgstr "Adres e-mail"
+
+#: template-parts/newsletter.php:33
+msgid "Your email address"
+msgstr "Twój adres e-mail"
+
+#: template-parts/newsletter.php:34
+msgid "Subscribe"
+msgstr "Zapisz się"
+
+#: template-parts/newsletter.php:37
+msgid "Thanks, you are on the list."
+msgstr "Dziękujemy, jesteś na liście."
+
+#: template-parts/newsletter.php:39
+msgid "Please enter a valid email address and try again."
+msgstr "Podaj poprawny adres e-mail i spróbuj ponownie."
+
+#: template-parts/product-rail.php:26
+msgid "View all"
+msgstr "Zobacz wszystko"
+
+#: template-parts/trust.php:15
+msgid "Why shop with us"
+msgstr "Dlaczego warto kupować u nas"
+
+#. translators: %s: date and time.
+#: template-withdrawal.php:27
+#, php-format
+msgid ""
+"Your withdrawal was received on %s. We have sent a confirmation to your "
+"email address."
+msgstr ""
+"Twoje odstąpienie od umowy zostało odebrane dnia %s. Wysłaliśmy "
+"potwierdzenie na Twój adres e-mail."
+
+#. translators: 1: date and time, 2: contact email.
+#: template-withdrawal.php:29
+#, php-format
+msgid ""
+"Your withdrawal was recorded on %1$s, but we could not send the confirmation "
+"email. Please keep this page (for example as a screenshot) and write to %2$s."
+msgstr ""
+"Twoje odstąpienie od umowy zostało zapisane dnia %1$s, ale nie udało nam się "
+"wysłać potwierdzenia e-mailem. Zachowaj tę stronę (np. jako zrzut ekranu) i "
+"napisz do nas: %2$s."
+
+#: template-withdrawal.php:30
+msgid "Please fill in your name, the order number and a valid email address."
+msgstr "Podaj imię i nazwisko, numer zamówienia i prawidłowy adres e-mail."
+
+#: template-withdrawal.php:31
+msgid ""
+"Too many attempts from this connection. Please try again later or email us."
+msgstr ""
+"Zbyt wiele prób z tego połączenia. Spróbuj ponownie później lub napisz do "
+"nas."
+
+#: template-withdrawal.php:55
+msgid ""
+"You have 14 days from receiving the goods to withdraw from the contract, "
+"without giving a reason. Fill in the details below and confirm."
+msgstr ""
+"Masz 14 dni od otrzymania towaru na odstąpienie od umowy bez podawania "
+"przyczyny. Uzupełnij dane poniżej i potwierdź."
+
+#: template-withdrawal.php:61
+msgid "First and last name"
+msgstr "Imię i nazwisko"
+
+#: template-withdrawal.php:64
+msgid "Email for the confirmation"
+msgstr "Adres e-mail do potwierdzenia"
+
+#: template-withdrawal.php:66
+msgid "Which goods? (leave empty for the whole order)"
+msgstr "Których towarów dotyczy? (puste = całe zamówienie)"
+
+#: template-withdrawal.php:69
+msgid ""
+"After you confirm, we send you an acknowledgement by email with the date and "
+"time we received your declaration."
+msgstr ""
+"Po potwierdzeniu wyślemy Ci e-mailem potwierdzenie z datą i godziną "
+"otrzymania Twojego oświadczenia."
+
+#: template-withdrawal.php:77
+msgid "Confirm withdrawal here"
+msgstr "Potwierdź odstąpienie od umowy tutaj"
