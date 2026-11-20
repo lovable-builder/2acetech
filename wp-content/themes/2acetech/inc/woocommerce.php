@@ -100,6 +100,8 @@ function ace_loop_sole_variation_args( $args, $product ) {
 		$classes         = array_diff( $classes, array( 'product_type_variable' ) );
 		$classes         = array_unique( array_merge( $classes, array( 'product_type_simple', 'add_to_cart_button', 'ajax_add_to_cart' ) ) );
 		$args['class']   = implode( ' ', $classes );
+		// WooCommerce's AJAX add-to-cart takes the variation's own ID as the product.
+		$args['attributes']['data-product_id']   = $variation_id;
 		$args['attributes']['data-variation_id'] = $variation_id;
 		unset( $args['attributes']['aria-describedby'] ); // "multiple variants" does not apply.
 		// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch, WordPress.WP.I18n.MissingTranslatorsComment
