@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 $deals = ace_deal_products( 4 );
 if ( ! $deals ) {
-	$deals = ace_get_products( 'sale', 1 );
+	$deals = ace_get_products( 'sale', 4 );
 }
 
 $tabs = array(
@@ -32,7 +32,7 @@ if ( ! $deals ) {
 	<div class="container deal">
 
 		<div class="deal__side">
-			<div class="deal__cards">
+			<div class="deal__cards" data-rail>
 				<?php
 				foreach ( array_values( $deals ) as $i => $deal ) :
 					if ( is_array( $deal ) ) {
@@ -55,17 +55,23 @@ if ( ! $deals ) {
 						<h3 class="deal__name" id="<?php echo esc_attr( "$uid-title-$i" ); ?>"><a href="<?php echo esc_url( $d_url ); ?>"><?php echo esc_html( $d_title ); ?></a></h3>
 						<p class="deal__price"><?php echo wp_kses_post( $d_price ); ?></p>
 
-						<p class="deal__hurry"><?php esc_html_e( 'Hurry up! Offer ends in:', '2acetech' ); ?></p>
-						<div class="countdown" data-countdown="<?php echo esc_attr( $d_end ); ?>" role="timer" aria-live="off">
-							<div><b data-cd="d">00</b><span><?php esc_html_e( 'days', '2acetech' ); ?></span></div>
-							<div><b data-cd="h">00</b><span><?php esc_html_e( 'hrs', '2acetech' ); ?></span></div>
-							<div><b data-cd="m">00</b><span><?php esc_html_e( 'min', '2acetech' ); ?></span></div>
-							<div><b data-cd="s">00</b><span><?php esc_html_e( 'sec', '2acetech' ); ?></span></div>
-						</div>
+						<?php if ( $d_end ) : // Only a real end date gets a countdown. ?>
+							<p class="deal__hurry"><?php esc_html_e( 'Hurry up! Offer ends in:', '2acetech' ); ?></p>
+							<div class="countdown" data-countdown="<?php echo esc_attr( $d_end ); ?>" role="timer" aria-live="off">
+								<div><b data-cd="d">00</b><span><?php esc_html_e( 'days', '2acetech' ); ?></span></div>
+								<div><b data-cd="h">00</b><span><?php esc_html_e( 'hrs', '2acetech' ); ?></span></div>
+								<div><b data-cd="m">00</b><span><?php esc_html_e( 'min', '2acetech' ); ?></span></div>
+								<div><b data-cd="s">00</b><span><?php esc_html_e( 'sec', '2acetech' ); ?></span></div>
+							</div>
+						<?php endif; ?>
 					</article>
 				<?php endforeach; ?>
 			</div>
 			<?php if ( count( $deals ) > 1 ) : ?>
+				<div class="deal__nav rail-nav">
+					<button class="rail-nav__btn" type="button" data-rail-prev aria-label="<?php esc_attr_e( 'Previous products', '2acetech' ); ?>"><?php echo ace_icon( 'left', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+					<button class="rail-nav__btn" type="button" data-rail-next aria-label="<?php esc_attr_e( 'Next products', '2acetech' ); ?>"><?php echo ace_icon( 'right', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+				</div>
 				<p class="deal__more"><?php esc_html_e( 'Swipe for more offers', '2acetech' ); ?> &rarr;</p>
 			<?php endif; ?>
 		</div>

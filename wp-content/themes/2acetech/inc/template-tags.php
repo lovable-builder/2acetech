@@ -663,10 +663,14 @@ function ace_demo_notice() {
 
 /**
  * Seconds-accurate deal end timestamp (ISO 8601): the product's own sale end
- * date when it has one, else the Customizer date, else the end of the week.
+ * date when it has one, else the date set in the Customizer. With neither it
+ * returns an empty string and the card shows no countdown: a timer that
+ * restarts every week while the price never changes is a misleading deadline
+ * (unfair commercial practice). Only the demo content, which has no real
+ * prices, keeps a sample timer.
  *
  * @param WC_Product|null $product Optional deal product.
- * @return string
+ * @return string ISO 8601 date, or '' when there is no real end date.
  */
 function ace_deal_end( $product = null ) {
 	if ( $product instanceof WC_Product ) {
@@ -679,6 +683,9 @@ function ace_deal_end( $product = null ) {
 	$custom = trim( (string) get_theme_mod( 'ace_deal_end', '' ) );
 	$ts     = $custom ? strtotime( $custom, current_time( 'timestamp' ) ) : false; // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp
 	if ( ! $ts || $ts < time() ) {
+		if ( ! ace_is_demo() ) {
+			return '';
+		}
 		$ts = strtotime( 'next sunday 23:59:59', current_time( 'timestamp' ) ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp
 	}
 	return gmdate( 'c', $ts - (int) ( get_option( 'gmt_offset' ) * HOUR_IN_SECONDS ) );

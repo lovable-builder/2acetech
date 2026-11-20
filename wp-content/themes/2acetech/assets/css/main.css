@@ -746,7 +746,9 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 .deal__cards::-webkit-scrollbar { display: none; }
 .deal__cards .deal__card { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; }
-.deal__more { margin: 6px 0 0; font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+.deal__more { display: none; margin: 6px 0 0; font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+.deal__nav { justify-content: center; margin: 10px 0 0; }
+@media (max-width: 760px) { .deal__more { display: block; } }
 .deal__label { margin: 0 0 6px; text-align: left; }
 .deal__media { display: grid; place-items: center; aspect-ratio: 1; }
 .deal__media img, .deal__media svg { width: 84%; height: 84%; object-fit: contain; animation: float 5s ease-in-out infinite; }
