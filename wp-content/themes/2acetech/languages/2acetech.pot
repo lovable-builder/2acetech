@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 15:10+0100\n"
+"POT-Creation-Date: 2026-11-20 15:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -96,7 +96,7 @@ msgid "Checkout"
 msgstr ""
 
 #: header.php:12 inc/customizer.php:49
-msgid "Fast, tracked delivery across Poland"
+msgid "Free courier delivery across Poland"
 msgstr ""
 
 #: header.php:25
@@ -1487,37 +1487,37 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: inc/template-tags.php:605
+#: inc/template-tags.php:612
 msgid "New"
 msgstr ""
 
-#: inc/template-tags.php:606
+#: inc/template-tags.php:613
 msgid "Sale"
 msgstr ""
 
-#: inc/template-tags.php:607
+#: inc/template-tags.php:614
 msgid "Sold out"
 msgstr ""
 
 #. translators: %s: product name.
-#: inc/template-tags.php:635
+#: inc/template-tags.php:642
 #, php-format
 msgid "View %s"
 msgstr ""
 
-#: inc/template-tags.php:674
+#: inc/template-tags.php:681
 msgid ""
 "Showing demo products. Add your first WooCommerce product and this content "
 "is replaced automatically."
 msgstr ""
 
-#: inc/template-tags.php:675
+#: inc/template-tags.php:682
 msgid ""
 "Showing demo products. Install and activate WooCommerce to sell real "
 "products."
 msgstr ""
 
-#: inc/template-tags.php:676
+#: inc/template-tags.php:683
 msgid "Admin preview:"
 msgstr ""
 

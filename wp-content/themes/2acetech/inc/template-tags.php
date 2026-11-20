@@ -526,8 +526,15 @@ function ace_query_products( $type, $limit, $cat = '' ) {
 					'post_status'         => 'publish',
 					'posts_per_page'      => $limit,
 					'meta_key'            => 'total_sales', // phpcs:ignore WordPress.DB.SlowDBQuery
-					'meta_value_num'      => 0,
-					'meta_compare'        => '>', // Only products that have really been sold.
+					// Only products that have really been sold.
+					'meta_query'          => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+						array(
+							'key'     => 'total_sales',
+							'value'   => 0,
+							'type'    => 'NUMERIC',
+							'compare' => '>',
+						),
+					),
 					'orderby'             => 'meta_value_num',
 					'order'               => 'DESC',
 					'no_found_rows'       => true,

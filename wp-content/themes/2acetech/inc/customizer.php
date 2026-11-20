@@ -46,7 +46,7 @@ function ace_customize_register( $wp_customize ) {
 	);
 
 	$text_fields = array(
-		'ace_topbar'    => array( __( 'Top bar message', '2acetech' ), __( 'Fast, tracked delivery across Poland', '2acetech' ), 'text' ),
+		'ace_topbar'    => array( __( 'Top bar message', '2acetech' ), __( 'Free courier delivery across Poland', '2acetech' ), 'text' ),
 		'ace_phone'     => array( __( 'Phone', '2acetech' ), '', 'text' ),
 		'ace_email'     => array( __( 'Email', '2acetech' ), 'info@2acetech.pl', 'text' ),
 		'ace_address'   => array( __( 'Address', '2acetech' ), ace_seller_defaults()['ace_address'], 'text' ),

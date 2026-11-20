@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 
 $phone   = get_theme_mod( 'ace_phone', '' );
 $email   = get_theme_mod( 'ace_email', 'info@2acetech.pl' );
-$message = get_theme_mod( 'ace_topbar', __( 'Fast, tracked delivery across Poland', '2acetech' ) );
+$message = get_theme_mod( 'ace_topbar', __( 'Free courier delivery across Poland', '2acetech' ) );
 $wish    = apply_filters( 'ace_wishlist_url', '' );
 ?>
 <!doctype html>

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2acetech 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-20 15:10+0100\n"
+"POT-Creation-Date: 2026-11-20 15:13+0100\n"
 "PO-Revision-Date: 2026-11-02 12:00+0000\n"
 "Last-Translator: 2acetech\n"
 "Language-Team: Polish\n"
@@ -96,8 +96,8 @@ msgid "Checkout"
 msgstr "Do kasy"
 
 #: header.php:12 inc/customizer.php:49
-msgid "Fast, tracked delivery across Poland"
-msgstr "Szybka dostawa z numerem śledzenia w całej Polsce"
+msgid "Free courier delivery across Poland"
+msgstr "Bezpłatna dostawa kurierem na terenie całej Polski"
 
 #: header.php:25
 msgid "Skip to content"
@@ -1329,7 +1329,9 @@ msgstr "Zwroty"
 msgid ""
 "I accept the %1$s and confirm that I have read it. How we process your data: "
 "%2$s."
-msgstr "Akceptuję %1$s i oświadczam, że zapoznałem(-am) się z jego treścią. Informacje o przetwarzaniu Twoich danych: %2$s."
+msgstr ""
+"Akceptuję %1$s i oświadczam, że zapoznałem(-am) się z jego treścią. "
+"Informacje o przetwarzaniu Twoich danych: %2$s."
 
 #: inc/legal.php:317 inc/legal.php:324
 msgid "Terms and conditions"
@@ -1563,25 +1565,25 @@ msgstr "Ocena %s na 5"
 msgid "Blog"
 msgstr "Blog"
 
-#: inc/template-tags.php:605
+#: inc/template-tags.php:612
 msgid "New"
 msgstr "Nowość"
 
-#: inc/template-tags.php:606
+#: inc/template-tags.php:613
 msgid "Sale"
 msgstr "Promocja"
 
-#: inc/template-tags.php:607
+#: inc/template-tags.php:614
 msgid "Sold out"
 msgstr "Wyprzedane"
 
 #. translators: %s: product name.
-#: inc/template-tags.php:635
+#: inc/template-tags.php:642
 #, php-format
 msgid "View %s"
 msgstr "Zobacz: %s"
 
-#: inc/template-tags.php:674
+#: inc/template-tags.php:681
 msgid ""
 "Showing demo products. Add your first WooCommerce product and this content "
 "is replaced automatically."
@@ -1589,7 +1591,7 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Dodaj pierwszy produkt w "
 "WooCommerce, a ta treść zostanie zastąpiona automatycznie."
 
-#: inc/template-tags.php:675
+#: inc/template-tags.php:682
 msgid ""
 "Showing demo products. Install and activate WooCommerce to sell real "
 "products."
@@ -1597,7 +1599,7 @@ msgstr ""
 "Wyświetlane są produkty demonstracyjne. Zainstaluj i aktywuj WooCommerce, "
 "aby sprzedawać prawdziwe produkty."
 
-#: inc/template-tags.php:676
+#: inc/template-tags.php:683
 msgid "Admin preview:"
 msgstr "Podgląd administratora:"
 
@@ -1954,6 +1956,9 @@ msgstr ""
 #: template-withdrawal.php:77
 msgid "Confirm withdrawal here"
 msgstr "Potwierdź odstąpienie od umowy tutaj"
+
+#~ msgid "Fast, tracked delivery across Poland"
+#~ msgstr "Szybka dostawa z numerem śledzenia w całej Polsce"
 
 #, php-format
 #~ msgid "I have read the %s and I accept it."
