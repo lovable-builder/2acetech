@@ -58,6 +58,62 @@ function ace_cart_count_html() {
 }
 
 /**
+ * Keep the product buttons in Polish. Some plugins (cart, dropshipping, bundle
+ * builders) overwrite the button label with their own English text such as
+ * "Add To Cart". When the label that arrives here is one of those English
+ * defaults, swap it for WooCommerce's own translated label; a label that is
+ * already Polish (or custom) is left alone.
+ *
+ * @param string          $text    Button label.
+ * @param WC_Product|null $product Product.
+ * @return string
+ */
+function ace_polish_cart_text( $text, $product = null ) {
+	$key = strtolower( trim( wp_strip_all_tags( (string) $text ) ) );
+	$map = array(
+		'add to cart'    => 'Add to cart',
+		'add to basket'  => 'Add to cart',
+		'buy now'        => 'Add to cart',
+		'select options' => 'Select options',
+		'choose options' => 'Select options',
+		'read more'      => 'Read more',
+		'view products'  => 'View products',
+	);
+	if ( ! isset( $map[ $key ] ) ) {
+		return $text;
+	}
+	// phpcs:ignore WordPress.WP.I18n.NonSingularStringLiteralText,WordPress.WP.I18n.TextDomainMismatch
+	$label = __( $map[ $key ], 'woocommerce' );
+	if ( $product instanceof WC_Product && $product->is_type( 'variable' ) && 'Add to cart' === $map[ $key ] ) {
+		// A variable product cannot be added from the list: it needs options first.
+		// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
+		$label = __( 'Select options', 'woocommerce' );
+	}
+	return $label;
+}
+add_filter( 'woocommerce_product_add_to_cart_text', 'ace_polish_cart_text', PHP_INT_MAX, 2 );
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'ace_polish_cart_text', PHP_INT_MAX, 2 );
+
+/**
+ * Safety net for plugins that rewrite the finished button HTML instead of the
+ * label: fix the visible text of the loop button.
+ *
+ * @param string          $html    Button HTML.
+ * @param WC_Product|null $product Product.
+ * @return string
+ */
+function ace_polish_cart_link( $html, $product = null ) {
+	return preg_replace_callback(
+		'#(<a\b[^>]*\badd_to_cart_button\b[^>]*>)([^<]+)(</a>)#i',
+		static function ( $m ) use ( $product ) {
+			return $m[1] . esc_html( ace_polish_cart_text( $m[2], $product ) ) . $m[3];
+		},
+		$html
+	);
+}
+add_filter( 'woocommerce_loop_add_to_cart_link', 'ace_polish_cart_link', PHP_INT_MAX, 2 );
+
+/**
  * The theme prints its own wrapper in woocommerce.php, and the shop has no
  * sidebar, so drop WooCommerce's default wrapper and sidebar.
  */
