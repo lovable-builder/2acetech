@@ -166,3 +166,18 @@ h1.page-title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 800; }
 .perks .icon { color: var(--accent); }
 .perks li > span { display: grid; gap: 1px; }
 .perks small { font-size: 0.8rem; font-weight: 500; color: var(--muted); }
+
+/* Grid cards line up: the content stacks and the price and button sit at the
+   bottom of every card, whatever the title length or old-price line. */
+.woocommerce ul.products li.product { display: flex; flex-direction: column; }
+.woocommerce ul.products li.product .woocommerce-LoopProduct-link { display: flex; flex-direction: column; flex: 1 1 auto; color: inherit; }
+.woocommerce ul.products li.product .woocommerce-loop-product__title { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.woocommerce ul.products li.product .price { margin-top: auto; padding-top: 6px; }
+.woocommerce ul.products li.product .button { display: block; flex: 0 0 auto; width: calc(100% - 20px); margin: 0 10px; text-align: center; white-space: nowrap; }
+.woocommerce ul.products li.product .added_to_cart { display: block; margin: 8px 10px 0; text-align: center; font-size: 0.85rem; font-weight: 700; text-decoration: underline; }
+@media (max-width: 760px) {
+	.woocommerce ul.products li.product { padding: 8px 8px 14px; }
+	.woocommerce ul.products li.product .woocommerce-loop-product__title { padding: 0 6px; font-size: 0.92rem; }
+	.woocommerce ul.products li.product .price { padding: 6px 6px 0; margin-bottom: 12px; font-size: 1.02rem; }
+	.woocommerce ul.products li.product .button { width: calc(100% - 12px); margin: 0 6px; padding: 13px 6px; font-size: 0.86rem; }
+}
