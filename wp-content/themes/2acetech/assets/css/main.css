@@ -197,7 +197,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .site-brand { display: flex; align-items: center; }
 .nav-toggle { display: none; }
 
-.search {
+/* "form.search", not ".search": WordPress also puts the class "search" on the
+   <body> of every search-results page, which turned the whole page into this
+   narrow rounded flex box. */
+form.search {
 	display: flex;
 	align-items: stretch;
 	max-width: 640px;
@@ -209,7 +212,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	overflow: hidden;
 	transition: border-color 0.2s, background 0.2s;
 }
-.search:focus-within { background: #fff; border-color: var(--ink); }
+form.search:focus-within { background: #fff; border-color: var(--ink); }
 .search__cat {
 	flex: none;
 	width: 196px;
@@ -379,7 +382,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 	.header__row { grid-template-columns: auto 1fr auto; padding-block: 10px; row-gap: 10px; }
 	.nav-toggle { display: inline-grid; margin-left: -10px; }
 	.site-brand { justify-self: start; }
-	.search { grid-column: 1 / -1; grid-row: 2; max-width: none; }
+	form.search { grid-column: 1 / -1; grid-row: 2; max-width: none; }
 	.search__cat { display: none; }
 
 	.header__nav { display: none; border-top: 1px solid var(--line); }
@@ -914,7 +917,7 @@ a.brand:hover { color: var(--ink); }
 
 .notfound { text-align: center; }
 .notfound__code { margin: 0; font-size: clamp(5rem, 16vw, 9rem); font-weight: 800; line-height: 1; letter-spacing: -0.06em; color: var(--accent); }
-.notfound .search { margin: 24px auto; }
+.notfound form.search { margin: 24px auto; }
 
 .comments { margin-top: 48px; }
 .comment-list { display: grid; gap: 20px; margin-bottom: 32px; }
