@@ -129,13 +129,13 @@ function ace_maybe_create_legal_pages() {
 				continue;
 			}
 			// WordPress ships an untouched draft "Privacy Policy" with tutorial
-			// text. Replace that, and an unedited draft of an older theme text
-			// with the current one. Never touch a page the owner has edited or
+			// text. Replace that, an unedited draft of an older theme text and an
+			// unfinished draft that still carries the editor note, with the current one. Never touch a page the owner has edited or
 			// published.
 			$stub      = 'privacy' === $key && ace_is_stock_privacy_stub( $existing );
 			$hash      = md5( $page->post_content );
 			$unedited  = 'draft' === $page->post_status
-				&& ( $hash === get_post_meta( $existing, '_ace_legal_seed', true ) || in_array( $hash, ace_legal_old_hashes(), true ) );
+				&& ( $hash === get_post_meta( $existing, '_ace_legal_seed', true ) || in_array( $hash, ace_legal_old_hashes(), true ) || false !== strpos( $page->post_content, '[USUŃ PRZED PUBLIKACJĄ]' ) );
 			if ( ( $stub || $unedited ) && $hash !== md5( $text ) ) {
 				wp_update_post(
 					wp_slash(
