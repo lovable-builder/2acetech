@@ -380,3 +380,37 @@ function ace_translate_auto_title( $title, $post_id ) {
 }
 add_filter( 'the_title', 'ace_translate_auto_title', 10, 2 );
 add_filter( 'single_post_title', 'ace_translate_auto_title', 10, 2 );
+
+/**
+ * Order confirmation e-mails: the full Regulamin in the message body.
+ *
+ * The seller must confirm the contract and the pre-contract information on a
+ * durable medium (art. 15 and 21 consumer rights act). An e-mail that contains
+ * the text of the Regulamin, with the withdrawal information and the model
+ * form it holds, does that without a PDF attachment. Only for the e-mails sent
+ * when the order is received, and only while the Regulamin page is published.
+ *
+ * @param WC_Order $order         Order.
+ * @param bool     $sent_to_admin Whether the e-mail goes to the shop owner.
+ * @param bool     $plain_text    Plain text e-mail.
+ * @param WC_Email $email         E-mail object.
+ */
+function ace_email_regulamin( $order, $sent_to_admin, $plain_text, $email = null ) {
+	if ( $sent_to_admin || ! is_object( $email ) || ! in_array( $email->id, array( 'customer_processing_order', 'customer_on_hold_order' ), true ) ) {
+		return;
+	}
+	$id   = ace_legal_page_id( 'terms' );
+	$page = $id ? get_post( $id ) : null;
+	if ( ! $page || 'publish' !== $page->post_status ) {
+		return;
+	}
+	$title = 'Regulamin sklepu';
+	if ( $plain_text ) {
+		echo "\n\n==========\n" . esc_html( $title ) . "\n==========\n\n";
+		echo esc_html( html_entity_decode( wp_strip_all_tags( preg_replace( '#</(p|li|h[1-6]|tr)>#i', "\n", $page->post_content ) ) ) ) . "\n";
+		return;
+	}
+	echo '<h2 style="margin:32px 0 12px">' . esc_html( $title ) . '</h2>';
+	echo '<div style="font-size:12px;line-height:1.5">' . wp_kses_post( wpautop( $page->post_content ) ) . '</div>';
+}
+add_action( 'woocommerce_email_after_order_table', 'ace_email_regulamin', 30, 4 );
