@@ -233,7 +233,7 @@ function ace_primary_fallback() {
 		array(
 			'title_li' => '',
 			'depth'    => 1,
-			'exclude'  => implode( ',', array_filter( array( $posts_page, (int) get_option( 'page_on_front' ), ace_has_store() ? (int) wc_get_page_id( 'shop' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'cart' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'checkout' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'myaccount' ) : 0 ) ) ),
+			'exclude'  => implode( ',', array_filter( array_merge( ace_legal_page_ids(), array( $posts_page, (int) get_option( 'page_on_front' ), ace_has_store() ? (int) wc_get_page_id( 'shop' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'cart' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'checkout' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'myaccount' ) : 0 ) ) ) ),
 		)
 	);
 	echo '</ul>';
@@ -255,7 +255,7 @@ function ace_footer_fallback( $which ) {
 		if ( ace_has_store() ) {
 			$links[ __( 'Cart', '2acetech' ) ] = wc_get_cart_url();
 		}
-		foreach ( get_pages( array( 'number' => 4, 'sort_column' => 'menu_order,post_title', 'exclude' => implode( ',', array_filter( array( (int) get_option( 'page_on_front' ), ace_has_store() ? (int) wc_get_page_id( 'shop' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'cart' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'checkout' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'myaccount' ) : 0 ) ) ) ) ) as $page ) {
+		foreach ( get_pages( array( 'number' => 4, 'sort_column' => 'menu_order,post_title', 'exclude' => implode( ',', array_filter( array_merge( ace_legal_page_ids(), array( (int) get_option( 'page_on_front' ), ace_has_store() ? (int) wc_get_page_id( 'shop' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'cart' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'checkout' ) : 0, ace_has_store() ? (int) wc_get_page_id( 'myaccount' ) : 0 ) ) ) ) ) ) as $page ) {
 			$links[ get_the_title( $page ) ] = get_permalink( $page );
 		}
 	}

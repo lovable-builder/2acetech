@@ -414,3 +414,23 @@ function ace_email_regulamin( $order, $sent_to_admin, $plain_text, $email = null
 	echo '<div style="font-size:12px;line-height:1.5">' . wp_kses_post( wpautop( $page->post_content ) ) . '</div>';
 }
 add_action( 'woocommerce_email_after_order_table', 'ace_email_regulamin', 30, 4 );
+
+/**
+ * IDs of the legal and policy pages (terms, privacy, cookies, delivery, returns,
+ * complaints, seller details, the withdrawal page and WooCommerce's returns
+ * stub). They live in the footer legal bar, so automatic page lists in the
+ * header and in the footer columns must not show them.
+ *
+ * @return int[]
+ */
+function ace_legal_page_ids() {
+	$ids = array();
+	foreach ( array_keys( ace_legal_defs() ) as $key ) {
+		$ids[] = ace_legal_page_id( $key );
+	}
+	foreach ( array( 'odstap-od-umowy', 'refund_returns' ) as $slug ) {
+		$page = get_page_by_path( $slug );
+		$ids[] = $page ? (int) $page->ID : 0;
+	}
+	return array_values( array_unique( array_filter( $ids ) ) );
+}
