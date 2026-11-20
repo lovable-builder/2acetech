@@ -95,6 +95,35 @@ add_filter( 'woocommerce_product_add_to_cart_text', 'ace_polish_cart_text', PHP_
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'ace_polish_cart_text', PHP_INT_MAX, 2 );
 
 /**
+ * Post/Redirect/Get for "Add to cart" on a product page.
+ *
+ * The product page form posts to its own URL and WooCommerce then shows the
+ * page straight from that POST. Reloading it (or pressing Back) makes the
+ * browser ask "Confirm Form Resubmission" and could add the product twice.
+ * After WooCommerce has added the product (wp_loaded, priority 20) and queued
+ * its notice in the session, send the visitor to a plain GET of the product
+ * page; the notice is then shown there as an in-site card.
+ */
+function ace_add_to_cart_post_redirect_get() {
+	if ( ! isset( $_SERVER['REQUEST_METHOD'] ) || 'POST' !== $_SERVER['REQUEST_METHOD'] ) {
+		return;
+	}
+	// phpcs:disable WordPress.Security.NonceVerification
+	if ( empty( $_REQUEST['add-to-cart'] ) || ! empty( $_REQUEST['wc-ajax'] ) || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+	$product_id = absint( wp_unslash( $_REQUEST['add-to-cart'] ) );
+	// phpcs:enable WordPress.Security.NonceVerification
+	$url = $product_id ? get_permalink( $product_id ) : '';
+	if ( ! $url ) {
+		$url = wp_get_referer() ? wp_get_referer() : home_url( '/' );
+	}
+	wp_safe_redirect( $url, 303 );
+	exit;
+}
+add_action( 'wp_loaded', 'ace_add_to_cart_post_redirect_get', 21 );
+
+/**
  * Safety net for plugins that rewrite the finished button HTML instead of the
  * label: fix the visible text of the loop button.
  *
