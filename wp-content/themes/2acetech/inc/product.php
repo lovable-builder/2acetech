@@ -58,19 +58,6 @@ function ace_product_hooks() {
 		}
 	);
 
-	// Photos cross-fade (the focus and light-sweep effect is in product.css),
-	// and the gallery loops from the last photo back to the first.
-	add_filter(
-		'woocommerce_single_product_carousel_options',
-		static function ( $options ) {
-			$options['animation']      = 'fade';
-			$options['animationSpeed'] = 650;
-			$options['animationLoop']  = true;
-			$options['smoothHeight']   = false;
-			return $options;
-		}
-	);
-
 	// Simple products show availability in our info list instead.
 	add_filter(
 		'woocommerce_get_stock_html',

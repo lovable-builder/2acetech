@@ -209,33 +209,6 @@
 			arrow('prev', text.prevPhoto, 'm15 6-6 6 6 6');
 			arrow('next', text.nextPhoto, 'm9 6 6 6-6 6');
 
-			// Frame counter and progress line, light sweep on every change.
-			const slides = $$('.woocommerce-product-gallery__image', gallery);
-			const counter = document.createElement('span');
-			counter.className = 'gallery-count';
-			counter.setAttribute('aria-hidden', 'true');
-			viewport.appendChild(counter);
-			const pad = (n) => String(n).padStart(2, '0');
-			let current = -1;
-			let sweepTimer = 0;
-			const syncFrame = () => {
-				const index = Math.max(0, slides.findIndex((s) => s.classList.contains('flex-active-slide')));
-				if (index === current) return;
-				const first = current === -1;
-				current = index;
-				counter.textContent = `${pad(index + 1)} / ${pad(slides.length)}`;
-				viewport.style.setProperty('--p', String((index + 1) / slides.length));
-				if (!first) {
-					viewport.classList.remove('is-switching');
-					void viewport.offsetWidth; // restart the animation
-					viewport.classList.add('is-switching');
-					clearTimeout(sweepTimer);
-					sweepTimer = setTimeout(() => viewport.classList.remove('is-switching'), 900);
-				}
-			};
-			syncFrame();
-			slides.forEach((s) => new MutationObserver(syncFrame).observe(s, { attributes: true, attributeFilter: ['class'] }));
-
 			// Slide the thumbnail strip, never the page.
 			const keepInView = () => {
 				const li = $('.flex-active', thumbs);
