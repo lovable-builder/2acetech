@@ -1,0 +1,56 @@
+<p>Wersja z dnia {{VERSION_DATE}} Pełne zasady są w <a href="/regulamin/#par-5">§ 5 Regulaminu</a>. Jeżeli ta strona różni się od Regulaminu, stosujemy to, co jest korzystniejsze dla Ciebie.</p>
+<h2>1. Dokąd dostarczamy</h2>
+<p>Dostarczamy <strong>wyłącznie na adresy w Polsce</strong>. Zamówienie może złożyć każdy Konsument, niezależnie od obywatelstwa i miejsca zamieszkania, jeśli adres dostawy jest w Polsce. Dostaw za granicę nie realizujemy.</p>
+<h2>2. Koszt i czas dostawy</h2>
+<table>
+<thead>
+<tr>
+<th>Sposób dostawy</th>
+<th>Koszt (brutto)</th>
+<th>Przygotowanie i nadanie</th>
+<th>Transport</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{{DELIVERY_METHOD_LABEL_PAGE}}</td>
+<td>{{DELIVERY_PRICE_TEXT}}</td>
+<td>do {{DISPATCH_DAYS_MAX}} dni roboczych od zawarcia umowy</td>
+<td>{{TRANSIT_DAYS}} dni roboczych od nadania</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Dni robocze</strong> to dni od poniedziałku do piątku z wyjątkiem dni ustawowo wolnych od pracy.</li>
+<li>Razem zwykle do <strong>{{TOTAL_DAYS_MAX}} dni roboczych</strong> od zawarcia umowy do dostarczenia. Termin przygotowania i nadania (do {{DISPATCH_DAYS_MAX}} dni roboczych) jest dla nas wiążący. Czas transportu ({{TRANSIT_DAYS}} dni roboczych) to przewidywany czas przewoźnika.</li>
+<li>Jeśli nie dostarczymy Towaru, możesz wyznaczyć nam dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy (art. 491 Kodeksu cywilnego). Jeżeli nie wskazaliśmy innego terminu, dostarczymy Towar nie później niż w ciągu {{DELIVERY_OUTER_LIMIT_DAYS}} dni od zawarcia umowy.</li>
+<li><!--IF:free_delivery-->Dostawa jest bezpłatna dla całego zamówienia. Jeśli zamówienie przyjdzie w kilku paczkach, każda jest bezpłatna.<!--ELSE-->Koszt dostawy naliczamy raz za całe zamówienie, niezależnie od liczby paczek.<!--ENDIF--></li>
+</ul>
+<h2>3. Skąd wysyłamy</h2>
+<!--IF:dropshipping--><p>Towary wysyłamy z magazynów naszych dostawców w {{WAREHOUSE_COUNTRY_LOC}} (sprzedawców wysyłających towar w naszym imieniu), przez firmy kurierskie wybrane przez dostawców, bezpośrednio do Ciebie. Na etykiecie przesyłki jako nadawca może być wskazany inny podmiot niż my. Sprzedawcą jesteśmy zawsze my – {{COMPANY_NAME_SHORT}} – i do nas kierujesz zwroty oraz reklamacje (<a href="/zwroty-i-odstapienie/">Zwroty i odstąpienie</a>, <a href="/reklamacje/">Reklamacje</a>).</p>
+<!--ELSE--><p>Towary wysyłamy z naszego magazynu w {{WAREHOUSE_COUNTRY_LOC}}, przez firmy kurierskie, bezpośrednio do Ciebie. Sprzedawcą jesteśmy my – {{COMPANY_NAME_SHORT}} – a zwroty oraz reklamacje kierujesz do nas (<a href="/zwroty-i-odstapienie/">Zwroty i odstąpienie</a>, <a href="/reklamacje/">Reklamacje</a>).</p>
+<!--ENDIF--><h2>4. Odbiór paczki</h2>
+<ul>
+<li>Zalecamy sprawdzić paczkę przy kurierze. Jeśli opakowanie jest uszkodzone, poproś o spisanie protokołu szkody. Brak protokołu nie pozbawia Cię praw.</li>
+<li>Do chwili wydania Ci Towaru ryzyko jego utraty lub uszkodzenia w transporcie ponosimy my (art. 548 § 3 Kodeksu cywilnego).</li>
+<li>Jeśli nie możesz odebrać paczki, skontaktuj się z nami: <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>, {{SHOP_PHONE}}.</li>
+</ul>
+<h2>5. Płatność</h2>
+<ul>
+<li>Płacisz z góry, przy składaniu zamówienia. <strong>Nie przyjmujemy płatności przy odbiorze (za pobraniem).</strong></li>
+<li>Dostępne metody: {{PAYMENT_METHODS_LIST_PAGE}}. Płatności obsługuje operator płatności {{PAYMENT_PROVIDER_NAME}} (<a href="/polityka-prywatnosci/">szczegóły w Polityce prywatności</a>). Nie oferujemy innych metod płatności.</li>
+<li>Nie pobieramy opłat za wybraną metodę płatności ani żadnych innych opłat, o których nie poinformowaliśmy Cię przed złożeniem zamówienia.</li>
+<!--IF:payment_cards--><li>Nie przechowujemy pełnych numerów Twoich kart płatniczych i ich nie otrzymujemy. Dane karty trafiają do operatora płatności.</li>
+<!--ENDIF--><li><!--IF:vat_exempt-->Ceny są w złotych polskich i są cenami końcowymi (korzystamy ze zwolnienia z podatku VAT). Łączną cenę z kosztem dostawy widzisz<!--ELSE-->Ceny są w złotych polskich i zawierają podatek VAT. Łączną cenę z podatkiem i kosztem dostawy widzisz<!--ENDIF--> w podsumowaniu zamówienia przed jego złożeniem.</li>
+<li>Jeżeli płatność się nie powiedzie, zamówienie nie jest przyjęte. Możesz spróbować ponownie lub wybrać inną metodę.</li>
+</ul>
+<h2>6. Faktura</h2>
+<p>Dokumentujemy sprzedaż w sposób wymagany przepisami. Jeśli chcesz fakturę VAT, napisz na <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a> w ciągu 3 miesięcy od końca miesiąca, w którym dostarczono Towar lub zapłaciłaś/zapłaciłeś (art. 106b ust. 3 ustawy o podatku od towarów i usług). Podaj numer zamówienia i dane do faktury. Fakturę wyślemy e-mailem.</p>
+<!--IF:weee--><h2><!--S:weee-->{{S:weee}}. Zużyty sprzęt elektryczny, baterie i akumulatory</h2>
+<p>Część Towarów to sprzęt elektryczny lub elektroniczny (np. {{WEEE_EXAMPLES}}) albo zawiera baterie lub akumulatory. Symbol przekreślonego kosza na śmieci na sprzęcie lub opakowaniu oznacza, że zużytego sprzętu <strong>nie wolno wyrzucać razem z innymi odpadami</strong>; należy go oddać do punktu zbierania (selektywne zbieranie). Zużyty sprzęt i baterie nie należą do odpadów komunalnych.</p>
+<ul>
+<li><strong>Bezpłatny odbiór zużytego sprzętu przy dostawie.</strong> Gdy dostarczamy sprzęt przeznaczony dla gospodarstw domowych, możesz przekazać nam nieodpłatnie zużyty sprzęt pochodzący z gospodarstwa domowego, o ile jest tego samego rodzaju i pełnił te same funkcje co dostarczony sprzęt (art. 37 ust. 2 ustawy o zużytym sprzęcie elektrycznym i elektronicznym). Odbiór następuje w miejscu dostawy. Zorganizujemy go na Twoje żądanie: napisz do nas na <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a> przed dostawą albo najpóźniej w dniu dostawy, podając numer zamówienia i rodzaj sprzętu do odbioru. Odpowiemy, jak i kiedy sprzęt zostanie odebrany.</li>
+<li><strong>Punkty zbierania.</strong> Zużyty sprzęt możesz też oddać w punkcie zbierania zużytego sprzętu lub w punkcie selektywnego zbierania odpadów komunalnych (PSZOK). Informacje o punktach w Twojej okolicy, w tym o PSZOK, podaje Twoja gmina na swojej stronie internetowej.</li>
+<li><strong>Baterie i akumulatory</strong> oddawaj do punktów zbierania (np. oznaczonych pojemników w sklepach) lub do PSZOK. Nie wyrzucaj ich do zwykłych koszy ani nie demontuj samodzielnie, jeśli to niebezpieczne. Uszkodzoną lub spuchniętą baterię traktuj jak źródło zagrożenia pożarem i skontaktuj się z nami (<a href="/reklamacje/">Reklamacje</a>, punkt {{X:reklamacje:S:safety}}).</li>
+<li>Selektywne zbieranie zużytego sprzętu zmniejsza ilość odpadów i pozwala odzyskać surowce.</li>
+</ul>
+<!--ENDIF--><h2><!--S:help-->{{S:help}}. Pomoc</h2>
+<p>E-mail: <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>, telefon: {{SHOP_PHONE}}. Dane firmy: {{COMPANY_NAME_SHORT}}, {{SEAT_ADDRESS}}, KRS {{KRS}}, NIP {{NIP}}, REGON {{REGON}}.</p>

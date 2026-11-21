@@ -1,0 +1,170 @@
+<p>Wersja z dnia {{VERSION_DATE}}</p>
+<h2>1. Czym są pliki cookie</h2>
+<p>Pliki cookie to małe pliki tekstowe, które strona internetowa zapisuje na Twoim urządzeniu (komputerze, telefonie). Podobne działanie mają inne technologie zapisujące lub odczytujące informacje na urządzeniu (np. pamięć lokalna przeglądarki, piksele). W tej polityce piszemy o nich wszystkich „pliki cookie”.</p>
+<h2>2. Kto je stosuje i na jakiej podstawie</h2>
+<p>Administratorem danych jest {{COMPANY_NAME_SHORT}}, {{SEAT_ADDRESS}} (KRS {{KRS}}, NIP {{NIP}}). Kontakt: <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>. Więcej o danych osobowych: <a href="/polityka-prywatnosci/">Polityka prywatności</a>.</p>
+<p>Zapisywanie informacji na Twoim urządzeniu i uzyskiwanie do nich dostępu wymaga co do zasady Twojej <strong>zgody</strong>, którą poprzedza informacja o celu (art. 399 ust. 1 ustawy z dnia 12 lipca 2024 r. Prawo komunikacji elektronicznej). Zgoda ma spełniać wymogi RODO (art. 400 tej ustawy). Zgody <strong>nie</strong> potrzebujemy na pliki cookie konieczne do świadczenia usługi, o którą prosisz, np. koszyka, składania zamówienia,<!--IF:accounts--> logowania,<!--ENDIF--> płatności (art. 399 ust. 3 pkt 2).</p>
+<h2>3. Twój wybór: baner i ustawienia</h2>
+<ul>
+<li>Przy pierwszej wizycie pokazujemy baner z trzema równorzędnymi przyciskami: <strong>Odrzuć wszystkie</strong>, <strong>Zarządzaj plikami cookie</strong> i <strong>Akceptuję</strong>. Odrzucenie jest tak samo łatwe jak zgoda.</li>
+<!--IF:consent_tools--><li>Kategorie „Analityczne” i „Marketingowe” są domyślnie wyłączone. Pliki cookie tych kategorii<!--IF:ga4|google_ads--> (<!--IF:ga4-->Google Analytics 4<!--ENDIF--><!--IF:ga4&google_ads--> i <!--ENDIF--><!--IF:google_ads-->Google Ads<!--ENDIF-->)<!--ENDIF--> zapisujemy dopiero po Twojej zgodzie.</li>
+<!--ELSE--><li>Kategorie „Analityczne” i „Marketingowe” są domyślnie wyłączone; obecnie Sklep nie używa narzędzi tych kategorii.</li>
+<!--ENDIF--><!--IF:google_consent_mode_pings--><li><strong>Co dzieje się przed Twoim wyborem.</strong> Skrypty narzędzi Google (Google Analytics 4 i Google Ads) ładują się z serwerów Google przy wejściu na stronę, ale od pierwszej chwili działają w trybie „odmowa” (Google Consent Mode v2): wszystkie zgody (na pamięć analityczną i reklamową, na przekazywanie danych użytkownika do reklam oraz na personalizację reklam) są ustawione na „odmowa”, dopóki ich nie udzielisz. W tym trybie Google nie zapisuje na Twoim urządzeniu swoich plików cookie. Przeglądarka łączy się jednak z serwerami Google, a Google otrzymuje m.in. Twój adres IP, adres odwiedzanej strony i dane o przeglądarce. Wysyłane są wtedy także krótkie sygnały pomiarowe bez plików cookie, opatrzone znacznikiem, że zgoda nie została udzielona.</li>
+<!--ENDIF--><!--IF:google_consent_mode_pings--><li>Po kliknięciu „Odrzuć wszystkie” zgody Google pozostają ustawione na „odmowa”. Po kliknięciu „Akceptuję” (albo zapisaniu wyboru w „Zarządzaj plikami cookie”) strona przekazuje Google Twój wybór, a Google może zapisać pliki cookie wymienione w <!--IF:ga4&google_ads-->punktach {{H:analytics}} i {{H:marketing}}<!--ELSE--><!--IF:ga4-->punkcie {{H:analytics}}<!--ELSE--><!--IF:google_ads-->punkcie {{H:marketing}}<!--ELSE-->4 tej polityki<!--ENDIF--><!--ENDIF--><!--ENDIF-->.</li>
+<!--ELSE--><!--IF:consent_tools--><li>Po kliknięciu „Akceptuję” (albo zapisaniu wyboru w „Zarządzaj plikami cookie”) ładujemy narzędzia wybranych kategorii, a ich pliki cookie są wymienione w punkcie 4 tej polityki. Po kliknięciu „Odrzuć wszystkie” tych narzędzi nie ładujemy.</li>
+<!--ENDIF--><!--ENDIF--><li>Zgoda jest dobrowolna. Odmowa nie wpływa na możliwość korzystania ze Sklepu ani składania zamówień.</li>
+<li>Swój wybór możesz zmienić lub wycofać w każdej chwili przyciskiem <strong>„Ustawienia cookies”</strong> w stopce każdej strony. Po wycofaniu zgody strona przeładuje się, a <!--IF:ga4|google_ads-->Google przestanie<!--ELSE-->narzędzia przestaną<!--ENDIF--> zapisywać i odczytywać swoje pliki cookie; pliki, które już zostały zapisane, możesz usunąć w ustawieniach przeglądarki. Wycofanie zgody nie wpływa na zgodność z prawem tego, co zrobiliśmy przed jej wycofaniem.</li>
+<li>Twój wybór zapamiętujemy w pliku cookie {{CONSENT_COOKIE_NAME}} przez {{CONSENT_COOKIE_DAYS}} dni (przechowuje wersję ustawień oraz Twój wybór: analityka tak/nie, marketing tak/nie). Po tym czasie zapytamy Cię ponownie.</li>
+</ul>
+<h2>4. Jakich plików cookie używamy</h2>
+<h3><!--H:necessary-->{{H:necessary}}. Niezbędne (bez zgody)</h3>
+<table>
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Kto ustawia</th>
+<th>Do czego służy</th>
+<th>Czas działania</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{{CONSENT_COOKIE_NAME}}</td>
+<td>Sklep</td>
+<td>zapamiętuje Twój wybór dotyczący plików cookie</td>
+<td>{{CONSENT_COOKIE_DAYS}} dni</td>
+</tr>
+<tr>
+<td>woocommerce_cart_hash, woocommerce_items_in_cart</td>
+<td>Sklep (WooCommerce)</td>
+<td>pozwalają Sklepowi wykryć zmiany w koszyku; powstają po dodaniu Towaru do koszyka</td>
+<td>do końca sesji przeglądarki</td>
+</tr>
+<tr>
+<td>wp_woocommerce_session_*</td>
+<td>Sklep (WooCommerce)</td>
+<td>zawiera kod, dzięki któremu Sklep odnajduje Twój koszyk i dane zamówienia; powstaje po dodaniu Towaru do koszyka</td>
+<td>około 2 dni</td>
+</tr>
+<!--IF:accounts--><tr>
+<td>wordpress_logged_in_*, wordpress_sec_*, wp-settings-*, wp-settings-time-*, wordpress_test_cookie</td>
+<td>Sklep (WordPress)</td>
+<td>utrzymują zalogowanie do Konta i sprawdzają, czy przeglądarka przyjmuje pliki cookie; powstają tylko po zalogowaniu lub na stronie logowania</td>
+<td>do końca sesji; wp-settings-* do 1 roku</td>
+</tr>
+<!--ENDIF--><!--IF:payment_stripe--><tr>
+<td>__stripe_mid, __stripe_sid, m</td>
+<td>Stripe (operator płatności)</td>
+<td>zapobiegają oszustwom i nadużyciom przy płatnościach kartą, Apple Pay i Google Pay; ładują się na stronach produktów, koszyka i kasy</td>
+<td>__stripe_mid: 1 rok; __stripe_sid: 30 minut; m: około 400 dni</td>
+</tr>
+<!--ENDIF--><!--IF:cookie_cf_bm--><tr>
+<td>__cf_bm</td>
+<td>technologia antybotowa używana przez <!--IF:payment_stripe-->Stripe (hCaptcha) oraz <!--ENDIF-->{{HOSTING_GROUP_NAME}}</td>
+<td>ochrona przed automatycznymi robotami; powstaje przy ładowaniu skryptów tych podmiotów (m.in. na stronach produktów i w kasie)</td>
+<td>około 30 minut</td>
+</tr>
+<!--ENDIF--><!--IF:cookie_hcdn--><tr>
+<td>hcdn</td>
+<td>dostawca hostingu ({{HOSTING_GROUP_NAME}})</td>
+<td>techniczna obsługa połączenia ze stroną przez sieć dostarczania treści dostawcy</td>
+<td>do końca sesji przeglądarki</td>
+</tr>
+<!--ENDIF-->{{EXTRA_NECESSARY_COOKIES_HTML}}</tbody></table>
+<p>Pliki cookie z tej kategorii można zablokować w ustawieniach przeglądarki, ale wtedy koszyk<!--IF:accounts-->, logowanie<!--ENDIF--> i płatność mogą nie działać.</p>
+<!--IF:review_remember_cookie--><h3><!--H:functions-->{{H:functions}}. Funkcje, które włączasz sam</h3>
+<table>
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Kto ustawia</th>
+<th>Do czego służy</th>
+<th>Czas działania</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>comment_author_*, comment_author_email_*, comment_author_url_*</td>
+<td>Sklep (WordPress)</td>
+<td>zapamiętują Twoje imię i adres e-mail w formularzu opinii o produkcie; powstają tylko wtedy, gdy zaznaczysz pole „Zapamiętaj moje dane w tej przeglądarce podczas pisania kolejnych komentarzy”</td>
+<td>około 1 roku</td>
+</tr>
+</tbody></table>
+<!--ENDIF--><!--IF:order_attribution--><h3><!--H:attribution-->{{H:attribution}}. Statystyka źródeł zamówień (WooCommerce Order Attribution)</h3>
+<p>Wbudowana w WooCommerce funkcja Order Attribution zapisuje od pierwszej wizyty, niezależnie od wyboru w banerze, krótkotrwałe pliki cookie służące statystyce źródeł zamówień w Sklepie (skąd klient trafił do Sklepu). Nie służą one reklamie. Dane z nich są dołączane do zamówienia w bazie Sklepu. Jeżeli nie chcesz tych plików, możesz je usunąć lub zablokować w ustawieniach przeglądarki.</p>
+<table>
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Kto ustawia</th>
+<th>Do czego służy</th>
+<th>Czas działania</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sbjs_first, sbjs_first_add, sbjs_current, sbjs_current_add, sbjs_udata, sbjs_migrations</td>
+<td>Sklep (WooCommerce)</td>
+<td>zapisują źródło wizyty (np. adres strony odsyłającej, parametry kampanii w adresie), typ urządzenia i liczbę odwiedzonych stron</td>
+<td>najwyżej do końca sesji przeglądarki</td>
+</tr>
+<tr>
+<td>sbjs_session</td>
+<td>Sklep (WooCommerce)</td>
+<td>oznacza bieżącą sesję odwiedzin</td>
+<td>30 minut</td>
+</tr>
+</tbody></table>
+<!--ENDIF--><!--IF:ga4|has_extra_analytics--><h3><!--H:analytics-->{{H:analytics}}. Analityczne (tylko po Twojej zgodzie)</h3>
+<table>
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Kto ustawia</th>
+<th>Do czego służy</th>
+<th>Czas działania</th>
+</tr>
+</thead>
+<tbody><!--IF:ga4--><tr>
+<td>_ga, _ga_* (np. _ga_{{GA4_ID_SUFFIX}})</td>
+<td>Google Ireland Limited (Google Analytics 4)</td>
+<td>statystyki odwiedzin: które strony są oglądane, skąd przychodzą odwiedzający, jak działa Sklep; pozwalają ulepszać Sklep</td>
+<td>do 400 dni</td>
+</tr>
+<!--ENDIF-->{{EXTRA_ANALYTICS_COOKIES_HTML}}</tbody></table>
+<!--IF:ga4--><p>Dane zebrane w Google Analytics Google przechowuje zgodnie z ustawieniami naszego konta (do wyboru 2 lub 14 miesięcy; maksymalnie 14 miesięcy). Dane z tej kategorii mogą trafiać do Google także poza Europejski Obszar Gospodarczy (więcej: <a href="/polityka-prywatnosci/#sec-4">Polityka prywatności, pkt 4</a>).</p>
+<!--ENDIF--><!--ENDIF--><!--IF:google_ads|has_extra_marketing--><h3><!--H:marketing-->{{H:marketing}}. Marketingowe (tylko po Twojej zgodzie)</h3>
+<table>
+<thead>
+<tr>
+<th>Nazwa</th>
+<th>Kto ustawia</th>
+<th>Do czego służy</th>
+<th>Czas działania</th>
+</tr>
+</thead>
+<tbody><!--IF:google_ads--><tr>
+<td>_gcl_au</td>
+<td>Google Ireland Limited (Google Ads)</td>
+<td>mierzenie skuteczności reklam Sklepu (np. czy po kliknięciu reklamy doszło do zakupu)</td>
+<td>90 dni</td>
+</tr>
+<!--ENDIF--><!--IF:google_ads--><tr>
+<td>IDE (w domenie doubleclick.net)</td>
+<td>Google (Google Ads)</td>
+<td>wyświetlanie i mierzenie reklam, także dopasowanych do zainteresowań, na innych stronach</td>
+<td>około 13 miesięcy</td>
+</tr>
+<!--ENDIF-->{{EXTRA_MARKETING_COOKIES_HTML}}</tbody></table>
+<!--IF:google_ads--><p>Po udzieleniu zgody Google może ustawić także inne identyfikatory w swoich domenach (google.com, doubleclick.net); lista może się zmieniać wraz ze zmianami po stronie Google.</p>
+<!--ENDIF--><!--ENDIF--><h2>5. Inne połączenia ze stronami firm trzecich</h2>
+<!--IF:google_fonts_remote|hostinger_reach_script|payment_stripe|no_other_trackers|share_links--><ul>
+<!--IF:google_fonts_remote--><li><strong>Czcionka z serwerów Google.</strong> Czcionki motywu Sklepu są zapisane na naszym serwerze. Przy pierwszej wizycie, zanim wybierzesz opcję w banerze, przeglądarka może jednak pobrać czcionkę ({{REMOTE_FONT_NAME}}) z serwerów Google (fonts.googleapis.com i fonts.gstatic.com); Google otrzymuje wtedy Twój adres IP. Czcionka nie zapisuje plików cookie.</li>
+<!--ENDIF--><!--IF:hostinger_reach_script--><li><strong>Skrypt dostawcy hostingu.</strong> Przy wejściu na stronę przeglądarka pobiera skrypt z sieci dostarczania treści dostawcy hostingu ({{HOSTING_CDN_SCRIPT_HOST}}), co ujawnia dostawcy Twój adres IP.<!--IF:cookie_cf_bm--> Dostawca może przy tym ustawić techniczny plik cookie __cf_bm (punkt {{H:necessary}}).<!--ENDIF--></li>
+<!--ENDIF--><!--IF:payment_stripe--><li><strong>Stripe.</strong> Na stronach produktów, koszyka i kasy ładują się skrypty Stripe (płatności {{PAYMENT_METHODS_INSTR}}), które ustawiają pliki cookie z punktu {{H:necessary}}.</li>
+<!--ENDIF--><!--IF:no_other_trackers|share_links--><li><!--IF:no_other_trackers-->Poza narzędziami wymienionymi w tej polityce Sklep nie ładuje narzędzi reklamowych ani pikseli innych firm (np. Meta).<!--ENDIF--><!--IF:no_other_trackers&share_links--> <!--ENDIF--><!--IF:share_links-->Przyciski udostępniania Towarów (Facebook, X, WhatsApp, LinkedIn) są zwykłymi odnośnikami: dane trafiają do tych serwisów dopiero wtedy, gdy klikniesz odnośnik i przejdziesz na ich stronę; wtedy obowiązują ich polityki prywatności.<!--ENDIF--></li>
+<!--ENDIF-->{{EXTRA_THIRD_PARTY_CONNECTIONS_HTML}}</ul>
+<!--ELSE--><p>Sklep nie łączy się z serwerami firm trzecich innych niż wymienione w tej polityce.</p>
+<!--ENDIF--><h2>6. Jak zarządzać plikami cookie w przeglądarce</h2>
+<p>Pliki cookie możesz w każdej chwili usunąć lub zablokować w ustawieniach swojej przeglądarki (Chrome, Safari, Firefox, Edge – ustawienia prywatności i bezpieczeństwa). Ustawienia przeglądarki są też zgodnym z prawem sposobem wyrażenia lub cofnięcia zgody (art. 399 ust. 2 ustawy Prawo komunikacji elektronicznej). Pamiętaj, że po zablokowaniu cookies niezbędnych koszyk, składanie zamówień<!--IF:accounts--> i logowanie<!--ENDIF--> nie będą działać prawidłowo.</p>
+<h2>7. Zmiany</h2>
+<p>Gdy zmienimy narzędzia lub cele plików cookie, zaktualizujemy tę politykę, podamy nową datę i – jeśli to potrzebne – ponownie poprosimy o zgodę.</p>
+<h2>8. Kontakt</h2>
+<p>Pytania o pliki cookie: <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>. Skargę na sposób przetwarzania danych możesz złożyć do Prezesa Urzędu Ochrony Danych Osobowych (<a href="https://uodo.gov.pl">uodo.gov.pl</a>).</p>

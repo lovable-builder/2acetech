@@ -1,0 +1,260 @@
+<p>Wersja z dnia {{VERSION_DATE}} Obowiązuje od dnia {{EFFECTIVE_DATE}}</p>
+<h2>§ 1. Postanowienia ogólne i dane Sprzedawcy</h2>
+<ol>
+<li>Regulamin określa zasady korzystania ze sklepu internetowego dostępnego pod adresem <a href="{{SHOP_URL}}">{{SHOP_URL}}</a> („Sklep”), zasady składania zamówień i zawierania umów sprzedaży na odległość oraz zasady świadczenia usług drogą elektroniczną w Sklepie.</li>
+<li>Sklep prowadzi <strong>{{COMPANY_NAME_FULL}}</strong> („Sprzedawca”) z siedzibą w {{SEAT_CITY_LOC}}:<ul>
+<li>adres siedziby: {{SEAT_ADDRESS}},</li>
+<li>wpisana do rejestru przedsiębiorców Krajowego Rejestru Sądowego pod numerem KRS <strong>{{KRS}}</strong> ({{REGISTRY_COURT}}),</li>
+<li>NIP: <strong>{{NIP}}</strong>, REGON: <strong>{{REGON}}</strong>,</li>
+<li>kapitał zakładowy: {{SHARE_CAPITAL}},</li>
+<li>adres e-mail: <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>,</li>
+<li>numer telefonu: {{SHOP_PHONE}} (opłata za połączenie jest zgodna z taryfą operatora Konsumenta i nie jest wyższa niż za zwykłe połączenie głosowe),</li>
+<li>adres do składania reklamacji: {{COMPLAINTS_ADDRESS}}<!--IF:complaints_same_as_seat--> (taki sam jak adres siedziby)<!--ENDIF-->,</li>
+<li>adres do odsyłania Towarów w przypadku odstąpienia od umowy: {{RETURN_ADDRESS}}.</li>
+</ul>
+</li>
+<li>Sklep jest przeznaczony dla Konsumentów. Sprzedawca nie zawiera w Sklepie umów z przedsiębiorcami w celu związanym z ich działalnością zawodową. Przepisy dotyczące konsumenta stosuje się także do osoby fizycznej, która zawiera umowę bezpośrednio związaną z jej działalnością gospodarczą, gdy z treści umowy wynika, że nie ma ona dla niej charakteru zawodowego (art. 7aa ustawy o prawach konsumenta).</li>
+<li>W Regulaminie używamy tych pojęć:<ol>
+<li><strong>Konsument</strong> – osoba fizyczna dokonująca ze Sprzedawcą czynności prawnej niezwiązanej bezpośrednio z jej działalnością gospodarczą lub zawodową (art. 22¹ Kodeksu cywilnego);</li>
+<li><strong>Klient</strong> – osoba, która korzysta ze Sklepu lub składa w nim zamówienie;</li>
+<li><strong>Towar</strong> – rzecz ruchoma oferowana w Sklepie;</li>
+<li><strong>Zamówienie</strong> – oświadczenie woli Klienta składane przez formularz Sklepu, zmierzające do zawarcia umowy sprzedaży Towaru;</li>
+<li><strong>Umowa sprzedaży</strong> – umowa sprzedaży Towaru zawierana na odległość między Sprzedawcą a Klientem;</li>
+<!--IF:dropshipping--><li><strong>Dostawca</strong> – podmiot współpracujący ze Sprzedawcą, z którego magazynu położonego w {{WAREHOUSE_COUNTRY_LOC}} wysyłany jest Towar;</li>
+<!--ENDIF--><!--IF:accounts--><li><strong>Konto</strong> – indywidualne konto Klienta w Sklepie (usługa dobrowolna);</li>
+<!--ENDIF--><li><strong>Trwały nośnik</strong> – materiał lub narzędzie umożliwiające przechowywanie informacji w sposób pozwalający na dostęp do nich w przyszłości i odtworzenie ich w niezmienionej postaci, w szczególności wiadomość e-mail (art. 2 pkt 4 ustawy o prawach konsumenta);</li>
+<li><strong>Funkcja odstąpienia</strong> – elektroniczna funkcja „Odstąp od umowy tutaj” opisana w § 6 ust. 6–12;</li>
+<li><strong>Dzień roboczy</strong> – dzień od poniedziałku do piątku, z wyjątkiem dni ustawowo wolnych od pracy;</li>
+<li><strong>UPK</strong> – ustawa z dnia 30 maja 2014 r. o prawach konsumenta (tekst jednolity: {{UPK_TEXT_REF}});</li>
+<li><strong>KC</strong> – ustawa z dnia 23 kwietnia 1964 r. Kodeks cywilny.</li>
+</ol>
+</li>
+<li>Do korzystania ze Sklepu potrzebne są: urządzenie z dostępem do internetu, aktualna przeglądarka z włączoną obsługą JavaScript i plików cookie niezbędnych do działania koszyka (patrz Polityka cookies) oraz aktywny adres e-mail. Korzystanie z internetu wiąże się ze szczególnymi zagrożeniami, np. złośliwym oprogramowaniem lub wyłudzaniem danych (phishing). Zalecamy stosowanie aktualnego oprogramowania zabezpieczającego<!--IF:accounts--> i nieujawnianie hasła do Konta innym osobom<!--ENDIF-->.</li>
+<li>Regulamin jest dostępny nieodpłatnie na stronie Sklepu w sposób, który umożliwia jego pobranie, odtworzenie i utrwalenie. Treść Regulaminu (wraz z załącznikami) Sprzedawca przekazuje także Konsumentowi na Trwałym nośniku, w treści wiadomości e-mail z potwierdzeniem Zamówienia (§ 4 ust. 4 i 7).</li>
+<li><strong>Zasięg oferty.</strong> Sklep kieruje ofertę do Konsumentów w Polsce, a Towary dostarczamy wyłącznie na adresy w Polsce. Zamówienie może złożyć każdy Konsument, bez względu na obywatelstwo i miejsce zamieszkania, jeżeli adres dostawy znajduje się w Polsce (art. 4 ust. 1 lit. a rozporządzenia (UE) 2018/302). Umowa sprzedaży jest zawierana w języku polskim.</li>
+<!--IF:dropshipping--><li><strong>Kto jest Sprzedawcą.</strong> Sprzedawcą wszystkich Towarów jest {{COMPANY_NAME_SHORT}} Towary wysyłamy z magazynów Dostawców położonych w {{WAREHOUSE_COUNTRY_LOC}}, bezpośrednio do Klienta. Na etykiecie przesyłki jako nadawca może być wskazany inny podmiot niż Sprzedawca. Nie zmienia to tego, że Umowę sprzedaży zawierasz ze Sprzedawcą, a Sprzedawca odpowiada za Towar, zwroty i reklamacje na zasadach Regulaminu. Nie musisz kontaktować się z Dostawcą ani z producentem.</li>
+<!--ENDIF--></ol>
+<h2>§ 2. Usługi świadczone drogą elektroniczną</h2>
+<ol>
+<li>W ramach Sklepu Sprzedawca świadczy nieodpłatnie następujące usługi drogą elektroniczną:<ol>
+<li>prezentacja oferty Towarów i możliwość złożenia Zamówienia;</li>
+<!--IF:accounts--><li>prowadzenie Konta (usługa dobrowolna, na czas nieoznaczony);</li>
+<!--ENDIF--><li>Funkcja odstąpienia<!--IF:reviews|contact_form|newsletter-->;<!--ELSE-->.<!--ENDIF--></li>
+<!--IF:reviews--><li>zamieszczanie opinii o Towarach (ust. {{N:rev_a}}–{{N:rev_b}})<!--IF:contact_form|newsletter-->;<!--ELSE-->.<!--ENDIF--></li>
+<!--ENDIF--><!--IF:contact_form--><li>formularz kontaktowy (ust. {{N:contact}})<!--IF:newsletter-->;<!--ELSE-->.<!--ENDIF--></li>
+<!--ENDIF--><!--IF:newsletter--><li>newsletter (ust. {{N:newsletter}}).</li>
+<!--ENDIF--></ol>
+</li>
+<!--IF:accounts--><li>Umowa o prowadzenie Konta zostaje zawarta z chwilą rejestracji (w Sklepie lub podczas składania Zamówienia). Klient może zakończyć korzystanie z Konta w każdej chwili, bez ponoszenia kosztów, przez wiadomość e-mail do Sprzedawcy z żądaniem usunięcia Konta; Sprzedawca usuwa Konto bez zbędnej zwłoki. Zakończenie korzystania z Konta nie wpływa na złożone wcześniej Zamówienia.</li>
+<!--ENDIF--><!--IF:accounts_or_reviews--><li>Klient nie dostarcza do Sklepu treści o charakterze bezprawnym. Zakazane jest w szczególności podawanie cudzych danych i działanie na szkodę Sprzedawcy lub innych Klientów.</li>
+<!--ENDIF--><!--IF:accounts--><li>Sprzedawca może wypowiedzieć umowę o prowadzenie Konta tylko z ważnych przyczyn, którymi są: rażące lub uporczywe naruszanie Regulaminu (w szczególności podanie cudzych danych, dostarczanie treści bezprawnych, działanie na szkodę Sprzedawcy lub innych Klientów) albo zakończenie prowadzenia Sklepu. Okres wypowiedzenia wynosi 14 dni. Wypowiedzenie następuje e-mailem na adres podany w Koncie, z podaniem przyczyny.</li>
+<!--ENDIF--><!--IF:accounts--><!--IF:guest_checkout--><li>Konto nie jest potrzebne do złożenia Zamówienia: Zamówienie można złożyć jako gość, bez zakładania Konta.</li>
+<!--ELSE--><li>Do złożenia Zamówienia potrzebne jest Konto, które można założyć podczas składania Zamówienia.</li>
+<!--ENDIF--><!--ENDIF--><li>Reklamacje dotyczące usług elektronicznych można składać w sposób opisany w § 8. Sprzedawca odpowie na nie w terminie 14 dni.</li>
+<!--IF:reviews--><li><!--N:rev_a--><strong>Opinie o Towarach.</strong> Pod opisem Towaru można dodać opinię: ocenę, komentarz i – gdy formularz na to pozwala – zdjęcia. Opinię może dodać każda osoba, która korzysta z formularza opinii. <!--IF:review_verified_label-->Opinie osób, które kupiły dany Towar w Sklepie, są oznaczone jako opinie zweryfikowanego nabywcy; oznaczenie nadaje automatycznie oprogramowanie Sklepu, gdy konto lub adres e-mail autora opinii odpowiada zamówieniu tego Towaru. Opinie pozostałych osób nie mają takiego oznaczenia, a Sprzedawca nie sprawdza, czy ich autor kupił lub używał Towaru. <!--ELSE-->Sprzedawca nie weryfikuje, czy autor opinii kupił lub używał Towaru, a opinie nie są oznaczane jako opinie zweryfikowanych nabywców. <!--ENDIF-->Sprzedawca sprawdza opinie przed publikacją lub po niej pod kątem treści bezprawnych (ust. {{N:rev_b}}). Nie usuwa opinii z powodu jej negatywnej oceny, nie filtruje opinii według oceny, nie zamawia opinii u osób trzecich i nie zamieszcza opinii fałszywych.</li>
+<li><!--N:rev_b-->Autor opinii oświadcza, że opinia i dołączone zdjęcia są jego własne i nie naruszają praw osób trzecich oraz udziela Sprzedawcy nieodpłatnej, niewyłącznej licencji na ich wyświetlanie w Sklepie na czas, gdy opinia jest w nim opublikowana. Sprzedawca usuwa opinie i zdjęcia o treści bezprawnej (np. obraźliwej, naruszającej cudze dane lub prawa). <strong>Zgłaszanie treści bezprawnych.</strong> Każdy może zgłosić opinię, którą uważa za bezprawną, e-mailem na adres {{SHOP_EMAIL}}; ten adres jest też punktem kontaktowym w rozumieniu art. 11 i 12 rozporządzenia (UE) 2022/2065 (akt o usługach cyfrowych), a komunikacja odbywa się po polsku. Zgłoszenie powinno zawierać: adres strony Towaru, na której jest opinia, wyjaśnienie, dlaczego treść jest zdaniem zgłaszającego bezprawna, oraz imię i adres e-mail zgłaszającego. Sprzedawca rozpatruje zgłoszenie bez zbędnej zwłoki i informuje zgłaszającego oraz autora opinii o decyzji z podaniem przyczyn. Autor może zwrócić się o ponowne rozpatrzenie decyzji na ten sam adres e-mail.</li>
+<!--ENDIF--><!--IF:contact_form--><li><!--N:contact--><strong>Formularz kontaktowy.</strong> Klient może wysłać wiadomość do Sprzedawcy przez formularz kontaktowy na stronie Sklepu. Usługa jest nieodpłatna i kończy się z chwilą wysłania wiadomości. Sprzedawca odpowiada na adres e-mail podany w formularzu. Reklamację albo oświadczenie o odstąpieniu od umowy można złożyć także w sposób opisany w § 8 i § 6; zalecamy e-mail lub Funkcję odstąpienia, bo wtedy Konsument ma potwierdzenie.</li>
+<!--ENDIF--><!--IF:newsletter--><li><!--N:newsletter--><strong>Newsletter.</strong> Newsletter jest usługą dobrowolną i nieodpłatną. Sprzedawca wysyła informacje handlowe drogą elektroniczną wyłącznie osobom, które uprzednio wyraziły na to zgodę (art. 398 ustawy Prawo komunikacji elektronicznej). Zgodę wyraża się przez podanie adresu e-mail w formularzu zapisu i zaznaczenie pola zgody<!--IF:newsletter_double_optin-->; zapis jest skuteczny po kliknięciu linku w wiadomości potwierdzającej<!--ENDIF-->. Zgodę można w każdej chwili wycofać, klikając link rezygnacji w wiadomości albo pisząc na {{SHOP_EMAIL}}. Wycofanie zgody nie wpływa na zgodność z prawem wcześniejszego przetwarzania. Złożenie Zamówienia nie oznacza zgody na newsletter.</li>
+<!--ENDIF--></ol>
+<h2>§ 3. Towary, ceny i informacje o ofercie</h2>
+<ol>
+<li>Opis każdego Towaru w Sklepie zawiera jego główne cechy. Informacje o Towarze, cenie, kosztach dostawy, czasie realizacji i prawie odstąpienia od umowy stanowią integralną część Umowy sprzedaży i mogą być zmienione tylko za wyraźnym porozumieniem stron (art. 22 UPK).</li>
+<li>Wszystkie ceny w Sklepie podawane są w złotych polskich (PLN) <!--IF:vat_exempt-->i są cenami końcowymi. Sprzedawca korzysta ze zwolnienia z podatku od towarów i usług (art. 113 ustawy o podatku od towarów i usług), więc cena nie zawiera wyodrębnionego podatku VAT. <!--ELSE-->i są cenami brutto, czyli zawierają podatek VAT. <!--ENDIF--><!--IF:free_delivery-->Dostawa na terenie Polski jest bezpłatna (0 zł). <!--ELSE-->Koszt dostawy jest podany w § 5 ust. {{N:delivery_table}} i w podsumowaniu Zamówienia, przed jego złożeniem. <!--ENDIF-->Cena widoczna w podsumowaniu Zamówienia jest ceną łączną, którą Klient zapłaci. Sprzedawca nie pobiera żadnych innych opłat, o których Klient nie został poinformowany przed złożeniem Zamówienia.</li>
+<li>Jeżeli Sprzedawca informuje o obniżce ceny Towaru, obok obniżonej ceny podaje najniższą cenę tego Towaru, która obowiązywała w okresie 30 dni przed wprowadzeniem obniżki. Jeżeli Towar jest oferowany krócej niż 30 dni, podaje najniższą cenę z okresu od rozpoczęcia oferowania do wprowadzenia obniżki (art. 4 ust. 2 i 3 ustawy o informowaniu o cenach towarów i usług). Sprzedawca nie przedstawia jako „ceny sprzed obniżki” ceny, po której Towaru faktycznie nie sprzedawał.</li>
+<li>Kody rabatowe i promocje obowiązują na warunkach podanych przy danej promocji. Nie ograniczają praw Konsumenta wynikających z Regulaminu i przepisów prawa. W razie odstąpienia od umowy Sprzedawca zwraca cenę faktycznie zapłaconą przez Konsumenta.</li>
+<li>Sprzedawca nie pobiera od Konsumenta opłaty za wybraną metodę płatności (art. 383¹ KC).</li>
+<li><strong>Informacje o Towarach i ich bezpieczeństwie.</strong> Informacje o Towarze (opis, instrukcje, ostrzeżenia, a jeżeli zostały dostarczone Sprzedawcy – dane producenta) Sklep podaje na stronie Towaru lub w dokumentach dostarczanych z Towarem. Konsument może w każdej chwili zażądać danych producenta Towaru oraz instrukcji obsługi w języku polskim, pisząc na adres {{SHOP_EMAIL}}; Sprzedawca przekaże te dane i dokumenty bez zbędnej zwłoki, jeżeli ma je do dyspozycji, a jeżeli nie – zwróci się o nie do Dostawcy lub producenta.</li>
+<!--IF:dropshipping--><li><strong>Dostępność.</strong> Towary pochodzą z magazynów Dostawców, dlatego stan magazynowy może zmienić się po złożeniu Zamówienia; zasady postępowania w takim przypadku opisuje § 4 ust. 5.</li>
+<!--ENDIF--></ol>
+<h2>§ 4. Składanie Zamówienia i zawarcie Umowy sprzedaży</h2>
+<ol>
+<li>Zamówienie można złożyć przez cały czas za pośrednictwem strony Sklepu.</li>
+<li>Aby złożyć Zamówienie w kasie Sklepu, Klient:<ol>
+<li>dodaje wybrany Towar do koszyka;</li>
+<li>przechodzi do kasy i podaje dane potrzebne do realizacji Zamówienia: adres e-mail, imię i nazwisko, adres dostawy w Polsce <!--IF:phone_optional-->oraz, jeżeli chce, numer telefonu dla kuriera (podanie telefonu jest dobrowolne)<!--ELSE-->oraz numer telefonu dla kuriera<!--ENDIF-->;</li>
+<li>sprawdza sposób dostawy (kurier<!--IF:free_delivery-->, bezpłatnie<!--ENDIF-->) i wybiera sposób płatności;</li>
+<li>sprawdza podsumowanie Zamówienia, w którym Sklep pokazuje zamawiane Towary i łączną cenę, którą Klient zapłaci;</li>
+<li>zaznacza pole potwierdzające, że zapoznał się z Regulaminem i go akceptuje;</li>
+<li>klika przycisk oznaczony słowami <strong>„Zamówienie z obowiązkiem zapłaty”</strong>.</li>
+</ol>
+</li>
+<li>Kliknięcie przycisku „Zamówienie z obowiązkiem zapłaty” oznacza złożenie Zamówienia i potwierdzenie, że Klient wie, że Zamówienie pociąga za sobą obowiązek zapłaty (art. 17 ust. 2 i 3 UPK). Przed jego kliknięciem Klient może poprawić dane i zmienić skład Zamówienia.<!--IF:express_checkout--> Dotyczy to także Zamówienia składanego za pomocą przycisku płatności {{EXPRESS_WALLETS_TEXT}}: również ono pociąga za sobą obowiązek zapłaty.<!--ENDIF--> Regulamin jest dostępny w Sklepie przez cały czas (§ 1 ust. 6), a jego treść Klient otrzymuje także w e-mailu z potwierdzeniem Zamówienia.</li>
+<li>Zamówienie jest ofertą zawarcia Umowy sprzedaży. Po złożeniu Zamówienia Sprzedawca potwierdza jego przyjęcie wiadomością e-mail wysłaną bez zbędnej zwłoki na adres podany przez Klienta. Umowa sprzedaży zostaje zawarta z chwilą wysłania tej wiadomości. Zamówienie, za które płatność nie została zakończona pomyślnie, nie jest przyjmowane (§ 5 ust. 3).</li>
+<li>Sprzedawca może odmówić przyjęcia Zamówienia (a po przyjęciu – anulować je) wyłącznie z następujących przyczyn: (a) Towar jest niedostępny z przyczyn niezależnych od Sprzedawcy, w szczególności<!--IF:dropshipping--> Dostawca nie może go wysłać<!--ELSE--> Towar nie jest już w magazynie Sprzedawcy<!--ENDIF-->; (b) płatność nie została zakończona pomyślnie; (c) dane podane przez Klienta uniemożliwiają realizację Zamówienia i Klient nie uzupełnił ich po wezwaniu. O odmowie lub anulowaniu Sprzedawca informuje Klienta bez zbędnej zwłoki e-mailem i zwraca wszystkie wpłacone kwoty niezwłocznie, nie później niż w ciągu 14 dni.</li>
+<li>Konsument może wycofać swoją ofertę przed jej przyjęciem przez Sprzedawcę (art. 31 ust. 2 UPK), pisząc na adres e-mail Sprzedawcy lub używając Funkcji odstąpienia.</li>
+<li>Sprzedawca przekazuje Konsumentowi potwierdzenie zawarcia Umowy sprzedaży na Trwałym nośniku, czyli w e-mailu z ust. 4, najpóźniej w chwili dostarczenia Towaru (art. 21 ust. 1 UPK). Potwierdzenie zawiera informacje, o których mowa w art. 12 ust. 1 UPK, w tym treść niniejszego Regulaminu, Pouczenie o odstąpieniu od umowy (Załącznik nr 1) i wzór formularza odstąpienia (Załącznik nr 2) – w treści wiadomości e-mail z potwierdzeniem Zamówienia.</li>
+<li>Sprzedawca utrwala i zabezpiecza treść Zamówienia. Klient może do niej wrócić w e-mailu z potwierdzeniem<!--IF:accounts--> oraz (po zalogowaniu) w Koncie, w zakładce „Zamówienia”<!--ENDIF-->.</li>
+</ol>
+<h2>§ 5. Płatności, dostawa i zużyty sprzęt</h2>
+<p><strong>Płatność</strong></p>
+<ol>
+<li>Cena Towaru jest płatna z góry (przedpłata). <strong>Sklep nie przyjmuje płatności przy odbiorze (za pobraniem).</strong></li>
+<li>Dostępne metody płatności: {{PAYMENT_METHODS_LIST}}. Płatności obsługuje operator płatności {{PAYMENT_PROVIDER_NAME}} (szczegóły w Polityce prywatności).<!--IF:payment_cards--> Sprzedawca nie przechowuje pełnych numerów kart płatniczych.<!--ENDIF--></li>
+<li>Płatność online następuje od razu przy składaniu Zamówienia. Jeżeli płatność nie zostanie zakończona pomyślnie, Zamówienie nie jest przyjęte (§ 4 ust. 5 lit. b), o czym Klient jest informowany. Klient może złożyć nowe Zamówienie.</li>
+<li>Sprzedawca dokumentuje sprzedaż w sposób wymagany przepisami. Na żądanie Klienta Sprzedawca wystawia fakturę VAT. Żądanie należy zgłosić na adres {{SHOP_EMAIL}} w terminie 3 miesięcy od końca miesiąca, w którym dostarczono Towar lub otrzymano zapłatę (art. 106b ust. 3 ustawy o podatku od towarów i usług). Fakturę Sprzedawca wysyła e-mailem.</li>
+</ol>
+<p><strong>Dostawa</strong></p>
+<ol start="auto">
+<li>Sprzedawca dostarcza Towary wyłącznie na terytorium Rzeczypospolitej Polskiej. Informacja o tym ograniczeniu oraz o akceptowanych sposobach płatności jest podana w Regulaminie i na stronie „Dostawa i płatność” (art. 18 UPK). Towarów nie dostarczamy do innych krajów.</li>
+<li><!--IF:dropshipping-->Towary są wysyłane z magazynów Dostawców położonych w {{WAREHOUSE_COUNTRY_LOC}}, przez firmy kurierskie wybrane przez Dostawców, w imieniu Sprzedawcy.<!--ELSE-->Towary są wysyłane z magazynu Sprzedawcy położonego w {{WAREHOUSE_COUNTRY_LOC}}, przez firmy kurierskie.<!--ENDIF--><!--IF:free_delivery--> Koszty dostawy ponosi Sprzedawca.<!--ELSE--> Koszt dostawy ponosi Klient w wysokości podanej w ust. {{N:delivery_table}}.<!--ENDIF--></li>
+<li><!--N:delivery_table-->Sposób dostawy, koszt i czas realizacji:
+<table>
+<thead>
+<tr>
+<th>Sposób dostawy</th>
+<th>Koszt dostawy (brutto)</th>
+<th>Czas przygotowania i nadania</th>
+<th>Przewidywany czas transportu</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>{{DELIVERY_METHOD_LABEL_REG}}</td>
+<td>{{DELIVERY_PRICE_TEXT}}</td>
+<td>do {{DISPATCH_DAYS_MAX}} Dni roboczych</td>
+<td>{{TRANSIT_DAYS}} Dni roboczych</td>
+</tr>
+</tbody></table>
+</li>
+<li><strong>Termin realizacji</strong> składa się z dwóch części: (a) czasu przygotowania i nadania przesyłki – do {{DISPATCH_DAYS_MAX}} Dni roboczych od zawarcia Umowy sprzedaży; termin ten jest dla Sprzedawcy wiążący; (b) czasu transportu przez przewoźnika – {{TRANSIT_DAYS}} Dni roboczych od nadania; jest to przewidywany czas przewoźnika. Łącznie realizacja Zamówienia trwa zwykle do {{TOTAL_DAYS_MAX}} Dni roboczych od zawarcia Umowy sprzedaży. Przewidywany czas transportu nie zmienia wiążącego terminu z lit. (a) i nie pozbawia Konsumenta uprawnień z ust. 9.</li>
+<li>Jeżeli w ofercie nie wskazano innego terminu, Sprzedawca dostarczy Towar bez zbędnej zwłoki, nie później niż w ciągu {{DELIVERY_OUTER_LIMIT_DAYS}} dni od zawarcia Umowy sprzedaży. Jeżeli Sprzedawca nie wykona zamówienia w terminie, Konsument może wyznaczyć mu odpowiedni dodatkowy termin do dostarczenia Towaru. Po bezskutecznym upływie tego terminu Konsument może odstąpić od Umowy sprzedaży (art. 491 KC). Dodatkowego terminu nie trzeba wyznaczać, gdy Sprzedawca odmówił dostarczenia Towaru albo gdy dostarczenie po terminie nie miałoby dla Konsumenta znaczenia ze względu na właściwości zobowiązania lub cel umowy wiadomy Sprzedawcy (art. 492 KC). W razie takiego odstąpienia Sprzedawca zwraca wszystkie wpłacone kwoty niezwłocznie, nie później niż w ciągu 14 dni od otrzymania oświadczenia Konsumenta.</li>
+<li>Dostawa następuje pod adres wskazany w Zamówieniu (art. 454¹ KC). Ryzyko przypadkowej utraty lub uszkodzenia Towaru w transporcie do Konsumenta ponosi Sprzedawca aż do wydania Towaru Konsumentowi (art. 548 § 3 KC). Zalecamy sprawdzenie przesyłki w obecności kuriera i spisanie protokołu szkody, jeśli opakowanie jest uszkodzone. Brak protokołu nie pozbawia Konsumenta jego praw.</li>
+<li>Zamówienie obejmujące kilka Towarów może zostać wysłane w kilku przesyłkach, także z różnych magazynów. <!--IF:free_delivery-->Za każdą przesyłkę Klient płaci 0 zł.<!--ELSE-->Koszt dostawy jest naliczany raz za całe Zamówienie, niezależnie od liczby przesyłek.<!--ENDIF--> Termin odstąpienia od umowy liczy się wtedy od objęcia w posiadanie ostatniego Towaru (§ 6 ust. 2).</li>
+</ol>
+<!--IF:weee--><p><strong>Zużyty sprzęt elektryczny i baterie</strong></p>
+<ol start="auto">
+<li>Symbol przekreślonego kosza na śmieci, umieszczony na sprzęcie elektrycznym lub elektronicznym albo na jego opakowaniu, oznacza, że zużytego sprzętu nie wolno wyrzucać razem z innymi odpadami. Zużyty sprzęt należy oddać do punktu zbierania; selektywne zbieranie pozwala odzyskać surowce i chroni środowisko. Gospodarstwo domowe może oddać zużyty sprzęt w punkcie zbierania zużytego sprzętu lub w punkcie selektywnego zbierania odpadów komunalnych (PSZOK); informacje o punktach w swojej okolicy podaje gmina na swojej stronie internetowej. Jeżeli Sprzedawca dostarcza Konsumentowi sprzęt przeznaczony dla gospodarstw domowych, Konsument może przekazać Sprzedawcy <strong>nieodpłatnie</strong> zużyty sprzęt pochodzący z gospodarstwa domowego, o ile jest tego samego rodzaju i pełnił te same funkcje co dostarczony sprzęt (art. 37 ust. 2 ustawy o zużytym sprzęcie elektrycznym i elektronicznym). Odbiór Sprzedawca organizuje na żądanie Konsumenta, przesłane na adres {{SHOP_EMAIL}} przed dostawą lub najpóźniej w dniu dostawy; szczegóły podaje strona „Dostawa i płatność”. Zużytych baterii i akumulatorów nie wyrzucamy z odpadami komunalnymi; oddajemy je do punktu zbierania.</li>
+</ol>
+<!--ENDIF--><h2>§ 6. Prawo odstąpienia od umowy</h2>
+<p><strong>Prawo odstąpienia i termin</strong></p>
+<ol>
+<li>Konsument, który zawarł umowę na odległość, może w terminie <strong>14 dni</strong> odstąpić od niej <strong>bez podawania przyczyny</strong> i bez ponoszenia kosztów, z wyjątkiem kosztów wymienionych w ust. 15 (art. 27 ust. 1 UPK).</li>
+<li>Termin 14 dni liczy się od dnia, w którym Konsument lub wskazana przez niego osoba trzecia inna niż przewoźnik weszła w posiadanie Towaru. Jeżeli Zamówienie obejmuje kilka Towarów dostarczanych osobno, partiami lub w częściach – termin liczy się od objęcia w posiadanie ostatniego Towaru, partii lub części (art. 28 pkt 1 UPK). Jeżeli ostatni dzień terminu przypada na sobotę lub dzień ustawowo wolny od pracy, termin upływa następnego dnia, który nie jest dniem wolnym od pracy ani sobotą (art. 115 KC).</li>
+<li>Do zachowania terminu wystarczy wysłanie oświadczenia o odstąpieniu przed jego upływem (art. 30 ust. 2 UPK).</li>
+</ol>
+<p><strong>Jak odstąpić od umowy</strong></p>
+<ol start="auto">
+<li>Konsument może odstąpić od umowy, składając Sprzedawcy oświadczenie o odstąpieniu (art. 30 UPK). Do wyboru są równorzędne sposoby:<ol>
+<li>przez <strong>Funkcję odstąpienia</strong> „Odstąp od umowy tutaj” na stronie Sklepu (ust. 6–12);</li>
+<li>wiadomością e-mail na adres {{SHOP_EMAIL}};</li>
+<li>pismem wysłanym na adres: {{COMPANY_NAME_SHORT}}, {{CORRESPONDENCE_ADDRESS}};</li>
+<li>z użyciem wzoru formularza odstąpienia od umowy z <strong>Załącznika nr 2</strong> do Regulaminu (formularz może być przesłany e-mailem lub pocztą). Użycie formularza jest dobrowolne.</li>
+</ol>
+</li>
+<li>Oświadczenie o odstąpieniu powinno pozwolić zidentyfikować Konsumenta i zamówienie (imię i nazwisko, numer zamówienia, adres e-mail).</li>
+</ol>
+<p><strong>Funkcja odstąpienia „Odstąp od umowy tutaj”</strong></p>
+<ol start="auto">
+<li>Na stronie Sklepu dostępna jest funkcja składania oświadczenia o odstąpieniu od umowy drogą elektroniczną, oznaczona słowami <strong>„Odstąp od umowy tutaj”</strong>, pod adresem <a href="{{SHOP_URL}}{{WITHDRAWAL_PATH}}">{{SHOP_URL}}{{WITHDRAWAL_PATH}}</a>. Link o tej nazwie znajduje się: (a) w stopce każdej strony Sklepu, <!--IF:accounts-->(b) w „Moje konto” &gt; „Zamówienia”, obok każdego zamówienia, (c) na stronie potwierdzenia złożonego Zamówienia, (d) w e-mailach Sklepu z potwierdzeniem zamówienia<!--ELSE-->(b) na stronie potwierdzenia złożonego Zamówienia, (c) w e-mailach Sklepu z potwierdzeniem zamówienia<!--ENDIF-->.</li>
+<li>Funkcja jest dostępna stale, w tym przez cały okres, w którym Konsument może odstąpić od umowy. Do jej użycia nie trzeba mieć Konta ani się logować.</li>
+<li>Konsument wpisuje w formularzu: imię i nazwisko, numer zamówienia, adres e-mail, na który ma zostać wysłane potwierdzenie otrzymania odstąpienia, oraz (dobrowolnie) wskazuje, których Towarów dotyczy odstąpienie. Jeżeli Konsument nie wskaże Towarów, odstąpienie dotyczy całego zamówienia.</li>
+<li>Oświadczenie zostaje przesłane Sprzedawcy dopiero po kliknięciu przycisku <strong>„Potwierdź odstąpienie od umowy tutaj”</strong>.</li>
+<li>Po kliknięciu tego przycisku Sklep wyświetla potwierdzenie z datą i godziną przyjęcia oświadczenia, a Sprzedawca <strong>bez zbędnej zwłoki</strong> wysyła na podany adres e-mail potwierdzenie otrzymania oświadczenia o odstąpieniu na Trwałym nośniku. Potwierdzenie zawiera treść oświadczenia oraz datę i godzinę jego otrzymania (art. 30 ust. 4 UPK). Kopię oświadczenia otrzymuje także Sprzedawca.</li>
+<li>Oświadczenie złożone przy użyciu Funkcji odstąpienia przed upływem terminu z ust. 1–2 zostało złożone w terminie. Jeżeli potwierdzenie e-mail nie dotrze, Konsument powinien sprawdzić folder spam, zachować ekran z potwierdzeniem i napisać do Sprzedawcy.</li>
+<li>Funkcja odstąpienia służy wyłącznie do złożenia i potwierdzenia oświadczenia. Nie powoduje automatycznego zwrotu pieniędzy ani odbioru Towaru. Po otrzymaniu oświadczenia Sprzedawca przekaże Konsumentowi informacje o dalszych krokach dotyczących zwrotu Towaru i zwrotu płatności, na zasadach z ust. 13–20.</li>
+</ol>
+<p><strong>Skutki odstąpienia i zwrot Towaru</strong></p>
+<ol start="auto">
+<li>W razie odstąpienia umowę uważa się za niezawartą (art. 31 ust. 1 UPK).</li>
+<li>Jeżeli Konsument otrzymał już Towar, zwraca go na adres: {{RETURN_ADDRESS}} niezwłocznie, nie później niż w terminie <strong>14 dni</strong> od dnia, w którym odstąpił od umowy. Termin jest zachowany, jeśli Konsument odeśle Towar przed jego upływem. Adres może należeć do podmiotu upoważnionego przez Sprzedawcę do odbioru zwracanych Towarów (art. 34 ust. 1 UPK); Towar odesłany na ten adres jest zwrócony Sprzedawcy.<!--IF:return_address_third_party--> Adres prowadzi {{RETURN_ADDRESS_OPERATOR}}, upoważniony przez Sprzedawcę do odbioru zwracanych Towarów.<!--ENDIF--> Konsument może wybrać dowolnego przewoźnika. Zalecamy przesyłkę śledzoną i dobre zapakowanie Towaru razem z akcesoriami i dokumentami. Dowód nadania warto zachować.</li>
+<li><!--N:return_cost--><strong>Koszty zwrotu.</strong> <!--IF:return_cost_customer-->Konsument ponosi tylko bezpośrednie koszty zwrotu Towaru (art. 34 ust. 2 UPK), czyli koszt odesłania Towaru na adres z ust. 14, <strong>chyba że Sprzedawca zgodzi się je ponieść</strong>. Sprzedawca nie ponosi kosztów zwrotu, o czym Konsument jest niniejszym informowany. <!--IF:!bulky_goods-->Obecnie w ofercie Sklepu ({{CATALOG_CATEGORIES_TEXT}}) nie ma Towarów, które ze względu na swój charakter nie mogą zostać odesłane w zwykłym trybie pocztą, dlatego szacowany maksymalny koszt zwrotu takich Towarów <strong>nie dotyczy</strong>. Jeżeli Sprzedawca doda do oferty taki Towar (np. duży lub ciężki), poda przy nim szacowany maksymalny koszt zwrotu przed złożeniem Zamówienia.<!--ELSE-->Towary: {{BULKY_GOODS_TEXT}} ze względu na swój charakter nie mogą zostać odesłane w zwykłym trybie pocztą. Szacowany maksymalny koszt zwrotu takich Towarów wynosi <strong>{{BULKY_RETURN_COST_ESTIMATE}}</strong>.<!--ENDIF--><!--ELSE-->Sprzedawca pokrywa koszty odesłania Towaru na adres z ust. 14. {{RETURN_COST_SELLER_MECHANISM}}<!--ENDIF--></li>
+<li><strong>Zwrot płatności.</strong> Sprzedawca zwraca Konsumentowi wszystkie dokonane przez niego płatności, w tym koszt dostarczenia Towaru do Konsumenta (jeżeli został poniesiony), niezwłocznie, nie później niż w terminie <strong>14 dni od dnia otrzymania oświadczenia o odstąpieniu</strong> (art. 32 ust. 1 UPK). Jeżeli Konsument wybrał sposób dostarczenia droższy niż najtańszy zwykły sposób oferowany w Sklepie, Sprzedawca nie zwraca dodatkowych kosztów (art. 33 UPK). <!--IF:free_delivery-->Dostawa w Sklepie jest bezpłatna, więc nie ma dodatkowych kosztów do odliczenia. <!--ENDIF-->Przy odstąpieniu od części umowy Sprzedawca zwraca cenę odpowiadającą Towarom, od których Konsument odstąpił.</li>
+<li>Zwrotu płatności Sprzedawca dokonuje takim samym sposobem płatności, jakiego użył Konsument (na kartę lub wallet, którymi Konsument płacił), chyba że Konsument wyraźnie zgodzi się na inny sposób zwrotu, który nie wiąże się dla niego z żadnymi kosztami (art. 32 ust. 2 UPK). Za zwrot Sprzedawca nie pobiera opłat.</li>
+<li>Ponieważ Sprzedawca nie zaproponował, że sam odbierze Towar, może wstrzymać się ze zwrotem płatności do chwili otrzymania Towaru z powrotem albo do dostarczenia przez Konsumenta dowodu jego odesłania, zależnie od tego, które zdarzenie nastąpi wcześniej (art. 32 ust. 3 UPK).</li>
+<li><strong>Zmniejszenie wartości Towaru.</strong> Konsument odpowiada tylko za zmniejszenie wartości Towaru wynikające z korzystania z niego w sposób wykraczający poza konieczny do stwierdzenia charakteru, cech i funkcjonowania Towaru (art. 34 ust. 4 UPK). Konsument może więc rozpakować Towar, włączyć go i sprawdzić, jak działa, tak jak w sklepie stacjonarnym. Nadmierne użytkowanie (np. widoczne zużycie, uszkodzenia, brak elementów) może obniżyć wartość Towaru. Sprzedawca może wtedy potrącić odpowiednią kwotę ze zwracanej płatności i poinformuje Konsumenta o jej wysokości i sposobie obliczenia.</li>
+<li>Jeżeli przesyłka zwrotna zaginie lub zostanie uszkodzona w transporcie, Konsument powinien niezwłocznie powiadomić Sprzedawcę i przekazać dowód nadania. Sprzedawca i Konsument ustalą dalsze kroki na podstawie dokumentacji przewoźnika.</li>
+</ol>
+<p><strong>Wyjątki od prawa odstąpienia (art. 38 UPK)</strong></p>
+<ol start="auto">
+<li>Prawo odstąpienia od umowy zawartej na odległość nie przysługuje Konsumentowi w przypadkach wymienionych w art. 38 ust. 1 UPK (m.in. dla Towaru wyprodukowanego według specyfikacji Konsumenta, Towaru dostarczanego w zapieczętowanym opakowaniu, którego nie można zwrócić ze względów higienicznych, jeśli opakowanie otwarto po dostarczeniu, oraz nagrań i programów w zapieczętowanym opakowaniu po jego otwarciu). <!--IF:!withdrawal_exceptions-->Żaden Towar oferowany w Sklepie nie jest objęty takim wyjątkiem: prawo odstąpienia przysługuje Konsumentowi w odniesieniu do wszystkich Towarów. Jeżeli Sprzedawca doda do oferty Towar objęty wyjątkiem, oznaczy go przy Towarze przed złożeniem Zamówienia.<!--ELSE-->Wyjątek dotyczy Towarów: {{WITHDRAWAL_EXCLUDED_GOODS_TEXT}}. Takie Towary są oznaczone przy Towarze przed złożeniem Zamówienia.<!--ENDIF--></li>
+<li>Samo rozpakowanie lub uruchomienie urządzenia elektronicznego w celu sprawdzenia jego działania nie pozbawia Konsumenta prawa odstąpienia od umowy.</li>
+</ol>
+<h2>§ 7. Odpowiedzialność Sprzedawcy za niezgodność Towaru z umową</h2>
+<ol>
+<li>Sprzedawca odpowiada wobec Konsumenta za niezgodność Towaru z umową na zasadach określonych w art. 43a–43g UPK. W potocznym języku jest to dawna „rękojmia”. Od 1 stycznia 2023 r. przepisy Kodeksu cywilnego o rękojmi nie mają do umów z Konsumentem zastosowania (art. 43a ust. 1 UPK).</li>
+<li>Towar jest zgodny z umową, jeżeli odpowiada w szczególności jego opisowi, rodzajowi, ilości, jakości, kompletności i funkcjonalności, nadaje się do celów, do których zwykle używa się takiego towaru, ma cechy typowe dla takiego towaru (w tym trwałość i bezpieczeństwo) i takie, jakich Konsument może rozsądnie oczekiwać (także na podstawie publicznych zapewnień Sprzedawcy, producenta, np. w reklamie lub na etykiecie), jest dostarczony z opakowaniem, akcesoriami i instrukcjami, których można rozsądnie oczekiwać (art. 43b UPK).</li>
+<li><strong>Okres odpowiedzialności i domniemanie.</strong> Sprzedawca odpowiada za niezgodność Towaru z umową, która istniała w chwili jego dostarczenia i <strong>ujawniła się w ciągu 2 lat od tej chwili</strong>. Jeżeli termin przydatności Towaru do użycia, określony przez Sprzedawcę, jego poprzedników prawnych lub osoby działające w ich imieniu, jest dłuższy – odpowiada przez ten dłuższy okres (art. 43c ust. 1 UPK). <strong>Domniemywa się</strong>, że niezgodność, która ujawniła się w ciągu 2 lat od dostarczenia, istniała w chwili dostarczenia. Oznacza to, że to Sprzedawca, a nie Konsument, musi udowodnić, że było inaczej. Domniemanie nie obowiązuje, jeżeli nie da się go pogodzić ze specyfiką Towaru lub charakterem niezgodności. Sprzedawca nie może powołać się na upływ tego terminu, jeśli niezgodność podstępnie zataił (art. 43c ust. 2 UPK).</li>
+<li>Jeżeli Towar jest niezgodny z umową, Konsument może <strong>żądać jego naprawy lub wymiany</strong> (art. 43d ust. 1 UPK). Sprzedawca może wymienić Towar, gdy Konsument żąda naprawy, albo naprawić, gdy żąda wymiany, jeżeli wybrany przez Konsumenta sposób jest niemożliwy lub wymagałby nadmiernych kosztów (art. 43d ust. 2–3 UPK). Naprawy lub wymiany Sprzedawca dokonuje w rozsądnym czasie i bez nadmiernych niedogodności dla Konsumenta. Koszty naprawy lub wymiany, w tym koszty przesyłki, ponosi Sprzedawca. Sprzedawca odbiera Towar od Konsumenta na swój koszt (art. 43d ust. 4–5 UPK). Konsument nie płaci za zwykłe korzystanie z Towaru, który następnie został wymieniony (art. 43d ust. 7 UPK).</li>
+<li>Konsument może złożyć oświadczenie o <strong>obniżeniu ceny albo odstąpić od umowy</strong>, gdy: Sprzedawca odmówił doprowadzenia Towaru do zgodności z umową; nie doprowadził go do zgodności w rozsądnym czasie lub bez nadmiernych niedogodności; niezgodność występuje nadal mimo próby naprawy lub wymiany; niezgodność jest tak istotna, że uzasadnia obniżenie ceny lub odstąpienie od razu; albo z oświadczenia Sprzedawcy lub okoliczności wyraźnie wynika, że nie doprowadzi Towaru do zgodności (art. 43e ust. 1 UPK). Konsument nie może odstąpić od umowy, jeżeli niezgodność jest nieistotna. Domniemywa się, że jest istotna (art. 43e ust. 4 UPK).</li>
+<li>Sprzedawca zwraca kwoty z tytułu obniżenia ceny niezwłocznie, nie później niż w ciągu 14 dni od otrzymania oświadczenia Konsumenta. W razie odstąpienia od umowy z powodu niezgodności Konsument zwraca Towar na koszt Sprzedawcy, a Sprzedawca zwraca cenę niezwłocznie, nie później niż w ciągu 14 dni od otrzymania Towaru lub dowodu jego odesłania. Zwrot następuje takim samym sposobem płatności, jakiego użył Konsument, chyba że Konsument wyraźnie zgodzi się na inny sposób bez kosztów (art. 43e ust. 3, 6 i 7 UPK).</li>
+<li>Konsument może powstrzymać się z zapłatą ceny do chwili wykonania przez Sprzedawcę swoich obowiązków z art. 43d i 43e UPK (art. 43f UPK).</li>
+<li>Uprawnienia z tego paragrafu przysługują Konsumentowi <strong>niezależnie od gwarancji</strong> (art. 579 § 1 KC). Wykonanie uprawnień z gwarancji nie wpływa na odpowiedzialność Sprzedawcy za niezgodność Towaru z umową.</li>
+<li><strong>Gwarancja.</strong> <!--IF:own_guarantee-->{{OWN_GUARANTEE_TEXT}} <!--ELSE-->Sprzedawca nie udziela własnej gwarancji na Towary. <!--ENDIF-->Jeżeli do Towaru dołączono gwarancję producenta lub innego gwaranta, jej warunki (gwarant, zakres, czas, sposób zgłaszania) określa dokument gwarancyjny. Gwarancja jest dodatkowym świadczeniem i nie zastępuje odpowiedzialności z ust. 1–7. Nie musisz z niej korzystać, żeby dochodzić swoich praw wobec Sprzedawcy.</li>
+<!--IF:digital_goods--><li>Dla Towarów z elementami cyfrowymi (np. sterowanych aplikacją) Sprzedawca odpowiada także za dostarczanie aktualizacji niezbędnych do zachowania zgodności Towaru z umową przez czas, jakiego Konsument może rozsądnie oczekiwać, a gdy aktualizacje są wymagane – informuje o nich Konsumenta (art. 43b ust. 3 w związku z art. 43k ust. 3 UPK).</li>
+<!--ENDIF--><!--IF:dropshipping--><li>Sprzedawca odpowiada za niezgodność Towaru z umową także wtedy, gdy Towar wysłał Dostawca. Niezgodność zgłasza się Sprzedawcy.</li>
+<!--ENDIF--><li>Zakres opisany w tym paragrafie nie wyłącza ani nie ogranicza odpowiedzialności Sprzedawcy względem Konsumenta.</li>
+</ol>
+<h2>§ 8. Reklamacje</h2>
+<ol>
+<li>Reklamację dotyczącą Towaru, Zamówienia, dostawy lub działania Sklepu można złożyć:<ol>
+<li>e-mailem na adres {{SHOP_EMAIL}};</li>
+<li>pisemnie na adres {{COMPLAINTS_ADDRESS}}<!--IF:complaints_same_as_seat--> (adres siedziby Sprzedawcy)<!--ENDIF-->.</li>
+</ol>
+Zalecamy złożenie reklamacji e-mailem lub pisemnie, bo wtedy Konsument ma dowód jej treści i daty. Numer telefonu {{SHOP_PHONE}} służy do uzyskania informacji; reklamację złożoną w inny sposób, także ustnie, Sprzedawca również rozpatrzy, prosząc o potwierdzenie jej treści e-mailem. Na stronie „Reklamacje” jest dostępny wzór formularza reklamacji. Jego użycie jest dobrowolne.</li>
+<li>W reklamacji warto podać: imię i nazwisko, adres do korespondencji i e-mail, numer zamówienia, opis niezgodności i datę jej ujawnienia, żądanie Konsumenta (naprawa, wymiana, obniżenie ceny, odstąpienie od umowy) i – jeśli to możliwe – zdjęcia. Brak któregoś z tych elementów nie wpływa na rozpatrzenie reklamacji.</li>
+<li>Jeżeli reklamacja dotyczy Towaru, który trzeba odesłać do naprawy lub wymiany, Sprzedawca w odpowiedzi na reklamację wskazuje, jak go przekazać: zamawia kuriera, który odbierze Towar od Konsumenta, albo zwraca Konsumentowi udokumentowany koszt wysyłki Towaru. Sprzedawca odbiera Towar na swój koszt (art. 43d ust. 5 UPK).</li>
+<li>Sprzedawca odpowiada na reklamację Konsumenta <strong>w terminie 14 dni od dnia jej otrzymania</strong>. Jeżeli Sprzedawca nie odpowie w tym terminie, uważa się, że uznał reklamację (art. 7a ust. 1 i 2 UPK). Odpowiedź Sprzedawca przekazuje na papierze lub na innym Trwałym nośniku, np. e-mailem (art. 7a ust. 3 UPK).</li>
+<li>Naprawę lub wymianę w ramach reklamacji Sprzedawca wykonuje w rozsądnym czasie, bez nadmiernych niedogodności dla Konsumenta (art. 43d ust. 4 UPK).</li>
+</ol>
+<p><strong>Pozasądowe sposoby rozpatrywania reklamacji i dochodzenia roszczeń (art. 12 ust. 1 pkt 21 UPK)</strong></p>
+<ol start="auto">
+<li>Konsument ma prawo skorzystać z pozasądowych sposobów rozpatrywania reklamacji i dochodzenia roszczeń, w szczególności z:<ol>
+<li>postępowania przed podmiotem uprawnionym do pozasądowego rozwiązywania sporów konsumenckich. Wykaz takich podmiotów prowadzi Prezes UOKiK: <a href="https://polubowne.uokik.gov.pl">https://polubowne.uokik.gov.pl</a>;</li>
+<li>pomocy powiatowego (miejskiego) rzecznika konsumentów;</li>
+<li>pomocy wojewódzkiego inspektoratu Inspekcji Handlowej oraz porad Urzędu Ochrony Konkurencji i Konsumentów: <a href="https://uokik.gov.pl">https://uokik.gov.pl</a>, <a href="https://prawakonsumenta.uokik.gov.pl">https://prawakonsumenta.uokik.gov.pl</a>.</li>
+</ol>
+</li>
+<li><!--IF:!adr_participation-->Sprzedawca nie zobowiązał się do korzystania z pozasądowego rozwiązywania sporów z konsumentami. Gdy spór nie zostanie rozwiązany w wyniku reklamacji, Sprzedawca przekaże Konsumentowi na papierze lub innym Trwałym nośniku oświadczenie, czy zamierza wziąć udział w takim postępowaniu, czy odmawia udziału (art. 32 ustawy o pozasądowym rozwiązywaniu sporów konsumenckich).<!--ELSE-->Sprzedawca zobowiązał się do korzystania z pozasądowego rozwiązywania sporów z konsumentami przed podmiotem: {{ADR_BODY_NAME}}, {{ADR_BODY_ADDRESS}}, <a href="{{ADR_BODY_URL}}">{{ADR_BODY_URL}}</a>.<!--ENDIF--></li>
+<li>Spory ze Sprzedawcą rozstrzygają sądy powszechne według przepisów o właściwości. Postanowienia Regulaminu nie ograniczają prawa Konsumenta do dochodzenia roszczeń przed sądem.</li>
+</ol>
+<h2>§ 9. Dane osobowe i pliki cookie</h2>
+<p>Zasady przetwarzania danych osobowych opisuje Polityka prywatności, a zasady stosowania plików cookie – Polityka cookies. Obie są dostępne na stronie Sklepu. Podanie danych potrzebnych do realizacji Zamówienia jest dobrowolne, ale konieczne do zawarcia i wykonania Umowy sprzedaży.</p>
+<h2>§ 10. Zmiany Regulaminu</h2>
+<ol>
+<li>Sprzedawca może zmienić Regulamin tylko z ważnych przyczyn, którymi są: (a) zmiana przepisów prawa lub orzeczenie sądu albo decyzja organu, które wymagają dostosowania Regulaminu; (b) zmiana danych Sprzedawcy lub sposobów kontaktu; (c) zmiana oferty usług elektronicznych lub funkcji Sklepu, w tym ich rozszerzenie lub zmiana wymagań technicznych; (d) zmiana dostawców usług płatniczych lub przewoźników albo ich warunków; (e) potrzeba zwiększenia bezpieczeństwa Sklepu lub zapobieżenia nadużyciom; (f) poprawienie błędów lub niejasności bez pogarszania sytuacji Konsumenta.</li>
+<li>Zmieniony Regulamin jest publikowany na stronie Sklepu co najmniej <strong>14 dni</strong> przed wejściem w życie zmian.<!--IF:accounts--> Klientom posiadającym Konto Sprzedawca wysyła informację o zmianie e-mailem w tym samym terminie.<!--ENDIF--></li>
+<!--IF:accounts--><li>Klient posiadający Konto, który nie akceptuje zmian, może przed ich wejściem w życie bez kosztów usunąć Konto. Brak sprzeciwu nie oznacza zgody na zmiany niekorzystne wykraczające poza ust. 1.</li>
+<!--ENDIF--><li>Do Umów sprzedaży zawartych przed zmianą stosuje się Regulamin w brzmieniu obowiązującym w dniu złożenia Zamówienia.</li>
+</ol>
+<h2>§ 11. Postanowienia końcowe</h2>
+<ol>
+<li>Do Umów sprzedaży stosuje się prawo polskie. Wybór prawa polskiego nie pozbawia Konsumenta mieszkającego w innym państwie ochrony przyznanej mu przez bezwzględnie obowiązujące przepisy prawa państwa jego zwykłego pobytu (art. 6 ust. 2 rozporządzenia (WE) nr 593/2008).</li>
+<li>Konsument nie może zrzec się praw przyznanych mu przez UPK. Postanowienia mniej korzystne dla Konsumenta niż przepisy ustawy są nieważne (art. 7 UPK). W razie sprzeczności Regulaminu z bezwzględnie obowiązującymi przepisami stosuje się te przepisy. Jeżeli informacje na stronach „Zwroty i odstąpienie”, „Reklamacje” oraz „Dostawa i płatność” różnią się od Regulaminu, stosuje się to postanowienie, które jest korzystniejsze dla Konsumenta.</li>
+<li>Jeżeli którekolwiek postanowienie Regulaminu okaże się nieważne lub niewiążące dla Konsumenta, pozostałe postanowienia wiążą strony.</li>
+<li>Regulamin obowiązuje od dnia {{EFFECTIVE_DATE}}</li>
+</ol>
+<p><strong>Załączniki:</strong></p>
+<ol>
+<li>Załącznik nr 1 – Pouczenie o prawie odstąpienia od umowy (wzór ustawowy).</li>
+<li>Załącznik nr 2 – Wzór formularza odstąpienia od umowy.</li>
+</ol>
+<hr>
+<h2>Załącznik nr 1. Pouczenie o prawie odstąpienia od umowy</h2>
+<p><em>(Treść oparta na wzorze z załącznika nr 1 do UPK. Zgodnie z art. 13 UPK doręczenie pouczenia zgodnego z wzorem spełnia obowiązki informacyjne z art. 12 ust. 1 pkt 9–11 UPK.)</em></p>
+<p><strong>Prawo odstąpienia od umowy</strong></p>
+<p>Mają Państwo prawo odstąpić od niniejszej umowy w terminie 14 dni bez podania jakiejkolwiek przyczyny.</p>
+<p>Termin do odstąpienia od umowy wygasa po upływie 14 dni od dnia, w którym weszli Państwo w posiadanie towaru lub w którym osoba trzecia inna niż przewoźnik i wskazana przez Państwa weszła w posiadanie towaru. W przypadku umowy obejmującej wiele towarów dostarczanych osobno – od dnia, w którym weszli Państwo w posiadanie ostatniego z towarów lub w którym osoba trzecia inna niż przewoźnik i wskazana przez Państwa weszła w posiadanie ostatniego z towarów. W przypadku towarów dostarczanych partiami lub w częściach – od dnia, w którym weszli Państwo w posiadanie ostatniej partii lub części lub w którym osoba trzecia inna niż przewoźnik i wskazana przez Państwa weszła w posiadanie ostatniej partii lub części.</p>
+<p>Aby skorzystać z prawa odstąpienia od umowy, muszą Państwo poinformować nas ({{COMPANY_NAME_SHORT}}, {{CORRESPONDENCE_ADDRESS}}, e-mail: {{SHOP_EMAIL}}, telefon: {{SHOP_PHONE}}) o swojej decyzji o odstąpieniu od niniejszej umowy w drodze jednoznacznego oświadczenia (na przykład pismo wysłane pocztą lub pocztą elektroniczną). Mogą Państwo skorzystać z wzoru formularza odstąpienia od umowy, jednak nie jest to obowiązkowe. Mogą Państwo również wypełnić i przesłać formularz odstąpienia od umowy lub jakiekolwiek inne jednoznaczne oświadczenie drogą elektroniczną na naszej stronie internetowej <a href="{{SHOP_URL}}{{WITHDRAWAL_PATH}}">{{SHOP_URL}}{{WITHDRAWAL_PATH}}</a> („Odstąp od umowy tutaj”). Jeżeli skorzystają Państwo z tej możliwości, prześlemy Państwu niezwłocznie potwierdzenie otrzymania informacji o odstąpieniu od umowy na trwałym nośniku (np. pocztą elektroniczną).</p>
+<p>Aby zachować termin do odstąpienia od umowy, wystarczy, aby wysłali Państwo informację dotyczącą wykonania przysługującego Państwu prawa odstąpienia od umowy przed upływem terminu do odstąpienia od umowy.</p>
+<p><strong>Skutki odstąpienia od umowy</strong></p>
+<p>W przypadku odstąpienia od niniejszej umowy zwracamy Państwu wszystkie otrzymane od Państwa płatności, w tym koszty dostarczenia towaru (z wyjątkiem dodatkowych kosztów wynikających z wybranego przez Państwa sposobu dostarczenia innego niż najtańszy zwykły sposób dostarczenia oferowany przez nas), niezwłocznie, a w każdym przypadku nie później niż 14 dni od dnia, w którym zostaliśmy poinformowani o Państwa decyzji o wykonaniu prawa odstąpienia od niniejszej umowy. Zwrotu płatności dokonamy przy użyciu takich samych sposobów płatności, jakie zostały przez Państwa użyte w pierwotnej transakcji, chyba że wyraźnie zgodziliście się Państwo na inne rozwiązanie; w każdym przypadku nie poniosą Państwo żadnych opłat w związku z tym zwrotem.</p>
+<p>Możemy wstrzymać się ze zwrotem płatności do czasu otrzymania towaru lub do czasu dostarczenia nam dowodu jego odesłania, w zależności od tego, które zdarzenie nastąpi wcześniej.</p>
+<p>Proszę odesłać lub przekazać nam towar na adres {{RETURN_ADDRESS}} niezwłocznie, a w każdym razie nie później niż 14 dni od dnia, w którym poinformowali nas Państwo o odstąpieniu od niniejszej umowy. Termin jest zachowany, jeżeli odeślą Państwo towar przed upływem terminu 14 dni.</p>
+<!--IF:return_cost_customer--><p>Będą Państwo musieli ponieść bezpośrednie koszty zwrotu towarów.<!--IF:bulky_goods--> Szacowany maksymalny koszt zwrotu towarów ({{BULKY_GOODS_TEXT}}): {{BULKY_RETURN_COST_ESTIMATE}}.<!--ENDIF--></p>
+<!--ELSE--><p>Poniesiemy koszty zwrotu towarów.</p>
+<!--ENDIF--><p>Odpowiadają Państwo tylko za zmniejszenie wartości towaru wynikające z korzystania z niego w sposób inny niż było to konieczne do stwierdzenia charakteru, cech i funkcjonowania towaru.</p>
+<hr>
+<h2>Załącznik nr 2. Wzór formularza odstąpienia od umowy</h2>
+<p><em>(Wzór z załącznika nr 2 do ustawy o prawach konsumenta. Formularz należy wypełnić i odesłać tylko w przypadku chęci odstąpienia od umowy. Można też skorzystać z Funkcji odstąpienia „Odstąp od umowy tutaj” na stronie Sklepu.)</em></p>
+<p><strong>Adresat:</strong><br>
+{{COMPANY_NAME_FULL}}<br>
+{{CORRESPONDENCE_ADDRESS}}<br>
+adres e-mail: {{SHOP_EMAIL}}</p>
+<ul>
+<li>Ja/My (*) niniejszym informuję/informujemy (*) o moim/naszym odstąpieniu od umowy sprzedaży następujących towarów (*): ……………………………………………………………………</li>
+<li>Data zawarcia umowy (*) / odbioru (*): ……………………………………</li>
+<li>Imię i nazwisko konsumenta(-ów): ……………………………………</li>
+<li>Adres konsumenta(-ów): ……………………………………</li>
+<li>Podpis konsumenta(-ów) (tylko jeżeli formularz jest przesyłany w wersji papierowej): ……………………………………</li>
+<li>Data: ……………………………………</li>
+</ul>
+<p>(*) Niepotrzebne skreślić.</p>

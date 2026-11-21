@@ -1,0 +1,33 @@
+<h2>Dane Sprzedawcy</h2>
+<ul>
+<li><strong>Firma:</strong> {{COMPANY_NAME_FULL}}</li>
+<li><strong>Siedziba i adres:</strong> {{SEAT_ADDRESS}}</li>
+<li><strong>Rejestr:</strong> Krajowy Rejestr Sądowy, rejestr przedsiębiorców, numer KRS {{KRS}} ({{REGISTRY_COURT}})</li>
+<li><strong>NIP:</strong> {{NIP}} &nbsp; <strong>REGON:</strong> {{REGON}}</li>
+<li><strong>Kapitał zakładowy:</strong> {{SHARE_CAPITAL}}</li>
+<li><strong>Sposób reprezentacji:</strong> {{REPRESENTATION_TEXT}}</li>
+</ul>
+<h2>Kontakt</h2>
+<ul>
+<li><strong>E-mail:</strong> <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a></li>
+<li><strong>Telefon:</strong> {{SHOP_PHONE}} (opłata według taryfy Twojego operatora, jak za zwykłe połączenie)</li>
+<!--IF:complaints_same_as_seat--><li><strong>Adres do korespondencji i reklamacji:</strong> {{COMPLAINTS_ADDRESS}}</li><!--ELSE--><li><strong>Adres do korespondencji:</strong> {{CORRESPONDENCE_ADDRESS}}</li>
+<li><strong>Adres do reklamacji:</strong> {{COMPLAINTS_ADDRESS}}</li><!--ENDIF-->
+<li><strong>Adres do zwrotów towarów:</strong> {{RETURN_ADDRESS}}</li>
+</ul>
+<p>Komunikujemy się w języku polskim.</p>
+<h2>Gdzie znajdziesz zasady</h2>
+<ul>
+<li><a href="/regulamin/">Regulamin sklepu</a></li>
+<li><a href="/dostawa-i-platnosc/">Dostawa i płatność</a></li>
+<li><a href="/zwroty-i-odstapienie/">Zwroty i odstąpienie od umowy</a> oraz przycisk <a href="{{WITHDRAWAL_PATH}}">Odstąp od umowy tutaj</a></li>
+<li><a href="/reklamacje/">Reklamacje</a></li>
+<li><a href="/polityka-prywatnosci/">Polityka prywatności</a></li>
+<li><a href="/polityka-cookies/">Polityka cookies</a></li>
+</ul>
+<h2>Bezpieczeństwo produktów</h2>
+<p>Jeśli zauważysz, że Towar zagraża bezpieczeństwu (przegrzewa się, iskrzy, ma uszkodzoną baterię lub małe części mogące się oderwać), przestań go używać i napisz na <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>. Szczegóły: <a href="/reklamacje/">Reklamacje</a>, punkt {{X:reklamacje:S:safety}}. Dane producenta Towaru i instrukcję obsługi w języku polskim możesz uzyskać, pisząc na ten sam adres e-mail (<a href="/regulamin/#par-3">§ 3 Regulaminu</a>).</p>
+<!--IF:reviews--><h2>Punkt kontaktowy dla organów i użytkowników (usługi pośrednie)</h2>
+<p>Punkt kontaktowy dla organów państw członkowskich, Komisji Europejskiej i Rady do spraw usług cyfrowych oraz dla użytkowników (art. 11 i 12 rozporządzenia (UE) 2022/2065): <a href="mailto:{{SHOP_EMAIL}}">{{SHOP_EMAIL}}</a>; język: polski. Zgłoszenia nielegalnych treści w opiniach wysyłaj na ten sam adres (opis w <a href="/regulamin/#par-2">§ 2 Regulaminu</a>).</p>
+<!--ENDIF--><h2>Skargi i spory</h2>
+<p>Informacje o pozasądowych sposobach rozpatrywania reklamacji i dochodzenia roszczeń są w <a href="/regulamin/#par-8">§ 8 Regulaminu</a>. Organem właściwym w sprawach ochrony danych osobowych jest Prezes Urzędu Ochrony Danych Osobowych (<a href="https://uodo.gov.pl">uodo.gov.pl</a>).</p>
