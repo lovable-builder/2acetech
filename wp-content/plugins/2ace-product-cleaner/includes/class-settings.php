@@ -65,6 +65,9 @@ class ACE_PC_Settings {
 
 	/** Runs by itself: cleans up to 2 finished imports per run. */
 	public static function cron() {
+		// Photos first, and always: cap galleries at 5, even when cleaning is switched off or has no API key.
+		ACE_PC_Photos::tidy_all();
+
 		$o = self::get();
 		if ( ! $o['auto'] || '' === $o['api_key'] || get_transient( 'ace_pc_lock' ) ) {
 			return;

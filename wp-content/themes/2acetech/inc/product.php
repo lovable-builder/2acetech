@@ -312,6 +312,34 @@ function ace_buybar() {
 }
 
 /**
+ * Supplier images inside a product description.
+ *
+ * Imported descriptions carry the supplier's own marketing images, hotlinked from
+ * AliExpress's servers: they stack one under another (several thousand pixels of
+ * page), visitors' IP addresses go to a third party, and the links die. They are
+ * removed from the product page; the real photos are in the gallery. Cleaning a
+ * product replaces the description anyway, this covers products before that.
+ *
+ * @param string $content Description HTML.
+ * @return string
+ */
+function ace_strip_supplier_images( $content ) {
+	if ( ! function_exists( 'is_product' ) || ! is_product() || ! in_the_loop() || false === stripos( $content, '<img' ) ) {
+		return $content;
+	}
+	$host = '#<img\b[^>]*\bsrc\s*=\s*["\'](?:https?:)?//[^"\']*(?:aliexpress|alicdn|alibaba)[^"\']*["\'][^>]*>#i';
+	$out  = preg_replace( $host, '', $content );
+	if ( null === $out ) {
+		return $content;
+	}
+	// Links and paragraphs that only held such an image.
+	$out = preg_replace( '#<a\b[^>]*>\s*</a>#i', '', $out );
+	$out = preg_replace( '#<p>(?:\s|&nbsp;)*</p>#i', '', $out );
+	return $out;
+}
+add_filter( 'the_content', 'ace_strip_supplier_images', 20 );
+
+/**
  * Product page assets. product.js also powers the cart quantity stepper.
  */
 function ace_product_assets() {

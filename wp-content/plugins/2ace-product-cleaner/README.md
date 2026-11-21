@@ -12,6 +12,12 @@ are skipped. Status (draft/published) is never changed.
   new Polish one (names in plural, max 2 levels, at most 12 main categories; past that, "Inne produkty").
   Duplicates are avoided (case-insensitive match). "Re-check categories of all products" on the settings page fixes
   products that already sit in the wrong place. Own products (RMF-*/lig*) are skipped.
+- **Photos** (v1.1): every 10 minutes every imported product is kept at **5 photos at most** (main photo + gallery;
+  the extra gallery photos only leave the gallery, the files stay in the media library and their ids are kept in
+  `_aliclean_gallery_removed`). Products > list has a **Photos** column; imports older than 15 minutes with a single
+  photo get a red badge and a warning above the list, linking to the importer's image queue (WooCommerce > ALD >
+  Failed images: press **Run** when it says the background process is not running). The cleaner cannot start that
+  queue itself. Own products (RMF-*/lig*) are skipped.
 - **Automatic**: every 10 minutes (WP-Cron) cleans up to 2 imports that have not changed for 5 minutes.
 - **Manual**: "Clean them now" on the settings page.
 - **Undo**: Products list > hover > "Undo Polish cleanup" (restores title, text, SKU, attributes incl. shared
