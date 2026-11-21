@@ -378,3 +378,99 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .woocommerce div.product form.cart table.variations tr.is-missing td { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
 @keyframes ace-vnotice-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ace-vnotice { animation: none; } }
+
+/* Gallery, futuristic stage ----------------------------------------------
+   HUD corner brackets, a light sweep + focus pull on every photo change, a
+   frame counter with a progress line, glowing thumbnails. Pure CSS/JS, no
+   extra libraries. */
+
+.woocommerce div.product div.images .flex-viewport {
+	/* Top layer: the progress line (width follows --p, set by product.js). */
+	background:
+		linear-gradient(90deg, var(--accent), #ff6a3d) left bottom / calc(var(--p) * 100%) 3px no-repeat,
+		radial-gradient(120% 90% at 50% 0%, #fff 0%, var(--mist) 100%);
+	border-radius: var(--radius);
+	box-shadow: 0 0 0 1px var(--line), 0 28px 60px -30px rgba(245, 5, 5, 0.35);
+	isolation: isolate;
+	--p: 0;
+	transition: background-size 0.6s var(--ease);
+}
+.woocommerce div.product .woocommerce-product-gallery__image { background: transparent; border: 0; border-radius: 0; }
+
+/* Corner brackets */
+.woocommerce div.product div.images .flex-viewport::before {
+	content: "";
+	position: absolute;
+	inset: 12px;
+	z-index: 3;
+	pointer-events: none;
+	background:
+		linear-gradient(var(--accent), var(--accent)) top left / 22px 2px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) top left / 2px 22px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) top right / 22px 2px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) top right / 2px 22px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) bottom left / 22px 2px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) bottom left / 2px 22px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) bottom right / 22px 2px no-repeat,
+		linear-gradient(var(--accent), var(--accent)) bottom right / 2px 22px no-repeat;
+	opacity: 0.85;
+}
+
+/* Light sweep */
+.woocommerce div.product div.images .flex-viewport::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	pointer-events: none;
+	background: linear-gradient(100deg, transparent 38%, rgba(245, 5, 5, 0.14) 47%, rgba(255, 255, 255, 0.85) 50%, rgba(245, 5, 5, 0.14) 53%, transparent 62%);
+	opacity: 0;
+	transform: translateX(-100%);
+}
+.woocommerce div.product div.images .flex-viewport.is-switching::after { animation: ace-sweep 0.85s var(--ease); }
+@keyframes ace-sweep {
+	0% { opacity: 1; transform: translateX(-100%); }
+	100% { opacity: 1; transform: translateX(100%); }
+}
+
+/* Focus pull: the new photo arrives blurred and slightly large, then locks sharp. */
+.woocommerce div.product div.images .flex-active-slide img:not(.zoomImg) { animation: ace-focus 0.75s var(--ease) both; }
+@keyframes ace-focus {
+	from { filter: blur(14px) saturate(1.5); transform: scale(1.07); }
+	to { filter: blur(0) saturate(1); transform: scale(1); }
+}
+
+/* Frame counter + progress line */
+.gallery-count {
+	position: absolute;
+	left: 14px;
+	bottom: 18px;
+	z-index: 4;
+	padding: 5px 10px;
+	background: rgba(11, 11, 13, 0.72);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 999px;
+	color: #fff;
+	font: 700 0.72rem/1 var(--font);
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.12em;
+}
+/* Glass controls */
+.gallery-nav { background: rgba(255, 255, 255, 0.7); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.woocommerce div.product .woocommerce-product-gallery__trigger { background: rgba(255, 255, 255, 0.7); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+
+/* Thumbnails: glow ring on the active frame */
+.woocommerce div.product div.images .flex-control-thumbs li img { transition: opacity 0.25s, border-color 0.25s, transform 0.25s var(--ease), box-shadow 0.25s; }
+.woocommerce div.product div.images .flex-control-thumbs li img:hover { transform: translateY(-2px); }
+.woocommerce div.product div.images .flex-control-thumbs li img.flex-active {
+	border-color: var(--accent);
+	box-shadow: 0 0 0 3px rgba(245, 5, 5, 0.16), 0 10px 22px -8px rgba(245, 5, 5, 0.55);
+	transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.woocommerce div.product div.images .flex-viewport.is-switching::after,
+	.woocommerce div.product div.images .flex-active-slide img:not(.zoomImg) { animation: none; }
+}
