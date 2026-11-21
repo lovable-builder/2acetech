@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  * @return string[]
  */
 function ace_art_names() {
-	return array( 'watch', 'laptop', 'headphones', 'camera', 'phone', 'speaker', 'tablet', 'console', 'lamp', 'blocks', 'scooter', 'pot', 'plant', 'notebook', 'bottle', 'paw', 'chip' );
+	return array( 'watch', 'laptop', 'headphones', 'camera', 'phone', 'speaker', 'tablet', 'console', 'lamp', 'blocks', 'scooter', 'pot', 'plant', 'tent', 'notebook', 'bottle', 'paw', 'chip' );
 }
 
 /**
@@ -260,6 +260,26 @@ SVG;
 <rect x="108" y="256" width="184" height="24" rx="12" fill="url(#{$p}-light)"/>
 <rect x="108" y="256" width="184" height="24" rx="12" fill="none" stroke="#fff" stroke-opacity=".7"/>
 <ellipse cx="200" cy="360" rx="116" ry="8" fill="#000" opacity=".1"/>
+SVG;
+			break;
+
+		case 'tent':
+			$body = <<<SVG
+<defs>
+<linearGradient id="{$p}-dark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a5163"/><stop offset="1" stop-color="#13151b"/></linearGradient>
+<linearGradient id="{$p}-light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6f7f9"/><stop offset="1" stop-color="#b8bcc6"/></linearGradient>
+</defs>
+<path d="M120 342L28 356M280 342L372 356" stroke="#13151b" stroke-opacity=".35" stroke-width="3" stroke-linecap="round"/>
+<path d="M200 70L338 338H62z" fill="url(#{$p}-dark)"/>
+<path d="M200 70L62 338H146z" fill="#fff" opacity=".1"/>
+<path d="M200 150L252 338H148z" fill="var(--art-accent)"/>
+<path d="M200 150V338" stroke="#fff" stroke-opacity=".38" stroke-width="3" stroke-linecap="round"/>
+<path d="M200 72V40" stroke="#4a5163" stroke-width="5" stroke-linecap="round"/>
+<path d="M203 42h42l-12 12 12 12h-42z" fill="url(#{$p}-light)"/>
+<path d="M62 338H338" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+<circle cx="120" cy="344" r="5" fill="url(#{$p}-light)"/>
+<circle cx="280" cy="344" r="5" fill="url(#{$p}-light)"/>
+<ellipse cx="200" cy="358" rx="150" ry="9" fill="#000" opacity=".1"/>
 SVG;
 			break;
 

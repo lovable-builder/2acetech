@@ -278,6 +278,13 @@ function ace_footer_fallback( $which ) {
  */
 function ace_guess_art( $name ) {
 	$map  = array(
+		// Camping first: "Camping i turystyka" must get the tent, not the scooter.
+		'camping'   => 'tent',
+		'kemping'   => 'tent',
+		'namiot'    => 'tent',
+		'biwak'     => 'tent',
+		'materac'   => 'tent',
+		'mattress'  => 'tent',
 		'watch'     => 'watch',
 		'wear'      => 'watch',
 		'laptop'    => 'laptop',

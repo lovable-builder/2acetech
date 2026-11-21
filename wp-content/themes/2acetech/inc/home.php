@@ -44,6 +44,7 @@ function ace_art_choices() {
 		'scooter'    => __( 'Scooter', '2acetech' ),
 		'pot'        => __( 'Cooking pot', '2acetech' ),
 		'plant'      => __( 'Plant', '2acetech' ),
+		'tent'       => __( 'Tent', '2acetech' ),
 		'notebook'   => __( 'Notebook', '2acetech' ),
 		'bottle'     => __( 'Baby bottle', '2acetech' ),
 		'paw'        => __( 'Paw print', '2acetech' ),
