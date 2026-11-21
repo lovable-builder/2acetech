@@ -378,3 +378,9 @@ select.is-swatched { position: absolute !important; width: 1px; height: 1px; opa
 .woocommerce div.product form.cart table.variations tr.is-missing td { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
 @keyframes ace-vnotice-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ace-vnotice { animation: none; } }
+
+/* Gallery: before the carousel plugin (vargal) has built its slider, the photos
+   are still a plain list. Show only the first one, so they never appear stacked
+   under each other (and the page does not jump when the carousel starts). The
+   direct-child selector stops matching once the plugin wraps them in its viewport. */
+.vargal-product-gallery__wrapper > .vargal-woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image:nth-child(n + 2) { display: none; }
