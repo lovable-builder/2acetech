@@ -70,13 +70,6 @@
 @keyframes cpanel-spin { to { transform: rotate(360deg); } }
 
 html.cpanel-lock { overflow: hidden; }
-/* Floating helpers from other plugins would sit on top of the panel. */
-html.cpanel-lock .kodee-fab,
-html.cpanel-lock #draggable,
-html.cpanel-lock .to-top { display: none !important; }
-/* Logged-in admins have the WordPress toolbar on top. */
-.admin-bar .cpanel__sheet { top: 32px; }
-@media (max-width: 782px) { .admin-bar .cpanel__sheet { top: 46px; } }
 
 @media (prefers-reduced-motion: reduce) {
 	.cpanel__backdrop, .cpanel__sheet { transition: none; }
