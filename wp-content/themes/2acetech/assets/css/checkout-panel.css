@@ -1,0 +1,96 @@
+/* Checkout side panel ----------------------------------------------------
+   The panel (top page) and the clean checkout shown inside it (html.ace-in-panel). */
+
+.cpanel { position: fixed; inset: 0; z-index: 9990; }
+.cpanel[hidden] { display: none; }
+
+.cpanel__backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(11, 11, 13, 0.55);
+	-webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	opacity: 0;
+	transition: opacity 0.28s var(--ease, ease);
+}
+
+.cpanel__sheet {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	width: min(540px, 100vw);
+	background: #fff;
+	box-shadow: -24px 0 60px -20px rgba(11, 11, 13, 0.4);
+	transform: translateX(100%);
+	transition: transform 0.32s var(--ease, ease);
+	outline: none;
+}
+.cpanel.is-open .cpanel__backdrop { opacity: 1; }
+.cpanel.is-open .cpanel__sheet { transform: none; }
+
+.cpanel__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	padding: 14px 18px 14px 22px;
+	border-bottom: 1px solid var(--line, #e7e7ea);
+}
+.cpanel__title { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.cpanel__close {
+	display: grid;
+	place-items: center;
+	width: 40px;
+	height: 40px;
+	padding: 0;
+	background: var(--mist, #f5f5f7);
+	border: 0;
+	border-radius: 50%;
+	color: var(--ink, #0b0b0d);
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s;
+}
+.cpanel__close:hover { background: var(--ink, #0b0b0d); color: #fff; }
+
+.cpanel__body { position: relative; flex: 1; min-height: 0; }
+.cpanel__frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; }
+.cpanel__loading { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; background: #fff; }
+.cpanel__loading[hidden] { display: none; }
+.cpanel__spinner {
+	width: 34px;
+	height: 34px;
+	border: 3px solid var(--line, #e7e7ea);
+	border-top-color: var(--accent, #f50505);
+	border-radius: 50%;
+	animation: cpanel-spin 0.8s linear infinite;
+}
+@keyframes cpanel-spin { to { transform: rotate(360deg); } }
+
+html.cpanel-lock { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+	.cpanel__backdrop, .cpanel__sheet { transition: none; }
+	.cpanel__spinner { animation-duration: 2.4s; }
+}
+
+/* Inside the panel: just the checkout --------------------------------- */
+
+html.ace-in-panel { margin-top: 0 !important; }
+html.ace-in-panel #wpadminbar,
+html.ace-in-panel .topbar,
+html.ace-in-panel .site-header,
+html.ace-in-panel .site-footer,
+html.ace-in-panel .page-head,
+html.ace-in-panel .woocommerce-breadcrumb,
+html.ace-in-panel .perks--row,
+html.ace-in-panel .to-top,
+html.ace-in-panel .cookie,
+html.ace-in-panel .kodee-fab,
+html.ace-in-panel #draggable { display: none !important; }
+
+html.ace-in-panel body { background: #fff; }
+html.ace-in-panel .site-main { padding: 0; }
+html.ace-in-panel .site-main > .container { max-width: none; padding: 18px 20px 28px; }
