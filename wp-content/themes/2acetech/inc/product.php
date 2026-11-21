@@ -355,6 +355,46 @@ function ace_strip_supplier_images( $content ) {
 add_filter( 'the_content', 'ace_strip_supplier_images', 20 );
 
 /**
+ * Keep the product's photos when a variation is selected.
+ *
+ * The variation-gallery plugin (vargal) replaces the carousel with the selected
+ * variation's own photos. Imported variations carry just one image and no
+ * gallery, and a product with a single variation has it selected at once. So
+ * the carousel appeared, then collapsed to one photo. A variation without its
+ * own gallery now gets the product's other photos (vargal puts the variation's
+ * image first itself).
+ *
+ * @param array                $data      Variation data sent to the page.
+ * @param WC_Product_Variable  $parent    Parent product.
+ * @param WC_Product_Variation $variation The variation.
+ * @return array
+ */
+function ace_variation_keeps_gallery( $data, $parent, $variation ) {
+	// The plugin adds a 'vargal' key (empty when the variation has no gallery of its own).
+	if ( ! is_array( $data ) || ! isset( $data['vargal'] ) || ! empty( $data['vargal'] ) || ! $parent instanceof WC_Product ) {
+		return $data;
+	}
+	if ( is_admin() && ! wp_doing_ajax() ) {
+		return $data;
+	}
+	$own   = isset( $data['image_id'] ) ? (int) $data['image_id'] : 0;
+	$ids   = array_merge( array( (int) $parent->get_image_id() ), array_map( 'intval', $parent->get_gallery_image_ids() ) );
+	$extra = array();
+	foreach ( array_unique( array_filter( $ids ) ) as $id ) {
+		if ( $id === $own ) {
+			continue;
+		}
+		$props = wc_get_product_attachment_props( $id );
+		if ( ! empty( $props['full_src'] ) ) {
+			$extra[] = $props;
+		}
+	}
+	$data['vargal'] = $extra;
+	return $data;
+}
+add_filter( 'woocommerce_available_variation', 'ace_variation_keeps_gallery', 999, 3 );
+
+/**
  * Product page assets. product.js also powers the cart quantity stepper.
  */
 function ace_product_assets() {
