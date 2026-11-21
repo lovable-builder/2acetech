@@ -12,6 +12,11 @@ are skipped. Status (draft/published) is never changed.
   new Polish one (names in plural, max 2 levels, at most 12 main categories; past that, "Inne produkty").
   Duplicates are avoided (case-insensitive match). "Re-check categories of all products" on the settings page fixes
   products that already sit in the wrong place. Own products (RMF-*/lig*) are skipped.
+- **Nothing ships from Poland** (v1.2): such a product is no longer skipped. The text is still cleaned into Polish
+  (title, description, attributes), every variation stays disabled (private, not deleted), and the product goes to
+  **Draft**, so nothing is sold with a false "shipped from Poland" promise. A note says so, and `_aliclean_no_poland`
+  is set. Undo restores the old status, the variations and the text. Publish it again only after choosing a
+  Polish-warehouse variation with the supplier.
 - **Photos** (v1.1): every 10 minutes every imported product is kept at **5 photos at most** (main photo + gallery;
   the extra gallery photos only leave the gallery, the files stay in the media library and their ids are kept in
   `_aliclean_gallery_removed`). Products > list has a **Photos** column; imports older than 15 minutes with a single

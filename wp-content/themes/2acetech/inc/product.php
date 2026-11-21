@@ -315,7 +315,7 @@ function ace_buybar() {
  * Supplier images inside a product description.
  *
  * Imported descriptions carry the supplier's own marketing images, hotlinked from
- * AliExpress's servers: they stack one under another (several thousand pixels of
+ * the supplier's servers (AliExpress, Tencent cloud, ...): they stack one under another (several thousand pixels of
  * page), visitors' IP addresses go to a third party, and the links die. They are
  * removed from the product page; the real photos are in the gallery. Cleaning a
  * product replaces the description anyway, this covers products before that.
@@ -327,8 +327,23 @@ function ace_strip_supplier_images( $content ) {
 	if ( ! function_exists( 'is_product' ) || ! is_product() || ! in_the_loop() || false === stripos( $content, '<img' ) ) {
 		return $content;
 	}
-	$host = '#<img\b[^>]*\bsrc\s*=\s*["\'](?:https?:)?//[^"\']*(?:aliexpress|alicdn|alibaba)[^"\']*["\'][^>]*>#i';
-	$out  = preg_replace( $host, '', $content );
+	// Any image hosted outside this site (AliExpress, Tencent cloud, ...), also lazy-load attributes.
+	$own = preg_replace( '/^www\./i', '', (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
+	$out = preg_replace_callback(
+		'#<img\b[^>]*>#i',
+		static function ( $m ) use ( $own ) {
+			if ( preg_match_all( '#\b(?:src|data-src|data-lazy-src|data-original)\s*=\s*["\']((?:https?:)?//[^"\']+)["\']#i', $m[0], $urls ) ) {
+				foreach ( $urls[1] as $url ) {
+					$host = preg_replace( '/^www\./i', '', (string) wp_parse_url( ( 0 === strpos( $url, '//' ) ? 'https:' : '' ) . $url, PHP_URL_HOST ) );
+					if ( '' !== $host && strtolower( $host ) !== strtolower( $own ) ) {
+						return '';
+					}
+				}
+			}
+			return $m[0];
+		},
+		$content
+	);
 	if ( null === $out ) {
 		return $content;
 	}

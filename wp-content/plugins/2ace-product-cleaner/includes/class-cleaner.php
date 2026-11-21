@@ -589,7 +589,7 @@ TXT;
 		$id   = $product->get_id();
 		$post = get_post( $id );
 		$snap = array(
-			'post'   => array( 'post_title' => $post->post_title, 'post_name' => $post->post_name, 'post_content' => $post->post_content, 'post_excerpt' => $post->post_excerpt ),
+			'post'   => array( 'post_title' => $post->post_title, 'post_name' => $post->post_name, 'post_content' => $post->post_content, 'post_excerpt' => $post->post_excerpt, 'post_status' => $post->post_status ),
 			'sku'    => get_post_meta( $id, '_sku', true ),
 			'attrs'  => get_post_meta( $id, '_product_attributes', true ),
 			'cats'   => wp_get_object_terms( $id, 'product_cat', array( 'fields' => 'ids' ) ),
@@ -649,6 +649,7 @@ TXT;
 		}
 		delete_post_meta( $id, self::MARKER );
 		delete_post_meta( $id, self::BACKUP );
+		delete_post_meta( $id, '_aliclean_no_poland' );
 		self::refresh( $id );
 	}
 
@@ -787,9 +788,10 @@ TXT;
 			}
 			$var_plan[ $vid ] = array( 'attrs' => $new, 'private' => $private, 'reg' => $reg_n, 'sale' => $sale_n );
 		}
-		if ( $vars && ! $live ) {
-			throw new Exception( 'No variation ships from Poland. Needs a manual decision.' );
-		}
+		// Nothing ships from Poland: the text is still cleaned (Polish title, description), every
+		// variation stays disabled, and the product goes to Draft so nothing is sold with a false
+		// "shipped from Poland" promise. Undo restores the old status.
+		$no_poland = $vars && ! $live;
 		$combos = array();
 		foreach ( $var_plan as $vp ) {
 			if ( ! $vp['private'] ) {
@@ -845,6 +847,14 @@ TXT;
 			}
 			$v->set_status( $vp['private'] ? 'private' : 'publish' );
 			$v->save();
+		}
+		$c['notes'] = isset( $c['notes'] ) ? (array) $c['notes'] : array();
+		if ( $no_poland ) {
+			if ( in_array( get_post_status( $id ), array( 'publish', 'private', 'pending' ), true ) ) {
+				wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) );
+			}
+			update_post_meta( $id, '_aliclean_no_poland', 1 );
+			$c['notes'][] = 'Żadna wersja nie jest wysyłana z Polski: wersje wyłączone, produkt w wersji roboczej (nie jest na sprzedaż).';
 		}
 		update_post_meta( $id, self::MARKER, gmdate( 'Y-m-d' ) );
 		delete_post_meta( $id, self::FAILS );
