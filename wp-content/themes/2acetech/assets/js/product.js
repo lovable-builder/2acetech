@@ -252,48 +252,6 @@
 		setup();
 	}
 
-	/* Variation-gallery plugin (vargal): frame counter, progress line and a
-	 * light sweep on every photo change. It builds its slider with JS, so wait
-	 * for its viewport to appear. */
-	(() => {
-		const root = $('.vargal-product-gallery');
-		if (!root) return;
-		const pad = (n) => String(n).padStart(2, '0');
-		let bound = false;
-		const bind = () => {
-			const viewport = $('.vargal-product-gallery-viewport');
-			const slides = viewport ? $$('.woocommerce-product-gallery__image', viewport) : [];
-			if (bound || !viewport || slides.length < 2) return;
-			bound = true;
-			const counter = document.createElement('span');
-			counter.className = 'gallery-count';
-			counter.setAttribute('aria-hidden', 'true');
-			viewport.appendChild(counter);
-			let current = -1;
-			let timer = 0;
-			const sync = () => {
-				const index = Math.max(0, slides.findIndex((s) => s.classList.contains('vargal-product-gallery-active-slide')));
-				if (index === current) return;
-				const first = current === -1;
-				current = index;
-				counter.textContent = `${pad(index + 1)} / ${pad(slides.length)}`;
-				viewport.style.setProperty('--p', String((index + 1) / slides.length));
-				if (!first) {
-					viewport.classList.remove('is-switching');
-					void viewport.offsetWidth; // restart the animation
-					viewport.classList.add('is-switching');
-					clearTimeout(timer);
-					timer = setTimeout(() => viewport.classList.remove('is-switching'), 900);
-				}
-			};
-			sync();
-			slides.forEach((s) => new MutationObserver(sync).observe(s, { attributes: true, attributeFilter: ['class'] }));
-		};
-		new MutationObserver(bind).observe(root, { childList: true, subtree: true });
-		window.addEventListener('load', bind);
-		bind();
-	})();
-
 	/* Products with nothing to choose ------------------------------------
 	 * Some imports are "variable" products with one variation and no option
 	 * to pick (the AliExpress "ship from" attribute is hidden). WooCommerce's
