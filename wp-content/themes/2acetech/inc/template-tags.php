@@ -477,14 +477,123 @@ function ace_get_products( $type = 'latest', $limit = 10, $cat = '' ) {
 		return ace_demo_slice( $type, $limit, $cat );
 	}
 
+	if ( 'mix' === $type ) {
+		return ace_mix_products( $limit );
+	}
+
 	$products = ace_query_products( $type, $limit, $cat );
-	// A rail of "featured" products may fall back to the latest ones. "Sale" and
-	// "best" never do: a deal or bestseller heading over products that are
-	// neither discounted nor sold would be a false claim.
+	// A rail of "featured" products falls back to a mix of every category, not to the
+	// newest uploads (those are whatever was imported last). "Sale" and "best" never
+	// fall back: a deal or bestseller heading over products that are neither
+	// discounted nor sold would be a false claim.
 	if ( ! $products && 'featured' === $type ) {
-		$products = ace_query_products( 'latest', $limit, $cat );
+		$products = $cat ? ace_query_products( 'latest', $limit, $cat ) : ace_mix_products( $limit );
 	}
 	return $products;
+}
+
+/**
+ * The products of one category (and its subcategories) that best show it off:
+ * starred ("featured") first, then on sale, then ones that have sold, then the
+ * newest. Only products that can really be bought.
+ *
+ * @param string $slug Category slug.
+ * @param int    $n    Maximum number of products.
+ * @return WC_Product[]
+ */
+function ace_category_showcase_products( $slug, $n = 6 ) {
+	$items = array();
+	foreach ( ace_query_products( 'latest', 24, $slug ) as $i => $p ) {
+		if ( ! $p->is_purchasable() || ! $p->is_in_stock() ) {
+			continue;
+		}
+		$score   = ( $p->is_featured() ? 4 : 0 ) + ( $p->is_on_sale() ? 2 : 0 ) + ( $p->get_total_sales() > 0 ? 1 : 0 );
+		$items[] = array( $score, $i, $p ); // $i keeps "newest first" among equals.
+	}
+	usort(
+		$items,
+		static function ( $a, $b ) {
+			return $b[0] <=> $a[0] ?: $a[1] <=> $b[1];
+		}
+	);
+	return array_slice( array_column( $items, 2 ), 0, max( 1, (int) $n ) );
+}
+
+/**
+ * A showcase of the whole range: products taken from every main category in turn,
+ * not the newest uploads (which are just whatever was imported last).
+ *
+ * Within a category the best candidate goes first: starred ("featured") products,
+ * then products on sale, then ones that have sold, then the newest. Each round
+ * takes one product from every category (biggest category first), so with six
+ * slots and three categories you see two of each. A product is shown once, and only
+ * if it can really be bought.
+ *
+ * @param int $limit How many products.
+ * @return WC_Product[]
+ */
+function ace_mix_products( $limit = 6 ) {
+	$limit = max( 1, (int) $limit );
+	if ( ace_is_demo() ) {
+		return ace_demo_slice( 'latest', $limit );
+	}
+
+	$cats = get_terms(
+		array(
+			'taxonomy'   => 'product_cat',
+			'parent'     => 0,
+			'hide_empty' => true,
+			'pad_counts' => true,
+			'exclude'    => array( (int) get_option( 'default_product_cat' ) ),
+		)
+	);
+	if ( is_wp_error( $cats ) || ! $cats ) {
+		return ace_query_products( 'latest', $limit );
+	}
+	// Biggest range first; ties keep the shop's own category order.
+	usort(
+		$cats,
+		static function ( $a, $b ) {
+			return $b->count <=> $a->count;
+		}
+	);
+
+	// Ranked candidates per category.
+	$queues = array();
+	foreach ( $cats as $cat ) {
+		$items = ace_category_showcase_products( $cat->slug, 24 );
+		if ( $items ) {
+			$queues[] = $items;
+		}
+	}
+	if ( ! $queues ) {
+		return array();
+	}
+
+	$out  = array();
+	$seen = array();
+	for ( $round = 0; count( $out ) < $limit; $round++ ) {
+		$took = false;
+		foreach ( $queues as &$q ) {
+			while ( $q && isset( $seen[ $q[0]->get_id() ] ) ) {
+				array_shift( $q ); // Already shown through another category.
+			}
+			if ( $q ) {
+				$p = array_shift( $q );
+				$seen[ $p->get_id() ] = true;
+				$out[] = $p;
+				$took  = true;
+				if ( count( $out ) >= $limit ) {
+					break 2;
+				}
+			}
+		}
+		unset( $q );
+		if ( ! $took ) {
+			break;
+		}
+	}
+	return $out;
 }
 
 /**

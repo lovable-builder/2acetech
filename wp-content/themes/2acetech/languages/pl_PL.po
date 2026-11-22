@@ -1993,3 +1993,75 @@ msgstr "Potwierdź odstąpienie od umowy tutaj"
 
 #~ msgid "Explore gaming"
 #~ msgstr "Odkryj gaming"
+
+msgid "In our shop"
+msgstr "W naszej ofercie"
+
+msgid "Discover our range"
+msgstr "Odkryj naszą ofertę"
+
+msgid "A mix from every category (recommended)"
+msgstr "Mieszanka ze wszystkich kategorii (zalecane)"
+
+msgid "Sleep under the stars, in comfort."
+msgstr "Wyśpij się pod gwiazdami – w wygodzie."
+
+msgid "Light that sets the mood."
+msgstr "Światło, które buduje nastrój."
+
+msgid "Play starts here."
+msgstr "Tu zaczyna się zabawa."
+
+msgid "Get out and get moving."
+msgstr "Wyjdź z domu i ruszaj w drogę."
+
+msgid "Make the garden your favourite room."
+msgstr "Ogród jak dodatkowy pokój."
+
+msgid "Everyday life, made easier."
+msgstr "Codzienność w wersji łatwiejszej."
+
+msgid "Smart gadgets for everyday life."
+msgstr "Sprytne gadżety na co dzień."
+
+msgid "Gear that keeps up with you."
+msgstr "Sprzęt, który dotrzymuje ci kroku."
+
+msgid "Everything for the little ones."
+msgstr "Wszystko dla najmłodszych."
+
+msgid "Treats for your four-legged friend."
+msgstr "Coś dla Twojego czworonoga."
+
+msgid "A tidy desk, a clear head."
+msgstr "Porządek na biurku, jasność w głowie."
+
+msgid "Discover: %s"
+msgstr "Odkryj: %s"
+
+msgid "Banner phrase"
+msgstr "Hasło w banerze"
+
+msgid "A short catchy line shown on this category’s slide in the homepage carousel. Empty = a built-in phrase."
+msgstr "Krótkie, chwytliwe hasło na slajdzie tej kategorii w karuzeli na stronie głównej. Puste = hasło wbudowane."
+
+msgid "Show the category carousel at the top (recommended)"
+msgstr "Pokaż karuzelę kategorii na górze strony (zalecane)"
+
+msgid "One slide per main category with a catchy phrase and real products. A banner with \"show from / until\" dates still takes over while it runs."
+msgstr "Jeden slajd na kategorię główną z chwytliwym hasłem i prawdziwymi produktami. Baner z datami „pokaż od / do” nadal przejmuje górę strony, gdy trwa."
+
+msgid "Slide %1$d of %2$d"
+msgstr "Slajd %1$d z %2$d"
+
+msgid "Subcategories"
+msgstr "Podkategorie"
+
+msgid "Shop: %s"
+msgstr "Zobacz: %s"
+
+msgid "Previous category"
+msgstr "Poprzednia kategoria"
+
+msgid "Next category"
+msgstr "Następna kategoria"

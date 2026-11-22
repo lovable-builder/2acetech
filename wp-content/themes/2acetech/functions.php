@@ -30,6 +30,7 @@ require_once ACE_DIR . '/inc/home.php';
 require_once ACE_DIR . '/inc/customizer.php';
 require_once ACE_DIR . '/inc/customizer-home.php';
 require_once ACE_DIR . '/inc/banner.php';
+require_once ACE_DIR . '/inc/category-hero.php';
 require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/contact.php';
@@ -137,7 +138,7 @@ function ace_assets() {
 			'checkoutUrl' => function_exists( 'wc_get_checkout_url' ) ? wc_get_checkout_url() : '',
 		)
 	);
-	if ( is_front_page() && ace_active_banner() ) {
+	if ( is_front_page() && ace_active_banner() && ! ace_category_hero_active() ) {
 		wp_enqueue_style( 'ace-banner', $css . 'banner.css', array( 'ace-main' ), ace_ver( 'assets/css/banner.css' ) );
 	}
 	if ( is_front_page() ) {

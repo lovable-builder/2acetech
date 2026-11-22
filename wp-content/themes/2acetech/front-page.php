@@ -17,9 +17,12 @@ get_header();
 	<?php
 	ace_demo_notice();
 
-	// The top of the page: an occasion banner (Customize > Landing page > Banner 1-3), else the scroll
-	// hero if it has been switched on again, else nothing.
-	if ( ace_active_banner() ) {
+	// The top of the page: the category carousel (one slide per main category), unless an occasion
+	// banner with dates is running (Customize > Landing page > Banner 1-3); else the always-on banner,
+	// else the scroll hero if it has been switched on again, else nothing.
+	if ( ace_category_hero_active() ) {
+		get_template_part( 'template-parts/category-hero' );
+	} elseif ( ace_active_banner() ) {
 		get_template_part( 'template-parts/banner' );
 	} elseif ( get_theme_mod( 'ace_hero_show', false ) ) {
 		get_template_part( 'template-parts/hero' );

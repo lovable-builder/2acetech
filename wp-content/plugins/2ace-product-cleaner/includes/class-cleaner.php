@@ -489,6 +489,35 @@ TXT;
 	}
 
 	/**
+	 * A short catchy phrase for a new main category, shown on its slide in the homepage
+	 * carousel (term meta "ace_cat_tagline", also editable under Products > Categories).
+	 * Optional: if there is no API key or the answer is unusable, nothing is stored and the
+	 * theme uses its built-in phrase. It never stops a product from being cleaned.
+	 *
+	 * @param int    $term_id Category id.
+	 * @param string $name    Category name.
+	 */
+	private static function write_tagline( $term_id, $name ) {
+		try {
+			$fake = apply_filters( 'ace_pc_tagline_json', null, $name );
+			$json = is_array( $fake ) ? $fake : self::complete(
+				"Napisz krótkie, chwytliwe hasło reklamowe po polsku dla kategorii sklepu internetowego: \"" . $name . "\".\n"
+				. "ZASADY: 3 do 7 słów, jedno zdanie, obrazowe i zachęcające, bez marek. ZAKAZ: superlatywów i obietnic, których sklep nie może udowodnić (\"najlepsze\", \"najtańsze\", \"numer 1\", \"gwarancja\", \"bezkonkurencyjne\"). Nie używaj wykrzykników ani emoji.\n"
+				. "Zwróć WYŁĄCZNIE JSON: {\"tagline\": \"...\"}"
+			);
+			$t = isset( $json['tagline'] ) ? trim( wp_strip_all_tags( (string) $json['tagline'] ), " \t\n\r\0\x0B\"„”" ) : '';
+			$n = self::words( $t );
+			if ( '' === $t || $n < 2 || $n > 9 || mb_strlen( $t ) > 80 || false !== strpos( $t, '!' ) || preg_match( '/najlepsz|najtańsz|numer\s*1|#\s*1|gwarancj|bezkonkurenc|lider/iu', $t ) ) {
+				return;
+			}
+			update_term_meta( $term_id, 'ace_cat_tagline', $t );
+			ACE_PC_Settings::log( sprintf( 'Banner phrase for "%s": %s', $name, $t ) );
+		} catch ( Throwable $e ) {
+			// Optional extra; the category itself is already created.
+		}
+	}
+
+	/**
 	 * Turn ["Parent", "Child"] into category ids, creating what is missing.
 	 * Never more than MAX_TOP top-level categories: beyond that, "Inne produkty" is used.
 	 *
@@ -519,6 +548,9 @@ TXT;
 				} else {
 					$term = get_term( $made['term_id'], 'product_cat' );
 					ACE_PC_Settings::log( sprintf( 'New category created: %s%s', $parent ? get_term( $parent )->name . ' > ' : '', $name ) );
+					if ( 0 === $parent ) {
+						self::write_tagline( (int) $term->term_id, $name ); // For the homepage carousel.
+					}
 				}
 			}
 			$parent = (int) $term->term_id;

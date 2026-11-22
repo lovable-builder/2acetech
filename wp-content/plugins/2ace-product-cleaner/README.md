@@ -8,6 +8,10 @@ removed (only Poland variations stay on sale, the others are disabled, not delet
 default category, prices rounded **up** to .99. Products named `RMF-*` / `lig*` and anything already cleaned
 are skipped. Status (draft/published) is never changed.
 
+- **Banner phrase** (v1.3): when the cleaner creates a new *main* category it also writes a short catchy Polish phrase for it
+  (term meta `ace_cat_tagline`, editable under Products > Categories > Banner phrase). The homepage carousel shows it on that
+  category's slide. Phrases with superlatives or unprovable promises ("najlepsze", "gwarancja", "numer 1", "!") are refused;
+  with no API key nothing is written and the theme uses a built-in phrase. Subcategories get no phrase.
 - **Categories**: for every import the AI picks the category from what the product *is*: an existing one, or a
   new Polish one (names in plural, max 2 levels, at most 12 main categories; past that, "Inne produkty").
   Duplicates are avoided (case-insensitive match). "Re-check categories of all products" on the settings page fixes

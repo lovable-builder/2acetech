@@ -79,11 +79,11 @@ function ace_banner_defaults( $n ) {
 		1 => array(
 			'on'        => true,
 			'style'     => 'default',
-			'eyebrow'   => __( 'New in the shop', '2acetech' ),
-			'title'     => __( 'Discover our newest products', '2acetech' ),
+			'eyebrow'   => __( 'In our shop', '2acetech' ),
+			'title'     => __( 'Discover our range', '2acetech' ),
 			'text'      => '',
 			'cta'       => __( 'Shop now', '2acetech' ),
-			'source'    => 'latest',
+			'source'    => 'mix',
 			'countdown' => false,
 		),
 		2 => array(
@@ -264,13 +264,13 @@ function ace_banner_products( $b ) {
 	} elseif ( 'category' === $b['source'] ) {
 		$out = ace_get_products( 'latest', $limit, sanitize_title( $b['cat'] ) );
 	} else {
-		$type = in_array( $b['source'], array( 'latest', 'featured', 'sale', 'best' ), true ) ? $b['source'] : 'latest';
+		$type = in_array( $b['source'], array( 'mix', 'latest', 'featured', 'sale', 'best' ), true ) ? $b['source'] : 'mix';
 		$out  = ace_get_products( $type, $limit );
 	}
 
 	// A wrong category slug or product list must not leave the banner with an empty side.
 	if ( ! $out ) {
-		$out = ace_get_products( 'latest', $limit );
+		$out = ace_get_products( 'mix', $limit );
 	}
 	return $out;
 }
@@ -299,7 +299,7 @@ function ace_sanitize_banner_media( $v ) {
 	return in_array( $v, array( 'none', 'image', 'products' ), true ) ? $v : 'products';
 }
 function ace_sanitize_banner_source( $v ) {
-	return in_array( $v, array( 'latest', 'featured', 'sale', 'best', 'category', 'ids' ), true ) ? $v : 'latest';
+	return in_array( $v, array( 'mix', 'latest', 'featured', 'sale', 'best', 'category', 'ids' ), true ) ? $v : 'mix';
 }
 function ace_sanitize_banner_size( $v ) {
 	return in_array( $v, array( 'compact', 'normal', 'tall' ), true ) ? $v : 'normal';
@@ -365,6 +365,7 @@ function ace_customize_banners( $wp ) {
 			array(
 				'type'     => 'select',
 				'choices'  => array(
+					'mix'      => __( 'A mix from every category (recommended)', '2acetech' ),
 					'latest'   => __( 'Newest products', '2acetech' ),
 					'featured' => __( 'Featured products (starred in WooCommerce)', '2acetech' ),
 					'sale'     => __( 'Products on sale', '2acetech' ),
