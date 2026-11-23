@@ -46,6 +46,16 @@ try {
 	$out['5: no API key: categories still created'] = 'Naszyjniki' === get_term( $nokey[0], 'product_cat' )->name;
 	$out['5: and no phrase stored'] = '' === (string) get_term_meta( get_term( $nokey[0], 'product_cat' )->parent, 'ace_cat_tagline', true );
 
+	// 5b. Three levels: main > sub > narrower sub, all created; a 4th level is cut off.
+	$three = ACE_PC_Cleaner::resolve_category( array( 'Sport i turystyka', 'Camping', 'Materace i maty', 'Za głęboko' ) );
+	$l3 = get_term( $three[0], 'product_cat' ); $l2 = get_term( $l3->parent, 'product_cat' ); $l1 = get_term( $l2->parent, 'product_cat' );
+	$out['5b: three levels created'] = $l1->name . ' > ' . $l2->name . ' > ' . $l3->name;
+	$out['5b: 4th level ignored'] = false === get_term_by( 'name', 'Za głęboko', 'product_cat' );
+	$again = ACE_PC_Cleaner::resolve_category( array( 'Sport i turystyka', 'Camping', 'Pompki' ) );
+	$out['5b: second leaf under the same Camping'] = get_term( get_term( $again[0], 'product_cat' )->parent, 'product_cat' )->term_id === $l2->term_id;
+	$lines = ACE_PC_Cleaner::tree_lines();
+	$out['5b: AI sees the third level'] = in_array( 'Sport i turystyka > Camping > Materace i maty', $lines, true );
+
 	// 6. Category cap: past 12 main categories the catch-all is used instead of a new one.
 	$tops = function () { return count( get_terms( array( 'taxonomy' => 'product_cat', 'parent' => 0, 'hide_empty' => false, 'fields' => 'ids', 'exclude' => array( (int) get_option( 'default_product_cat' ) ) ) ) ); };
 	for ( $i = 1; $i <= 20 && $tops() < ACE_PC_Cleaner::MAX_TOP; $i++ ) { wp_insert_term( "Fill $i", 'product_cat' ); }

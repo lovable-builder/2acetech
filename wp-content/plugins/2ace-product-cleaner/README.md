@@ -13,7 +13,7 @@ are skipped. Status (draft/published) is never changed.
   category's slide. Phrases with superlatives or unprovable promises ("najlepsze", "gwarancja", "numer 1", "!") are refused;
   with no API key nothing is written and the theme uses a built-in phrase. Subcategories get no phrase.
 - **Categories**: for every import the AI picks the category from what the product *is*: an existing one, or a
-  new Polish one (names in plural, max 2 levels, at most 12 main categories; past that, "Inne produkty").
+  new Polish one (names in plural, up to 3 levels, e.g. Sport i turystyka > Camping > Materace i maty, at most 12 main categories; past that, "Inne produkty").
   Duplicates are avoided (case-insensitive match). "Re-check categories of all products" on the settings page fixes
   products that already sit in the wrong place. Own products (RMF-*/lig*) are skipped.
 - **Nothing ships from Poland** (v1.2): such a product is no longer skipped. The text is still cleaned into Polish

@@ -306,8 +306,8 @@ function ace_guess_art( $name ) {
 		'zabaw'     => 'blocks',
 		'toy'       => 'blocks',
 		'klock'     => 'blocks',
+		'turyst'    => 'tent', // "Sport i turystyka": the outdoor range is mostly camping gear.
 		'sport'     => 'scooter',
-		'turyst'    => 'scooter',
 		'hulajn'    => 'scooter',
 		'outdoor'   => 'scooter',
 		'kuchn'     => 'pot',

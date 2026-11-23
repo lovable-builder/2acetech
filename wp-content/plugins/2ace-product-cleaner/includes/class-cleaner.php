@@ -157,7 +157,7 @@ ZASADY (bezwzględne):
 - Każdą wartość każdego zachowanego atrybutu przetłumacz na polski (np. "Warm White" -> "Ciepła biel", "EU Plug" -> "EU"). Podaj wszystkie wartości z listy, bez wyjątku.
 - Atrybut zawierający tylko nieprecyzyjny zakres z filtra (np. Wattage "0-5W") albo dane sprzeczne: ustaw {"drop": true} (atrybut zostanie usunięty ze sklepu).
 - Atrybut z jedną wartością u wszystkich wariantów ustaw "variation": false, chyba że jest jedynym atrybutem produktu - wtedy true.
-- KATEGORIA: wybierz kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Lista istniejących kategorii jest w "existing_categories". Użyj istniejącej, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez nazw marek; maksymalnie 2 poziomy ["Kategoria główna", "Podkategoria"]. Wybierz szeroką kategorię główną (np. "Zabawki i gry", "Oświetlenie", "Sport i rekreacja") i, jeśli sensowne, węższą podkategorię. Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza istniejąca.
+- KATEGORIA: wybierz kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Lista istniejących kategorii jest w "existing_categories". Użyj istniejącej, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez nazw marek; maksymalnie 3 poziomy ["Kategoria główna", "Podkategoria", "Węższa podkategoria"], np. ["Sport i turystyka", "Camping", "Materace i maty"]. Wybierz szeroką kategorię główną (np. "Zabawki i gry", "Oświetlenie", "Sport i turystyka") i, jeśli sensowne, węższą podkategorię, a trzeci poziom tylko gdy w danej podkategorii jest wyraźna grupa produktów (np. materace, pompki, krzesła). Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza istniejąca.
 
 FORMAT ODPOWIEDZI:
 {
@@ -167,7 +167,7 @@ FORMAT ODPOWIEDZI:
  "features": ["3-8 najważniejszych cech"],
  "spec_rows": [["Nazwa parametru","Wartość"]],
  "tags": ["3-5 polskich tagów"],
- "category": ["Kategoria główna", "Podkategoria (opcjonalnie)"],
+ "category": ["Kategoria główna", "Podkategoria (opcjonalnie)", "Węższa podkategoria (opcjonalnie)"],
  "attrs": { "<oryginalna nazwa atrybutu>": {"name": "polska nazwa", "variation": true, "values": {"<oryginalna wartość>": "<polska wartość>"}} },
  "notes": ["krótko: sprzeczności, pominięte dane, zmiany nazw wbrew liście"]
 }
@@ -453,6 +453,9 @@ TXT;
 
 	const MAX_TOP = 12;
 
+	/** Category levels: main > sub > narrower sub (Sport i turystyka > Camping > Materace i maty). */
+	const MAX_DEPTH = 3;
+
 	/** The shop's category tree as text lines ("Parent", "Parent > Child") for the AI. */
 	public static function tree_lines() {
 		$terms = get_terms( array( 'taxonomy' => 'product_cat', 'hide_empty' => false, 'exclude' => array( (int) get_option( 'default_product_cat' ) ) ) );
@@ -468,6 +471,9 @@ TXT;
 			$lines[] = $top->name;
 			foreach ( isset( $by_parent[ $top->term_id ] ) ? $by_parent[ $top->term_id ] : array() as $kid ) {
 				$lines[] = $top->name . ' > ' . $kid->name;
+				foreach ( isset( $by_parent[ $kid->term_id ] ) ? $by_parent[ $kid->term_id ] : array() as $grand ) {
+					$lines[] = $top->name . ' > ' . $kid->name . ' > ' . $grand->name;
+				}
 			}
 		}
 		return $lines;
@@ -525,7 +531,7 @@ TXT;
 	 * @return int[] The leaf category id (in an array).
 	 */
 	public static function resolve_category( $path, $over_cap = false ) {
-		$path   = array_slice( array_values( array_filter( array_map( 'trim', (array) $path ) ) ), 0, 2 );
+		$path   = array_slice( array_values( array_filter( array_map( 'trim', (array) $path ) ) ), 0, self::MAX_DEPTH );
 		$parent = 0;
 		$leaf   = 0;
 		foreach ( $path as $i => $name ) {
@@ -586,8 +592,8 @@ TXT;
 			return array();
 		}
 		$tree   = self::tree_lines();
-		$prompt = "Jesteś redaktorem sklepu internetowego. Dla KAŻDEGO produktu wybierz właściwą kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Zwróć WYŁĄCZNIE JSON w formacie {\"categories\": {\"<id>\": [\"Kategoria główna\", \"Podkategoria (opcjonalnie)\"]}}.\n"
-			. "ZASADY: użyj istniejącej kategorii z listy, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez marek, maksymalnie 2 poziomy. Wybieraj szerokie kategorie główne (np. \"Zabawki i gry\", \"Oświetlenie\", \"Sport i rekreacja\") i, jeśli sensowne, podkategorię. Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza.\n"
+		$prompt = "Jesteś redaktorem sklepu internetowego. Dla KAŻDEGO produktu wybierz właściwą kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Zwróć WYŁĄCZNIE JSON w formacie {\"categories\": {\"<id>\": [\"Kategoria główna\", \"Podkategoria (opcjonalnie)\", \"Węższa podkategoria (opcjonalnie)\"]}}.\n"
+			. "ZASADY: użyj istniejącej kategorii z listy, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez marek, maksymalnie 3 poziomy (np. Sport i turystyka > Camping > Materace i maty). Wybieraj szerokie kategorie główne (np. \"Zabawki i gry\", \"Oświetlenie\", \"Sport i turystyka\") i, jeśli sensowne, podkategorię; trzeci poziom tylko dla wyraźnej grupy produktów. Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza.\n"
 			. "ISTNIEJĄCE KATEGORIE:\n" . implode( "\n", $tree ) . "\n\nPRODUKTY:\n" . wp_json_encode( $items, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
 
 		$fake = apply_filters( 'ace_pc_recat_json', null, $items );

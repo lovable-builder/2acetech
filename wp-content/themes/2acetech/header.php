@@ -103,6 +103,9 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 								printf( '<li class="menu__all"><a href="%s">%s</a></li>', esc_url( $cat['url'] ), esc_html( sprintf( __( 'All in %s', '2acetech' ), $cat['label'] ) ) );
 								foreach ( $cat['children'] as $kid ) {
 									printf( '<li><a href="%s"><span>%s</span><small>%d</small></a></li>', esc_url( $kid['url'] ), esc_html( $kid['label'] ), (int) $kid['count'] );
+									foreach ( $kid['children'] as $grand ) {
+										printf( '<li class="menu__sub2"><a href="%s"><span>%s</span><small>%d</small></a></li>', esc_url( $grand['url'] ), esc_html( $grand['label'] ), (int) $grand['count'] );
+									}
 								}
 								echo '</ul>';
 							}
@@ -125,6 +128,9 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 									<li class="menu__all"><a href="<?php echo esc_url( $cat['url'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: category name. */ __( 'All in %s', '2acetech' ), $cat['label'] ) ); ?></a></li>
 									<?php foreach ( $cat['children'] as $kid ) : ?>
 										<li><a href="<?php echo esc_url( $kid['url'] ); ?>"><span><?php echo esc_html( $kid['label'] ); ?></span><small><?php echo (int) $kid['count']; ?></small></a></li>
+										<?php foreach ( $kid['children'] as $grand ) : ?>
+											<li class="menu__sub2"><a href="<?php echo esc_url( $grand['url'] ); ?>"><span><?php echo esc_html( $grand['label'] ); ?></span><small><?php echo (int) $grand['count']; ?></small></a></li>
+										<?php endforeach; ?>
 									<?php endforeach; ?>
 								</ul>
 							<?php endif; ?>

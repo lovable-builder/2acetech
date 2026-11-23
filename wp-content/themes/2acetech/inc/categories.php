@@ -1,6 +1,6 @@
 <?php
 /**
- * Category navigation: a two-level tree for the header menu, subcategory chips
+ * Category navigation: a three-level tree for the header menu, subcategory chips
  * on shop and category pages. Parents count the products of their children, so
  * a parent whose products all sit in subcategories still shows up.
  *
@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  * Visible product categories as a tree: top level with their visible children.
  *
  * @param int $limit Max top-level categories.
- * @return array[] Each: term, url, label, count, children[ term, url, label, count ].
+ * @return array[] Each: term, url, label, count, children[ term, url, label, count, children[ same ] ].
  */
 function ace_category_tree( $limit = 12 ) {
 	if ( ! ace_has_store() || ace_is_demo() ) {
@@ -36,7 +36,15 @@ function ace_category_tree( $limit = 12 ) {
 		$children = array();
 		if ( ! is_wp_error( $kids ) ) {
 			foreach ( $kids as $k ) {
-				$children[] = array( 'term' => $k, 'url' => get_term_link( $k ), 'label' => $k->name, 'count' => (int) $k->count );
+				// Third level (Sport i turystyka > Camping > Materace i maty).
+				$grand = get_terms( array_merge( $base, array( 'parent' => $k->term_id ) ) );
+				$g     = array();
+				if ( ! is_wp_error( $grand ) ) {
+					foreach ( $grand as $gk ) {
+						$g[] = array( 'term' => $gk, 'url' => get_term_link( $gk ), 'label' => $gk->name, 'count' => (int) $gk->count );
+					}
+				}
+				$children[] = array( 'term' => $k, 'url' => get_term_link( $k ), 'label' => $k->name, 'count' => (int) $k->count, 'children' => $g );
 			}
 		}
 		$out[] = array( 'term' => $t, 'url' => get_term_link( $t ), 'label' => $t->name, 'count' => (int) $t->count, 'children' => $children );
@@ -60,7 +68,12 @@ function ace_category_chips() {
 		'orderby'    => 'menu_order',
 	);
 	$current = is_product_category() ? get_queried_object() : null;
-	if ( $current ) {
+	$own = $current ? get_terms( array_merge( $base, array( 'parent' => $current->term_id ) ) ) : array();
+	if ( $current && ! is_wp_error( $own ) && $own ) {
+		// A category with subcategories of its own: show those (Camping > Materace i maty, Pompki ...).
+		$items = $own;
+		$all   = array( get_term_link( $current ), sprintf( /* translators: %s: category. */ __( 'All in %s', '2acetech' ), $current->name ), true );
+	} elseif ( $current ) {
 		$parent = $current->parent ? get_term( $current->parent, 'product_cat' ) : $current;
 		$items  = get_terms( array_merge( $base, array( 'parent' => $parent->term_id ) ) );
 		$all    = array( get_term_link( $parent ), $parent->term_id === $current->term_id ? sprintf( /* translators: %s: category. */ __( 'All in %s', '2acetech' ), $parent->name ) : sprintf( __( 'All in %s', '2acetech' ), $parent->name ), $parent->term_id === $current->term_id );

@@ -111,6 +111,13 @@ function ace_category_hero_slides( $limit = ACE_CAT_HERO_MAX ) {
 		}
 		$subs = array();
 		$kids = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => $cat->term_id, 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC', 'number' => 4 ) );
+		// A main category with a single subcategory (Sport i turystyka > Camping): show what is inside that one.
+		if ( ! is_wp_error( $kids ) && 1 === count( $kids ) ) {
+			$inner = get_terms( array( 'taxonomy' => 'product_cat', 'parent' => $kids[0]->term_id, 'hide_empty' => true, 'orderby' => 'count', 'order' => 'DESC', 'number' => 4 ) );
+			if ( ! is_wp_error( $inner ) && $inner ) {
+				$kids = $inner;
+			}
+		}
 		if ( ! is_wp_error( $kids ) ) {
 			foreach ( $kids as $kid ) {
 				$link = get_term_link( $kid );
