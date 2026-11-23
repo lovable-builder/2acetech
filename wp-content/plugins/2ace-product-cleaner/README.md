@@ -8,6 +8,10 @@ removed (only Poland variations stay on sale, the others are disabled, not delet
 default category, prices rounded **up** to .99. Products named `RMF-*` / `lig*` and anything already cleaned
 are skipped. Status (draft/published) is never changed.
 
+- **Stuck products** (v1.7): (1) when several live variations have the SAME options once "Ships from" is removed (different
+  warehouses/prices of one product) the cleaner keeps the cheapest and disables the others (not deleted) instead of failing with
+  "Duplicate options remain"; (2) when the AI's answer is not JSON (cut off or refused) it asks once more for a shorter answer, and
+  the error now shows what the AI really answered (`finish`, `length`, first 160 characters).
 - **No fake sales** (v1.6): the importer's price rules (Settings > Price in the importer, "Multiply with" x.x / y.y) add a made-up
   higher "regular" price to every product, so everything shows the same permanent ~21% "sale". Google Merchant Center and Polish
   law (Omnibus) treat that as misleading. Cleaning now makes the price customers actually pay the regular price and clears the sale

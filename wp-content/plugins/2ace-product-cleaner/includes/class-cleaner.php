@@ -281,7 +281,7 @@ TXT;
 		}
 		$model = self::model( $o );
 		if ( 'anthropic' === $o['provider'] ) {
-			$j    = self::http( $o, 'POST', '/v1/messages', array( 'model' => $model, 'max_tokens' => 4000, 'messages' => array( array( 'role' => 'user', 'content' => $prompt ) ) ) );
+			$j    = self::http( $o, 'POST', '/v1/messages', array( 'model' => $model, 'max_tokens' => 8000, 'messages' => array( array( 'role' => 'user', 'content' => $prompt ) ) ) );
 			$text = isset( $j['content'][0]['text'] ) ? $j['content'][0]['text'] : '';
 		} else {
 			$j    = self::http(
@@ -302,13 +302,16 @@ TXT;
 			);
 			$text = isset( $j['choices'][0]['message']['content'] ) ? $j['choices'][0]['message']['content'] : '';
 		}
+		$why  = ( 'anthropic' === $o['provider'] ? ( isset( $j['stop_reason'] ) ? $j['stop_reason'] : '' ) : ( isset( $j['choices'][0]['finish_reason'] ) ? $j['choices'][0]['finish_reason'] : '' ) );
 		$text = preg_replace( '/^```(?:json)?\s*|\s*```$/', '', trim( $text ) );
+		// What the AI actually said (first 160 characters) goes into the error, so a failure can be understood.
+		$hint = sprintf( ' [finish: %s; length: %d; starts: "%s"]', $why ? $why : '?', strlen( $text ), mb_substr( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $text ) ), 0, 160 ) );
 		if ( ! preg_match( '/\{.*\}/s', $text, $m ) ) {
-			throw new Exception( 'The AI returned no JSON.' );
+			throw new Exception( 'The AI returned no JSON.' . $hint );
 		}
 		$json = json_decode( $m[0], true );
 		if ( ! is_array( $json ) ) {
-			throw new Exception( 'The AI answer was not valid JSON.' );
+			throw new Exception( 'The AI answer was not valid JSON.' . $hint );
 		}
 		return $json;
 	}
@@ -970,7 +973,16 @@ TXT;
 		$c    = null;
 		$errs = array( 'not generated' );
 		for ( $try = 1; $try <= 2; $try++ ) {
-			$c    = self::ask( $src, 1 === $try ? '' : "\n\nPoprzednia odpowiedź miała błędy, popraw je: " . implode( '; ', $errs ) );
+			try {
+				$c = self::ask( $src, 1 === $try ? '' : "\n\nPoprzednia odpowiedź miała błędy, popraw je: " . implode( '; ', $errs ) );
+			} catch ( Exception $e ) {
+				if ( 1 === $try && false !== stripos( $e->getMessage(), 'json' ) ) {
+					// The answer was cut off or was not JSON: ask once more, for a shorter one.
+					$errs = array( 'odpowiedź nie była kompletnym obiektem JSON; zwróć jeden kompletny obiekt JSON i skróć go: najwyżej 5 punktów w short_bullets, 5 cech i 6 wierszy specyfikacji' );
+					continue;
+				}
+				throw $e;
+			}
 			$errs = self::validate( $c, $attrs, $source_text . ' ' . $product->get_name() );
 			if ( ! $errs ) {
 				break;
@@ -1043,6 +1055,35 @@ TXT;
 			}
 			$var_plan[ $vid ] = array( 'attrs' => $new, 'private' => $private, 'reg' => $reg_n, 'sale' => $sale_n );
 		}
+		// Several live variations can end up with the SAME options once "Ships from" is gone (different
+		// warehouses or prices of one product). Keep the cheapest, disable the others (not deleted).
+		$groups    = array();
+		foreach ( $var_plan as $vid => $vp ) {
+			if ( ! $vp['private'] ) {
+				ksort( $vp['attrs'] );
+				$groups[ wp_json_encode( $vp['attrs'] ) ][] = $vid;
+			}
+		}
+		$dupes = 0;
+		foreach ( $groups as $ids ) {
+			if ( count( $ids ) < 2 ) {
+				continue;
+			}
+			usort(
+				$ids,
+				static function ( $a, $b ) use ( $var_plan ) {
+					$pa = '' !== $var_plan[ $a ]['sale'] ? (float) $var_plan[ $a ]['sale'] : (float) $var_plan[ $a ]['reg'];
+					$pb = '' !== $var_plan[ $b ]['sale'] ? (float) $var_plan[ $b ]['sale'] : (float) $var_plan[ $b ]['reg'];
+					return $pa <=> $pb ?: $a <=> $b;
+				}
+			);
+			foreach ( array_slice( $ids, 1 ) as $extra ) {
+				$var_plan[ $extra ]['private'] = true;
+				$live--;
+				$dupes++;
+			}
+		}
+
 		// Nothing ships from Poland: the text is still cleaned (Polish title, description), every
 		// variation stays disabled, and the product goes to Draft so nothing is sold with a false
 		// "shipped from Poland" promise. Undo restores the old status.
@@ -1119,6 +1160,9 @@ TXT;
 		// Customers pay the lower price, so that becomes the normal price and the strikethrough goes.
 		self::drop_importer_sale( $id );
 		$c['notes'] = isset( $c['notes'] ) ? (array) $c['notes'] : array();
+		if ( ! empty( $dupes ) ) {
+			$c['notes'][] = sprintf( 'Wyłączono %d zdublowanych wariantów (te same opcje po usunięciu "Ships from"); zostawiono najtańszy.', $dupes );
+		}
 		if ( $no_poland ) {
 			if ( in_array( get_post_status( $id ), array( 'publish', 'private', 'pending' ), true ) ) {
 				wp_update_post( array( 'ID' => $id, 'post_status' => 'draft' ) );
