@@ -912,8 +912,11 @@ a.brand:hover { color: var(--ink); }
 
 .navigation.pagination { margin-top: 32px; }
 .nav-links { display: flex; flex-wrap: wrap; gap: 8px; }
-.page-numbers { display: inline-grid; place-items: center; min-width: 44px; height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; font-weight: 700; }
-.page-numbers.current, .page-numbers:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+/* Only the page links are buttons. WooCommerce also puts .page-numbers on the whole <ul> list, which
+   used to turn the entire row black on hover. */
+a.page-numbers, span.page-numbers { display: inline-grid; place-items: center; min-width: 44px; height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; font-weight: 700; }
+span.page-numbers.current, a.page-numbers:hover { background: var(--ink); border-color: var(--ink); color: #fff; }
+ul.page-numbers { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
 
 .notfound { text-align: center; }
 .notfound__code { margin: 0; font-size: clamp(5rem, 16vw, 9rem); font-weight: 800; line-height: 1; letter-spacing: -0.06em; color: var(--accent); }
