@@ -168,6 +168,7 @@ function ace_share_meta() {
 		if ( $same ) {
 			$org['sameAs'] = $same;
 		}
+		$org = apply_filters( 'ace_organization_schema', $org );
 		echo '<script type="application/ld+json">' . wp_json_encode( $org, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . "</script>\n";
 	}
 }

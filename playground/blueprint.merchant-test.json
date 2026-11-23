@@ -1,0 +1,30 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "preferredVersions": {
+    "php": "8.3",
+    "wp": "latest"
+  },
+  "features": {
+    "networking": true
+  },
+  "login": true,
+  "plugins": [
+    "woocommerce"
+  ],
+  "steps": [
+    {
+      "step": "activateTheme",
+      "themeFolderName": "2acetech"
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "WPLANG": "pl_PL"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php require '/wordpress/wp-load.php'; require '/playground/test-merchant.php';"
+    }
+  ]
+}
