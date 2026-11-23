@@ -20,6 +20,7 @@ class ACE_PC_Settings {
 		add_action( 'wp_ajax_ace_pc_clean', array( __CLASS__, 'ajax_clean' ) );
 		add_action( 'wp_ajax_ace_pc_test', array( __CLASS__, 'ajax_test' ) );
 		add_action( 'wp_ajax_ace_pc_recat', array( __CLASS__, 'ajax_recat' ) );
+		add_action( 'wp_ajax_ace_pc_brands', array( __CLASS__, 'ajax_brands' ) );
 		add_action( 'admin_post_ace_pc_undo', array( __CLASS__, 'handle_undo' ) );
 		add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
 		add_filter( 'cron_schedules', array( __CLASS__, 'schedules' ) );
@@ -175,6 +176,11 @@ class ACE_PC_Settings {
 			<p><button class="button" id="acepc-recat" <?php disabled( '' === $o['api_key'] ); ?>><?php esc_html_e( 'Re-check categories of all products', '2ace-product-cleaner' ); ?></button> <span id="acepc-recat-out"></span></p>
 			<ul id="acepc-recat-list" style="list-style:disc;margin-left:20px"></ul>
 
+			<h2><?php esc_html_e( 'Brands', '2ace-product-cleaner' ); ?></h2>
+			<p><?php esc_html_e( 'New imports get their brand automatically while they are cleaned: the cleaner reads the brand from the source ("Brand Name" or the start of the title), creates it under Products > Brands if it does not exist, and assigns it. Only real brands written in the source are used (never a guess, a shop name or "NoEnName"). The brand is kept out of the title and description. Use the button below once to find brands for products that are already in the shop.', '2ace-product-cleaner' ); ?></p>
+			<p><button class="button" id="acepc-brands" <?php disabled( '' === $o['api_key'] || ! taxonomy_exists( 'product_brand' ) ); ?>><?php esc_html_e( 'Detect brands of all products', '2ace-product-cleaner' ); ?></button> <span id="acepc-brands-out"></span></p>
+			<ul id="acepc-brands-list" style="list-style:disc;margin-left:20px"></ul>
+
 			<form method="post" action="options.php">
 				<?php settings_fields( 'ace_pc' ); ?>
 				<table class="form-table" role="presentation">
@@ -231,6 +237,22 @@ class ACE_PC_Settings {
 					}
 				}catch(e){ out.textContent=' ✖ '+e; }
 				rb.disabled=false;
+			});
+			var bb=document.getElementById('acepc-brands');
+			if(bb) bb.addEventListener('click',async function(){
+				bb.disabled=true; var out=document.getElementById('acepc-brands-out'), list=document.getElementById('acepc-brands-list'); var offset=0, n=0;
+				try{
+					while(true){
+						out.textContent=' working… '+offset;
+						var fd=new FormData(); fd.append('action','ace_pc_brands'); fd.append('offset',offset); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
+						var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
+						if(!r.success){ out.textContent=' ✖ '+r.data; break; }
+						Object.keys(r.data.found).forEach(function(id){ n++; var li=document.createElement('li'); li.textContent='#'+id+': '+r.data.found[id]; list.appendChild(li); });
+						offset=r.data.next;
+						if(r.data.done){ out.textContent=' ✔ done, '+n+' product(s) got a brand'; break; }
+					}
+				}catch(e){ out.textContent=' ✖ '+e; }
+				bb.disabled=false;
 			});
 			var btn=document.getElementById('acepc-run'); if(!btn) return;
 			var ids=<?php echo wp_json_encode( array_map( 'intval', $waiting ) ); ?>;
@@ -302,6 +324,29 @@ class ACE_PC_Settings {
 			self::log( sprintf( '#%d category: %s', $id, $txt ) );
 		}
 		wp_send_json_success( array( 'changed' => (object) $changed, 'next' => $off + 15, 'done' => $off + 15 >= count( $all ) ) );
+	}
+
+	public static function ajax_brands() {
+		check_ajax_referer( 'ace_pc' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'Not allowed' );
+		}
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 280 ); // phpcs:ignore
+		}
+		$all   = get_posts( array( 'post_type' => 'product', 'post_status' => array( 'publish', 'draft', 'pending', 'private' ), 'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'ASC', 'fields' => 'ids', 'no_found_rows' => true ) );
+		$off   = absint( $_POST['offset'] ?? 0 );
+		$batch = array_slice( $all, $off, 15 );
+		try {
+			$found = ACE_PC_Cleaner::recognise_brands( $batch );
+		} catch ( Exception $e ) {
+			self::log( 'Brand detection failed: ' . $e->getMessage() );
+			wp_send_json_error( $e->getMessage() );
+		}
+		foreach ( $found as $id => $brand ) {
+			self::log( sprintf( '#%d brand: %s', $id, $brand ) );
+		}
+		wp_send_json_success( array( 'found' => (object) $found, 'next' => $off + 15, 'done' => $off + 15 >= count( $all ) ) );
 	}
 
 	/* ---- product list: Undo ---- */

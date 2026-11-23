@@ -8,6 +8,12 @@ removed (only Poland variations stay on sale, the others are disabled, not delet
 default category, prices rounded **up** to .99. Products named `RMF-*` / `lig*` and anything already cleaned
 are skipped. Status (draft/published) is never changed.
 
+- **Brands** (v1.5): while cleaning, the AI reads the brand from the source ("Brand Name" or the start of the title); the
+  plugin creates it under Products > Brands if it is missing (any letter case matches the existing one) and assigns it, so
+  the shop can have a brand filter. Only real brands written literally in the source are used: guesses, "NoEnName", shop or
+  seller names (Store, Official, Ltd ...), countries and over-long values are refused. The brand stays OUT of the title and
+  description (the existing rule). Undo restores the previous brand. Settings page > Brands > "Detect brands of all products"
+  backfills the products already in the shop from their original title and description. Own products (RMF-*, lig*) are skipped.
 - **Banner phrase** (v1.3): when the cleaner creates a new *main* category it also writes a short catchy Polish phrase for it
   (term meta `ace_cat_tagline`, editable under Products > Categories > Banner phrase). The homepage carousel shows it on that
   category's slide. Phrases with superlatives or unprovable promises ("najlepsze", "gwarancja", "numer 1", "!") are refused;

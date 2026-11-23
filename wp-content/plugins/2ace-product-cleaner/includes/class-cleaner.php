@@ -158,6 +158,7 @@ ZASADY (bezwzględne):
 - Atrybut zawierający tylko nieprecyzyjny zakres z filtra (np. Wattage "0-5W") albo dane sprzeczne: ustaw {"drop": true} (atrybut zostanie usunięty ze sklepu).
 - Atrybut z jedną wartością u wszystkich wariantów ustaw "variation": false, chyba że jest jedynym atrybutem produktu - wtedy true.
 - KATEGORIA: wybierz kategorię według tego, czym produkt NAPRAWDĘ jest (nie według słów w tytule). Lista istniejących kategorii jest w "existing_categories". Użyj istniejącej, jeśli pasuje. Jeśli żadna nie pasuje, zaproponuj nową: polska nazwa w liczbie mnogiej, 1-3 słowa, bez nazw marek; maksymalnie 3 poziomy ["Kategoria główna", "Podkategoria", "Węższa podkategoria"], np. ["Sport i turystyka", "Camping", "Materace i maty"]. Wybierz szeroką kategorię główną (np. "Zabawki i gry", "Oświetlenie", "Sport i turystyka") i, jeśli sensowne, węższą podkategorię, a trzeci poziom tylko gdy w danej podkategorii jest wyraźna grupa produktów (np. materace, pompki, krzesła). Nie twórz kategorii dla pojedynczego produktu, jeśli pasuje szersza istniejąca.
+- MARKA (pole "brand"): podaj nazwę marki/producenta DOKŁADNIE tak, jak jest zapisana w źródle (pole "Brand Name" albo pierwsze słowo/słowa tytułu, gdy to wyraźnie marka), tylko do filtra marek w sklepie. Zwróć null, gdy: brak marki, wartość to "NoEnName", "No Brand", "Generic", "OEM", "Other", nazwa sklepu/sprzedawcy (Store, Shop, Official, Trading, Ltd), nazwa kraju, albo nie masz pewności. Nie zgaduj i nie twórz marek. Lista marek już istniejących w sklepie jest w "existing_brands": jeśli to ta sama marka, użyj dokładnie jej pisowni. Marki NIE wpisuj do tytułu ani opisu (zakaz wyżej obowiązuje).
 
 FORMAT ODPOWIEDZI:
 {
@@ -168,6 +169,7 @@ FORMAT ODPOWIEDZI:
  "spec_rows": [["Nazwa parametru","Wartość"]],
  "tags": ["3-5 polskich tagów"],
  "category": ["Kategoria główna", "Podkategoria (opcjonalnie)", "Węższa podkategoria (opcjonalnie)"],
+ "brand": "Nazwa marki ze źródła albo null",
  "attrs": { "<oryginalna nazwa atrybutu>": {"name": "polska nazwa", "variation": true, "values": {"<oryginalna wartość>": "<polska wartość>"}} },
  "notes": ["krótko: sprzeczności, pominięte dane, zmiany nazw wbrew liście"]
 }
@@ -620,6 +622,148 @@ TXT;
 	}
 
 	/* ------------------------------------------------------------------
+	 * Brands (WooCommerce Brands, taxonomy product_brand), for a brand filter
+	 * ---------------------------------------------------------------- */
+
+	/** Names of the brands that already exist (the AI reuses their spelling). */
+	public static function brand_names() {
+		if ( ! taxonomy_exists( 'product_brand' ) ) {
+			return array();
+		}
+		$names = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => false, 'fields' => 'names', 'number' => 200 ) );
+		return is_wp_error( $names ) ? array() : array_values( $names );
+	}
+
+	/**
+	 * A brand the AI found, or '' when it is not a usable brand. Refused: empty, "no brand" words, seller
+	 * or shop names, countries, anything too long, and anything that is NOT written in the source text
+	 * (so a guess can never become a brand).
+	 *
+	 * @param mixed  $raw  The AI's answer.
+	 * @param string $blob Source text: title, description, attribute values.
+	 * @return string
+	 */
+	public static function valid_brand( $raw, $blob ) {
+		if ( ! is_string( $raw ) ) {
+			return '';
+		}
+		$b = trim( preg_replace( '/\s+/u', ' ', wp_strip_all_tags( $raw ) ), " \t\n\r\0\x0B\"'„”«»" );
+		if ( mb_strlen( $b ) < 2 || mb_strlen( $b ) > 40 || ! preg_match( '/\p{L}/u', $b ) || preg_match( '#https?:|www\.|@#i', $b ) ) {
+			return '';
+		}
+		if ( preg_match( '/^(no|none|null|n\/?a|unknown|generic|unbranded|brandless|oem|odm|other|others|brand|original|own|china|mainland china|poland|polska|noenname.*|no[ -]?brand.*|no[ -]?name.*|brak.*)$/iu', $b ) ) {
+			return '';
+		}
+		if ( preg_match( '/aliexpress|alibaba|\bstores?\b|\bshops?\b|sklep|official|\btrading\b|\bltd\b|\bco\.?,|factory|wholesale|dropship|\bseller\b|technology co/iu', $b ) ) {
+			return '';
+		}
+		if ( false === mb_stripos( (string) $blob, $b ) ) {
+			return ''; // Not in the source: a guess.
+		}
+		// "aiopp" -> "Aiopp"; keep every other spelling as the source has it.
+		if ( mb_strtolower( $b ) === $b ) {
+			$b = mb_strtoupper( mb_substr( $b, 0, 1 ) ) . mb_substr( $b, 1 );
+		}
+		return $b;
+	}
+
+	/** An existing brand with this name (any letter case) or slug. */
+	private static function find_brand( $name ) {
+		$terms = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => false ) );
+		if ( is_wp_error( $terms ) ) {
+			return null;
+		}
+		$want = mb_strtolower( $name );
+		foreach ( $terms as $t ) {
+			if ( mb_strtolower( $t->name ) === $want || $t->slug === sanitize_title( $name ) ) {
+				return $t;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Give a product its brand, creating the brand if it does not exist yet.
+	 *
+	 * @return int Brand term id, or 0 (no Brands taxonomy, or it could not be created).
+	 */
+	public static function assign_brand( $id, $name ) {
+		if ( '' === $name || ! taxonomy_exists( 'product_brand' ) ) {
+			return 0;
+		}
+		$term = self::find_brand( $name );
+		if ( ! $term ) {
+			$made = wp_insert_term( $name, 'product_brand' );
+			if ( is_wp_error( $made ) ) {
+				if ( 'term_exists' === $made->get_error_code() && $made->get_error_data() ) {
+					$term = get_term( (int) $made->get_error_data(), 'product_brand' );
+				} else {
+					return 0;
+				}
+			} else {
+				$term = get_term( $made['term_id'], 'product_brand' );
+				ACE_PC_Settings::log( sprintf( 'New brand created: %s', $name ) );
+			}
+		}
+		if ( ! $term || is_wp_error( $term ) ) {
+			return 0;
+		}
+		wp_set_object_terms( $id, array( (int) $term->term_id ), 'product_brand' );
+		update_post_meta( $id, '_aliclean_brand', $term->name );
+		return (int) $term->term_id;
+	}
+
+	/**
+	 * Find brands for products that already exist (15 per AI call). Uses the ORIGINAL title and description
+	 * (kept in the cleanup backup) because the cleaned copy has no brand names in it. Products that already
+	 * have a brand, and your own products (RMF-*, lig*), are skipped.
+	 *
+	 * @param int[] $ids Product ids.
+	 * @return array id => brand for the ones that got one.
+	 */
+	public static function recognise_brands( $ids ) {
+		if ( ! taxonomy_exists( 'product_brand' ) ) {
+			throw new Exception( 'WooCommerce Brands is not available on this shop.' );
+		}
+		$items = array();
+		$blobs = array();
+		foreach ( $ids as $id ) {
+			$p = wc_get_product( $id );
+			if ( ! $p || self::is_protected( $p ) || ! self::is_import( $p ) ) {
+				continue;
+			}
+			if ( wp_get_object_terms( $id, 'product_brand', array( 'fields' => 'ids' ) ) ) {
+				continue; // Already has one.
+			}
+			$snap  = get_post_meta( $id, self::BACKUP, true );
+			$title = is_array( $snap ) && ! empty( $snap['post']['post_title'] ) ? $snap['post']['post_title'] : $p->get_name();
+			$desc  = is_array( $snap ) && isset( $snap['post']['post_content'] ) ? $snap['post']['post_content'] : $p->get_description();
+			$text  = self::strip_html( $desc, 800 );
+			$items[]       = array( 'id' => (int) $id, 'title' => $title, 'description' => $text );
+			$blobs[ $id ]  = $title . ' ' . $text;
+		}
+		if ( ! $items ) {
+			return array();
+		}
+		$prompt = "Dla KAŻDEGO produktu podaj markę/producenta DOKŁADNIE tak, jak jest zapisana w tytule lub opisie źródłowym (pole \"Brand Name\" albo pierwsze słowo tytułu, gdy to wyraźnie marka). Zwróć WYŁĄCZNIE JSON {\"brands\": {\"<id>\": \"Marka\" albo null}}.\n"
+			. "Zwróć null, gdy: brak marki, \"NoEnName\", \"No Brand\", \"Generic\", \"OEM\", nazwa sklepu lub sprzedawcy (Store, Shop, Official, Trading, Ltd), nazwa kraju, albo nie masz pewności. Nie zgaduj i nie twórz marek. Jeśli marka już istnieje na liście, użyj jej pisowni.\n"
+			. "ISTNIEJĄCE MARKI: " . wp_json_encode( self::brand_names(), JSON_UNESCAPED_UNICODE ) . "\n\nPRODUKTY:\n" . wp_json_encode( $items, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
+
+		$fake = apply_filters( 'ace_pc_brands_json', null, $items );
+		$json = is_array( $fake ) ? $fake : self::complete( $prompt );
+		$map  = isset( $json['brands'] ) && is_array( $json['brands'] ) ? $json['brands'] : array();
+
+		$done = array();
+		foreach ( $items as $it ) {
+			$brand = self::valid_brand( isset( $map[ $it['id'] ] ) ? $map[ $it['id'] ] : null, $blobs[ $it['id'] ] );
+			if ( '' !== $brand && self::assign_brand( $it['id'], $brand ) ) {
+				$done[ $it['id'] ] = $brand;
+			}
+		}
+		return $done;
+	}
+
+	/* ------------------------------------------------------------------
 	 * Backup / undo
 	 * ---------------------------------------------------------------- */
 
@@ -635,6 +779,7 @@ TXT;
 			'terms'  => array(),
 			'prices' => array( '_regular_price' => get_post_meta( $id, '_regular_price', true ), '_sale_price' => get_post_meta( $id, '_sale_price', true ) ),
 			'vars'   => array(),
+			'brands' => taxonomy_exists( 'product_brand' ) ? wp_get_object_terms( $id, 'product_brand', array( 'fields' => 'ids' ) ) : null,
 		);
 		if ( is_array( $snap['attrs'] ) ) {
 			foreach ( $snap['attrs'] as $key => $a ) {
@@ -685,6 +830,10 @@ TXT;
 			}
 			wp_update_post( array( 'ID' => $vid, 'post_status' => $v['status'] ) );
 		}
+		if ( isset( $snap['brands'] ) && is_array( $snap['brands'] ) && taxonomy_exists( 'product_brand' ) ) {
+			wp_set_object_terms( $id, array_map( 'intval', $snap['brands'] ), 'product_brand' );
+		}
+		delete_post_meta( $id, '_aliclean_brand' );
 		delete_post_meta( $id, self::MARKER );
 		delete_post_meta( $id, self::BACKUP );
 		delete_post_meta( $id, '_aliclean_no_poland' );
@@ -744,7 +893,7 @@ TXT;
 		}
 
 		$source_text = self::strip_html( $product->get_description() ? $product->get_description() : $product->get_short_description() );
-		$src         = array( 'title' => $product->get_name(), 'description' => $source_text, 'attributes' => array(), 'existing_categories' => self::tree_lines() );
+		$src         = array( 'title' => $product->get_name(), 'description' => $source_text, 'attributes' => array(), 'existing_categories' => self::tree_lines(), 'existing_brands' => self::brand_names() );
 		foreach ( $attrs as $label => $a ) {
 			$src['attributes'][] = array( 'name' => $label, 'options' => $a['options'] );
 		}
@@ -873,6 +1022,17 @@ TXT;
 		$product->set_category_ids( self::resolve_category( $c['category'] ) );
 		$product->save();
 		wp_set_object_terms( $id, array_values( array_unique( $c['tags'] ) ), 'product_tag' );
+
+		// Brand (for the brand filter): only a real brand written in the source; never blocks the cleanup.
+		try {
+			$brand_blob = $source_text . ' ' . $src['title'] . ' ' . wp_json_encode( $src['attributes'], JSON_UNESCAPED_UNICODE );
+			$brand      = self::valid_brand( isset( $c['brand'] ) ? $c['brand'] : null, $brand_blob );
+			if ( '' !== $brand && self::assign_brand( $id, $brand ) ) {
+				ACE_PC_Settings::log( sprintf( '#%d brand: %s', $id, $brand ) );
+			}
+		} catch ( Throwable $e ) {
+			// Optional extra.
+		}
 
 		foreach ( $var_plan as $vid => $vp ) {
 			$v = wc_get_product( $vid );
