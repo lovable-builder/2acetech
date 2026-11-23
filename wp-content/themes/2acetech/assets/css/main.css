@@ -1135,3 +1135,8 @@ a.brand:hover { color: var(--ink); }
 /* Third level in the category menus: indented under its subcategory. */
 .menu__sub2 > a { padding-left: 34px !important; font-size: 0.92em; color: var(--muted); }
 .menu__sub2 > a:hover { color: var(--accent); }
+
+/* Brand filter: a second row of chips under the category chips. */
+.cat-chips--brands { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: -8px; }
+.cat-chips__label { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cat-chips--brands .cat-chip { font-size: 0.88rem; }

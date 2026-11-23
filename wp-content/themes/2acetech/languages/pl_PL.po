@@ -2065,3 +2065,9 @@ msgstr "Poprzednia kategoria"
 
 msgid "Next category"
 msgstr "Następna kategoria"
+
+msgid "Brand"
+msgstr "Marka"
+
+msgid "All brands"
+msgstr "Wszystkie marki"
