@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       2ACE Product Cleaner
  * Description:       Rewrites imported AliExpress products in Polish, automatically: title, bullets, description, tags, attributes, SKU, category and .99 prices. Own products are never touched. Undo per product.
- * Version:           1.5.0
+ * Version:           1.6.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce

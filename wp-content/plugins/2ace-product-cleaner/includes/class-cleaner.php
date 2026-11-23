@@ -622,6 +622,74 @@ TXT;
 	}
 
 	/* ------------------------------------------------------------------
+	 * Importer "sale" prices
+	 * ---------------------------------------------------------------- */
+
+	/**
+	 * Is this price pair a real, scheduled promotion (dates set by a person) rather than the importer's
+	 * permanent regular-vs-sale pair?
+	 */
+	private static function has_schedule( $product ) {
+		return $product->get_date_on_sale_from() || $product->get_date_on_sale_to();
+	}
+
+	/**
+	 * Remove the importer's invented "was" price: the price customers actually pay (the sale price)
+	 * becomes the regular price and the sale price is cleared. The amount charged does not change.
+	 * Products or variations with a scheduled sale (from/to dates) are left alone, and so are own products.
+	 * The old pair is kept in post meta `_aliclean_sale_backup`.
+	 *
+	 * @param int $id Product id.
+	 * @return int Number of prices (product or variations) that were changed.
+	 */
+	public static function drop_importer_sale( $id ) {
+		$product = wc_get_product( $id );
+		if ( ! $product || self::is_protected( $product ) || ! self::is_import( $product ) ) {
+			return 0;
+		}
+		$targets = $product->is_type( 'variable' ) ? array_filter( array_map( 'wc_get_product', $product->get_children() ) ) : array( $product );
+		$backup  = get_post_meta( $id, '_aliclean_sale_backup', true );
+		$backup  = is_array( $backup ) ? $backup : array();
+		$changed = 0;
+		foreach ( $targets as $t ) {
+			$reg  = $t->get_regular_price();
+			$sale = $t->get_sale_price();
+			if ( '' === $sale || '' === $reg || (float) $sale >= (float) $reg || self::has_schedule( $t ) ) {
+				continue;
+			}
+			if ( ! isset( $backup[ $t->get_id() ] ) ) {
+				$backup[ $t->get_id() ] = array( $reg, $sale );
+			}
+			$t->set_regular_price( $sale );
+			$t->set_sale_price( '' );
+			$t->save();
+			$changed++;
+		}
+		if ( $changed ) {
+			update_post_meta( $id, '_aliclean_sale_backup', $backup );
+			self::refresh( $id );
+		}
+		return $changed;
+	}
+
+	/**
+	 * Apply drop_importer_sale() to a batch of products (settings page button).
+	 *
+	 * @param int[] $ids Product ids.
+	 * @return array id => number of prices changed, only for products that changed.
+	 */
+	public static function drop_importer_sales( $ids ) {
+		$out = array();
+		foreach ( $ids as $id ) {
+			$n = self::drop_importer_sale( (int) $id );
+			if ( $n ) {
+				$out[ (int) $id ] = $n;
+			}
+		}
+		return $out;
+	}
+
+	/* ------------------------------------------------------------------
 	 * Brands (WooCommerce Brands, taxonomy product_brand), for a brand filter
 	 * ---------------------------------------------------------------- */
 
@@ -1046,6 +1114,10 @@ TXT;
 			$v->set_status( $vp['private'] ? 'private' : 'publish' );
 			$v->save();
 		}
+
+		// The importer's price rules always add a made-up higher "regular" price (a permanent 21% "sale").
+		// Customers pay the lower price, so that becomes the normal price and the strikethrough goes.
+		self::drop_importer_sale( $id );
 		$c['notes'] = isset( $c['notes'] ) ? (array) $c['notes'] : array();
 		if ( $no_poland ) {
 			if ( in_array( get_post_status( $id ), array( 'publish', 'private', 'pending' ), true ) ) {

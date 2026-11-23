@@ -8,6 +8,12 @@ removed (only Poland variations stay on sale, the others are disabled, not delet
 default category, prices rounded **up** to .99. Products named `RMF-*` / `lig*` and anything already cleaned
 are skipped. Status (draft/published) is never changed.
 
+- **No fake sales** (v1.6): the importer's price rules (Settings > Price in the importer, "Multiply with" x.x / y.y) add a made-up
+  higher "regular" price to every product, so everything shows the same permanent ~21% "sale". Google Merchant Center and Polish
+  law (Omnibus) treat that as misleading. Cleaning now makes the price customers actually pay the regular price and clears the sale
+  price, so the amount charged does not change; products or variations with a scheduled sale (from/to dates) are left alone, and so
+  are own products. The old pair is kept in `_aliclean_sale_backup`; Undo restores the original prices. Settings page > Prices >
+  "Remove the importer's fake sale prices from all products" does it once for products already in the shop.
 - **Brands** (v1.5): while cleaning, the AI reads the brand from the source ("Brand Name" or the start of the title); the
   plugin creates it under Products > Brands if it is missing (any letter case matches the existing one) and assigns it, so
   the shop can have a brand filter. Only real brands written literally in the source are used: guesses, "NoEnName", shop or

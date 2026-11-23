@@ -21,6 +21,7 @@ class ACE_PC_Settings {
 		add_action( 'wp_ajax_ace_pc_test', array( __CLASS__, 'ajax_test' ) );
 		add_action( 'wp_ajax_ace_pc_recat', array( __CLASS__, 'ajax_recat' ) );
 		add_action( 'wp_ajax_ace_pc_brands', array( __CLASS__, 'ajax_brands' ) );
+		add_action( 'wp_ajax_ace_pc_sales', array( __CLASS__, 'ajax_sales' ) );
 		add_action( 'admin_post_ace_pc_undo', array( __CLASS__, 'handle_undo' ) );
 		add_filter( 'post_row_actions', array( __CLASS__, 'row_actions' ), 10, 2 );
 		add_filter( 'cron_schedules', array( __CLASS__, 'schedules' ) );
@@ -181,6 +182,10 @@ class ACE_PC_Settings {
 			<p><button class="button" id="acepc-brands" <?php disabled( '' === $o['api_key'] || ! taxonomy_exists( 'product_brand' ) ); ?>><?php esc_html_e( 'Detect brands of all products', '2ace-product-cleaner' ); ?></button> <span id="acepc-brands-out"></span></p>
 			<ul id="acepc-brands-list" style="list-style:disc;margin-left:20px"></ul>
 
+			<h2><?php esc_html_e( 'Prices', '2ace-product-cleaner' ); ?></h2>
+			<p><?php esc_html_e( 'The importer\'s price rules add a made-up higher "regular" price to every product, so everything looks permanently on sale (the same % off on all of them). Customers pay the lower price. Cleaning now makes that price the normal price and removes the crossed-out one, so the amount charged does not change. Products with a sale that has start/end dates are left alone. Use the button once for the products already in the shop.', '2ace-product-cleaner' ); ?></p>
+			<p><button class="button" id="acepc-sales"><?php esc_html_e( 'Remove the importer\'s fake sale prices from all products', '2ace-product-cleaner' ); ?></button> <span id="acepc-sales-out"></span></p>
+
 			<form method="post" action="options.php">
 				<?php settings_fields( 'ace_pc' ); ?>
 				<table class="form-table" role="presentation">
@@ -237,6 +242,21 @@ class ACE_PC_Settings {
 					}
 				}catch(e){ out.textContent=' ✖ '+e; }
 				rb.disabled=false;
+			});
+			var sb=document.getElementById('acepc-sales');
+			if(sb) sb.addEventListener('click',async function(){
+				sb.disabled=true; var out=document.getElementById('acepc-sales-out'); var offset=0, n=0;
+				try{
+					while(true){
+						out.textContent=' working… '+offset;
+						var fd=new FormData(); fd.append('action','ace_pc_sales'); fd.append('offset',offset); fd.append('_wpnonce','<?php echo esc_js( $nonce ); ?>');
+						var r=await (await fetch(ajaxurl,{method:'POST',body:fd,credentials:'same-origin'})).json();
+						if(!r.success){ out.textContent=' ✖ '+r.data; break; }
+						n+=r.data.changed; offset=r.data.next;
+						if(r.data.done){ out.textContent=' ✔ done, '+n+' product(s) no longer show a fake sale'; break; }
+					}
+				}catch(e){ out.textContent=' ✖ '+e; }
+				sb.disabled=false;
 			});
 			var bb=document.getElementById('acepc-brands');
 			if(bb) bb.addEventListener('click',async function(){
@@ -324,6 +344,24 @@ class ACE_PC_Settings {
 			self::log( sprintf( '#%d category: %s', $id, $txt ) );
 		}
 		wp_send_json_success( array( 'changed' => (object) $changed, 'next' => $off + 15, 'done' => $off + 15 >= count( $all ) ) );
+	}
+
+	public static function ajax_sales() {
+		check_ajax_referer( 'ace_pc' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( 'Not allowed' );
+		}
+		if ( function_exists( 'set_time_limit' ) ) {
+			@set_time_limit( 280 ); // phpcs:ignore
+		}
+		$all   = get_posts( array( 'post_type' => 'product', 'post_status' => array( 'publish', 'draft', 'pending', 'private' ), 'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'ASC', 'fields' => 'ids', 'no_found_rows' => true ) );
+		$off   = absint( $_POST['offset'] ?? 0 );
+		$batch = array_slice( $all, $off, 10 );
+		$done  = ACE_PC_Cleaner::drop_importer_sales( $batch );
+		foreach ( $done as $id => $n ) {
+			self::log( sprintf( '#%d fake sale price removed (%d price%s)', $id, $n, 1 === $n ? '' : 's' ) );
+		}
+		wp_send_json_success( array( 'changed' => count( $done ), 'next' => $off + 10, 'done' => $off + 10 >= count( $all ) ) );
 	}
 
 	public static function ajax_brands() {
