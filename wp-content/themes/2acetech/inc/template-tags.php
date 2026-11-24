@@ -426,21 +426,76 @@ function ace_category_list( $limit = 8 ) {
 }
 
 /**
+ * Which top-level categories each brand sells in (for the brand strip's category tabs).
+ *
+ * @return array{brands: array<int, string[]>, cats: WP_Term[]} brands: term id => category slugs; cats: slug => term.
+ */
+function ace_brand_category_map() {
+	$out = array( 'brands' => array(), 'cats' => array() );
+	$ids = get_posts(
+		array(
+			'post_type'      => 'product',
+			'post_status'    => 'publish',
+			'posts_per_page' => 500,
+			'fields'         => 'ids',
+			'no_found_rows'  => true,
+			'tax_query'      => array( array( 'taxonomy' => 'product_visibility', 'field' => 'name', 'terms' => array( 'exclude-from-catalog' ), 'operator' => 'NOT IN' ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+		)
+	);
+	if ( ! $ids ) {
+		return $out;
+	}
+	$brands = wp_get_object_terms( $ids, 'product_brand', array( 'fields' => 'all_with_object_id' ) );
+	$cats   = wp_get_object_terms( $ids, 'product_cat', array( 'fields' => 'all_with_object_id' ) );
+	if ( is_wp_error( $brands ) || is_wp_error( $cats ) ) {
+		return $out;
+	}
+	$top = function ( $term ) {
+		$guard = 0;
+		while ( $term->parent && $guard++ < 5 ) {
+			$parent = get_term( $term->parent, 'product_cat' );
+			if ( ! $parent || is_wp_error( $parent ) ) {
+				break;
+			}
+			$term = $parent;
+		}
+		return $term;
+	};
+	$by_product = array();
+	foreach ( $cats as $c ) {
+		$t = $top( $c );
+		if ( 'uncategorized' === $t->slug ) {
+			continue;
+		}
+		$by_product[ $c->object_id ][ $t->slug ] = $t;
+	}
+	foreach ( $brands as $b ) {
+		foreach ( isset( $by_product[ $b->object_id ] ) ? $by_product[ $b->object_id ] : array() as $slug => $t ) {
+			$out['brands'][ $b->term_id ][ $slug ] = $slug;
+			$out['cats'][ $slug ]                  = $t;
+		}
+	}
+	return $out;
+}
+
+/**
  * Brand list for the brand strip. Uses WooCommerce Brands when available.
  *
- * @return array[] Each: label, url, logo (HTML or '').
+ * @return array[] Each: label, url, logo (HTML or ''), cats (slugs of the top-level categories it sells in).
  */
 function ace_brand_list() {
 	$out = array();
 
 	if ( ace_has_store() && ! ace_is_demo() && taxonomy_exists( 'product_brand' ) ) {
-		$terms = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => true, 'number' => 12 ) );
+		$terms = get_terms( array( 'taxonomy' => 'product_brand', 'hide_empty' => true, 'number' => 60 ) );
 		if ( ! is_wp_error( $terms ) ) {
+			$map = ace_brand_category_map();
 			foreach ( $terms as $term ) {
 				$out[] = array(
 					'label' => $term->name,
 					'url'   => get_term_link( $term ),
 					'logo'  => ace_brand_logo( $term ),
+					'cats'  => isset( $map['brands'][ $term->term_id ] ) ? array_values( $map['brands'][ $term->term_id ] ) : array(),
 				);
 			}
 		}
@@ -450,7 +505,7 @@ function ace_brand_list() {
 	// advertise brands that are not sold (misleading, art. 5 UPNPR).
 	if ( ! $out && ace_is_demo() ) {
 		foreach ( ace_demo_brands() as $name ) {
-			$out[] = array( 'label' => $name, 'url' => '', 'logo' => '' );
+			$out[] = array( 'label' => $name, 'url' => '', 'logo' => '', 'cats' => array() );
 		}
 	}
 

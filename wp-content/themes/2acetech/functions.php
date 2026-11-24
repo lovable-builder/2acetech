@@ -146,6 +146,7 @@ function ace_assets() {
 	}
 	if ( is_front_page() ) {
 		wp_enqueue_script( 'ace-hero', $js . 'hero.js', array(), ace_ver( 'assets/js/hero.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
+		wp_enqueue_script( 'ace-brands', $js . 'brands.js', array(), ace_ver( 'assets/js/brands.js' ), array( 'strategy' => 'defer', 'in_footer' => true ) );
 	}
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {

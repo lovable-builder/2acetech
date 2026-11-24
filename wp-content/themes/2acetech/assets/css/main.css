@@ -771,9 +771,36 @@ form.search:focus-within { background: #fff; border-color: var(--ink); }
 /* Brands ----------------------------------------------------------------- */
 
 .brands { border-block: 1px solid var(--line); }
-.brands__list { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 24px; padding-block: 28px; }
+.brands__head { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 18px; padding-top: 24px; }
+.brands__title { margin: 0; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.brands__tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.brands__tab { font: inherit; font-size: 0.86rem; font-weight: 700; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--muted); cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+.brands__tab:hover { border-color: var(--ink); color: var(--ink); }
+.brands__tab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+/* Without JavaScript the tabs do nothing, so they stay hidden. */
+.brands__tabs { display: none; }
+.js .brands__tabs { display: flex; }
+.brands__marquee { overflow: hidden; }
+.brands__track { display: flex; width: max-content; max-width: 100%; margin-inline: auto; }
+.brands__list { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px 24px; padding-block: 28px; margin: 0; list-style: none; }
+.brands__list li[hidden] { display: none; }
 /* Every brand gets the same slot. --brand-h is set from Customize > Brand logos. */
 .brands__list li { flex: none; width: min(calc(var(--brand-h, 64px) * 2.6), calc(50% - 12px)); }
+.brands__list--clone { display: none; }
+/* Ticker: used only when the brands are too many to fit in one row (brands.js adds .is-moving). */
+.brands__marquee.is-moving { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.brands__marquee.is-moving .brands__track { max-width: none; margin-inline: 0; animation: brands-scroll var(--brands-time, 40s) linear infinite; }
+.brands__marquee.is-moving .brands__list { flex-wrap: nowrap; justify-content: flex-start; gap: 0 24px; padding-right: 24px; }
+.brands__marquee.is-moving .brands__list li { width: calc(var(--brand-h, 64px) * 2.6); }
+.brands__marquee.is-moving .brands__list--clone { display: flex; }
+.brands__marquee.is-moving:hover .brands__track,
+.brands__marquee.is-moving:focus-within .brands__track { animation-play-state: paused; }
+@keyframes brands-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+	.brands__marquee.is-moving { -webkit-mask-image: none; mask-image: none; overflow-x: auto; }
+	.brands__marquee.is-moving .brands__track { animation: none; }
+	.brands__marquee.is-moving .brands__list--clone { display: none; }
+}
 .brand {
 	display: flex;
 	align-items: center;
@@ -811,7 +838,7 @@ a.brand:hover { color: var(--ink); }
 }
 .brands--grey .brand-logo img { filter: grayscale(1); opacity: 0.6; }
 .brands--grey a.brand:hover .brand-logo img { filter: none; opacity: 1; }
-@media (max-width: 760px) { .brand { font-size: 1rem; } .brands__list { gap: 10px 24px; } }
+@media (max-width: 760px) { .brand { font-size: 1rem; } .brands__list { gap: 10px 24px; } .brands__head { padding-top: 18px; } }
 
 /* Newsletter ------------------------------------------------------------- */
 
