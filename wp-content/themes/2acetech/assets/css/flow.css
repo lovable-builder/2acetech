@@ -209,6 +209,8 @@ body.woocommerce-account:not(.logged-in) .woocommerce .u-columns { align-items: 
 /* Login + register */
 .woocommerce-account .u-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; float: none; }
 .woocommerce-account .u-columns .u-column1, .woocommerce-account .u-columns .u-column2 { float: none; width: auto; }
+.woocommerce-account .u-columns::before, .woocommerce-account .u-columns::after { display: none; } /* WooCommerce's clearfix would become two empty grid cells. */
+.woocommerce-account .u-columns { align-items: start; }
 .woocommerce form.login, .woocommerce form.register, .woocommerce form.lost_reset_password { padding: 28px; border: 1px solid var(--line); border-radius: var(--radius); }
 .woocommerce-account .woocommerce h2 { font-size: 1.5rem; font-weight: 800; }
 .woocommerce form.login .button, .woocommerce form.register .button { min-width: 160px; background: var(--accent); }
