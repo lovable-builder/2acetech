@@ -71,7 +71,10 @@ function ace_email_styles( $css ) {
 	return $css . '
 #template_header { background-color: #ffffff !important; color: #0b0b0d !important; border-bottom: 4px solid #f50505 !important; }
 #template_header h1, #template_header h1 a { color: #0b0b0d !important; text-shadow: none !important; }
-#template_header_image img { margin: 0 0 14px 0 !important; }
+#template_header_image img { width: 150px !important; max-width: 150px !important; height: auto !important; margin: 0 0 14px 0 !important; }
+body, #wrapper, #template_container, #body_content, #body_content td, #body_content p, #body_content li, #template_header h1, #template_footer td, #template_footer p, h2, h3 { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important; }
+#template_header h1 { font-size: 26px !important; line-height: 1.25 !important; font-weight: 800 !important; }
+#body_content p, #body_content li { font-size: 15px !important; line-height: 1.6 !important; }
 #template_footer #credit, #template_footer #credit p { color: #62626c !important; font-size: 12px !important; line-height: 1.6 !important; }
 ';
 }
