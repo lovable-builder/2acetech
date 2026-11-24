@@ -215,6 +215,15 @@ body.woocommerce-account:not(.logged-in) .woocommerce .u-columns { align-items: 
 .woocommerce-account .woocommerce h2 { font-size: 1.5rem; font-weight: 800; }
 .woocommerce form.login .button, .woocommerce form.register .button { min-width: 160px; background: var(--accent); }
 .woocommerce form.login .button:hover, .woocommerce form.register .button:hover { background: var(--accent-dark); }
+/* One form at a time (inc/account-switch.php): login first, a link swaps in the register form. */
+html.acct-toggle .woocommerce-account .u-columns { display: block; max-width: 520px; margin-inline: auto; }
+html.acct-toggle .woocommerce-account .u-column2 { display: none; }
+html.acct-toggle.acct-register .woocommerce-account .u-column1 { display: none; }
+html.acct-toggle.acct-register .woocommerce-account .u-column2 { display: block; }
+html.acct-toggle .woocommerce-account .page-title { text-align: center; }
+.acct-switch { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.95rem; }
+.acct-switch a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.acct-switch a:hover { text-decoration: underline; }
 .woocommerce-LostPassword a { color: var(--muted); text-decoration: underline; }
 .woocommerce-form-login__rememberme { display: inline-flex; align-items: center; gap: 8px; margin-right: 16px; }
 

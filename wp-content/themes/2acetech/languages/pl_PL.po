@@ -2077,3 +2077,15 @@ msgstr "Wszystkie"
 
 msgid "Show brands by category"
 msgstr "Pokaż marki według kategorii"
+
+msgid "Don't have an account yet?"
+msgstr "Nie masz jeszcze konta?"
+
+msgid "Register"
+msgstr "Zarejestruj się"
+
+msgid "Already have an account?"
+msgstr "Masz już konto?"
+
+msgid "Log in"
+msgstr "Zaloguj się"
