@@ -184,6 +184,9 @@ body .wc-block-components-order-summary-item__quantity span { color: #fff !impor
 
 .woocommerce-account .woocommerce { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 32px clamp(28px, 5vw, 64px); align-items: start; }
 .woocommerce-account .woocommerce::before, .woocommerce-account .woocommerce::after { display: none; } /* Clearfix pseudo-elements become grid items. */
+/* Logged out (login, register, lost password) there is no side menu: one column, forms side by side. */
+body.woocommerce-account:not(.logged-in) .woocommerce { display: block; }
+body.woocommerce-account:not(.logged-in) .woocommerce .u-columns { align-items: start; }
 .woocommerce-account:not(.logged-in) .woocommerce { display: block; }
 .woocommerce-account.logged-in .woocommerce > :not(.woocommerce-MyAccount-navigation):not(.woocommerce-MyAccount-content) { grid-column: 1 / -1; }
 .woocommerce-MyAccount-navigation { position: sticky; top: calc(var(--stick) + 20px); padding: 12px; background: var(--mist); border-radius: var(--radius); }
