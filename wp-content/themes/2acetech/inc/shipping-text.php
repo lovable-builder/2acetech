@@ -45,3 +45,42 @@ function ace_hide_delivery_order_meta( $formatted_meta ) {
 	return $formatted_meta;
 }
 add_filter( 'woocommerce_order_item_get_formatted_meta_data', 'ace_hide_delivery_order_meta', 99 );
+
+/**
+ * Cart and checkout blocks read their lines from the Store API: remove the estimate there too.
+ *
+ * @param WP_REST_Response|mixed $response Response.
+ * @param WP_REST_Server         $server   Server.
+ * @param WP_REST_Request        $request  Request.
+ * @return WP_REST_Response|mixed
+ */
+function ace_hide_delivery_store_api( $response, $server, $request ) {
+	if ( ! $response instanceof WP_REST_Response || 0 !== strpos( $request->get_route(), '/wc/store/' ) ) {
+		return $response;
+	}
+	$response->set_data( ace_scrub_item_data( $response->get_data() ) );
+	return $response;
+}
+add_filter( 'rest_post_dispatch', 'ace_hide_delivery_store_api', 99, 3 );
+
+/** Walk a response and drop item_data rows that only carry a delivery estimate. */
+function ace_scrub_item_data( $data ) {
+	if ( ! is_array( $data ) ) {
+		return $data;
+	}
+	foreach ( $data as $key => $value ) {
+		if ( 'item_data' === $key && is_array( $value ) ) {
+			$rows = array();
+			foreach ( $value as $row ) {
+				$text = is_array( $row ) ? ( isset( $row['display'] ) && '' !== $row['display'] ? $row['display'] : ( isset( $row['value'] ) ? $row['value'] : '' ) ) : '';
+				if ( ! is_string( $text ) || ! ace_is_supplier_delivery_text( $text ) ) {
+					$rows[] = $row;
+				}
+			}
+			$data[ $key ] = $rows;
+		} elseif ( is_array( $value ) ) {
+			$data[ $key ] = ace_scrub_item_data( $value );
+		}
+	}
+	return $data;
+}
