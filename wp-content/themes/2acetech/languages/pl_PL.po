@@ -2071,3 +2071,9 @@ msgstr "Marka"
 
 msgid "All brands"
 msgstr "Wszystkie marki"
+
+msgid "All"
+msgstr "Wszystkie"
+
+msgid "Show brands by category"
+msgstr "Pokaż marki według kategorii"
