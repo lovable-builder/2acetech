@@ -62,3 +62,11 @@
 .acepu-card__meta { padding: 14px 16px 18px; }
 .acepu-card__meta h2 { margin: 0 0 4px; font-size: 16px; }
 .acepu-card__meta p { margin: 0 0 12px; color: #50575e; }
+
+/* WordPress styles every h2 inside the edit screen; keep the pop-up headline as on the site. */
+#poststuff .acepu h2.acepu__title { margin: 0; padding: 0; font-size: 2.15rem; font-weight: 800; line-height: 1.12; }
+#poststuff .acepu--phone h2.acepu__title { font-size: 1.6rem; }
+#poststuff .acepu--slide h2.acepu__title { font-size: 1.35rem; }
+#poststuff .acepu--bar h2.acepu__title { font-size: 1rem; }
+#poststuff .acepu--full h2.acepu__title { font-size: 3.4rem; }
+#poststuff .acepu h3 { margin: 0; padding: 0; font-size: 1.3rem; font-weight: 800; }
