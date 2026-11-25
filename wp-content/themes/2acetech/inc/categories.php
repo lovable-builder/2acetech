@@ -97,4 +97,5 @@ function ace_category_chips() {
 	}
 	echo '</ul></nav>';
 }
-add_action( 'woocommerce_before_shop_loop', 'ace_category_chips', 5 );
+// Replaced by the filter side panel (inc/shop-filters.php); kept for reference.
+// add_action( 'woocommerce_before_shop_loop', 'ace_category_chips', 5 );

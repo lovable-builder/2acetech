@@ -114,4 +114,5 @@ function ace_brand_filter() {
 	}
 	echo '</ul></nav>';
 }
-add_action( 'woocommerce_before_shop_loop', 'ace_brand_filter', 6 );
+// Replaced by the filter side panel (inc/shop-filters.php); kept for reference.
+// add_action( 'woocommerce_before_shop_loop', 'ace_brand_filter', 6 );

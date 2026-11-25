@@ -47,6 +47,7 @@ require_once ACE_DIR . '/inc/brands.php';
 require_once ACE_DIR . '/inc/categories.php';
 require_once ACE_DIR . '/inc/mega-menu.php';
 require_once ACE_DIR . '/inc/brand-filter.php';
+require_once ACE_DIR . '/inc/shop-filters.php';
 require_once ACE_DIR . '/inc/woocommerce.php';
 require_once ACE_DIR . '/inc/product.php';
 require_once ACE_DIR . '/inc/product-details.php';

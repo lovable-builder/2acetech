@@ -2095,3 +2095,51 @@ msgstr "Polecane"
 
 msgid "Shop by brand"
 msgstr "Kupuj według marki"
+
+msgid "Filters"
+msgstr "Filtry"
+
+msgid "Close filters"
+msgstr "Zamknij filtry"
+
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Price from"
+msgstr "Cena od"
+
+msgid "Price to"
+msgstr "Cena do"
+
+msgid "up to %s zł"
+msgstr "do %s zł"
+
+msgid "over %s zł"
+msgstr "powyżej %s zł"
+
+msgid "from %s zł"
+msgstr "od %s zł"
+
+
+msgid "In stock only"
+msgstr "Tylko dostępne"
+
+
+msgid "Show results"
+msgstr "Pokaż wyniki"
+
+msgid "Clear all filters"
+msgstr "Wyczyść wszystkie filtry"
+
+msgid "Active filters"
+msgstr "Aktywne filtry"
+
+msgid "Remove filter"
+msgstr "Usuń filtr"
+
+msgid "Show more"
+msgstr "Pokaż więcej"
+
+msgid "Show less"
+msgstr "Pokaż mniej"
