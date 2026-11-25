@@ -32,8 +32,8 @@
 		#fff;
 	border: 1px solid #dcdcde; border-radius: 10px;
 }
-.acepu-stage__inner { position: relative; width: 1000px; height: 620px; transform-origin: 0 0; transform: scale(var(--s, 0.5)); }
-.acepu-stage__inner.is-phone { height: 760px; }
+.acepu-stage__inner { --stage-h: 620px; position: relative; width: 1000px; transform-origin: 0 0; transform: scale(var(--s, 0.5)); }
+.acepu-stage__inner.is-phone { --stage-h: 760px; }
 
 .acepu-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; text-align: center; }
 .acepu-stats b { display: block; font-size: 1.25rem; }
@@ -58,7 +58,7 @@
 .acepu-wrap .acepu-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 22px; margin-top: 18px; }
 .acepu-card { overflow: hidden; background: #fff; border: 1px solid #dcdcde; border-radius: 12px; }
 .acepu-card__stage { position: relative; overflow: hidden; background: #eef0f3; }
-.acepu-card__inner { position: relative; width: 1000px; height: 560px; transform-origin: 0 0; transform: scale(var(--s, 0.34)); pointer-events: none; }
+.acepu-card__inner { --stage-h: 560px; position: relative; width: 1000px; transform-origin: 0 0; transform: scale(var(--s, 0.34)); pointer-events: none; }
 .acepu-card__meta { padding: 14px 16px 18px; }
 .acepu-card__meta h2 { margin: 0 0 4px; font-size: 16px; }
 .acepu-card__meta p { margin: 0 0 12px; color: #50575e; }

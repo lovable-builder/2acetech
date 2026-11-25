@@ -82,6 +82,8 @@ class ACEPU_Render {
 			$classes[] = 'acepu--static';
 			$classes[] = 'is-open';
 		}
+		// In the editor the preview sits inside WordPress's own <form>, and browsers drop a nested one.
+		$ftag     = $static ? 'div' : 'form';
 		$code_url = 'code' === $mode && $s['code'] ? self::apply_url( $s['code'], $to ) : '';
 
 		ob_start();
@@ -123,7 +125,7 @@ class ACEPU_Render {
 					<?php endif; ?>
 
 					<?php if ( 'email' === $mode ) : ?>
-						<form class="acepu__form" data-acepu-form novalidate>
+						<<?php echo $ftag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="acepu__form" data-acepu-form<?php echo $static ? '' : ' novalidate'; ?>>
 							<input type="hidden" name="popup" value="<?php echo (int) $id; ?>">
 							<label class="screen-reader-text acepu__sr" for="acepu-<?php echo (int) $id; ?>-e"><?php esc_html_e( 'Your e-mail address', '2ace-popups' ); ?></label>
 							<div class="acepu__row">
@@ -144,7 +146,7 @@ class ACEPU_Render {
 							<?php endif; ?>
 							<input type="text" name="website" value="" tabindex="-1" autocomplete="off" class="acepu__hp" aria-hidden="true">
 							<p class="acepu__err" role="alert" hidden></p>
-						</form>
+						</<?php echo $ftag; // phpcs:ignore WordPress.Security.EscapeOutput ?>>
 						<div class="acepu__done" hidden aria-live="polite">
 							<h3><?php echo esc_html( self::tokens( $s['done_title'] ? $s['done_title'] : __( 'Your code is ready!', '2ace-popups' ), $s ) ); ?></h3>
 							<?php if ( $s['done_text'] ) : ?><p><?php echo esc_html( self::tokens( $s['done_text'], $s ) ); ?></p><?php endif; ?>

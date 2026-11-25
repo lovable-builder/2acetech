@@ -184,8 +184,9 @@ html.acepu-lock { overflow: hidden; }
 .acepu--bar .acepu__x { top: 50%; margin-top: -20px; }
 
 /* Editor preview: the pop-up sits inside its stage instead of covering the page. */
-.acepu--static { position: absolute; z-index: 1; }
+.acepu--static { position: relative; inset: auto; z-index: 1; width: 100%; min-height: var(--stage-h, 560px); }
 .acepu--static .acepu__box { max-height: none; }
+.acepu--static.acepu--full .acepu__box { height: auto; min-height: var(--stage-h, 560px); }
 
 @media (max-width: 720px) {
 	.acepu--split .acepu__box, .acepu--full .acepu__box { grid-template-columns: minmax(0, 1fr); }
