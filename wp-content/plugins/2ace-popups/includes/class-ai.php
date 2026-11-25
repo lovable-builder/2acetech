@@ -71,14 +71,48 @@ class ACEPU_AI {
 		if ( is_wp_error( $r ) ) {
 			return new WP_Error( 'acepu_ai_http', $r->get_error_message() );
 		}
-		self::spend();
 		$code = (int) wp_remote_retrieve_response_code( $r );
 		$j    = json_decode( wp_remote_retrieve_body( $r ), true );
+		if ( $code < 400 ) {
+			self::spend(); // A model that does not exist costs nothing and does not use up the daily limit.
+		}
 		if ( $code >= 400 || ! is_array( $j ) ) {
 			$why = isset( $j['error']['message'] ) ? $j['error']['message'] : 'HTTP ' . $code;
-			return new WP_Error( 'acepu_ai_api', sprintf( /* translators: %s: Google's message. */ __( 'Google returned an error: %s', '2ace-popups' ), $why ) );
+			return new WP_Error( 'acepu_ai_api', sprintf( /* translators: %s: Google's message. */ __( 'Google returned an error: %s', '2ace-popups' ), $why ), array( 'http' => $code ) );
 		}
 		return $j;
+	}
+
+	/** Models that may answer text requests, the configured one first. Google offers different models in different regions. */
+	public static function text_candidates() {
+		$o     = ACEPU_Store::options();
+		$list  = array( array( $o['ai_text'], $o['ai_text_loc'] ) );
+		$other = array(
+			array( 'gemini-2.5-flash', 'us-central1' ),
+			array( 'gemini-2.5-flash', 'europe-west4' ),
+			array( 'gemini-2.5-flash-lite', 'us-central1' ),
+			array( 'gemini-2.0-flash-001', 'us-central1' ),
+			array( 'gemini-2.5-pro', 'us-central1' ),
+			array( 'gemini-2.5-pro', 'global' ),
+			array( 'gemini-3-pro-preview', 'global' ),
+			array( 'gemini-3-flash-preview', 'global' ),
+			array( 'gemini-2.5-flash', 'global' ),
+		);
+		foreach ( $other as $c ) {
+			if ( $c[0] !== $list[0][0] || $c[1] !== $list[0][1] ) {
+				$list[] = $c;
+			}
+		}
+		return $list;
+	}
+
+	/** Is this error "that model is not available to you" (try the next one) rather than a real failure? */
+	private static function model_missing( $err ) {
+		if ( ! is_wp_error( $err ) || 'acepu_ai_api' !== $err->get_error_code() ) {
+			return false;
+		}
+		$d = $err->get_error_data();
+		return ( isset( $d['http'] ) && in_array( (int) $d['http'], array( 400, 403, 404 ), true ) ) && (bool) preg_match( '/not found|does not have access|not supported|invalid model|unsupported|permission/i', $err->get_error_message() );
 	}
 
 	/* ---------------------------------------------------------------------
@@ -115,39 +149,51 @@ class ACEPU_AI {
 	 * @return array|WP_Error Fields: eyebrow, headline, text, cta_label, dismiss_label, badge, footnote, bg, fg, accent, accent_fg, image_prompt.
 	 */
 	public static function suggest( $in ) {
-		$o   = ACEPU_Store::options();
-		$str = array( 'type' => 'STRING' );
-		$j   = self::call(
-			$o['ai_text'],
-			$o['ai_text_loc'],
-			array(
-				'contents'         => array( array( 'role' => 'user', 'parts' => array( array( 'text' => self::text_prompt( $in ) ) ) ) ),
-				'generationConfig' => array(
-					'temperature'      => 0.8,
-					'responseMimeType' => 'application/json',
-					'responseSchema'   => array(
-						'type'       => 'OBJECT',
-						'properties' => array(
-							'eyebrow'       => $str,
-							'headline'      => $str,
-							'text'          => $str,
-							'cta_label'     => $str,
-							'dismiss_label' => $str,
-							'badge'         => $str,
-							'footnote'      => $str,
-							'bg'            => $str,
-							'fg'            => $str,
-							'accent'        => $str,
-							'accent_fg'     => $str,
-							'image_prompt'  => $str,
-						),
+		$str  = array( 'type' => 'STRING' );
+		$body = array(
+			'contents'         => array( array( 'role' => 'user', 'parts' => array( array( 'text' => self::text_prompt( $in ) ) ) ) ),
+			'generationConfig' => array(
+				'temperature'      => 0.8,
+				'responseMimeType' => 'application/json',
+				'responseSchema'   => array(
+					'type'       => 'OBJECT',
+					'properties' => array(
+						'eyebrow'       => $str,
+						'headline'      => $str,
+						'text'          => $str,
+						'cta_label'     => $str,
+						'dismiss_label' => $str,
+						'badge'         => $str,
+						'footnote'      => $str,
+						'bg'            => $str,
+						'fg'            => $str,
+						'accent'        => $str,
+						'accent_fg'     => $str,
+						'image_prompt'  => $str,
 					),
 				),
 			),
-			60
 		);
+		$j     = null;
+		$tried = array();
+		foreach ( self::text_candidates() as $c ) {
+			$j = self::call( $c[0], $c[1], $body, 60 );
+			if ( ! is_wp_error( $j ) ) {
+				$o = ACEPU_Store::options();
+				if ( $c[0] !== $o['ai_text'] || $c[1] !== $o['ai_text_loc'] ) { // Remember the one that works.
+					$o['ai_text']     = $c[0];
+					$o['ai_text_loc'] = $c[1];
+					update_option( ACEPU_Store::OPTION, $o, false );
+				}
+				break;
+			}
+			$tried[] = $c[0] . ' (' . $c[1] . ')';
+			if ( ! self::model_missing( $j ) ) {
+				return $j; // A real problem (limit, sign-in, network): do not keep trying.
+			}
+		}
 		if ( is_wp_error( $j ) ) {
-			return $j;
+			return new WP_Error( 'acepu_ai_nomodel', sprintf( /* translators: %s: model list. */ __( 'None of the text models is available to your Google project (tried: %s). In Google Cloud, enable Vertex AI Gemini models for the project, or set a model you have in Pop-ups > Settings.', '2ace-popups' ), implode( ', ', $tried ) ) );
 		}
 		$raw = '';
 		foreach ( isset( $j['candidates'][0]['content']['parts'] ) ? $j['candidates'][0]['content']['parts'] : array() as $part ) {

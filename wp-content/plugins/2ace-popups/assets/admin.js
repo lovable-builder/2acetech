@@ -52,6 +52,7 @@
 		const fd = new FormData();
 		fd.append('action', 'acepu_preview');
 		fd.append('nonce', cfg.nonce);
+		if (inner.classList.contains('is-phone')) fd.append('phone', '1');
 		new FormData(form).forEach((v, k) => { if (k.startsWith('acepu[')) fd.append(k, v); });
 		const my = ++req;
 		fetch(cfg.ajax, { method: 'POST', body: fd, credentials: 'same-origin' })

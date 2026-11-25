@@ -201,6 +201,19 @@ html.acepu-lock { overflow: hidden; }
 	.acepu--bar .acepu__btn { width: auto; }
 	.acepu__code { width: 100%; justify-content: space-between; }
 }
+
+/* Same rules for the editor's phone preview (the window is wide there, so the media query cannot apply). */
+.acepu--phone.acepu--split .acepu__box, .acepu--phone.acepu--full .acepu__box { grid-template-columns: minmax(0, 1fr); }
+.acepu--phone.acepu--split .acepu__media, .acepu--phone.acepu--full .acepu__media { order: 0 !important; height: 150px; min-height: 0; }
+.acepu--phone.acepu--full { overflow: auto; }
+.acepu--phone.acepu--full .acepu__box { height: auto; min-height: 100%; }
+.acepu--phone.acepu--slide { padding: 0; }
+.acepu--phone.acepu--slide .acepu__box { width: 100%; border-radius: var(--r) var(--r) 0 0; transform: translateY(100%); }
+.acepu--phone.acepu--bar .acepu__body { padding: 12px 52px 12px 16px; }
+.acepu--phone .acepu__row { flex-direction: column; }
+.acepu--phone .acepu__btn { width: 100%; }
+.acepu--phone.acepu--bar .acepu__btn { width: auto; }
+.acepu--phone .acepu__code { width: 100%; justify-content: space-between; }
 @media (prefers-reduced-motion: reduce) {
 	.acepu__box, .acepu__overlay { transition: none; }
 	.acepu--anim-rise .acepu__box, .acepu--anim-zoom .acepu__box { transform: none; }

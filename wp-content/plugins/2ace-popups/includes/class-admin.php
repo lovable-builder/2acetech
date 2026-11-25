@@ -321,7 +321,7 @@ class ACEPU_Admin {
 		self::ajax_guard();
 		$raw = isset( $_POST['acepu'] ) ? wp_unslash( $_POST['acepu'] ) : array(); // phpcs:ignore WordPress.Security
 		$s   = ACEPU_Store::sanitize( $raw );
-		wp_send_json_success( array( 'html' => ACEPU_Render::html( 0, $s, array( 'static' => true ) ) ) );
+		wp_send_json_success( array( 'html' => ACEPU_Render::html( 0, $s, array( 'static' => true, 'phone' => ! empty( $_POST['phone'] ) ) ) ) );
 	}
 
 	public static function ajax_ai_text() {

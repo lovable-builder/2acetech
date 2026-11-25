@@ -78,6 +78,9 @@ class ACEPU_Render {
 		if ( ! $img && 'background' !== $pos ) {
 			$classes[] = 'acepu--noimg';
 		}
+		if ( ! empty( $args['phone'] ) ) {
+			$classes[] = 'acepu--phone';
+		}
 		if ( $static ) {
 			$classes[] = 'acepu--static';
 			$classes[] = 'is-open';

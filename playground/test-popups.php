@@ -187,6 +187,43 @@ try {
 	$o = ACEPU_Store::options(); $o['ai_limit'] = 2; update_option( ACEPU_Store::OPTION, $o );
 	$out['daily limit stops further calls'] = 'acepu_ai_limit' === ACEPU_AI::artwork( 'a tent under a starry sky', 'portrait' )->get_error_code();
 
+	/* ---- Text model fallback ---- */
+	$o = ACEPU_Store::options(); $o['ai_limit'] = 30; $o['ai_text'] = 'gemini-9-flash'; $o['ai_text_loc'] = 'global'; update_option( ACEPU_Store::OPTION, $o );
+	update_option( 'acepu_ai_day', array( 'd' => '', 'n' => 0 ) );
+	$miss = function ( $pre, $args, $url ) {
+		if ( false !== strpos( $url, 'gemini-9' ) ) {
+			return array( 'response' => array( 'code' => 404 ), 'body' => wp_json_encode( array( 'error' => array( 'message' => 'Publisher model `x` was not found or your project does not have access to it.' ) ) ) );
+		}
+		return $pre;
+	};
+	add_filter( 'pre_http_request', $miss, 20, 3 );
+	$sg2 = ACEPU_AI::suggest( array( 'occasion' => 'x', 'brief' => 'camping', 'discount' => '', 'mode' => 'info', 'tone' => 'friendly' ) );
+	$o2  = ACEPU_Store::options();
+	$out['missing model: falls back to the next one'] = is_array( $sg2 ) && 'Camping taniej o 15%' === $sg2['headline'];
+	$out['the working model is remembered'] = 'gemini-2.5-flash' === $o2['ai_text'] && 'us-central1' === $o2['ai_text_loc'];
+	$out['the failed attempt cost nothing'] = 29 === ACEPU_AI::left();
+	remove_filter( 'pre_http_request', $miss, 20 );
+	$all = function ( $pre, $args, $url ) {
+		if ( false !== strpos( $url, 'aiplatform.googleapis.com' ) ) {
+			return array( 'response' => array( 'code' => 404 ), 'body' => wp_json_encode( array( 'error' => array( 'message' => 'Publisher model was not found or your project does not have access to it.' ) ) ) );
+		}
+		return $pre;
+	};
+	add_filter( 'pre_http_request', $all, 20, 3 );
+	$none = ACEPU_AI::suggest( array( 'occasion' => 'x', 'brief' => 'y', 'discount' => '', 'mode' => 'info', 'tone' => 'friendly' ) );
+	$out['no model available: one clear error listing what was tried'] = is_wp_error( $none ) && 'acepu_ai_nomodel' === $none->get_error_code() && false !== strpos( $none->get_error_message(), 'us-central1' );
+	remove_filter( 'pre_http_request', $all, 20 );
+	$perm = function ( $pre, $args, $url ) {
+		if ( false !== strpos( $url, 'aiplatform.googleapis.com' ) ) {
+			return array( 'response' => array( 'code' => 429 ), 'body' => wp_json_encode( array( 'error' => array( 'message' => 'Quota exceeded' ) ) ) );
+		}
+		return $pre;
+	};
+	add_filter( 'pre_http_request', $perm, 20, 3 );
+	$q = ACEPU_AI::suggest( array( 'occasion' => 'x', 'brief' => 'y', 'discount' => '', 'mode' => 'info', 'tone' => 'friendly' ) );
+	$out['a real error (quota) stops at once'] = is_wp_error( $q ) && 'acepu_ai_api' === $q->get_error_code();
+	remove_filter( 'pre_http_request', $perm, 20 );
+
 	/* ---- Admin screens ---- */
 	require_once ABSPATH . 'wp-admin/includes/admin.php';
 	set_current_screen( 'edit-ace_popup' );
