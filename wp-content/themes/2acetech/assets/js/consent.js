@@ -45,6 +45,7 @@
 			Array.from(old.attributes).forEach((a) => {
 				if (a.name !== 'type' && a.name !== 'data-ace-consent') s.setAttribute(a.name, a.value);
 			});
+			s.async = old.hasAttribute('async'); // keep the original order: scripts started later must wait for earlier ones
 			s.textContent = old.textContent;
 			old.parentNode.insertBefore(s, old.nextSibling);
 		});
