@@ -451,6 +451,7 @@ function ace_filter_facets( $scope, $f ) {
 		}
 		foreach ( $row['attrs'] as $slug => $a ) {
 			$out['attrs'][ $slug ]['label'] = $a['label'];
+			$out['attrs'][ $slug ]['n']     = ( isset( $out['attrs'][ $slug ]['n'] ) ? $out['attrs'][ $slug ]['n'] : 0 ) + 1; // Products that have this option.
 			if ( ! ace_filter_match( $row, $f, 'attr:' . $slug ) ) {
 				// Still register the option names so chosen ones do not vanish.
 				foreach ( $a['values'] as $key => $label ) {
@@ -498,14 +499,17 @@ function ace_filter_facets( $scope, $f ) {
 		},
 		ARRAY_FILTER_USE_BOTH
 	);
-	// Colour first, then the groups with most choices; at most six groups.
+	// Plain colour first, then the options most products have; at most seven groups.
+	$plain = static function ( $g ) {
+		return (bool) preg_match( '/^\s*(kolor|color)\s*$/iu', $g['label'] );
+	};
 	uasort(
 		$out['attrs'],
-		static function ( $a, $b ) {
-			return (int) $b['is_color'] <=> (int) $a['is_color'] ?: count( $b['values'] ) <=> count( $a['values'] );
+		static function ( $a, $b ) use ( $plain ) {
+			return (int) $plain( $b ) <=> (int) $plain( $a ) ?: $b['n'] <=> $a['n'] ?: count( $b['values'] ) <=> count( $a['values'] );
 		}
 	);
-	$out['attrs'] = array_slice( $out['attrs'], 0, 6, true );
+	$out['attrs'] = array_slice( $out['attrs'], 0, 7, true );
 	return $out;
 }
 
