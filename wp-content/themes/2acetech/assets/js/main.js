@@ -57,6 +57,84 @@
 		});
 	}
 
+	/* Mega menu: categories on the left, subcategories and brands on the right.
+	   Opens on hover (desktop) or tap (the button) and switches panels after a
+	   short hover delay, so a diagonal mouse move does not flip through every category. */
+	const mega = $('[data-mega]');
+	if (mega) {
+		const panel = $('.mega', mega);
+		const btn = $('[data-mega-toggle]', mega);
+		const items = $$('[data-mega-item]', panel);
+		const small = window.matchMedia('(max-width: 960px)');
+		const hoverable = window.matchMedia('(hover: hover)');
+		let openT, closeT, switchT;
+		const show = (id) => {
+			const target = id ? items.find((li) => li.dataset.megaItem === String(id)) : null;
+			if (target || !small.matches) {
+				items.forEach((li) => li.classList.toggle('is-active', li === (target || items[0])));
+			}
+		};
+		const set = (open, id) => {
+			clearTimeout(closeT);
+			panel.hidden = !open;
+			if (btn) btn.setAttribute('aria-expanded', String(open));
+			if (open) show(id);
+		};
+		const later = (open, id, ms) => {
+			clearTimeout(openT);
+			clearTimeout(closeT);
+			const run = () => set(open, id);
+			if (open) openT = setTimeout(run, ms); else closeT = setTimeout(run, ms);
+		};
+
+		if (small.matches) items.forEach((li) => li.classList.remove('is-active'));
+
+		if (btn) {
+			btn.addEventListener('click', () => set(panel.hidden));
+			btn.addEventListener('mouseenter', () => { if (hoverable.matches && !small.matches) later(true, null, 80); });
+		}
+		$$('[data-mega-open]', mega).forEach((a) => {
+			a.addEventListener('mouseenter', () => { if (hoverable.matches && !small.matches) later(true, a.dataset.megaOpen, 80); });
+		});
+		const pn = $('.primary-nav', mega);
+		if (pn) pn.addEventListener('mouseenter', () => { if (!small.matches) later(false, null, 60); });
+
+		mega.addEventListener('mouseleave', () => { clearTimeout(openT); if (hoverable.matches && !small.matches) later(false, null, 260); });
+		mega.addEventListener('mouseenter', () => clearTimeout(closeT));
+
+		items.forEach((li) => {
+			const link = $('.mega__link', li);
+			li.addEventListener('mouseenter', () => {
+				if (small.matches || !hoverable.matches) return;
+				clearTimeout(switchT);
+				switchT = setTimeout(() => show(li.dataset.megaItem), 90);
+			});
+			li.addEventListener('mouseleave', () => clearTimeout(switchT));
+			link.addEventListener('focus', () => { if (!small.matches) show(li.dataset.megaItem); });
+			// Phones: the first tap opens the category's panel under it; "View all" inside goes to the category.
+			link.addEventListener('click', (e) => {
+				if (!small.matches || !$('.mega__pane', li)) return;
+				e.preventDefault();
+				li.classList.toggle('is-active');
+			});
+		});
+
+		document.addEventListener('click', (e) => {
+			if (!small.matches && !mega.contains(e.target)) set(false);
+		});
+		mega.addEventListener('keydown', (e) => {
+			if (e.key !== 'Escape' || panel.hidden || small.matches) return;
+			set(false);
+			const back = btn && btn.offsetParent ? btn : $('[data-mega-open]', mega);
+			if (back) back.focus();
+		});
+		small.addEventListener('change', () => {
+			panel.hidden = true;
+			if (btn) btn.setAttribute('aria-expanded', 'false');
+			items.forEach((li, i) => li.classList.toggle('is-active', !small.matches && i === 0));
+		});
+	}
+
 	/* Product rails ------------------------------------------------------ */
 	$$('[data-rail]').forEach((rail) => {
 		const section = rail.closest('section');

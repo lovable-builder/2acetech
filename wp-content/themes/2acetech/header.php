@@ -75,14 +75,17 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 		// Up to 6 main categories sit directly in the bar on desktop; more than that stay in the "Shop by category" menu.
 		$ace_tree   = ace_category_tree( 12 );
 		$ace_inline = $ace_tree && count( $ace_tree ) <= 6;
+		// AliExpress-style menu: category list on the left, subcategories and brands of the one you point at on the right.
+		$ace_mega   = $ace_tree ? ace_mega_data() : array();
 		?>
-		<div class="container nav__row<?php echo $ace_inline ? ' nav__row--cats' : ''; ?>">
-			<div class="departments" data-departments>
-				<button class="departments__btn" type="button" aria-expanded="false" aria-controls="departments-panel" data-departments-toggle>
+		<div class="container nav__row<?php echo $ace_inline ? ' nav__row--cats' : ''; ?><?php echo $ace_mega ? ' nav__row--mega' : ''; ?>"<?php echo $ace_mega ? ' data-mega' : ''; ?>>
+			<div class="departments"<?php echo $ace_mega ? '' : ' data-departments'; ?>>
+				<button class="departments__btn" type="button" aria-expanded="false" aria-controls="departments-panel" <?php echo $ace_mega ? 'data-mega-toggle' : 'data-departments-toggle'; ?>>
 					<?php echo ace_icon( 'menu', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 					<span><?php esc_html_e( 'Shop by category', '2acetech' ); ?></span>
 					<?php echo ace_icon( 'chevron', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 				</button>
+				<?php if ( ! $ace_mega ) : ?>
 				<nav class="departments__panel" id="departments-panel" aria-label="<?php esc_attr_e( 'Product categories', '2acetech' ); ?>" hidden>
 					<?php
 					if ( has_nav_menu( 'departments' ) ) {
@@ -116,14 +119,15 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 					}
 					?>
 				</nav>
+				<?php endif; ?>
 			</div>
 
 			<?php if ( $ace_inline ) : ?>
 				<ul class="catbar" aria-label="<?php esc_attr_e( 'Product categories', '2acetech' ); ?>">
 					<?php foreach ( $ace_tree as $cat ) : ?>
 						<li>
-							<a href="<?php echo esc_url( $cat['url'] ); ?>"><?php echo esc_html( $cat['label'] ); ?><?php echo $cat['children'] ? ace_icon( 'chevron', 14 ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
-							<?php if ( $cat['children'] ) : ?>
+							<a href="<?php echo esc_url( $cat['url'] ); ?>"<?php echo $ace_mega ? ' data-mega-open="' . (int) $cat['term']->term_id . '"' : ''; ?>><?php echo esc_html( $cat['label'] ); ?><?php echo $cat['children'] ? ace_icon( 'chevron', 14 ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?></a>
+							<?php if ( $cat['children'] && ! $ace_mega ) : ?>
 								<ul class="catbar__sub">
 									<li class="menu__all"><a href="<?php echo esc_url( $cat['url'] ); ?>"><?php echo esc_html( sprintf( /* translators: %s: category name. */ __( 'All in %s', '2acetech' ), $cat['label'] ) ); ?></a></li>
 									<?php foreach ( $cat['children'] as $kid ) : ?>
@@ -152,6 +156,12 @@ $wish    = apply_filters( 'ace_wishlist_url', '' );
 				);
 				?>
 			</nav>
+
+			<?php if ( $ace_mega ) : ?>
+				<div class="mega" id="departments-panel" role="region" aria-label="<?php esc_attr_e( 'Product categories', '2acetech' ); ?>" hidden>
+					<?php ace_mega_render( $ace_mega ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </header>

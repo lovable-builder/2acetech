@@ -2089,3 +2089,9 @@ msgstr "Masz już konto?"
 
 msgid "Log in"
 msgstr "Zaloguj się"
+
+msgid "Recommended"
+msgstr "Polecane"
+
+msgid "Shop by brand"
+msgstr "Kupuj według marki"
