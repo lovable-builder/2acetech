@@ -194,12 +194,14 @@ function ace_mega_render( $data ) {
 		if ( $top['brands'] ) {
 			echo '<section class="mega__sec"><h3>' . esc_html__( 'Shop by brand', '2acetech' ) . '</h3><ul class="mega__tiles mega__tiles--brands">';
 			foreach ( $top['brands'] as $b ) {
+				// With a logo: logo plus name underneath. Without: the name itself is the tile, no repeated caption.
 				$face = $b['logo'] ? $b['logo'] : '<span class="mega__brandname">' . esc_html( $b['label'] ) . '</span>';
 				printf(
-					'<li><a class="mega__tile mega__tile--brand" href="%s"><span class="mega__pic mega__pic--brand">%s</span><span class="mega__name">%s</span></a></li>',
+					'<li><a class="mega__tile mega__tile--brand" href="%s" aria-label="%s"><span class="mega__pic mega__pic--brand">%s</span>%s</a></li>',
 					esc_url( $b['url'] ),
+					esc_attr( $b['label'] ),
 					$face, // Logo markup from ace_brand_logo(), or escaped name above.
-					esc_html( $b['label'] )
+					$b['logo'] ? '<span class="mega__name">' . esc_html( $b['label'] ) . '</span>' : ''
 				);
 			}
 			echo '</ul></section>';
