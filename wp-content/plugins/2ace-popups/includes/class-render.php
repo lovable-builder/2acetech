@@ -15,7 +15,7 @@ class ACEPU_Render {
 		return 'percent' === $s['gen_type'] ? $s['gen_amount'] . '%' : $s['gen_amount'] . ' zł';
 	}
 
-	/** Replace {discount}, {coupon_code}, {end_date}, {site}. */
+	/** Replace {discount}, {coupon_code}, {end_date}, {site}, {prize}. */
 	public static function tokens( $text, $s, $prize = '' ) {
 		$end = ACEPU_Store::ts( $s['end'] );
 		return strtr(
@@ -25,6 +25,7 @@ class ACEPU_Render {
 				'{coupon_code}' => 'code' === $s['mode'] ? $s['code'] : '',
 				'{end_date}'    => $end ? wp_date( 'j.m.Y, H:i', $end ) : '',
 				'{site}'        => get_bloginfo( 'name' ),
+				'{prize}'       => '' === $prize ? '{prize}' : $prize, // On the wheel the browser fills it in after the spin.
 			)
 		);
 	}

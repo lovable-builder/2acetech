@@ -90,8 +90,8 @@ class ACEPU_Coupons {
 			$valid .= ' ' . __( 'Use the same e-mail address when you place the order.', '2ace-popups' );
 		}
 		$body  = wpautop( esc_html( ACEPU_Render::tokens( $intro, $s, $prize_label ) ) );
-		$body .= '<p style="margin:24px 0;text-align:center"><span style="display:inline-block;padding:14px 26px;border:2px dashed #f50505;border-radius:10px;font:700 24px/1.2 monospace;letter-spacing:2px;color:#0b0b0d">' . esc_html( $code ) . '</span></p>';
-		$body .= '<p style="text-align:center"><a href="' . esc_url( ACEPU_Render::apply_url( $code, '' ) ) . '" style="display:inline-block;padding:12px 24px;background:#f50505;color:#ffffff;border-radius:999px;text-decoration:none;font-weight:700">' . esc_html__( 'Use it now', '2ace-popups' ) . '</a></p>';
+		$body .= '<p style="margin:24px 0 28px;text-align:center"><span style="display:inline-block;padding:14px 26px;border:2px dashed #f50505;border-radius:10px;font:700 24px/1.2 monospace;letter-spacing:2px;color:#0b0b0d">' . esc_html( $code ) . '</span></p>';
+		$body .= '<p style="margin:0 0 20px;text-align:center"><a href="' . esc_url( ACEPU_Render::apply_url( $code, '' ) ) . '" style="display:inline-block;padding:12px 24px;background:#f50505;color:#ffffff;border-radius:999px;text-decoration:none;font-weight:700">' . esc_html__( 'Use it now', '2ace-popups' ) . '</a></p>';
 		$body .= '<p style="color:#62626c;font-size:13px">' . esc_html( $valid ) . '</p>';
 
 		if ( function_exists( 'WC' ) && WC()->mailer() ) {

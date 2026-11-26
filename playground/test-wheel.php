@@ -88,7 +88,7 @@ try {
 	$out['winner gets the drawn gift as a personal coupon'] = 200 === $r->get_status() && 'A' === $sd['prize'] && 'percent' === $cp->get_discount_type() && 10.0 === (float) $cp->get_amount() && 1 === $cp->get_usage_limit() && array( 'maria@example.com' ) === $cp->get_email_restrictions() && 0 === strpos( $sd['code'], 'KOLO-' );
 	$lead = $wpdb->get_row( 'SELECT * FROM ' . ACEPU_Store::leads_table() . ' ORDER BY id DESC LIMIT 1' );
 	$out['lead stores the gift'] = 'A' === $lead->prize && 'maria@example.com' === $lead->email && 1 === (int) $lead->consent_service;
-	$out['mail has the code and the gift'] = 1 === count( $mailbox ) && false !== strpos( $mailbox[0]['message'], $sd['code'] ) && false !== strpos( $mailbox[0]['message'], 'A' );
+	$out['mail has the code and the gift'] = 1 === count( $mailbox ) && false !== strpos( $mailbox[0]['message'], $sd['code'] ) && false !== strpos( $mailbox[0]['message'], 'Wygrywasz: A.' ) && false === strpos( $mailbox[0]['message'], '{prize}' );
 	$out['signup counted'] = 1 === ACEPU_Store::totals( $pid_popup )['signup'];
 	$r = $sign( array( 'popup' => $pid_popup, 'email' => 'other@example.com', 'c1' => '1', 'spin' => $token ) );
 	$out['a token works only once'] = 422 === $r->get_status();
