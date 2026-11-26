@@ -1,0 +1,20 @@
+<?php
+$out = array();
+ob_start(); ace_meta_pixel_base(); $head = ob_get_clean();
+$out['head_gated'] = (false !== strpos($head, 'type="text/plain" data-ace-consent="marketing"'));
+$out['has_id'] = (false !== strpos($head, "fbq('init','987315574452864')"));
+$out['has_pageview'] = (false !== strpos($head, "fbq('track','PageView')"));
+$out['no_noscript_img'] = (false === strpos($head, 'facebook.com/tr'));
+$p = new WC_Product_Simple(); $p->set_name('T'); $p->set_regular_price(50); $p->set_status('publish'); $id = $p->save();
+$out['call'] = ace_meta_pixel_call('ViewContent', array('content_ids'=>array((string)$id),'value'=>50.0,'currency'=>'PLN'));
+$out['call_ok'] = (0 === strpos($out['call'], 'fbq("track","ViewContent",{'));
+$o = wc_create_order(); $o->add_product($p, 2); $o->calculate_totals(); $o->save();
+ob_start(); ace_meta_pixel_purchase($o->get_id()); $pur = ob_get_clean();
+$out['purchase_printed'] = (false !== strpos($pur, '"Purchase"') && false !== strpos($pur, '"value":100'));
+$out['not_marked_without_consent'] = !wc_get_order($o->get_id())->get_meta('_ace_fb_purchase_sent');
+$_COOKIE['ace_consent'] = '1.0.1';
+ob_start(); ace_meta_pixel_purchase($o->get_id()); ob_end_clean();
+$out['marked_with_consent'] = (bool) wc_get_order($o->get_id())->get_meta('_ace_fb_purchase_sent');
+ob_start(); ace_meta_pixel_purchase($o->get_id()); $again = ob_get_clean();
+$out['no_duplicate'] = ('' === $again);
+file_put_contents('/playground/_pixel-result.json', json_encode($out, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));

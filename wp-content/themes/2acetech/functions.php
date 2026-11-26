@@ -35,6 +35,7 @@ require_once ACE_DIR . '/inc/newsletter.php';
 require_once ACE_DIR . '/inc/seo.php';
 require_once ACE_DIR . '/inc/merchant-data.php';
 require_once ACE_DIR . '/inc/variable-price.php';
+require_once ACE_DIR . '/inc/meta-pixel.php';
 require_once ACE_DIR . '/inc/customer-reviews.php';
 require_once ACE_DIR . '/inc/emails.php';
 require_once ACE_DIR . '/inc/account-switch.php';
