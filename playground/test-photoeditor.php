@@ -112,11 +112,14 @@ PEM;
 	$out['apply: gallery untouched, order kept'] = array_map( 'intval', $product->get_gallery_image_ids() ) === array( $g1, $g2 );
 	$out['apply: variation photo replaced too'] = (int) wc_get_product( $vid )->get_image_id() === $new;
 	$out['apply: swap recorded'] = array( $new => $main ) === get_post_meta( $pid, ACE_PE_Editor::SWAPS, true );
-	$out['discard refuses a photo that is in use'] = false === ACE_PE_Editor::discard( $new ) && (bool) get_post( $new );
+	$out['delete_edit refuses a photo that is in use'] = false === ACE_PE_Editor::delete_edit( $new ) && (bool) get_post( $new );
 	$r = ACE_PE_Editor::revert( $pid, $new ); $product = wc_get_product( $pid );
 	$out['revert: original back (main + variation)'] = true === $r && (int) $product->get_image_id() === $main && (int) wc_get_product( $vid )->get_image_id() === $main;
 	$out['revert: swap cleared'] = array() === get_post_meta( $pid, ACE_PE_Editor::SWAPS, true );
-	$out['discard removes an unused edit'] = true === ACE_PE_Editor::discard( $new ) && ! get_post( $new );
+	$out['discard keeps the edit (nothing deleted)'] = true === ACE_PE_Editor::discard( $new ) && (bool) get_post( $new );
+	$out['saved_edits lists it with its original'] = ( ACE_PE_Editor::saved_edits( $pid )[ $new ] ?? 0 ) === $main;
+	$out['original photo still exists'] = (bool) get_post( $main );
+	$out['delete_edit removes it only on request'] = true === ACE_PE_Editor::delete_edit( $new ) && ! get_post( $new );
 
 	// A gallery photo: replaced in place.
 	$n2 = ACE_PE_Editor::edit_attachment( $g1, 'overlay', $pid ); ACE_PE_Editor::apply( $pid, $g1, $n2 ); $product = wc_get_product( $pid );

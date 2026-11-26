@@ -227,8 +227,40 @@ class ACE_PE_Editor {
 		return true;
 	}
 
-	/** Throw away an edit that was not used. */
+	/** "Not now": the edit is kept in the media library and in the list of saved edits; nothing is deleted. */
 	public static function discard( $new ) {
+		if ( ! get_post_meta( $new, self::SOURCE, true ) ) {
+			return false;
+		}
+		update_post_meta( $new, '_ace_pe_parked', 1 );
+		return true;
+	}
+
+	/** Edits of this product that no product uses right now: [ edited id => original id ]. */
+	public static function saved_edits( $product_id ) {
+		$ids = get_posts(
+			array(
+				'post_type'      => 'attachment',
+				'post_status'    => 'inherit',
+				'post_parent'    => (int) $product_id,
+				'meta_key'       => self::SOURCE, // phpcs:ignore WordPress.DB.SlowDBQuery
+				'posts_per_page' => 100,
+				'fields'         => 'ids',
+			)
+		);
+		$swaps = get_post_meta( $product_id, self::SWAPS, true );
+		$swaps = is_array( $swaps ) ? $swaps : array();
+		$out   = array();
+		foreach ( $ids as $id ) {
+			if ( ! isset( $swaps[ $id ] ) ) {
+				$out[ (int) $id ] = (int) get_post_meta( $id, self::SOURCE, true );
+			}
+		}
+		return $out;
+	}
+
+	/** Delete an edit for good. Only when the shop owner asks, and never one a product is using. */
+	public static function delete_edit( $new ) {
 		if ( ! get_post_meta( $new, self::SOURCE, true ) ) {
 			return false;
 		}

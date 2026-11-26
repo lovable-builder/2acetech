@@ -18,6 +18,7 @@ class ACE_PE_Admin {
 		add_action( 'wp_ajax_ace_pe_edit', array( __CLASS__, 'ajax_edit' ) );
 		add_action( 'wp_ajax_ace_pe_apply', array( __CLASS__, 'ajax_apply' ) );
 		add_action( 'wp_ajax_ace_pe_discard', array( __CLASS__, 'ajax_discard' ) );
+		add_action( 'wp_ajax_ace_pe_delete', array( __CLASS__, 'ajax_delete' ) );
 		add_action( 'wp_ajax_ace_pe_revert', array( __CLASS__, 'ajax_revert' ) );
 		add_action( 'wp_ajax_ace_pe_test', array( __CLASS__, 'ajax_test' ) );
 		add_filter( 'post_row_actions', array( __CLASS__, 'row_action' ), 10, 2 );
@@ -115,7 +116,13 @@ class ACE_PE_Admin {
 
 	public static function ajax_discard() {
 		self::guard();
-		wp_send_json_success( array( 'deleted' => ACE_PE_Editor::discard( absint( $_POST['new'] ?? 0 ) ) ) );
+		wp_send_json_success( array( 'kept' => ACE_PE_Editor::discard( absint( $_POST['new'] ?? 0 ) ) ) );
+	}
+
+	public static function ajax_delete() {
+		self::guard();
+		$ok = ACE_PE_Editor::delete_edit( absint( $_POST['new'] ?? 0 ) );
+		$ok ? wp_send_json_success() : wp_send_json_error( __( 'This photo is used in a product, so it was not deleted.', '2ace-photo-editor' ) );
 	}
 
 	public static function ajax_revert() {
@@ -202,6 +209,24 @@ class ACE_PE_Admin {
 					<span class="description"><?php echo esc_html( sprintf( /* translators: %d: edits left today. */ __( 'Each photo is one paid request to Google. Left today: %d.', '2ace-photo-editor' ), ACE_PE_Editor::left_today() ) ); ?></span>
 				</p>
 				<div id="acepe-results" style="display:grid;gap:16px;max-width:960px"></div>
+				<?php $saved = ACE_PE_Editor::saved_edits( $pid ); ?>
+				<?php if ( $saved ) : ?>
+					<h2><?php esc_html_e( 'Saved edits (not used in the product)', '2ace-photo-editor' ); ?></h2>
+					<p class="description"><?php esc_html_e( 'Nothing here is deleted automatically. Use one, or delete it when you are sure.', '2ace-photo-editor' ); ?></p>
+					<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;max-width:960px">
+						<?php foreach ( $saved as $nid => $oid ) : ?>
+							<div style="border:1px solid #c3c4c7;border-radius:6px;padding:8px;background:#fff">
+								<?php echo wp_get_attachment_image( $nid, 'medium', false, array( 'style' => 'width:100%;height:auto;display:block' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+								<p style="margin:8px 0 0">
+									<?php if ( ACE_PE_Editor::belongs( $product, $oid ) ) : ?>
+										<button type="button" class="button button-primary acepe-saved-use" data-old="<?php echo (int) $oid; ?>" data-new="<?php echo (int) $nid; ?>"><?php esc_html_e( 'Use', '2ace-photo-editor' ); ?></button>
+									<?php endif; ?>
+									<button type="button" class="button acepe-saved-del" data-new="<?php echo (int) $nid; ?>"><?php esc_html_e( 'Delete permanently', '2ace-photo-editor' ); ?></button>
+								</p>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
 			<?php endif; ?>
 
 			<h2><?php echo $product ? '3' : '2'; ?>. <?php esc_html_e( 'Google Cloud connection', '2ace-photo-editor' ); ?></h2>
@@ -244,9 +269,11 @@ class ACE_PE_Admin {
 			'before'  => __( 'Before', '2ace-photo-editor' ),
 			'after'   => __( 'After', '2ace-photo-editor' ),
 			'use'     => __( 'Use the edited photo', '2ace-photo-editor' ),
-			'discard' => __( 'Discard', '2ace-photo-editor' ),
+			'discard' => __( 'Not now (keep it)', '2ace-photo-editor' ),
+			'delete'  => __( 'Delete permanently', '2ace-photo-editor' ),
+			'sure'    => __( 'Delete this edited photo for good?', '2ace-photo-editor' ),
 			'used'    => __( '✔ In use. Reload the page to see it in the list.', '2ace-photo-editor' ),
-			'gone'    => __( 'Discarded.', '2ace-photo-editor' ),
+			'gone'    => __( 'Kept in the media library and in “Saved edits” below. Nothing was deleted.', '2ace-photo-editor' ),
 			'revert'  => __( 'Original is back. Reloading…', '2ace-photo-editor' ),
 		);
 		?>
@@ -258,6 +285,8 @@ class ACE_PE_Admin {
 			var tb=document.getElementById('acepe-test');
 			if(tb) tb.addEventListener('click',function(e){ e.preventDefault(); var o=document.getElementById('acepe-test-out'); o.textContent=' …'; post({action:'ace_pe_test'}).then(function(r){ o.textContent=r.success?' ✔ OK ('+r.data.project+')':' ✖ '+r.data; }).catch(function(x){ o.textContent=' ✖ '+x; }); });
 			document.querySelectorAll('.acepe-revert').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); post({action:'ace_pe_revert',product:PID,'new':a.dataset.new}).then(function(r){ if(r.success){ a.parentNode.textContent=T.revert; location.reload(); } else alert(r.data); }); }); });
+			document.querySelectorAll('.acepe-saved-use').forEach(function(b){ b.addEventListener('click',function(){ b.disabled=true; post({action:'ace_pe_apply',product:PID,old:b.dataset.old,'new':b.dataset.new}).then(function(r){ if(r.success) location.reload(); else { alert(r.data); b.disabled=false; } }); }); });
+			document.querySelectorAll('.acepe-saved-del').forEach(function(b){ b.addEventListener('click',function(){ if(!confirm(T.sure)) return; post({action:'ace_pe_delete','new':b.dataset.new}).then(function(r){ if(r.success) b.closest('div').remove(); else alert(r.data); }); }); });
 			var run=document.getElementById('acepe-run'); if(!run) return;
 			run.addEventListener('click',async function(){
 				var picks=[].slice.call(document.querySelectorAll('.acepe-pick:checked')).map(function(c){return c.value;});
