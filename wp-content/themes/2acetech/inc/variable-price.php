@@ -65,6 +65,27 @@ add_filter( 'woocommerce_variable_price_html', 'ace_variable_price_html', 20, 2 
 add_filter( 'woocommerce_variable_sale_price_html', 'ace_variable_price_html', 20, 2 );
 
 /**
+ * The option named in the address (?attribute_x=y), if it matches one purchasable option.
+ *
+ * @param WC_Product $product Variable product.
+ * @return WC_Product_Variation|null
+ */
+function ace_requested_variation( $product ) {
+	$attrs = array();
+	foreach ( $_GET as $key => $value ) { // phpcs:ignore WordPress.Security.NonceVerification
+		if ( 0 === strpos( (string) $key, 'attribute_' ) && is_scalar( $value ) ) {
+			$attrs[ sanitize_title( $key ) ] = wc_clean( wp_unslash( (string) $value ) );
+		}
+	}
+	if ( ! $attrs ) {
+		return null;
+	}
+	$id = ( new WC_Product_Data_Store_CPT() )->find_matching_product_variation( $product, $attrs );
+	$v  = $id ? wc_get_product( $id ) : null;
+	return ( $v && $v->is_purchasable() ) ? $v : null;
+}
+
+/**
  * Structured data: a single Offer at the lowest price instead of an AggregateOffer range.
  * Runs before ace_offer_policies() (priority 20) adds shipping and returns to the offer.
  *
@@ -77,9 +98,16 @@ function ace_single_offer_markup( $markup, $product ) {
 	if ( ! $b || empty( $markup['@type'] ) || 'AggregateOffer' !== $markup['@type'] ) {
 		return $markup;
 	}
+	// The Google feed lists every option as its own item and links to it with the option in the address
+	// (?attribute_rozmiar=L ...). For such a link the page must tell Google that option's own price.
+	$price = $b[0];
+	$match = ace_requested_variation( $product );
+	if ( $match ) {
+		$price = (float) wc_get_price_to_display( $match );
+	}
 	$offer = array(
 		'@type'         => 'Offer',
-		'price'         => wc_format_decimal( $b[0], wc_get_price_decimals() ),
+		'price'         => wc_format_decimal( $price, wc_get_price_decimals() ),
 		'priceCurrency' => isset( $markup['priceCurrency'] ) ? $markup['priceCurrency'] : get_woocommerce_currency(),
 	);
 	foreach ( array( 'priceValidUntil', 'availability', 'url', 'seller', 'itemCondition' ) as $key ) {

@@ -12,6 +12,7 @@ $g = $GLOBALS; $GLOBALS['product'] = $p;
 $m = apply_filters('woocommerce_structured_data_product_offer', array('@type'=>'AggregateOffer','lowPrice'=>'615.99','highPrice'=>'768.99','offerCount'=>2,'priceCurrency'=>'PLN','availability'=>'https://schema.org/InStock','url'=>'x'), $p);
 $out['offer_type'] = $m['@type']; $out['offer_price'] = $m['price'] ?? null; $out['no_range'] = !isset($m['lowPrice']) && !isset($m['highPrice']);
 $out['policies_kept'] = isset($m['hasMerchantReturnPolicy'], $m['shippingDetails']);
+$_GET['attribute_rozmiar']='L'; $m2 = apply_filters('woocommerce_structured_data_product_offer', array('@type'=>'AggregateOffer','lowPrice'=>'615.99','highPrice'=>'768.99','offerCount'=>2,'priceCurrency'=>'PLN'), $p); $out['variant_link_price']=$m2['price']; $out['variant_link_ok']=('768.99'===$m2['price']); unset($_GET['attribute_rozmiar']);
 // Same price for all options keeps default.
 $s = new WC_Product_Simple(); $s->set_regular_price(10); $s->save();
 $out['simple_untouched'] = false === strpos(wp_strip_all_tags(wc_get_product($s->get_id())->get_price_html()), 'od');
