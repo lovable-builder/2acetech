@@ -233,6 +233,7 @@ class ACEPU_Front {
 			'gap'     => (int) $o['gap'],
 			'cookie'  => (bool) $o['wait_cookie'],
 			'preview' => $preview,
+			'nonce'   => $preview ? wp_create_nonce( 'wp_rest' ) : '', // So the owner's test spin is recognised as the owner.
 			'stats'   => ! current_user_can( 'manage_options' ) && ! $preview,
 			'tzoff'   => (int) $tz->getOffset( new DateTime( 'now', $tz ) ),
 			'i18n'    => array(
@@ -300,9 +301,16 @@ class ACEPU_Front {
 		return false;
 	}
 
-	private static function live_popup( $id ) {
+	/** A published pop-up; with $owner_test the shop owner may also try out a draft from the preview link. */
+	private static function live_popup( $id, $owner_test = false ) {
 		$p = $id ? get_post( $id ) : null;
-		return ( $p && ACEPU_Store::CPT === $p->post_type && 'publish' === $p->post_status ) ? $p : null;
+		if ( ! $p || ACEPU_Store::CPT !== $p->post_type ) {
+			return null;
+		}
+		if ( 'publish' === $p->post_status || ( $owner_test && current_user_can( 'manage_options' ) ) ) {
+			return $p;
+		}
+		return null;
 	}
 
 	public static function rest_event( WP_REST_Request $r ) {
@@ -340,7 +348,7 @@ class ACEPU_Front {
 	 */
 	public static function rest_spin( WP_REST_Request $r ) {
 		$id = absint( $r->get_param( 'popup' ) );
-		if ( ! self::live_popup( $id ) ) {
+		if ( ! self::live_popup( $id, true ) ) {
 			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'This offer is no longer available.', '2ace-popups' ) ), 404 );
 		}
 		$s = ACEPU_Store::get( $id );
@@ -362,7 +370,7 @@ class ACEPU_Front {
 
 	public static function rest_signup( WP_REST_Request $r ) {
 		$id = absint( $r->get_param( 'popup' ) );
-		if ( ! self::live_popup( $id ) ) {
+		if ( ! self::live_popup( $id, true ) ) {
 			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'This offer is no longer available.', '2ace-popups' ) ), 404 );
 		}
 		$s = ACEPU_Store::get( $id );

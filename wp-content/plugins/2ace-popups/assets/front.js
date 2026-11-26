@@ -167,7 +167,7 @@
 					let err = root.querySelector('.acepu__spin-err');
 					if (err) err.hidden = true;
 					try {
-						const res = await fetch(cfg.rest + 'spin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ popup: p.id }) });
+						const res = await fetch(cfg.rest + 'spin', { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, cfg.nonce ? { 'X-WP-Nonce': cfg.nonce } : {}), body: JSON.stringify({ popup: p.id }) });
 						const j = await res.json();
 						if (!res.ok || !j.ok) throw new Error(j.msg || cfg.i18n.error);
 						try { localStorage.setItem(key, JSON.stringify({ idx: j.idx, label: j.label, token: j.token, t: Date.now() })); } catch (e) { /* ignore */ }
@@ -200,7 +200,7 @@
 				const label = btn.textContent; btn.disabled = true; btn.textContent = cfg.i18n.busy;
 				try {
 					const res = await fetch(cfg.rest + 'signup', {
-						method: 'POST', headers: { 'Content-Type': 'application/json' },
+						method: 'POST', headers: Object.assign({ 'Content-Type': 'application/json' }, cfg.nonce ? { 'X-WP-Nonce': cfg.nonce } : {}),
 						body: JSON.stringify({ popup: p.id, email, c1: c1 && c1.checked ? '1' : '', c2: form.elements.c2 && form.elements.c2.checked ? '1' : '', website: form.elements.website.value, spin: form.elements.spin ? form.elements.spin.value : '' }),
 					});
 					const j = await res.json();

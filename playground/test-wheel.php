@@ -3,6 +3,7 @@
 $out = array();
 try {
 	global $wpdb;
+	wp_set_current_user( 1 ); // The shop owner.
 	$mailbox = array();
 	add_filter( 'pre_wp_mail', function ( $null, $a ) use ( &$mailbox ) { $mailbox[] = $a; return true; }, 10, 2 );
 
@@ -61,7 +62,8 @@ try {
 	$r  = $spin( $pid_popup ); $d = $r->get_data();
 	$out['spin ok, only the weighted slice can win'] = 200 === $r->get_status() && 0 === $d['idx'] && 'A' === $d['label'] && 32 === strlen( $d['token'] );
 	$out['spin counted for the stats'] = 1 === ACEPU_Store::totals( $pid_popup )['spin'] || 0 === ACEPU_Store::totals( $pid_popup )['spin']; // admin spins are not counted
-	$out['spin on a draft refused'] = ( function () use ( $spin ) { $x = wp_insert_post( array( 'post_type' => 'ace_popup', 'post_status' => 'draft', 'post_title' => 'd' ) ); return 404 === $spin( $x )->get_status(); } )();
+	$out['owner can test-spin a draft'] = ( function () use ( $spin, $pre ) { $x = wp_insert_post( array( 'post_type' => 'ace_popup', 'post_status' => 'draft', 'post_title' => 'd' ) ); ACEPU_Store::save( $x, ACEPU_Store::sanitize( $pre ) ); return 200 === $spin( $x )->get_status(); } )();
+	$out['visitor cannot spin a draft'] = ( function () use ( $spin, $pre ) { $x = wp_insert_post( array( 'post_type' => 'ace_popup', 'post_status' => 'draft', 'post_title' => 'd2' ) ); ACEPU_Store::save( $x, ACEPU_Store::sanitize( $pre ) ); $me = get_current_user_id(); wp_set_current_user( 0 ); $c = $spin( $x )->get_status(); wp_set_current_user( $me ); return 404 === $c; } )();
 	$out['spin on a non-wheel pop-up refused'] = ( function () use ( $spin ) { $x = wp_insert_post( array( 'post_type' => 'ace_popup', 'post_status' => 'publish', 'post_title' => 'i' ) ); ACEPU_Store::save( $x, ACEPU_Store::sanitize( array( 'mode' => 'info' ) ) ); return 400 === $spin( $x )->get_status(); } )();
 	$out['client cannot fake a spin event'] = ( function () use ( $pid_popup ) { $r = new WP_REST_Request( 'POST', '/ace-popups/v1/event' ); $r->set_param( 'id', $pid_popup ); $r->set_param( 'event', 'spin' ); return 400 === ACEPU_Front::rest_event( $r )->get_status(); } )();
 
