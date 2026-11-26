@@ -133,6 +133,58 @@
 			if (t.closest('[data-cta]')) { send(p.id, 'cta'); convert(p.id); }
 		});
 
+
+		/* Fortune wheel: the server draws the gift, the browser only turns the disc to it. ---------- */
+		const wheel = root.querySelector('[data-acepu-wheel]');
+		if (wheel) {
+			const disc = root.querySelector('[data-acepu-disc]');
+			const spinBtn = root.querySelector('[data-acepu-spin]');
+			const body = root.querySelector('.acepu__body');
+			const wf = root.querySelector('[data-acepu-form]');
+			const n = parseInt(wheel.dataset.n, 10) || 6;
+			const key = 'acepu_wheel_' + p.id;
+			const angleFor = (idx, jitter) => 360 * 6 + (360 - (idx + 0.5) * (360 / n)) + (jitter ? (Math.random() - 0.5) * (360 / n) * 0.6 : 0);
+			const reveal = (label, token) => {
+				if (wf.elements.spin) wf.elements.spin.value = token;
+				const t = root.querySelector('.acepu__title');
+				if (t) t.textContent = (body.dataset.winTitle || '{prize}').replace('{prize}', label);
+				let x = root.querySelector('.acepu__text');
+				if (!x && body.dataset.winText) { x = document.createElement('p'); x.className = 'acepu__text'; t.after(x); }
+				if (x) x.textContent = body.dataset.winText || '';
+				spinBtn.hidden = true; wf.hidden = false; root.classList.add('is-won');
+				const em = wf.elements.email; if (em) { try { em.focus({ preventScroll: true }); } catch (e) { /* ignore */ } }
+			};
+			let saved = null;
+			try { saved = JSON.parse(localStorage.getItem(key) || 'null'); } catch (e) { saved = null; }
+			if (saved && saved.t && Date.now() - saved.t < 3 * 86400000 && !cfg.preview) {
+				disc.style.transition = 'none';
+				disc.style.transform = 'rotate(' + angleFor(saved.idx, false) + 'deg)';
+				reveal(saved.label, saved.token);
+			} else if (spinBtn) {
+				spinBtn.addEventListener('click', async () => {
+					const old = spinBtn.textContent;
+					spinBtn.disabled = true; spinBtn.textContent = cfg.i18n.spinning;
+					let err = root.querySelector('.acepu__spin-err');
+					if (err) err.hidden = true;
+					try {
+						const res = await fetch(cfg.rest + 'spin', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ popup: p.id }) });
+						const j = await res.json();
+						if (!res.ok || !j.ok) throw new Error(j.msg || cfg.i18n.error);
+						try { localStorage.setItem(key, JSON.stringify({ idx: j.idx, label: j.label, token: j.token, t: Date.now() })); } catch (e) { /* ignore */ }
+						const calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+						disc.style.transition = calm ? 'transform .6s ease-out' : '';
+						disc.getBoundingClientRect(); // Let the browser register the start before it moves.
+						disc.style.transform = 'rotate(' + angleFor(j.idx, true) + 'deg)';
+						setTimeout(() => reveal(j.label, j.token), calm ? 700 : 5600);
+					} catch (x) {
+						if (!err) { err = document.createElement('p'); err.className = 'acepu__err acepu__spin-err'; err.setAttribute('role', 'alert'); spinBtn.after(err); }
+						err.textContent = x.message || cfg.i18n.error; err.hidden = false;
+						spinBtn.disabled = false; spinBtn.textContent = old;
+					}
+				});
+			}
+		}
+
 		const form = root.querySelector('[data-acepu-form]');
 		if (form) {
 			form.addEventListener('submit', async (e) => {
@@ -149,16 +201,20 @@
 				try {
 					const res = await fetch(cfg.rest + 'signup', {
 						method: 'POST', headers: { 'Content-Type': 'application/json' },
-						body: JSON.stringify({ popup: p.id, email, c1: c1 && c1.checked ? '1' : '', c2: form.elements.c2 && form.elements.c2.checked ? '1' : '', website: form.elements.website.value }),
+						body: JSON.stringify({ popup: p.id, email, c1: c1 && c1.checked ? '1' : '', c2: form.elements.c2 && form.elements.c2.checked ? '1' : '', website: form.elements.website.value, spin: form.elements.spin ? form.elements.spin.value : '' }),
 					});
 					const j = await res.json();
 					if (!res.ok || !j.ok) throw new Error(j.msg || cfg.i18n.error);
 					const done = root.querySelector('.acepu__done');
+					const h3 = done.querySelector('h3');
+					if (h3) h3.textContent = h3.textContent.replace('{prize}', j.prize || '');
+					try { localStorage.removeItem('acepu_wheel_' + p.id); } catch (e2) { /* ignore */ }
 					done.querySelector('[data-acepu-code]').textContent = j.code;
 					done.querySelector('[data-acepu-copy]').dataset.acepuCopy = j.code;
 					const a = done.querySelector('[data-acepu-apply]');
 					a.href = j.apply + (a.dataset.to ? '&to=' + encodeURIComponent(a.dataset.to) : '');
 					form.hidden = true; done.hidden = false;
+					const sb = root.querySelector('[data-acepu-spin]'); if (sb) sb.hidden = true;
 					root.querySelectorAll('.acepu__title, .acepu__text, .acepu__no').forEach((n) => { if (n.classList.contains('acepu__no')) n.hidden = true; });
 					convert(p.id);
 					const f = focusables(done)[0]; if (f) f.focus();

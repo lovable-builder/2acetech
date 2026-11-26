@@ -16,7 +16,7 @@ class ACEPU_Render {
 	}
 
 	/** Replace {discount}, {coupon_code}, {end_date}, {site}. */
-	public static function tokens( $text, $s ) {
+	public static function tokens( $text, $s, $prize = '' ) {
 		$end = ACEPU_Store::ts( $s['end'] );
 		return strtr(
 			(string) $text,
@@ -47,6 +47,31 @@ class ACEPU_Render {
 		return add_query_arg( $args, home_url( '/' ) );
 	}
 
+
+	/** The wheel: an SVG disc with one slice per gift, and the pointer. */
+	public static function wheel( $s ) {
+		$prizes = $s['prizes'];
+		$n      = count( $prizes );
+		$step   = 360 / $n;
+		$svg    = '';
+		for ( $i = 0; $i < $n; $i++ ) {
+			$a1  = deg2rad( -90 + $i * $step );
+			$a2  = deg2rad( -90 + ( $i + 1 ) * $step );
+			$x1  = round( 100 + 98 * cos( $a1 ), 3 );
+			$y1  = round( 100 + 98 * sin( $a1 ), 3 );
+			$x2  = round( 100 + 98 * cos( $a2 ), 3 );
+			$y2  = round( 100 + 98 * sin( $a2 ), 3 );
+			$cls = ( $n % 2 && $i === $n - 1 ) ? 2 : $i % 2;
+			$lab = (string) $prizes[ $i ]['label'];
+			$fs  = max( 7, min( 14, 88 / max( 1, strlen( $lab ) ) ) );
+			$mid = round( ( $i + 0.5 ) * $step - 90, 3 );
+			$svg .= '<path class="acepu__sl acepu__sl--' . $cls . '" d="M100 100 L' . $x1 . ' ' . $y1 . ' A98 98 0 0 1 ' . $x2 . ' ' . $y2 . ' Z"/>';
+			$svg .= '<text class="acepu__sl-t acepu__sl-t--' . $cls . '" transform="rotate(' . $mid . ' 100 100)" x="180" y="100" dy="0.35em" text-anchor="end" font-size="' . round( $fs, 1 ) . '">' . esc_html( $lab ) . '</text>';
+		}
+		$svg .= '<circle class="acepu__hub" cx="100" cy="100" r="13"/>';
+		return '<div class="acepu__wheel" data-acepu-wheel data-n="' . (int) $n . '"><span class="acepu__pointer" aria-hidden="true"></span><svg class="acepu__disc" data-acepu-disc viewBox="0 0 200 200" role="img" aria-label="' . esc_attr__( 'Fortune wheel', '2ace-popups' ) . '">' . $svg . '</svg></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+
 	/**
 	 * @param int   $id   Pop-up id.
 	 * @param array $s    Settings (full, with defaults).
@@ -55,11 +80,15 @@ class ACEPU_Render {
 	 */
 	public static function html( $id, $s, $args = array() ) {
 		$static = ! empty( $args['static'] );
+		$wheel  = 'wheel' === $s['mode'];
 		$layout = $s['layout'];
-		$pos    = in_array( $layout, array( 'bar', 'slide' ), true ) && 'left' === $s['image_pos'] ? 'left' : $s['image_pos'];
+		if ( $wheel && in_array( $layout, array( 'bar', 'slide' ), true ) ) {
+			$layout = 'split'; // A wheel needs room.
+		}
+		$pos    = $wheel ? 'left' : ( in_array( $layout, array( 'bar', 'slide' ), true ) && 'left' === $s['image_pos'] ? 'left' : $s['image_pos'] );
 		$mode   = $s['mode'];
 		$to     = $s['cta_url'] ? $s['cta_url'] : ( function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/' ) );
-		$img    = $s['image_id'] ? wp_get_attachment_image( $s['image_id'], 'large', false, array( 'class' => 'acepu__img', 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) ) : '';
+		$img    = ( $s['image_id'] && ! $wheel ) ? wp_get_attachment_image( $s['image_id'], 'large', false, array( 'class' => 'acepu__img', 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) ) : '';
 		$end    = ACEPU_Store::ts( $s['end'] );
 		$style  = sprintf(
 			'--bg:%s;--fg:%s;--ac:%s;--acfg:%s;--ov:%s;--r:%dpx;--w:%dpx;',
@@ -75,7 +104,10 @@ class ACEPU_Render {
 		if ( $s['blur'] ) {
 			$classes[] = 'acepu--blur';
 		}
-		if ( ! $img && 'background' !== $pos ) {
+		if ( $wheel ) {
+			$classes[] = 'acepu--wheel';
+		}
+		if ( ! $img && 'background' !== $pos && ! $wheel ) {
 			$classes[] = 'acepu--noimg';
 		}
 		if ( ! empty( $args['phone'] ) ) {
@@ -102,13 +134,13 @@ class ACEPU_Render {
 				<?php if ( 'background' === $pos && $img ) : ?>
 					<div class="acepu__bg" aria-hidden="true"><?php echo $img; // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 				<?php elseif ( 'bar' !== $layout ) : ?>
-					<div class="acepu__media<?php echo $img ? '' : ' acepu__media--ph'; ?>" aria-hidden="true">
-						<?php echo $img; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-						<?php if ( $s['badge'] ) : ?><span class="acepu__badge"><?php echo esc_html( $s['badge'] ); ?></span><?php endif; ?>
+					<div class="acepu__media<?php echo $img || $wheel ? '' : ' acepu__media--ph'; ?><?php echo $wheel ? ' acepu__media--wheel' : ''; ?>"<?php echo $wheel ? '' : ' aria-hidden="true"'; ?>>
+						<?php echo $wheel ? self::wheel( $s ) : $img; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+						<?php if ( $s['badge'] && ! $wheel ) : ?><span class="acepu__badge"><?php echo esc_html( $s['badge'] ); ?></span><?php endif; ?>
 					</div>
 				<?php endif; ?>
 
-				<div class="acepu__body">
+				<div class="acepu__body"<?php echo $wheel ? ' data-win-title="' . esc_attr( $s['win_title'] ) . '" data-win-text="' . esc_attr( $s['win_text'] ) . '"' : ''; ?>>
 					<?php if ( $s['eyebrow'] ) : ?><p class="acepu__eyebrow"><?php echo esc_html( self::tokens( $s['eyebrow'], $s ) ); ?></p><?php endif; ?>
 					<h2 class="acepu__title" id="acepu-<?php echo (int) $id; ?>-t"><?php echo esc_html( self::tokens( $s['headline'], $s ) ); ?></h2>
 					<?php if ( $s['text'] ) : ?><p class="acepu__text"><?php echo esc_html( self::tokens( $s['text'], $s ) ); ?></p><?php endif; ?>
@@ -127,13 +159,19 @@ class ACEPU_Render {
 						</div>
 					<?php endif; ?>
 
-					<?php if ( 'email' === $mode ) : ?>
-						<<?php echo $ftag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="acepu__form" data-acepu-form<?php echo $static ? '' : ' novalidate'; ?>>
+					<?php if ( $wheel ) : ?>
+						<button type="button" class="acepu__btn acepu__spin" data-acepu-spin<?php echo $static ? ' disabled' : ''; ?>><?php echo esc_html( $s['wheel_btn'] ? $s['wheel_btn'] : __( 'Spin the wheel', '2ace-popups' ) ); ?></button>
+						<?php if ( $s['rules_url'] ) : ?><p class="acepu__rules"><a href="<?php echo esc_url( $s['rules_url'] ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Rules of the game', '2ace-popups' ); ?></a></p><?php endif; ?>
+					<?php endif; ?>
+
+					<?php if ( 'email' === $mode || $wheel ) : ?>
+						<<?php echo $ftag; // phpcs:ignore WordPress.Security.EscapeOutput ?> class="acepu__form" data-acepu-form<?php echo $static ? '' : ' novalidate'; ?><?php echo $wheel && ! $static ? ' hidden' : ''; ?>>
 							<input type="hidden" name="popup" value="<?php echo (int) $id; ?>">
+							<?php if ( $wheel ) : ?><input type="hidden" name="spin" value=""><?php endif; ?>
 							<label class="screen-reader-text acepu__sr" for="acepu-<?php echo (int) $id; ?>-e"><?php esc_html_e( 'Your e-mail address', '2ace-popups' ); ?></label>
 							<div class="acepu__row">
 								<input type="email" id="acepu-<?php echo (int) $id; ?>-e" name="email" autocomplete="email" required placeholder="<?php echo esc_attr( $s['email_ph'] ? $s['email_ph'] : __( 'Your e-mail address', '2ace-popups' ) ); ?>">
-								<button type="submit" class="acepu__btn"><?php echo esc_html( $s['cta_label'] ? $s['cta_label'] : __( 'Get my code', '2ace-popups' ) ); ?></button>
+								<button type="submit" class="acepu__btn"><?php echo esc_html( $s['cta_label'] ? $s['cta_label'] : ( $wheel ? __( 'Get my gift', '2ace-popups' ) : __( 'Get my code', '2ace-popups' ) ) ); ?></button>
 							</div>
 							<?php if ( $s['consent_text'] ) : ?>
 								<label class="acepu__check"><input type="checkbox" name="c1" value="1" required><span><?php echo esc_html( $s['consent_text'] ); ?>

@@ -70,3 +70,13 @@
 #poststuff .acepu--bar h2.acepu__title { font-size: 1rem; }
 #poststuff .acepu--full h2.acepu__title { font-size: 3.4rem; }
 #poststuff .acepu h3 { margin: 0; padding: 0; font-size: 1.3rem; font-weight: 800; }
+
+/* Fortune wheel gifts */
+.acepu-prizes { display: grid; gap: 8px; margin-top: 6px; }
+.acepu-prizes__head, .acepu-prize { display: grid; grid-template-columns: 1.1fr 1.2fr 1.3fr 0.7fr 0.6fr 24px; gap: 8px; align-items: center; }
+.acepu-prizes__head { font-size: 11px; font-weight: 600; color: #50575e; text-transform: uppercase; letter-spacing: 0.04em; }
+.acepu-prize input, .acepu-prize select { width: 100%; min-width: 0; }
+.acepu-prize__val { display: grid; }
+.acepu-prize__pct { font-weight: 600; }
+.acepu-prize [data-prize-del] { font-size: 20px; line-height: 1; color: #b32d2e; text-decoration: none; }
+.acepu-prizes [data-prize-add] { justify-self: start; }

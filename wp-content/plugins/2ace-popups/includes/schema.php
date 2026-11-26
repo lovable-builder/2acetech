@@ -27,12 +27,25 @@ function acepu_page_types() {
 	);
 }
 
+/** The gifts on a new wheel. kind: percent | fixed | product. */
+function acepu_default_prizes() {
+	return array(
+		array( 'label' => '-5%', 'kind' => 'percent', 'amount' => 5, 'product' => 0, 'weight' => 30 ),
+		array( 'label' => '-10%', 'kind' => 'percent', 'amount' => 10, 'product' => 0, 'weight' => 28 ),
+		array( 'label' => '-15%', 'kind' => 'percent', 'amount' => 15, 'product' => 0, 'weight' => 18 ),
+		array( 'label' => '-20 zł', 'kind' => 'fixed', 'amount' => 20, 'product' => 0, 'weight' => 14 ),
+		array( 'label' => '-25%', 'kind' => 'percent', 'amount' => 25, 'product' => 0, 'weight' => 7 ),
+		array( 'label' => '-30 zł', 'kind' => 'fixed', 'amount' => 30, 'product' => 0, 'weight' => 3 ),
+	);
+}
+
 /** The editor tabs. */
 function acepu_tabs() {
 	return array(
 		'content' => __( 'Content', '2ace-popups' ),
 		'design'  => __( 'Design', '2ace-popups' ),
 		'coupon'  => __( 'Coupon & form', '2ace-popups' ),
+		'wheel'   => __( 'Fortune wheel', '2ace-popups' ),
 		'when'    => __( 'When to show', '2ace-popups' ),
 		'who'     => __( 'Who sees it', '2ace-popups' ),
 		'ai'      => __( 'AI designer', '2ace-popups' ),
@@ -75,22 +88,29 @@ function acepu_schema() {
 		'click_close'   => array( 'type' => 'bool', 'def' => 1, 'tab' => 'design', 'label' => __( 'Close when the dimmed area is clicked', '2ace-popups' ) ),
 
 		// Coupon and form.
-		'mode'          => array( 'type' => 'select', 'def' => 'info', 'tab' => 'coupon', 'label' => __( 'What the pop-up does', '2ace-popups' ), 'opts' => array( 'info' => __( 'Message and button only', '2ace-popups' ), 'code' => __( 'Show an existing coupon code', '2ace-popups' ), 'email' => __( 'E-mail sign-up that creates a personal one-time coupon', '2ace-popups' ) ) ),
+		'mode'          => array( 'type' => 'select', 'def' => 'info', 'tab' => 'coupon', 'label' => __( 'What the pop-up does', '2ace-popups' ), 'opts' => array( 'info' => __( 'Message and button only', '2ace-popups' ), 'code' => __( 'Show an existing coupon code', '2ace-popups' ), 'email' => __( 'E-mail sign-up that creates a personal one-time coupon', '2ace-popups' ), 'wheel' => __( 'Fortune wheel: spin, then sign up to get the gift', '2ace-popups' ) ) ),
 		'code'          => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Coupon code', '2ace-popups' ), 'help' => __( 'A coupon you created in Marketing > Coupons.', '2ace-popups' ), 'show' => 'mode:code' ),
 		'gen_type'      => array( 'type' => 'select', 'def' => 'percent', 'tab' => 'coupon', 'label' => __( 'Discount type', '2ace-popups' ), 'opts' => array( 'percent' => __( 'Percentage', '2ace-popups' ), 'fixed_cart' => __( 'Fixed amount (zł)', '2ace-popups' ) ), 'show' => 'mode:email' ),
 		'gen_amount'    => array( 'type' => 'int', 'def' => 10, 'min' => 1, 'max' => 1000, 'tab' => 'coupon', 'label' => __( 'Discount', '2ace-popups' ), 'show' => 'mode:email' ),
-		'gen_days'      => array( 'type' => 'int', 'def' => 14, 'min' => 1, 'max' => 365, 'tab' => 'coupon', 'label' => __( 'Coupon valid for (days)', '2ace-popups' ), 'show' => 'mode:email' ),
-		'gen_min'       => array( 'type' => 'int', 'def' => 0, 'min' => 0, 'max' => 100000, 'tab' => 'coupon', 'label' => __( 'Minimum order (zł, 0 = none)', '2ace-popups' ), 'show' => 'mode:email' ),
-		'gen_nosale'    => array( 'type' => 'bool', 'def' => 0, 'tab' => 'coupon', 'label' => __( 'Not valid on products already on sale', '2ace-popups' ), 'show' => 'mode:email' ),
-		'gen_prefix'    => array( 'type' => 'text', 'def' => 'ACE', 'tab' => 'coupon', 'label' => __( 'Code prefix', '2ace-popups' ), 'show' => 'mode:email' ),
-		'email_ph'      => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'E-mail field hint', '2ace-popups' ), 'show' => 'mode:email' ),
-		'consent_text'  => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Consent text (required tick box)', '2ace-popups' ), 'help' => __( 'GDPR: the visitor must tick it to get the code. It is never pre-ticked. The privacy policy link is added after the text.', '2ace-popups' ), 'show' => 'mode:email' ),
-		'news_on'       => array( 'type' => 'bool', 'def' => 0, 'tab' => 'coupon', 'label' => __( 'Offer an optional newsletter tick box', '2ace-popups' ), 'help' => __( 'Separate, optional and never pre-ticked. A newsletter needs its own consent.', '2ace-popups' ), 'show' => 'mode:email' ),
-		'news_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Newsletter tick box text', '2ace-popups' ), 'show' => 'mode:email' ),
-		'done_title'    => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Thank-you headline', '2ace-popups' ), 'show' => 'mode:email' ),
-		'done_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Thank-you text', '2ace-popups' ), 'show' => 'mode:email' ),
-		'mail_subject'  => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Subject of the e-mail with the code', '2ace-popups' ), 'show' => 'mode:email' ),
-		'mail_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Text of the e-mail with the code', '2ace-popups' ), 'show' => 'mode:email' ),
+		'gen_days'      => array( 'type' => 'int', 'def' => 14, 'min' => 1, 'max' => 365, 'tab' => 'coupon', 'label' => __( 'Coupon valid for (days)', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'gen_min'       => array( 'type' => 'int', 'def' => 0, 'min' => 0, 'max' => 100000, 'tab' => 'coupon', 'label' => __( 'Minimum order (zł, 0 = none)', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'gen_nosale'    => array( 'type' => 'bool', 'def' => 0, 'tab' => 'coupon', 'label' => __( 'Not valid on products already on sale', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'gen_prefix'    => array( 'type' => 'text', 'def' => 'ACE', 'tab' => 'coupon', 'label' => __( 'Code prefix', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'email_ph'      => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'E-mail field hint', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'consent_text'  => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Consent text (required tick box)', '2ace-popups' ), 'help' => __( 'GDPR: the visitor must tick it to get the code. It is never pre-ticked. The privacy policy link is added after the text.', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'news_on'       => array( 'type' => 'bool', 'def' => 0, 'tab' => 'coupon', 'label' => __( 'Offer an optional newsletter tick box', '2ace-popups' ), 'help' => __( 'Separate, optional and never pre-ticked. A newsletter needs its own consent.', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'news_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Newsletter tick box text', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'done_title'    => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Thank-you headline', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'done_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Thank-you text', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'mail_subject'  => array( 'type' => 'text', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Subject of the e-mail with the code', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+		'mail_text'     => array( 'type' => 'textarea', 'def' => '', 'tab' => 'coupon', 'label' => __( 'Text of the e-mail with the code', '2ace-popups' ), 'show' => 'mode:email|wheel' ),
+
+		// Fortune wheel.
+		'prizes'        => array( 'type' => 'prizes', 'def' => acepu_default_prizes(), 'tab' => 'wheel', 'label' => __( 'What is on the wheel', '2ace-popups' ), 'help' => __( 'Every slice is a gift: nobody leaves with nothing. The chance of a slice is its weight divided by the total of all weights. The coupon is created only after the winner signs up, and it is personal and one-time.', '2ace-popups' ) ),
+		'wheel_btn'     => array( 'type' => 'text', 'def' => 'Zakręć kołem', 'tab' => 'wheel', 'label' => __( 'Spin button text', '2ace-popups' ) ),
+		'win_title'     => array( 'type' => 'text', 'def' => 'Wygrywasz: {prize}!', 'tab' => 'wheel', 'label' => __( 'Headline after the spin', '2ace-popups' ), 'help' => __( 'Use {prize} for the label of the slice that won.', '2ace-popups' ) ),
+		'win_text'      => array( 'type' => 'textarea', 'def' => 'Podaj adres e-mail, a prześlemy Ci prezent. Kod jest jednorazowy i przypisany do Twojego adresu.', 'tab' => 'wheel', 'label' => __( 'Text after the spin', '2ace-popups' ) ),
+		'rules_url'     => array( 'type' => 'url', 'def' => '', 'tab' => 'wheel', 'label' => __( 'Link to the rules of the game', '2ace-popups' ), 'help' => __( 'Shown under the wheel as "Regulamin". Publish the rules first: who organises it, that taking part is free and needs no purchase, what the gifts are, how the winner gets them and how to complain.', '2ace-popups' ) ),
 
 		// When.
 		'triggers'      => array( 'type' => 'multi', 'def' => array( 'time' ), 'tab' => 'when', 'label' => __( 'Show the pop-up when', '2ace-popups' ), 'help' => __( 'It appears at the first of the chosen moments.', '2ace-popups' ), 'opts' => array( 'time' => __( 'some seconds after the page opens', '2ace-popups' ), 'scroll' => __( 'the visitor has scrolled down', '2ace-popups' ), 'exit' => __( 'the visitor is about to leave (exit intent)', '2ace-popups' ), 'idle' => __( 'the visitor is inactive', '2ace-popups' ), 'pageviews' => __( 'the visitor has viewed several pages', '2ace-popups' ), 'addtocart' => __( 'a product was added to the cart', '2ace-popups' ), 'click' => __( 'a button or link is clicked', '2ace-popups' ) ) ),

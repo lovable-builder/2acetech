@@ -242,6 +242,7 @@ class ACEPU_Front {
 				'consent' => __( 'Please tick the consent box to get the code.', '2ace-popups' ),
 				'error'  => __( 'Something went wrong. Please try again in a moment.', '2ace-popups' ),
 				'busy'   => __( 'Sending ...', '2ace-popups' ),
+				'spinning' => __( 'Spinning ...', '2ace-popups' ),
 			),
 		);
 		wp_add_inline_script( 'acepu-front', 'window.acePopups=' . wp_json_encode( $cfg ) . ';', 'before' );
@@ -264,6 +265,15 @@ class ACEPU_Front {
 			array(
 				'methods'             => 'POST',
 				'callback'            => array( __CLASS__, 'rest_event' ),
+				'permission_callback' => '__return_true',
+			)
+		);
+		register_rest_route(
+			'ace-popups/v1',
+			'/spin',
+			array(
+				'methods'             => 'POST',
+				'callback'            => array( __CLASS__, 'rest_spin' ),
 				'permission_callback' => '__return_true',
 			)
 		);
@@ -298,7 +308,7 @@ class ACEPU_Front {
 	public static function rest_event( WP_REST_Request $r ) {
 		$id    = absint( $r->get_param( 'id' ) );
 		$event = sanitize_key( (string) $r->get_param( 'event' ) );
-		if ( ! self::live_popup( $id ) || ! in_array( $event, ACEPU_Store::events(), true ) || 'signup' === $event ) {
+		if ( ! self::live_popup( $id ) || ! in_array( $event, ACEPU_Store::events(), true ) || in_array( $event, array( 'signup', 'spin' ), true ) ) {
 			return new WP_REST_Response( array( 'ok' => false ), 400 );
 		}
 		if ( ! self::limited( 'ev', 240 ) ) {
@@ -307,14 +317,68 @@ class ACEPU_Front {
 		return new WP_REST_Response( array( 'ok' => true ), 200 );
 	}
 
+
+	/** Pick a gift by weight with a secure random number. */
+	private static function draw( $prizes ) {
+		$total = array_sum( array_column( $prizes, 'weight' ) );
+		if ( $total < 1 ) {
+			return random_int( 0, count( $prizes ) - 1 );
+		}
+		$r = random_int( 1, $total );
+		foreach ( $prizes as $i => $p ) {
+			$r -= (int) $p['weight'];
+			if ( $r <= 0 ) {
+				return $i;
+			}
+		}
+		return count( $prizes ) - 1;
+	}
+
+	/**
+	 * The visitor spins. The server decides the gift (the browser only animates it) and remembers it under
+	 * a one-time token; the coupon itself is made only when the winner signs up with that token.
+	 */
+	public static function rest_spin( WP_REST_Request $r ) {
+		$id = absint( $r->get_param( 'popup' ) );
+		if ( ! self::live_popup( $id ) ) {
+			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'This offer is no longer available.', '2ace-popups' ) ), 404 );
+		}
+		$s = ACEPU_Store::get( $id );
+		if ( 'wheel' !== $s['mode'] || count( $s['prizes'] ) < 2 ) {
+			return new WP_REST_Response( array( 'ok' => false ), 400 );
+		}
+		if ( self::limited( 'sp', 6 ) ) {
+			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'Too many attempts. Please try again later.', '2ace-popups' ) ), 429 );
+		}
+		$idx   = self::draw( $s['prizes'] );
+		$prize = $s['prizes'][ $idx ];
+		$token = wp_generate_password( 32, false, false );
+		set_transient( 'acepu_spin_' . $token, array( 'popup' => $id, 'prize' => $prize ), 3 * DAY_IN_SECONDS );
+		if ( ! current_user_can( 'manage_options' ) ) {
+			ACEPU_Store::record( $id, 'spin' ); // Not the owner trying it out.
+		}
+		return new WP_REST_Response( array( 'ok' => true, 'idx' => (int) $idx, 'label' => $prize['label'], 'token' => $token ), 200 );
+	}
+
 	public static function rest_signup( WP_REST_Request $r ) {
 		$id = absint( $r->get_param( 'popup' ) );
 		if ( ! self::live_popup( $id ) ) {
 			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'This offer is no longer available.', '2ace-popups' ) ), 404 );
 		}
 		$s = ACEPU_Store::get( $id );
-		if ( 'email' !== $s['mode'] ) {
+		if ( ! in_array( $s['mode'], array( 'email', 'wheel' ), true ) ) {
 			return new WP_REST_Response( array( 'ok' => false ), 400 );
+		}
+		// On the wheel the gift is the one the server drew for this visitor's spin.
+		$prize = array();
+		$spin  = '';
+		if ( 'wheel' === $s['mode'] ) {
+			$spin = preg_replace( '/[^A-Za-z0-9]/', '', (string) $r->get_param( 'spin' ) );
+			$won  = $spin ? get_transient( 'acepu_spin_' . $spin ) : false;
+			if ( ! is_array( $won ) || (int) $won['popup'] !== $id ) {
+				return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'Please spin the wheel first.', '2ace-popups' ) ), 422 );
+			}
+			$prize = $won['prize'];
 		}
 		if ( '' !== (string) $r->get_param( 'website' ) ) { // Honeypot.
 			return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'Something went wrong. Please try again in a moment.', '2ace-popups' ) ), 400 );
@@ -333,15 +397,22 @@ class ACEPU_Front {
 		$email = strtolower( $email );
 		$code  = ACEPU_Store::lead_coupon( $id, $email );
 		$again = '' !== $code;
-		if ( ! $again ) {
-			$code = ACEPU_Coupons::generate( $id, $s, $email );
+		$label = '';
+		if ( $again ) {
+			$label = ACEPU_Store::lead_prize( $id, $email ); // One gift per e-mail address: a second spin does not change it.
+		} else {
+			$code = ACEPU_Coupons::generate( $id, $s, $email, $prize );
 			if ( is_wp_error( $code ) ) {
 				return new WP_REST_Response( array( 'ok' => false, 'msg' => __( 'Something went wrong. Please try again in a moment.', '2ace-popups' ) ), 500 );
 			}
-			ACEPU_Store::add_lead( $id, $email, $code, 1, '1' === (string) $r->get_param( 'c2' ) && $s['news_on'], $s['consent_text'] . ( $s['news_on'] ? ' | ' . $s['news_text'] : '' ) );
-			ACEPU_Coupons::send_mail( $email, $code, $s );
+			$label = $prize ? $prize['label'] : '';
+			ACEPU_Store::add_lead( $id, $email, $code, 1, '1' === (string) $r->get_param( 'c2' ) && $s['news_on'], $s['consent_text'] . ( $s['news_on'] ? ' | ' . $s['news_text'] : '' ), $label );
+			ACEPU_Coupons::send_mail( $email, $code, $s, $label );
 			ACEPU_Store::record( $id, 'signup' );
 		}
-		return new WP_REST_Response( array( 'ok' => true, 'code' => $code, 'again' => $again, 'apply' => ACEPU_Render::apply_url( $code, '' ) ), 200 );
+		if ( $spin ) {
+			delete_transient( 'acepu_spin_' . $spin ); // One spin, one gift.
+		}
+		return new WP_REST_Response( array( 'ok' => true, 'code' => $code, 'prize' => $label, 'again' => $again, 'apply' => ACEPU_Render::apply_url( $code, '' ) ), 200 );
 	}
 }

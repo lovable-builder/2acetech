@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       2ACE Popups
  * Description:       Design your own marketing pop-ups for sales and occasions, with coupons, e-mail sign-up that creates a one-time coupon, many triggers (time, scroll, exit intent, idle, add to cart ...), targeting, schedule, statistics, and AI help for the texts and artwork. No paid plugin needed.
- * Version:           1.0.2
+ * Version:           1.1.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            2ACE sp. z o.o.
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ACEPU_VERSION', '1.0.2' );
+define( 'ACEPU_VERSION', '1.1.0' );
 define( 'ACEPU_FILE', __FILE__ );
 define( 'ACEPU_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ACEPU_URL', plugin_dir_url( __FILE__ ) );

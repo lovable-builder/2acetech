@@ -12,7 +12,7 @@ class ACEPU_Store {
 	const CPT     = 'ace_popup';
 	const META    = '_acepu';
 	const OPTION  = 'acepu_settings';
-	const DB_VER  = '1';
+	const DB_VER  = '2';
 
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'register' ) );
@@ -81,6 +81,7 @@ class ACEPU_Store {
 				popup_id bigint(20) unsigned NOT NULL,
 				email varchar(190) NOT NULL,
 				coupon varchar(64) NOT NULL DEFAULT '',
+				prize varchar(190) NOT NULL DEFAULT '',
 				consent_service tinyint(1) NOT NULL DEFAULT 0,
 				consent_news tinyint(1) NOT NULL DEFAULT 0,
 				consent_text text NOT NULL,
@@ -175,6 +176,9 @@ class ACEPU_Store {
 				case 'ids':
 					$out[ $k ] = array_values( array_unique( array_filter( array_map( 'absint', is_array( $v ) ? $v : array() ) ) ) );
 					break;
+				case 'prizes':
+					$out[ $k ] = self::clean_prizes( $v, $f['def'] );
+					break;
 				case 'datetime':
 					$ts        = $v ? strtotime( (string) $v ) : false;
 					$out[ $k ] = $ts ? gmdate( 'Y-m-d\TH:i', $ts ) : '';
@@ -192,6 +196,60 @@ class ACEPU_Store {
 			$out['hour_to']   = 24;
 		}
 		return $out;
+	}
+
+	/** A short label for a gift, made from its kind and amount. */
+	public static function prize_label( $kind, $amount, $product ) {
+		if ( 'fixed' === $kind ) {
+			return '-' . $amount . ' zł';
+		}
+		if ( 'product' === $kind ) {
+			$t = $product ? get_the_title( $product ) : '';
+			return $t ? sprintf( /* translators: %s: product. */ __( 'Gratis: %s', '2ace-popups' ), wp_html_excerpt( $t, 18, '…' ) ) : __( 'Gratis', '2ace-popups' );
+		}
+		return '-' . $amount . '%';
+	}
+
+	/**
+	 * The wheel's gifts: 2 to 12 rows. Each: label, kind, amount, product, weight.
+	 *
+	 * @param mixed $v   Raw rows.
+	 * @param array $def Rows to fall back on.
+	 * @return array
+	 */
+	public static function clean_prizes( $v, $def ) {
+		$rows = array();
+		foreach ( is_array( $v ) ? $v : array() as $r ) {
+			if ( ! is_array( $r ) ) {
+				continue;
+			}
+			$kind = isset( $r['kind'] ) && in_array( $r['kind'], array( 'percent', 'fixed', 'product' ), true ) ? $r['kind'] : 'percent';
+			$amt  = isset( $r['amount'] ) ? (int) $r['amount'] : 0;
+			$amt  = 'percent' === $kind ? max( 1, min( 100, $amt ) ) : max( 1, min( 5000, $amt ) );
+			$prod = 0;
+			if ( 'product' === $kind ) {
+				$prod = isset( $r['product'] ) ? absint( $r['product'] ) : 0;
+				if ( ! $prod || 'product' !== get_post_type( $prod ) ) {
+					continue; // A free product that does not exist is no gift.
+				}
+			}
+			$label = isset( $r['label'] ) ? trim( sanitize_text_field( (string) $r['label'] ) ) : '';
+			$label = '' === $label ? self::prize_label( $kind, $amt, $prod ) : wp_html_excerpt( $label, 24 );
+			$wt    = isset( $r['weight'] ) ? max( 0, min( 1000, (int) $r['weight'] ) ) : 1;
+			$rows[] = array( 'label' => $label, 'kind' => $kind, 'amount' => $amt, 'product' => $prod, 'weight' => $wt );
+			if ( count( $rows ) >= 12 ) {
+				break;
+			}
+		}
+		if ( count( $rows ) < 2 ) {
+			return $def;
+		}
+		if ( ! array_sum( array_column( $rows, 'weight' ) ) ) {
+			foreach ( $rows as $i => $r ) {
+				$rows[ $i ]['weight'] = 1;
+			}
+		}
+		return $rows;
 	}
 
 	public static function save( $id, $clean ) {
@@ -235,7 +293,7 @@ class ACEPU_Store {
 	 * ------------------------------------------------------------------ */
 
 	public static function events() {
-		return array( 'view', 'close', 'cta', 'copy', 'signup' );
+		return array( 'view', 'close', 'cta', 'copy', 'signup', 'spin' );
 	}
 
 	public static function record( $popup_id, $event ) {
@@ -286,7 +344,7 @@ class ACEPU_Store {
 	 * Leads
 	 * ------------------------------------------------------------------ */
 
-	public static function add_lead( $popup_id, $email, $coupon, $svc, $news, $text ) {
+	public static function add_lead( $popup_id, $email, $coupon, $svc, $news, $text, $prize = '' ) {
 		global $wpdb;
 		$wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
 			self::leads_table(),
@@ -294,12 +352,13 @@ class ACEPU_Store {
 				'popup_id'        => (int) $popup_id,
 				'email'           => $email,
 				'coupon'          => $coupon,
+				'prize'           => $prize,
 				'consent_service' => $svc ? 1 : 0,
 				'consent_news'    => $news ? 1 : 0,
 				'consent_text'    => $text,
 				'created'         => current_time( 'mysql' ),
 			),
-			array( '%d', '%s', '%s', '%d', '%d', '%s', '%s' )
+			array( '%d', '%s', '%s', '%s', '%d', '%d', '%s', '%s' )
 		);
 		return (int) $wpdb->insert_id;
 	}
@@ -308,5 +367,11 @@ class ACEPU_Store {
 	public static function lead_coupon( $popup_id, $email ) {
 		global $wpdb;
 		return (string) $wpdb->get_var( $wpdb->prepare( 'SELECT coupon FROM ' . self::leads_table() . ' WHERE popup_id = %d AND email = %s ORDER BY id DESC LIMIT 1', $popup_id, $email ) ); // phpcs:ignore WordPress.DB
+	}
+
+	/** The gift label stored with an earlier lead of this e-mail, or ''. */
+	public static function lead_prize( $popup_id, $email ) {
+		global $wpdb;
+		return (string) $wpdb->get_var( $wpdb->prepare( 'SELECT prize FROM ' . self::leads_table() . ' WHERE popup_id = %d AND email = %s ORDER BY id DESC LIMIT 1', $popup_id, $email ) ); // phpcs:ignore WordPress.DB
 	}
 }

@@ -196,6 +196,13 @@ class ACEPU_Admin {
 				}
 				echo '</div>';
 				break;
+			case 'prizes':
+				echo '<span class="acepu-label">' . esc_html( $f['label'] ) . '</span><div class="acepu-prizes" data-prizes><div class="acepu-prizes__head"><span>' . esc_html__( 'Shown on the slice', '2ace-popups' ) . '</span><span>' . esc_html__( 'Gift', '2ace-popups' ) . '</span><span>' . esc_html__( 'Value', '2ace-popups' ) . '</span><span>' . esc_html__( 'Weight', '2ace-popups' ) . '</span><span>' . esc_html__( 'Chance', '2ace-popups' ) . '</span><span></span></div><div data-prize-rows>';
+				foreach ( array_values( (array) $val ) as $i => $r ) {
+					echo self::prize_row( $name, $i, $r ); // phpcs:ignore WordPress.Security.EscapeOutput
+				}
+				echo '</div><template data-prize-tpl>' . self::prize_row( $name, '__i__', array( 'label' => '', 'kind' => 'percent', 'amount' => 10, 'product' => 0, 'weight' => 10 ) ) . '</template><button type="button" class="button" data-prize-add>' . esc_html__( 'Add a slice', '2ace-popups' ) . '</button></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
+				break;
 			case 'media':
 				$thumb = $val ? wp_get_attachment_image( (int) $val, 'thumbnail' ) : '';
 				echo '<span class="acepu-label">' . esc_html( $f['label'] ) . '</span><div class="acepu-media" data-media><div class="acepu-media__thumb">' . $thumb . '</div><input type="hidden" id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" value="' . (int) $val . '"><button type="button" class="button" data-media-pick>' . esc_html__( 'Choose', '2ace-popups' ) . '</button> <button type="button" class="button-link" data-media-clear>' . esc_html__( 'Remove', '2ace-popups' ) . '</button></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
@@ -205,6 +212,23 @@ class ACEPU_Admin {
 			echo '<p class="description">' . esc_html( $f['help'] ) . '</p>';
 		}
 		echo '</div>';
+	}
+
+	/** One row of the wheel's gift table. */
+	private static function prize_row( $name, $i, $r ) {
+		$n   = $name . '[' . $i . ']';
+		$out = '<div class="acepu-prize" data-prize>';
+		$out .= '<input type="text" name="' . esc_attr( $n ) . '[label]" value="' . esc_attr( $r['label'] ) . '" maxlength="24" placeholder="-10%">';
+		$out .= '<select name="' . esc_attr( $n ) . '[kind]" data-prize-kind>';
+		foreach ( array( 'percent' => __( 'Percent off', '2ace-popups' ), 'fixed' => __( 'Amount off (zł)', '2ace-popups' ), 'product' => __( 'Free product', '2ace-popups' ) ) as $k => $l ) {
+			$out .= '<option value="' . esc_attr( $k ) . '"' . selected( $r['kind'], $k, false ) . '>' . esc_html( $l ) . '</option>';
+		}
+		$out .= '</select>';
+		$out .= '<span class="acepu-prize__val"><input type="number" min="1" max="5000" name="' . esc_attr( $n ) . '[amount]" value="' . (int) $r['amount'] . '" data-prize-amount><input type="number" min="1" name="' . esc_attr( $n ) . '[product]" value="' . ( $r['product'] ? (int) $r['product'] : '' ) . '" placeholder="' . esc_attr__( 'Product ID', '2ace-popups' ) . '" data-prize-product></span>';
+		$out .= '<input type="number" min="0" max="1000" name="' . esc_attr( $n ) . '[weight]" value="' . (int) $r['weight'] . '" data-prize-weight>';
+		$out .= '<b class="acepu-prize__pct" data-prize-pct></b>';
+		$out .= '<button type="button" class="button-link" data-prize-del aria-label="' . esc_attr__( 'Remove', '2ace-popups' ) . '">&times;</button></div>';
+		return $out;
 	}
 
 	public static function box_designer( $post ) {
@@ -543,7 +567,7 @@ class ACEPU_Admin {
 						<td><?php echo esc_html( mysql2date( 'j.m.Y H:i', $r->created ) ); ?></td>
 						<td><?php echo esc_html( $r->email ); ?></td>
 						<td><?php echo esc_html( get_the_title( $r->popup_id ) ); ?></td>
-						<td><code><?php echo esc_html( $r->coupon ); ?></code></td>
+						<td><code><?php echo esc_html( $r->coupon ); ?></code><?php echo $r->prize ? ' <small>' . esc_html( $r->prize ) . '</small>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput ?></td>
 						<td><?php echo $r->consent_service ? '✔' : '—'; ?></td>
 						<td><?php echo $r->consent_news ? '✔' : '—'; ?></td>
 						<td><a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=acepu_lead_delete&id=' . (int) $r->id ), 'acepu_lead_' . (int) $r->id ) ); ?>" onclick="return confirm('<?php echo esc_js( __( 'Delete this entry?', '2ace-popups' ) ); ?>')"><?php esc_html_e( 'Delete', '2ace-popups' ); ?></a></td>
@@ -578,11 +602,11 @@ class ACEPU_Admin {
 		header( 'Content-Disposition: attachment; filename=popup-leads-' . gmdate( 'Y-m-d' ) . '.csv' );
 		$out = fopen( 'php://output', 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		fwrite( $out, "\xEF\xBB\xBF" ); // phpcs:ignore WordPress.WP.AlternativeFunctions
-		fputcsv( $out, array( 'date', 'email', 'popup', 'coupon', 'coupon_consent', 'newsletter_consent', 'consent_text' ) );
+		fputcsv( $out, array( 'date', 'email', 'popup', 'coupon', 'gift', 'coupon_consent', 'newsletter_consent', 'consent_text' ) );
 		foreach ( $rows as $r ) {
 			// A leading = + - @ would run as a formula in a spreadsheet.
 			$mail = preg_match( '/^[=+\-@]/', $r->email ) ? "'" . $r->email : $r->email;
-			fputcsv( $out, array( $r->created, $mail, get_the_title( $r->popup_id ), $r->coupon, $r->consent_service, $r->consent_news, $r->consent_text ) );
+			fputcsv( $out, array( $r->created, $mail, get_the_title( $r->popup_id ), $r->coupon, $r->prize, $r->consent_service, $r->consent_news, $r->consent_text ) );
 		}
 		fclose( $out ); // phpcs:ignore WordPress.WP.AlternativeFunctions
 		exit;
@@ -626,6 +650,7 @@ class ACEPU_Admin {
 					array( 'name' => __( 'Date', '2ace-popups' ), 'value' => $r->created ),
 					array( 'name' => __( 'E-mail', '2ace-popups' ), 'value' => $r->email ),
 					array( 'name' => __( 'Coupon', '2ace-popups' ), 'value' => $r->coupon ),
+					array( 'name' => __( 'Gift', '2ace-popups' ), 'value' => $r->prize ),
 					array( 'name' => __( 'Newsletter consent', '2ace-popups' ), 'value' => $r->consent_news ? __( 'Yes', '2ace-popups' ) : __( 'No', '2ace-popups' ) ),
 				),
 			);

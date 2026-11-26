@@ -218,3 +218,43 @@ html.acepu-lock { overflow: hidden; }
 	.acepu__box, .acepu__overlay { transition: none; }
 	.acepu--anim-rise .acepu__box, .acepu--anim-zoom .acepu__box { transform: none; }
 }
+
+/* Fortune wheel -------------------------------------------------------------- */
+.acepu__media--wheel {
+	display: grid; place-items: center;
+	padding: 34px 26px 26px;
+	background: radial-gradient(circle at 30% 18%, color-mix(in srgb, var(--ac) 55%, #000), #0b0b0d 78%);
+}
+.acepu__wheel { position: relative; width: min(100%, 380px); aspect-ratio: 1; }
+.acepu__disc {
+	display: block; width: 100%; height: 100%;
+	border-radius: 50%;
+	box-shadow: 0 0 0 6px var(--bg), 0 18px 44px rgba(0, 0, 0, 0.45);
+	transition: transform 5.2s cubic-bezier(0.12, 0.62, 0.1, 1);
+	will-change: transform;
+}
+.acepu__pointer {
+	position: absolute; top: -20px; left: 50%; z-index: 3;
+	width: 0; height: 0; transform: translateX(-50%);
+	border-left: 13px solid transparent; border-right: 13px solid transparent; border-top: 28px solid var(--bg);
+	filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4));
+}
+.acepu__sl { stroke: var(--bg); stroke-width: 1.6; stroke-linejoin: round; }
+.acepu__sl--0 { fill: var(--bg); }
+.acepu__sl--1 { fill: var(--ac); }
+.acepu__sl--2 { fill: color-mix(in srgb, var(--ac) 38%, var(--bg)); }
+.acepu__sl-t { font-family: inherit; font-weight: 800; paint-order: normal; }
+.acepu__sl-t--0, .acepu__sl-t--2 { fill: var(--fg); }
+.acepu__sl-t--1 { fill: var(--acfg); }
+.acepu__hub { fill: var(--bg); stroke: var(--ac); stroke-width: 4; }
+.acepu__spin { margin-top: 4px; }
+.acepu__rules { margin: 0; font-size: 0.74rem; opacity: 0.7; }
+.acepu__rules a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.acepu--wheel.is-won .acepu__rules { display: none; }
+@media (max-width: 720px) {
+	.acepu--wheel .acepu__media--wheel { height: auto !important; padding: 30px 20px 22px; }
+	.acepu--wheel .acepu__wheel { width: min(76vw, 290px); }
+}
+.acepu--phone.acepu--wheel .acepu__media--wheel { height: auto !important; padding: 30px 20px 22px; }
+.acepu--phone.acepu--wheel .acepu__wheel { width: min(76vw, 290px); }
+@media (prefers-reduced-motion: reduce) { .acepu__disc { transition-duration: 0.6s; } }

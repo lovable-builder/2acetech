@@ -29,7 +29,7 @@ try {
 	}
 	$out['all presets render cleanly'] = array() === $bad;
 	$out['bad presets'] = $bad;
-	$out['8 presets'] = 8 === count( acepu_presets() );
+	$out['9 presets'] = 9 === count( acepu_presets() );
 
 	/* ---- Render details ---- */
 	$mail = ACEPU_Store::sanitize( wp_parse_args( acepu_presets()['welcome']['set'], ACEPU_Store::defaults() ) );
@@ -229,7 +229,7 @@ try {
 	set_current_screen( 'edit-ace_popup' );
 	$post = get_post( $em );
 	ob_start(); ACEPU_Admin::box_designer( $post ); $box = ob_get_clean();
-	$out['designer renders every tab and field'] = 6 === substr_count( $box, 'class="acepu-tab"' ) && false !== strpos( $box, 'name="acepu[headline]"' ) && false !== strpos( $box, 'name="acepu[triggers][]"' ) && false !== strpos( $box, 'name="acepu[accent]"' ) && false !== strpos( $box, 'data-show="mode:email"' ) && false !== strpos( $box, 'data-ai-run="text"' );
+	$out['designer renders every tab and field'] = 7 === substr_count( $box, 'class="acepu-tab"' ) && false !== strpos( $box, 'name="acepu[headline]"' ) && false !== strpos( $box, 'name="acepu[triggers][]"' ) && false !== strpos( $box, 'name="acepu[accent]"' ) && false !== strpos( $box, 'data-show="mode:email"' ) && false !== strpos( $box, 'data-ai-run="text"' );
 	$missing = array();
 	foreach ( array_keys( acepu_schema() ) as $k ) { if ( false === strpos( $box, 'acepu[' . $k . ']' ) ) { $missing[] = $k; } }
 	$out['every schema field is in the form'] = array() === $missing;
@@ -238,7 +238,7 @@ try {
 	$out['stats box shows a preview link and the #acepu-ID'] = false !== strpos( $side, 'acepu_preview=' ) && false !== strpos( $side, '#acepu-' . $em );
 	$u = new WP_User( $uid ); $u->set_role( 'administrator' ); wp_set_current_user( 0 ); wp_set_current_user( $uid );
 	ob_start(); ACEPU_Admin::page_templates(); $tp = ob_get_clean();
-	$out['template gallery: blank + 8 templates'] = 9 === substr_count( $tp, 'class="acepu-card"' );
+	$out['template gallery: blank + 9 templates'] = 10 === substr_count( $tp, 'class="acepu-card"' );
 	$out['status labels'] = 'live' === ACEPU_Admin::status( get_post( $pA ) )[0] && 'off' === ACEPU_Admin::status( get_post( $pD ) )[0] && 'ended' === ACEPU_Admin::status( get_post( $pC ) )[0];
 	ob_start(); ACEPU_Admin::column( 'acepu_r', $em ); $col = ob_get_clean();
 	$out['list column shows results'] = false !== strpos( $col, 'shown' );

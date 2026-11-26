@@ -34,7 +34,8 @@
 	const applyShow = () => {
 		root.querySelectorAll('[data-show]').forEach((f) => {
 			const [k, v] = f.dataset.show.split(':');
-			f.hidden = !valueOf(k).includes(v);
+			const have = valueOf(k);
+			f.hidden = !v.split('|').some((x) => have.includes(x));
 		});
 	};
 
@@ -69,6 +70,37 @@
 		inner.classList.toggle('is-phone', b.dataset.dev === '420');
 		refresh();
 	}));
+
+	/* Fortune wheel gifts ----------------------------------------------------------------- */
+	const prizes = root.querySelector('[data-prizes]');
+	if (prizes) {
+		const rows = prizes.querySelector('[data-prize-rows]');
+		const sync = () => {
+			const all = Array.from(rows.querySelectorAll('[data-prize]'));
+			const total = all.reduce((a, r) => a + (parseInt(r.querySelector('[data-prize-weight]').value, 10) || 0), 0);
+			all.forEach((r, i) => {
+				const kind = r.querySelector('[data-prize-kind]').value;
+				r.querySelector('[data-prize-amount]').hidden = kind === 'product';
+				r.querySelector('[data-prize-product]').hidden = kind !== 'product';
+				const w = parseInt(r.querySelector('[data-prize-weight]').value, 10) || 0;
+				r.querySelector('[data-prize-pct]').textContent = total ? Math.round(w / total * 1000) / 10 + '%' : '-';
+				r.querySelector('[data-prize-del]').hidden = all.length <= 2;
+				r.querySelectorAll('[name]').forEach((el) => { el.name = el.name.replace(/\[\d+\]|\[__i__\]/, '[' + i + ']'); });
+			});
+			prizes.querySelector('[data-prize-add]').hidden = all.length >= 12;
+		};
+		prizes.addEventListener('input', sync);
+		prizes.addEventListener('change', sync);
+		prizes.querySelector('[data-prize-add]').addEventListener('click', () => {
+			rows.insertAdjacentHTML('beforeend', prizes.querySelector('[data-prize-tpl]').innerHTML.replace(/__i__/g, '99'));
+			sync(); later();
+		});
+		prizes.addEventListener('click', (e) => {
+			const d = e.target.closest('[data-prize-del]');
+			if (d) { d.closest('[data-prize]').remove(); sync(); later(); }
+		});
+		sync();
+	}
 
 	/* Colour pickers -------------------------------------------------------------- */
 	$('.acepu-color').wpColorPicker({ change: later, clear: later });
