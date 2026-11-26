@@ -1852,3 +1852,6 @@ msgstr ""
 #: template-withdrawal.php:77
 msgid "Confirm withdrawal here"
 msgstr ""
+
+msgid "from"
+msgstr ""

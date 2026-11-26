@@ -2143,3 +2143,6 @@ msgstr "Pokaż więcej"
 
 msgid "Show less"
 msgstr "Pokaż mniej"
+
+msgid "from"
+msgstr "od"
