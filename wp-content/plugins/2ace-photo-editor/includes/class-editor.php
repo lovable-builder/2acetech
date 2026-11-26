@@ -15,6 +15,9 @@ class ACE_PE_Editor {
 
 	/** On the new attachment: id of the photo it was made from. */
 	const SOURCE = '_ace_pe_source';
+	/** Most photos a product shows (main + gallery). */
+	const MAX_PHOTOS = 5;
+
 	/** On the product: [ new attachment id => original attachment id ] for photos that are swapped in. */
 	const SWAPS = '_ace_pe_swaps';
 	/** Request counter for the daily limit. */
@@ -206,7 +209,18 @@ class ACE_PE_Editor {
 		if ( ! $product || (int) get_post_meta( $new, self::SOURCE, true ) !== (int) $old || ! self::belongs( $product, $old ) ) {
 			return new WP_Error( 'ace_pe_apply', __( 'This photo does not belong to the product.', '2ace-photo-editor' ) );
 		}
+		$was_main = (int) $product->get_image_id() === (int) $old;
 		self::swap( $product, $old, $new );
+		if ( $was_main ) {
+			// The edited photo is the main one; the original (it usually carries the text that is useful in the
+			// description) goes first in the gallery. Photos beyond the 5-per-product limit leave the gallery only
+			// (they stay in the media library).
+			$gallery = array_values( array_diff( array_map( 'intval', $product->get_gallery_image_ids() ), array( (int) $old, (int) $new ) ) );
+			array_unshift( $gallery, (int) $old );
+			$product->set_gallery_image_ids( array_slice( $gallery, 0, self::MAX_PHOTOS - 1 ) );
+			$product->save();
+			wc_delete_product_transients( $product->get_id() );
+		}
 		$swaps = get_post_meta( $product_id, self::SWAPS, true );
 		$swaps = is_array( $swaps ) ? $swaps : array();
 		$swaps[ (int) $new ] = (int) $old;
@@ -221,7 +235,13 @@ class ACE_PE_Editor {
 		if ( ! $product || ! is_array( $swaps ) || empty( $swaps[ (int) $new ] ) ) {
 			return new WP_Error( 'ace_pe_revert', __( 'Nothing to put back for this photo.', '2ace-photo-editor' ) );
 		}
-		self::swap( $product, $new, (int) $swaps[ (int) $new ] );
+		$orig = (int) $swaps[ (int) $new ];
+		if ( (int) $product->get_image_id() === (int) $new ) {
+			// The original was added to the gallery when the edit became the main photo; it goes back to being the main one.
+			$product->set_gallery_image_ids( array_values( array_diff( array_map( 'intval', $product->get_gallery_image_ids() ), array( $orig ) ) ) );
+			$product->save();
+		}
+		self::swap( $product, $new, $orig );
 		unset( $swaps[ (int) $new ] );
 		update_post_meta( $product_id, self::SWAPS, $swaps );
 		return true;

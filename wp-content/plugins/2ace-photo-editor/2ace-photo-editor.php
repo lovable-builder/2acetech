@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       2ACE AI Photo Editor
  * Description:       Removes text from the product photos you choose, with Google Cloud (Vertex AI). You see before and after, only approved photos go into the product, and the original can be put back with one click. Edited photos are marked as AI-edited in their metadata.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce

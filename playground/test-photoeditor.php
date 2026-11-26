@@ -109,12 +109,13 @@ PEM;
 	// Apply / revert.
 	$r = ACE_PE_Editor::apply( $pid, $main, $new ); $product = wc_get_product( $pid );
 	$out['apply: main photo replaced'] = true === $r && (int) $product->get_image_id() === $new;
-	$out['apply: gallery untouched, order kept'] = array_map( 'intval', $product->get_gallery_image_ids() ) === array( $g1, $g2 );
+	$out['apply: original goes first in the gallery, rest kept'] = array_map( 'intval', $product->get_gallery_image_ids() ) === array( $main, $g1, $g2 );
 	$out['apply: variation photo replaced too'] = (int) wc_get_product( $vid )->get_image_id() === $new;
 	$out['apply: swap recorded'] = array( $new => $main ) === get_post_meta( $pid, ACE_PE_Editor::SWAPS, true );
 	$out['delete_edit refuses a photo that is in use'] = false === ACE_PE_Editor::delete_edit( $new ) && (bool) get_post( $new );
 	$r = ACE_PE_Editor::revert( $pid, $new ); $product = wc_get_product( $pid );
 	$out['revert: original back (main + variation)'] = true === $r && (int) $product->get_image_id() === $main && (int) wc_get_product( $vid )->get_image_id() === $main;
+	$out['revert: gallery back to how it was'] = array_map( 'intval', $product->get_gallery_image_ids() ) === array( $g1, $g2 );
 	$out['revert: swap cleared'] = array() === get_post_meta( $pid, ACE_PE_Editor::SWAPS, true );
 	$out['discard keeps the edit (nothing deleted)'] = true === ACE_PE_Editor::discard( $new ) && (bool) get_post( $new );
 	$out['saved_edits lists it with its original'] = ( ACE_PE_Editor::saved_edits( $pid )[ $new ] ?? 0 ) === $main;
